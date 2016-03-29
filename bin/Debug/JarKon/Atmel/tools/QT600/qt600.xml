@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AVRTOOL version="1.0">
+	<TYPE>com.atmel.avrdbg.tool.qt600</TYPE>
+	<NAME>QT600</NAME>
+	<DEBUGSUPPORT>false</DEBUGSUPPORT>
+	<DETECTABLE>true</DETECTABLE>
+	<ALWAYSAVAILABLE>false</ALWAYSAVAILABLE>
+	<Connection type="USB" name="com.atmel.avrdbg.connection.jungousb">
+		<VendorId>0x03EB</VendorId>
+		<ProductId>0x2116</ProductId>
+		<DeviceProducts>
+			<DeviceProduct>QT600 Programmer</DeviceProduct>
+		</DeviceProducts>
+	</Connection>  
+	<PROVIDER>Atmel Corporation</PROVIDER>
+	<DESCRIPTION>
+      QT600 is a complete touch development kit for buttons, sliders and wheels
+      supporting both QTouch and QMatrix acquisition methods.
+	</DESCRIPTION>
+	<WEBPAGE>http://www.atmel.com/tools/QT600.aspx</WEBPAGE>
+	<WEBSHOP>http://store.atmel.com/product.ashx?sku=ATQT600</WEBSHOP>
+	<ASOGUI>
+		<IMAGEINDEX>7</IMAGEINDEX>
+	</ASOGUI>
+	<PROGRAMMINGSUPPORT>true</PROGRAMMINGSUPPORT>
+	<PROGRAMMINGINTERFACES>
+		<INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+			<InterfaceTypes>
+				<InterfaceType>megajtag</InterfaceType>
+			</InterfaceTypes>
+			<DAISYCHAIN DAISYCHAINMAXDEVICESBEFORE="255" DAISYCHAINMAXDEVICESAFTER="255" DAISYCHAINMAXBITSBEFORE="65535" DAISYCHAINMAXBITSAFTER="65535"/>
+			<ResetOnStartSession>always</ResetOnStartSession>
+		</INTERFACE>
+		<INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+			<InterfaceTypes>
+				<InterfaceType>xmegajtag</InterfaceType>
+			</InterfaceTypes>
+			<DAISYCHAIN DAISYCHAINMAXDEVICESBEFORE="255" DAISYCHAINMAXDEVICESAFTER="255" DAISYCHAINMAXBITSBEFORE="65535" DAISYCHAINMAXBITSAFTER="65535"/>
+			<ResetOnStartSession>never</ResetOnStartSession>
+		</INTERFACE>
+		<INTERFACE DisplayName="ISP" InterfaceName="ISP">
+			<InterfaceTypes>
+				<InterfaceType>isp</InterfaceType>
+			</InterfaceTypes>
+			<CLOCK Name="ISP Clock" ClockType="Discrete">
+				<Unit>Hz</Unit>
+				<MINFREQUENCY>2000</MINFREQUENCY>
+				<MAXFREQUENCY>4000000</MAXFREQUENCY>
+				<DEFAULTFREQUENCY>125000</DEFAULTFREQUENCY>
+				<Description>The ISP Clock frequency must be lower than 1/4 of frequency the device is operating on.</Description>
+				<FREQUENCIES>
+					<FREQUENCY>2152</FREQUENCY>
+					<FREQUENCY>4209</FREQUENCY>
+					<FREQUENCY>8239</FREQUENCY>
+					<FREQUENCY>16097</FREQUENCY>
+					<FREQUENCY>32654</FREQUENCY>
+					<FREQUENCY>64000</FREQUENCY>
+					<FREQUENCY>125000</FREQUENCY>
+					<FREQUENCY>250000</FREQUENCY>
+					<FREQUENCY>500000</FREQUENCY>
+					<FREQUENCY>1000000</FREQUENCY>
+					<FREQUENCY>2000000</FREQUENCY>
+					<FREQUENCY>4000000</FREQUENCY>
+				</FREQUENCIES>
+			</CLOCK>
+		</INTERFACE>
+		<INTERFACE DisplayName="aWire" InterfaceName="aWire">
+			<InterfaceTypes>
+				<InterfaceType>aw</InterfaceType>
+			</InterfaceTypes>
+			<CLOCK Name="aWire Clock Auto-detect Limit" ClockType="Continous">
+				<Unit>Hz</Unit>
+				<MINFREQUENCY>32000</MINFREQUENCY>
+				<MAXFREQUENCY>1000000</MAXFREQUENCY>
+				<DEFAULTFREQUENCY>200000</DEFAULTFREQUENCY>
+				<Description>The aWire clock is automatically detected. However, an upper limit can be set.</Description>
+			</CLOCK>
+		</INTERFACE>
+	</PROGRAMMINGINTERFACES>
+	<ToolInfoProperties>
+		<CompositeProperty Description="Firmware Version" FormatString="{0:x}.{1:x}">
+			<Property Name="MajorFirmwareVersion" DataType="Int64"/>
+			<Property Name="MinorFirmwareVersion" DataType="Int64"/>
+			<Property Name="MajorFirmwareVersionOnDisk" DataType="Int64"/>
+			<Property Name="MinorFirmwareVersionOnDisk" DataType="Int64"/>
+		</CompositeProperty>
+		<CompositeProperty Description="Hardware Version" FormatString="{0}">
+			<Property Name="HardwareRevision" DataType="Int64"/>
+		</CompositeProperty>
+	</ToolInfoProperties>
+</AVRTOOL>

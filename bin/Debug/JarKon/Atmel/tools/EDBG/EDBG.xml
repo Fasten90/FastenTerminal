@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AVRTOOL version="1.0">
+  <TYPE>com.atmel.avrdbg.tool.edbg</TYPE>
+  <NAME>EDBG</NAME>
+  <DEBUGSUPPORT>true</DEBUGSUPPORT>
+  <PROGRAMMINGSUPPORT>true</PROGRAMMINGSUPPORT>
+  <DETECTABLE>true</DETECTABLE>
+  <Connection type="USB" name="com.atmel.avrdbg.connection.cmsis-dap">
+    <VendorId>0x03EB</VendorId>
+    <ProductIds>
+      <ProductId>0x2111</ProductId>
+      <ProductId>0x213A</ProductId>
+	  <ProductId>0x2157</ProductId>
+    </ProductIds>
+  </Connection>
+  <ALWAYSAVAILABLE>false</ALWAYSAVAILABLE>
+  <PROVIDER>Atmel Corporation</PROVIDER>
+  <DESCRIPTION></DESCRIPTION>
+  <WEBPAGE>http://www.atmel.com/xplainedpro</WEBPAGE>
+  <WEBSHOP></WEBSHOP>
+  <ASOGUI>
+    <Image>x.png</Image>
+  </ASOGUI>
+  <DEBUGGINGINTERFACES>
+    <INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+      <InterfaceTypes>
+        <InterfaceType>megajtag</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="JTAG Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>4000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>220000</DEFAULTFREQUENCY>
+        <Description>The JTAG Clock frequency must be lower than 1/4 of frequency the device is operating on.</Description>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+    <INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+      <InterfaceTypes>
+        <InterfaceType>xmegajtag</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="JTAG Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>12000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>4000000</DEFAULTFREQUENCY>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+    <INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+      <InterfaceTypes>
+        <InterfaceType>samjtag</InterfaceType>
+        <InterfaceType>avr32jtag</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="JTAG Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>12000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>4000000</DEFAULTFREQUENCY>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+    <INTERFACE DisplayName="SWD" InterfaceName="SWD">
+      <InterfaceTypes>
+        <InterfaceType>swd</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="SWD Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>2000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>2000000</DEFAULTFREQUENCY>
+        <Description>The clock frequency should not exceed target CPU speed * 10.</Description>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+    <INTERFACE DisplayName="PDI" InterfaceName="PDI">
+      <InterfaceTypes>
+        <InterfaceType>pdi</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="PDI Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>7500000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>4000000</DEFAULTFREQUENCY>
+      </CLOCK>
+    </INTERFACE>
+    <INTERFACE DisplayName="aWire" InterfaceName="aWire">
+      <InterfaceTypes>
+        <InterfaceType>aw</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="aWire Clock Auto-detect Limit" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>7500000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>7500000</DEFAULTFREQUENCY>
+      </CLOCK>
+    </INTERFACE>
+    <INTERFACE DisplayName="debugWIRE" InterfaceName="dW">
+      <InterfaceTypes>
+        <InterfaceType>dw</InterfaceType>
+      </InterfaceTypes>
+    </INTERFACE>
+  </DEBUGGINGINTERFACES>
+  <DETECTABLE>true</DETECTABLE>
+  <ALWAYSAVAILABLE>false</ALWAYSAVAILABLE>
+  <PROVIDER>Atmel Corporation</PROVIDER>
+  <DESCRIPTION></DESCRIPTION>
+  <PROGRAMMINGINTERFACES>
+    <INTERFACE DisplayName="ISP" InterfaceName="ISP">
+        <InterfaceTypes>
+            <InterfaceType>isp</InterfaceType>
+        </InterfaceTypes>
+        <CLOCK Name="ISP Clock" ClockType="Continous">
+            <Unit>Hz</Unit>
+            <MINFREQUENCY>125000</MINFREQUENCY>
+            <MAXFREQUENCY>125000</MAXFREQUENCY>
+            <DEFAULTFREQUENCY>125000</DEFAULTFREQUENCY>
+            <Description>The ISP Clock frequency must be lower than 1/4 of frequency the device is operating on.</Description>
+        </CLOCK>
+    </INTERFACE>
+    <INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+      <InterfaceTypes>
+        <InterfaceType>samjtag</InterfaceType>
+        <InterfaceType>megajtag</InterfaceType>
+        <InterfaceType>xmegajtag</InterfaceType>
+        <InterfaceType>avr32jtag</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="JTAG Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>12000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>4000000</DEFAULTFREQUENCY>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+    <INTERFACE DisplayName="SWD" InterfaceName="SWD">
+      <InterfaceTypes>
+        <InterfaceType>swd</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="SWD Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>12000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>4000000</DEFAULTFREQUENCY>
+        <Description>The clock frequency should not exceed target CPU speed * 10.</Description>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+    <INTERFACE DisplayName="PDI" InterfaceName="PDI">
+      <InterfaceTypes>
+        <InterfaceType>pdi</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="PDI Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>7500000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>4000000</DEFAULTFREQUENCY>
+      </CLOCK>
+    </INTERFACE>
+    <INTERFACE DisplayName="aWire" InterfaceName="aWire">
+      <InterfaceTypes>
+        <InterfaceType>aw</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="aWire Clock Auto-detect Limit" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>7500000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>7500000</DEFAULTFREQUENCY>
+      </CLOCK>
+      </INTERFACE>
+    <INTERFACE DisplayName="debugWIRE" InterfaceName="dW">
+      <InterfaceTypes>
+        <InterfaceType>dw</InterfaceType>
+      </InterfaceTypes>
+    </INTERFACE>
+  </PROGRAMMINGINTERFACES>
+  <ToolInfoProperties>
+    <CompositeProperty Description="Firmware Version" FormatString="{0:x}.{1:x}">
+      <Property Name="MajorFirmwareVersion" DataType="Int64" />
+      <Property Name="MinorFirmwareVersion" DataType="Int64" />
+      <Property Name="MajorFirmwareVersionOnDisk" DataType="Int64" />
+      <Property Name="MinorFirmwareVersionOnDisk" DataType="Int64" />
+    </CompositeProperty>
+    <CompositeProperty Description="Hardware Version" FormatString="{0}">
+      <Property Name="HardwareRevision" DataType="Int64" />
+ </CompositeProperty>
+  </ToolInfoProperties>
+</AVRTOOL>

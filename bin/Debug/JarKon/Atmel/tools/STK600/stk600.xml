@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AVRTOOL version="1.0">
+	<TYPE>com.atmel.avrdbg.tool.stk600</TYPE>
+	<NAME>STK600</NAME>
+	<DEBUGSUPPORT>false</DEBUGSUPPORT>
+	<DETECTABLE>true</DETECTABLE>
+	<Connection type="USB" name="com.atmel.avrdbg.connection.jungousb">
+		<VendorId>0x03EB</VendorId>
+		<ProductId>0x2106</ProductId>
+	</Connection>
+	<ALWAYSAVAILABLE>false</ALWAYSAVAILABLE>
+	<PROVIDER>Atmel Corporation</PROVIDER>
+	<DESCRIPTION>The Atmel AVR STK600 is a complete starter kit and development system for the AVR and AVR32 flash microcontrollers from ATMEL Corporation.</DESCRIPTION>
+	<WEBPAGE>http://www.atmel.com/tools/STK600.aspx</WEBPAGE>
+	<WEBSHOP>http://store.atmel.com/product.ashx?sku=ATSTK600</WEBSHOP>
+	<ASOGUI>
+		<IMAGEINDEX>4</IMAGEINDEX>
+	</ASOGUI>
+	<PROGRAMMINGSUPPORT>true</PROGRAMMINGSUPPORT>
+	<PROGRAMMINGINTERFACES>
+		<INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+			<InterfaceTypes>
+				<InterfaceType>megajtag</InterfaceType>
+				<InterfaceType>xmegajtag</InterfaceType>
+			</InterfaceTypes>
+			<DAISYCHAIN DAISYCHAINMAXDEVICESBEFORE="255" DAISYCHAINMAXDEVICESAFTER="255" DAISYCHAINMAXBITSBEFORE="65535" DAISYCHAINMAXBITSAFTER="65535"/>
+			<ResetOnStartSession>always</ResetOnStartSession>
+		</INTERFACE>
+		<INTERFACE DisplayName="JTAG" InterfaceName="JTAG">
+			<InterfaceTypes>
+				<InterfaceType>avr32jtag</InterfaceType>
+			</InterfaceTypes>
+			<DAISYCHAIN DAISYCHAINMAXDEVICESBEFORE="255" DAISYCHAINMAXDEVICESAFTER="255" DAISYCHAINMAXBITSBEFORE="65535" DAISYCHAINMAXBITSAFTER="65535"/>
+			<ResetOnStartSession>selectable</ResetOnStartSession>
+		</INTERFACE>
+		<INTERFACE DisplayName="PDI" InterfaceName="PDI">
+			<InterfaceTypes>
+				<InterfaceType>pdi</InterfaceType>
+			</InterfaceTypes>
+		</INTERFACE>
+		<INTERFACE DisplayName="TPI" InterfaceName="TPI">
+			<InterfaceTypes>
+				<InterfaceType>tpi</InterfaceType>
+			</InterfaceTypes>
+		</INTERFACE>
+		<INTERFACE DisplayName="aWire" InterfaceName="aWire">
+			<InterfaceTypes>
+				<InterfaceType>aw</InterfaceType>
+			</InterfaceTypes>
+			<CLOCK Name="aWire Clock Auto-detect Limit" ClockType="Continous">
+				<Unit>Hz</Unit>
+				<MINFREQUENCY>32000</MINFREQUENCY>
+				<MAXFREQUENCY>1000000</MAXFREQUENCY>
+				<DEFAULTFREQUENCY>1000000</DEFAULTFREQUENCY>
+				<Description>The aWire clock is automatically detected. However, an upper limit can be set.</Description>
+			</CLOCK>
+		</INTERFACE>
+		<INTERFACE DisplayName="ISP" InterfaceName="ISP">
+			<InterfaceTypes>
+				<InterfaceType>isp</InterfaceType>
+			</InterfaceTypes>
+			<CLOCK Name="ISP Clock" ClockType="Discrete">
+				<Unit>Hz</Unit>
+				<MINFREQUENCY>2000</MINFREQUENCY>
+				<MAXFREQUENCY>8000000</MAXFREQUENCY>
+				<DEFAULTFREQUENCY>125000</DEFAULTFREQUENCY>
+				<Description>The ISP Clock frequency must be lower than 1/4 of frequency the device is operating on.</Description>
+				<FREQUENCIES>
+					<FREQUENCY>2500</FREQUENCY>
+					<FREQUENCY>5000</FREQUENCY>
+					<FREQUENCY>10000</FREQUENCY>
+					<FREQUENCY>25000</FREQUENCY>
+					<FREQUENCY>50000</FREQUENCY>
+					<FREQUENCY>100000</FREQUENCY>
+					<FREQUENCY>250000</FREQUENCY>
+					<FREQUENCY>500000</FREQUENCY>         
+					<FREQUENCY>1000000</FREQUENCY>
+					<FREQUENCY>1600000</FREQUENCY>
+					<FREQUENCY>2000000</FREQUENCY>
+					<FREQUENCY>2666667</FREQUENCY>
+					<FREQUENCY>4000000</FREQUENCY>
+					<FREQUENCY>8000000</FREQUENCY>          
+				</FREQUENCIES>          
+			</CLOCK>
+		</INTERFACE>
+		<INTERFACE DisplayName="HVPP" InterfaceName="HVPP">
+			<InterfaceTypes>
+				<InterfaceType>hvpp</InterfaceType>
+			</InterfaceTypes>
+		</INTERFACE>
+		<INTERFACE DisplayName="HVSP" InterfaceName="HVSP">
+			<InterfaceTypes>
+				<InterfaceType>hvsp</InterfaceType>
+			</InterfaceTypes>
+		</INTERFACE>
+	</PROGRAMMINGINTERFACES>
+	<ToolInfoProperties>
+		<CompositeProperty Description="Master Firmware Version" FormatString="{0:x}.{1:x}">
+			<Property Name="MajorFirmwareVersion" DataType="Int64"/>
+			<Property Name="MinorFirmwareVersion" DataType="Int64" />
+			<Property Name="MajorFirmwareVersionOnDisk" DataType="Int64"/>
+			<Property Name="MinorFirmwareVersionOnDisk" DataType="Int64" />
+		</CompositeProperty>
+		<CompositeProperty Description="Slave 1 Firmware Version" FormatString="{0:x}.{1:x}">
+			<Property Name="Slave1MajorFirmwareVersion" DataType="Int64" />
+			<Property Name="Slave1MinorFirmwareVersion" DataType="Int64" />
+			<Property Name="Slave1MajorFirmwareVersionOnDisk" DataType="Int64" />
+			<Property Name="Slave1MinorFirmwareVersionOnDisk" DataType="Int64" />
+		</CompositeProperty>
+		<CompositeProperty Description="Slave 2 Firmware Version" FormatString="{0:x}.{1:x}">
+			<Property Name="Slave2MajorFirmwareVersion" DataType="Int64" />
+			<Property Name="Slave2MinorFirmwareVersion" DataType="Int64" />
+			<Property Name="Slave2MajorFirmwareVersionOnDisk" DataType="Int64" />
+			<Property Name="Slave2MinorFirmwareVersionOnDisk" DataType="Int64" />
+		</CompositeProperty>
+		<CompositeProperty Description="Hardware Version" FormatString="{0}">
+			<Property Name="HardwareRevision" DataType="Int64" />
+		</CompositeProperty>
+	</ToolInfoProperties>
+</AVRTOOL>

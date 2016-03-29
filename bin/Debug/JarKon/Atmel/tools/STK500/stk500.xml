@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AVRTOOL version="1.0">
+	<TYPE>com.atmel.avrdbg.tool.stk500</TYPE>
+	<NAME>STK500</NAME>
+	<DEBUGSUPPORT>false</DEBUGSUPPORT>
+	<DETECTABLE>false</DETECTABLE>
+	<ALWAYSAVAILABLE>false</ALWAYSAVAILABLE>
+	<PROVIDER>Atmel Corporation</PROVIDER>
+	<Connection type="Serial" name="com.atmel.avrdbg.connection.serialport" />
+	<DESCRIPTION>The Atmel AVR STK500 is a starter kit and development system for the AVR flash microcontrollers from ATMEL Corporation.</DESCRIPTION>
+	<WEBPAGE>http://www.atmel.com/tools/STK500.aspx</WEBPAGE>
+	<WEBSHOP>http://store.atmel.com/product.ashx?sku=ATSTK500</WEBSHOP>
+	<ASOGUI>
+		<IMAGEINDEX>8</IMAGEINDEX>
+	</ASOGUI>
+	<PROGRAMMINGSUPPORT>true</PROGRAMMINGSUPPORT>
+	<PROGRAMMINGINTERFACES>
+		<INTERFACE DisplayName="ISP" InterfaceName="ISP">
+			<InterfaceTypes>
+				<InterfaceType>isp</InterfaceType>
+			</InterfaceTypes>
+			<CLOCK Name="ISP Clock" ClockType="Discrete">
+				<Unit>Hz</Unit>
+				<MINFREQUENCY>1206</MINFREQUENCY>
+				<MAXFREQUENCY>1843200</MAXFREQUENCY>
+				<DEFAULTFREQUENCY>125000</DEFAULTFREQUENCY>
+				<Description>The ISP Clock frequency must be lower than 1/4 of frequency the device is operating on.</Description>
+				<FREQUENCIES>
+					<FREQUENCY>1748</FREQUENCY>
+					<FREQUENCY>3498</FREQUENCY>
+					<FREQUENCY>7009</FREQUENCY>
+					<FREQUENCY>14071</FREQUENCY>
+					<FREQUENCY>28358</FREQUENCY>
+					<FREQUENCY>57600</FREQUENCY>
+					<FREQUENCY>115200</FREQUENCY>
+					<FREQUENCY>460800</FREQUENCY>
+					<FREQUENCY>1843200</FREQUENCY>
+				</FREQUENCIES>
+			</CLOCK>
+		</INTERFACE>
+		<INTERFACE DisplayName="HVPP" InterfaceName="HVPP">
+			<InterfaceTypes>
+				<InterfaceType>hvpp</InterfaceType>
+			</InterfaceTypes>
+		</INTERFACE>
+		<INTERFACE DisplayName="HVSP" InterfaceName="HVSP">
+			<InterfaceTypes>
+				<InterfaceType>hvsp</InterfaceType>
+			</InterfaceTypes>
+		</INTERFACE>
+	</PROGRAMMINGINTERFACES>
+	<SupportsExternalResetOnStartSession>false</SupportsExternalResetOnStartSession>
+	<ToolInfoProperties>
+		<CompositeProperty Description="Firmware Version" FormatString="{0:x}.{1:x}">
+			<Property Name="MajorFirmwareVersion" DataType="Int64" />
+			<Property Name="MinorFirmwareVersion" DataType="Int64" />
+		</CompositeProperty>
+		<CompositeProperty Description="Hardware Version" FormatString="{0}">
+			<Property Name="HardwareRevision" DataType="Int64" />
+		</CompositeProperty>
+	</ToolInfoProperties>
+</AVRTOOL>

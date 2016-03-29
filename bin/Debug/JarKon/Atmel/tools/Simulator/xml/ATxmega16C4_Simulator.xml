@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<avr-tools-part-file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../schema/avr_tools_part_file.xsd">
+  <devices>
+    <device name="ATxmega16C4">
+      <tools>
+        <tool name="Simulator"/>
+      </tools>
+      <property-groups>
+        <property-group name="Simulator_properties">
+          <property name="model" value="atxmega32c4"/>
+        </property-group>
+      </property-groups>
+    </device>
+  </devices>
+</avr-tools-part-file>

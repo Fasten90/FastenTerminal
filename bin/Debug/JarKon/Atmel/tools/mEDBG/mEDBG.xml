@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AVRTOOL version="1.0">
+  <TYPE>com.atmel.avrdbg.tool.medbg</TYPE>
+  <NAME>mEDBG</NAME>
+  <DEBUGSUPPORT>true</DEBUGSUPPORT>
+  <PROGRAMMINGSUPPORT>true</PROGRAMMINGSUPPORT>
+  <DETECTABLE>true</DETECTABLE>
+  <Connection type="USB" name="com.atmel.avrdbg.connection.cmsis-dap">
+    <VendorId>0x03EB</VendorId>
+    <ProductIds>
+      <ProductId>0x2145</ProductId>
+    </ProductIds>
+  </Connection>
+  <ALWAYSAVAILABLE>false</ALWAYSAVAILABLE>
+  <PROVIDER>Atmel Corporation</PROVIDER>
+  <DESCRIPTION></DESCRIPTION>
+  <WEBPAGE>http://www.atmel.com/</WEBPAGE>
+  <WEBSHOP></WEBSHOP>
+  <ASOGUI>
+    <Image>mini.png</Image>
+  </ASOGUI>
+  <DEBUGGINGINTERFACES>
+   <INTERFACE DisplayName="debugWIRE" InterfaceName="dW">
+      <InterfaceTypes>
+        <InterfaceType>dw</InterfaceType>
+      </InterfaceTypes>
+    </INTERFACE>
+    <INTERFACE DisplayName="SWD" InterfaceName="SWD">
+      <InterfaceTypes>
+        <InterfaceType>swd</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="SWD Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>2000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>2000000</DEFAULTFREQUENCY>
+        <Description>The clock frequency should not exceed target CPU speed * 10.</Description>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+  </DEBUGGINGINTERFACES>
+  <DETECTABLE>true</DETECTABLE>
+  <ALWAYSAVAILABLE>false</ALWAYSAVAILABLE>
+  <PROVIDER>Atmel Corporation</PROVIDER>
+  <DESCRIPTION></DESCRIPTION>
+  <PROGRAMMINGINTERFACES>
+    <INTERFACE DisplayName="ISP" InterfaceName="ISP">
+        <InterfaceTypes>
+            <InterfaceType>isp</InterfaceType>
+        </InterfaceTypes>
+    </INTERFACE>
+    <INTERFACE DisplayName="SWD" InterfaceName="SWD">
+      <InterfaceTypes>
+        <InterfaceType>swd</InterfaceType>
+      </InterfaceTypes>
+      <CLOCK Name="SWD Clock" ClockType="Continous">
+        <Unit>Hz</Unit>
+        <MINFREQUENCY>32000</MINFREQUENCY>
+        <MAXFREQUENCY>2000000</MAXFREQUENCY>
+        <DEFAULTFREQUENCY>2000000</DEFAULTFREQUENCY>
+        <Description>The clock frequency should not exceed target CPU speed * 10.</Description>
+      </CLOCK>
+      <ResetOnStartSession>always</ResetOnStartSession>
+    </INTERFACE>
+  </PROGRAMMINGINTERFACES>
+  <ToolInfoProperties>
+    <CompositeProperty Description="Firmware Version" FormatString="{0:x}.{1:x}">
+      <Property Name="MajorFirmwareVersion" DataType="Int64" />
+      <Property Name="MinorFirmwareVersion" DataType="Int64" />
+      <Property Name="MajorFirmwareVersionOnDisk" DataType="Int64" />
+      <Property Name="MinorFirmwareVersionOnDisk" DataType="Int64" />
+    </CompositeProperty>
+    <CompositeProperty Description="Hardware Version" FormatString="{0}">
+      <Property Name="HardwareRevision" DataType="Int64" />
+ </CompositeProperty>
+  </ToolInfoProperties>
+</AVRTOOL>
