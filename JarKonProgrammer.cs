@@ -215,6 +215,18 @@ namespace JarKonLogApplication
 			Application.Exit();
 		}
 
+		private void textBoxProgramCommand_TextChanged(object sender, EventArgs e)
+		{
+			textBoxProgramCommand.SelectionStart = textBoxProgramCommand.Text.Length;
+			textBoxProgramCommand.ScrollToCaret();
+		}
+
+		private void textBoxProgramOutput_TextChanged(object sender, EventArgs e)
+		{
+			textBoxProgramOutput.SelectionStart = textBoxProgramOutput.Text.Length;
+			textBoxProgramOutput.ScrollToCaret();
+		}
+
 
 
 		/*

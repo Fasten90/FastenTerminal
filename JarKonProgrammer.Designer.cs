@@ -179,6 +179,7 @@
 			this.textBoxProgramOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxProgramOutput.Size = new System.Drawing.Size(441, 130);
 			this.textBoxProgramOutput.TabIndex = 6;
+			this.textBoxProgramOutput.TextChanged += new System.EventHandler(this.textBoxProgramOutput_TextChanged);
 			// 
 			// labelOutput
 			// 
@@ -203,6 +204,7 @@
 			this.textBoxProgramCommand.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBoxProgramCommand.Size = new System.Drawing.Size(437, 112);
 			this.textBoxProgramCommand.TabIndex = 4;
+			this.textBoxProgramCommand.TextChanged += new System.EventHandler(this.textBoxProgramCommand_TextChanged);
 			// 
 			// labelV2Program
 			// 
