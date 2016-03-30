@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -52,56 +53,62 @@ namespace JarKonLogApplication
 
         private void buttonV2programming_Click(object sender, EventArgs e)
         {
-            //v2Programming();
+
 			progressBarProgramming.Value = 0;
-			String command = "";
-			String output = "";
-			textBoxProgramCommandText.Text = "";
-			textBoxProgramOutput.Text = "";
-			config.v2Program.Programming(this, ref command, ref output, ref config);
-			textBoxProgramCommandText.Text += command;
-			textBoxProgramOutput.Text += output;
+
+			Thread t = new Thread(() => config.v2Program.Programming(this, ref config));
+			t.Start();
 
         }
 
 
         private void buttonObuProgramming_Click(object sender, EventArgs e)
         {
+			/*
+			// Original, work !!
             //obuProgramming();
 			progressBarProgramming.Value = 0;
 			String command = "";
 			String output = "";
-			textBoxProgramCommandText.Text = "";
+			textBoxProgramCommand.Text = "";
 			textBoxProgramOutput.Text = "";
 			config.obuProgram.Programming(this, ref command, ref output, ref config);
-			textBoxProgramCommandText.Text += command;
+			textBoxProgramCommand.Text += command;
 			textBoxProgramOutput.Text += output;
+			*/
+
+			progressBarProgramming.Value = 0;
+
+			//Thread t = new Thread(new ParameterizedThreadStart(config.obuProgram.Programming));		
+			//t.Start(this, ref command, ref output, ref config);
+
+			// Lambda
+			Thread t = new Thread(() => config.obuProgram.Programming(this, ref config));
+			t.Start();
+
+			// Wait for this thread
+			//t.Join();
+
         }
 
 
 		private void buttonTastaProgramming_Click(object sender, EventArgs e)
 		{
+
 			progressBarProgramming.Value = 0;
-			String command = "";
-			String output = "";
-			textBoxProgramCommandText.Text = "";
-			textBoxProgramOutput.Text = "";
-			config.tasztaProgram.Programming(this, ref command, ref output, ref config);
-			textBoxProgramCommandText.Text += command;
-			textBoxProgramOutput.Text += output;
+
+			Thread t = new Thread(() => config.tasztaProgram.Programming(this, ref config));
+			t.Start();
 		}
 
 
 		private void buttonAccelerometerProgramming_Click(object sender, EventArgs e)
 		{
+
 			progressBarProgramming.Value = 0;
-			String command = "";
-			String output = "";
-			textBoxProgramCommandText.Text = "";
-			textBoxProgramOutput.Text = "";
-			config.gyorulasProgram.Programming(this, ref command, ref output, ref config);
-			textBoxProgramCommandText.Text += command;
-			textBoxProgramOutput.Text += output;
+
+			Thread t = new Thread(() => config.gyorulasProgram.Programming(this, ref config));
+			t.Start();
 		}
 
 
@@ -149,29 +156,55 @@ namespace JarKonLogApplication
 		}
 
 
-		public void AppendTextBox(string value)
+		/// <summary>
+		/// For output text ++
+		/// </summary>
+		/// <param name="value"></param>
+		public void AppendOutputTextBox(string value)
 		{
 			if (InvokeRequired)
 			{
-				this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
+				this.Invoke(new Action<string>(AppendOutputTextBox), new object[] { value });
 				return;
 			}
-			//textBox1.Text += value;
+
+			textBoxProgramOutput.Text += value;
+			//textBoxProgramCommand.Text += command;
+			//textBoxProgramOutput.Text += output;
 		}
 
 
 		/// <summary>
-		/// For change progress bar
+		/// For output text ++
+		/// </summary>
+		/// <param name="value"></param>
+		public void AppendCommandTextBox(string value)
+		{
+			if (InvokeRequired)
+			{
+				this.Invoke(new Action<string>(AppendCommandTextBox), new object[] { value });
+				return;
+			}
+
+			textBoxProgramCommand.Text += value;
+			//textBoxProgramCommand.Text += command;
+			//textBoxProgramOutput.Text += output;
+		}
+
+
+
+		/// <summary>
+		/// For change progress bar - invoked, thread safe
 		/// </summary>
 		/// <param name="value"></param>
 		public void ProgressBarChange(int value)
 		{
 			if (InvokeRequired)
 			{
-				this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
+				this.Invoke(new Action<int>(ProgressBarChange), new object[] { value });
 				return;
 			}
-			progressBarProgramming.Value = value*33;
+			progressBarProgramming.Value = value;
 		}
 
 		
@@ -199,7 +232,7 @@ namespace JarKonLogApplication
                 command1 = command1
             };
 
-            textBoxProgramCommandText.Text = command + " " + command1;
+            textBoxProgramCommand.Text = command + " " + command1;
 
             program.Programming(this);
 

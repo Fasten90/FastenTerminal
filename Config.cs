@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JarKonLogApplication
 {
+
 	
     public enum ProgrammerType
     {
@@ -32,64 +34,86 @@ namespace JarKonLogApplication
 		public String eepromFile { set; get; }
 
 
-		public void Programming(JarKonProgrammer form, ref String commandText, ref String outputText, ref Config config)
+		public void Programming(JarKonProgrammer form, ref Config config)
         {
-			commandText = "";
+
 			bool success = true;
 
-
 			String command = GetProgrammerPath(config);
+			String parameter = "";
+
+			String outputText = "";
+
+			form.ProgressBarChange(5);
 
 
 			// Command 1
 			if (success == true)
 			{ 			
 				
+				// Command
+				parameter = this.command1;
 
-				String parameter = this.command1;
+				// Print
+				form.AppendCommandTextBox("[1. Flash erase + fuse command]\r\n" + command + " " + parameter + "\r\n");
+				form.AppendOutputTextBox("[Flash erase + Fuse]\r\n");
+				outputText = "";
 
-				// Text
-				commandText += "[1. Flash erase + fuse command]\r\n";
-				commandText += command + " " + parameter + "\r\n";
-				outputText += "[Flash erase + Fuse]";
-
+				// Run
 				success = Programming2(command, parameter, form, ref outputText);
-				form.ProgressBarChange(1);
+				form.AppendOutputTextBox(outputText);
+
+				form.ProgressBarChange(10);
 			}
 
+			
 
 			// Command 2
+			// <command> -f "flashfile"
 			if (success == true)
 			{
-				//String command = this.programmer;
+				// Command
+				parameter = this.command2 + " -f " + "\"" + this.flashFile + "\"";
 
-				String parameter = this.command2 + " -f " + "\"" + this.flashFile + "\"";
+				// Print
+				form.AppendCommandTextBox("[2. Flash programming...\r\n" + command + " " + parameter + "\r\n");
+				form.AppendOutputTextBox("[Flash programming...]\r\n");
+				outputText = "";
 
-				// Text
-				commandText += "[2. Flash programming...\r\n";
-				commandText += command + " " + parameter + "\r\n";
-				outputText += "[Flash programming...]";
-
+				// Run
 				success = Programming2(command, parameter, form, ref outputText);
-				form.ProgressBarChange(2);
+				form.AppendOutputTextBox(outputText);
+
+				form.ProgressBarChange(20);
 			}
 
+			
 
             // Command 3
 			if (success == true)
             {
-                //String command = this.programmer;
-
-				String parameter = this.command3 + " -f " + "\""  + this.eepromFile + "\"";
+				// Command
+				parameter = this.command3 + " -f " + "\""  + this.eepromFile + "\"";
 				
-				// Text
-				commandText += "[3. EEPROM programming...\r\n";
-				commandText += command + " " + parameter + "\r\n";
-				outputText += "[EEPROM programming...]";
+				// Print
+				form.AppendCommandTextBox("[3. EEPROM programming...\r\n" + command + " " + parameter + "\r\n");
+				form.AppendOutputTextBox("[EEPROM programming...]\r\n");
+				outputText = "";
 
+				// Run
 				success = Programming2(command, parameter, form, ref outputText);
-				form.ProgressBarChange(3);
+				form.AppendOutputTextBox(outputText);
+
+				form.ProgressBarChange(100);
             }
+
+			if (success == false)
+			{
+				// Error
+				form.AppendOutputTextBox("[Error...]\r\n");
+			}
+
+			return;
 
         }
 
@@ -97,6 +121,8 @@ namespace JarKonLogApplication
 		public bool Programming2(String command, String parameter, JarKonProgrammer form, ref String outputText)
         {
 			
+			///*
+			// Work and good, but blocking mode
 			Process process = new Process();
 			process.StartInfo.FileName = command;
 			process.StartInfo.Arguments = parameter;
@@ -140,10 +166,14 @@ namespace JarKonLogApplication
 			}
 
 
+			//*/
 
 
 
+			//
 			/*
+			/// http://stackoverflow.com/questions/4291912/process-start-how-to-get-the-output
+			/// 
 			// ASYNC
             Process process = new Process();
             process.StartInfo.FileName = command;
@@ -153,22 +183,29 @@ namespace JarKonLogApplication
             process.StartInfo.RedirectStandardError = true;
 			process.StartInfo.CreateNoWindow = true;		// Not create new window
             /// Set your output and error (asynchronous) handlers
-            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler(ref outputText));
-			process.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler(ref outputText));
+			process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+			process.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
             /// Start process and handlers
             // Exception, if there is no this flashFile
             try
             {
                 process.Start();
+		
             }
             catch (Exception e)
             {
                 Console.WriteLine("Program futtatási gond: " + e.Message);
                 MessageBox.Show("Program futtatási gond. Lehet, hogy a fájl nem érhető.");
+
+				return false;
             }
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
-            process.WaitForExit();
+            //process.WaitForExit();
+
+			return true;
+
+			//
 			*/
 		}
 
@@ -182,7 +219,12 @@ namespace JarKonLogApplication
             // Unsafe, from other thread, do not use
             //this.textBoxProgramOutput.Text += message;
         
+			// Save?
+			//formJarKon.AppendOutputTextBox(outLine.Data);
+
+			//outputText += outLine.Data;
         }
+
 
 
 		public String GetProgrammerPath (Config config)

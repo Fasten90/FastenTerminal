@@ -40,7 +40,7 @@
 			this.buttonTastaProgramming = new System.Windows.Forms.Button();
 			this.textBoxProgramOutput = new System.Windows.Forms.TextBox();
 			this.labelOutput = new System.Windows.Forms.Label();
-			this.textBoxProgramCommandText = new System.Windows.Forms.TextBox();
+			this.textBoxProgramCommand = new System.Windows.Forms.TextBox();
 			this.labelV2Program = new System.Windows.Forms.Label();
 			this.buttonObuProgramming = new System.Windows.Forms.Button();
 			this.buttonV2programming = new System.Windows.Forms.Button();
@@ -56,7 +56,6 @@
 			this.névjegyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.készítetteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.process1 = new System.Diagnostics.Process();
 			this.tabControl.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageFirmware.SuspendLayout();
@@ -89,7 +88,7 @@
 			this.tabPageV2programming.Controls.Add(this.buttonTastaProgramming);
 			this.tabPageV2programming.Controls.Add(this.textBoxProgramOutput);
 			this.tabPageV2programming.Controls.Add(this.labelOutput);
-			this.tabPageV2programming.Controls.Add(this.textBoxProgramCommandText);
+			this.tabPageV2programming.Controls.Add(this.textBoxProgramCommand);
 			this.tabPageV2programming.Controls.Add(this.labelV2Program);
 			this.tabPageV2programming.Controls.Add(this.buttonObuProgramming);
 			this.tabPageV2programming.Controls.Add(this.buttonV2programming);
@@ -106,9 +105,9 @@
 			this.labelProgrammerGroupST.AutoSize = true;
 			this.labelProgrammerGroupST.Location = new System.Drawing.Point(8, 201);
 			this.labelProgrammerGroupST.Name = "labelProgrammerGroupST";
-			this.labelProgrammerGroupST.Size = new System.Drawing.Size(99, 13);
+			this.labelProgrammerGroupST.Size = new System.Drawing.Size(105, 13);
 			this.labelProgrammerGroupST.TabIndex = 14;
-			this.labelProgrammerGroupST.Text = "ST Cortex - ST link:";
+			this.labelProgrammerGroupST.Text = "Cortex - ST - ST link:";
 			// 
 			// labelProgrammerGroupCortex
 			// 
@@ -192,18 +191,18 @@
 			this.labelOutput.TabIndex = 5;
 			this.labelOutput.Text = "Parancs kimenet:";
 			// 
-			// textBoxProgramCommandText
+			// textBoxProgramCommand
 			// 
-			this.textBoxProgramCommandText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.textBoxProgramCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxProgramCommandText.Location = new System.Drawing.Point(195, 19);
-			this.textBoxProgramCommandText.MinimumSize = new System.Drawing.Size(100, 20);
-			this.textBoxProgramCommandText.Multiline = true;
-			this.textBoxProgramCommandText.Name = "textBoxProgramCommandText";
-			this.textBoxProgramCommandText.ReadOnly = true;
-			this.textBoxProgramCommandText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxProgramCommandText.Size = new System.Drawing.Size(437, 112);
-			this.textBoxProgramCommandText.TabIndex = 4;
+			this.textBoxProgramCommand.Location = new System.Drawing.Point(195, 19);
+			this.textBoxProgramCommand.MinimumSize = new System.Drawing.Size(100, 20);
+			this.textBoxProgramCommand.Multiline = true;
+			this.textBoxProgramCommand.Name = "textBoxProgramCommand";
+			this.textBoxProgramCommand.ReadOnly = true;
+			this.textBoxProgramCommand.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxProgramCommand.Size = new System.Drawing.Size(437, 112);
+			this.textBoxProgramCommand.TabIndex = 4;
 			// 
 			// labelV2Program
 			// 
@@ -340,25 +339,15 @@
 			// készítetteToolStripMenuItem
 			// 
 			this.készítetteToolStripMenuItem.Name = "készítetteToolStripMenuItem";
-			this.készítetteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.készítetteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
 			this.készítetteToolStripMenuItem.Text = "Névjegy";
 			this.készítetteToolStripMenuItem.Click += new System.EventHandler(this.készítetteToolStripMenuItem_Click);
 			// 
 			// segítségToolStripMenuItem
 			// 
 			this.segítségToolStripMenuItem.Name = "segítségToolStripMenuItem";
-			this.segítségToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.segítségToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
 			this.segítségToolStripMenuItem.Text = "Segítség";
-			// 
-			// process1
-			// 
-			this.process1.StartInfo.Domain = "";
-			this.process1.StartInfo.LoadUserProfile = false;
-			this.process1.StartInfo.Password = null;
-			this.process1.StartInfo.StandardErrorEncoding = null;
-			this.process1.StartInfo.StandardOutputEncoding = null;
-			this.process1.StartInfo.UserName = "";
-			this.process1.SynchronizingObject = this;
 			// 
 			// JarKonProgrammer
 			// 
@@ -393,7 +382,7 @@
         private System.Windows.Forms.Button buttonV2programming;
         private System.Windows.Forms.Button buttonObuProgramming;
         private System.Windows.Forms.Label labelV2Program;
-        private System.Windows.Forms.TextBox textBoxProgramCommandText;
+        private System.Windows.Forms.TextBox textBoxProgramCommand;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fájlToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem v2ProgramFájlBeállításaToolStripMenuItem;
@@ -406,7 +395,6 @@
 		private System.Windows.Forms.ToolStripMenuItem névjegyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem készítetteToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem segítségToolStripMenuItem;
-		private System.Diagnostics.Process process1;
 		private System.Windows.Forms.ProgressBar progressBarProgramming;
 		private System.Windows.Forms.Label labelProgrammerGroupST;
 		private System.Windows.Forms.Label labelProgrammerGroupCortex;
