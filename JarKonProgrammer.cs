@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JarKonApplication;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,8 @@ namespace JarKonLogApplication
         // Config
         Config config;
         String configFilePath = @"JarKon\Config.xml";
+
+		JarKonSerial serial;
 
 
         public JarKonProgrammer()
@@ -48,6 +51,9 @@ namespace JarKonLogApplication
 				ConfigHandler.SaveConfigToXml(configFilePath, config);
 			}
 
+			// Load Serial
+			serial = new JarKonSerial(serialPortDevice, this);
+			comboBoxSerialPortBaudrate.SelectedIndex = 0;
         }
 
 
@@ -227,29 +233,109 @@ namespace JarKonLogApplication
 			textBoxProgramOutput.ScrollToCaret();
 		}
 
+		private void buttonSerialPortRefresh_Click(object sender, EventArgs e)
+		{
+			SerialRefresh();
+		}
 
 
-		/*
-        void obuProgramming()
-        {
-            String command = config.atmelProgramLink;
+		private void SerialRefresh()
+		{
+			serial.SerialPortComRefresh();
 
-            String command1 = config.obuProgram.
-                + config.obuFuses
-                + config.obuProgramFile;
+			if (serial.ComAvailableList != null)
+			{
+				foreach (string s in serial.ComAvailableList)
+				{
+					comboBoxSerialPortCOM.Items.Add(s);
+				}
 
-            Programmer program = new Programmer()
-            {
-                command = command,
-                command1 = command1
-            };
+				comboBoxSerialPortCOM.SelectedIndex = 0;
 
-            textBoxProgramCommand.Text = command + " " + command1;
+			}
 
-            program.Programming(this);
 
-        }
-		*/
+			// Wrong
+			//comboBoxSerialPortCOM.DataSource = serial.ComAvailableList;
+		}
+
+		private void buttonSerialPortOpen_Click(object sender, EventArgs e)
+		{
+			SerialOpenClose();
+		}
+
+		private void SerialOpenClose()
+		{
+			if (serial.isOpenedPort == false)
+			{
+				// If not opened
+				if (serial.SerialPortComOpen())
+				{
+					buttonSerialPortOpen.Text = "Port bezárása";
+				}
+
+			}
+			else
+			{
+				// If opened
+				serial.SerialPortComClose();
+				buttonSerialPortOpen.Text = "Port nyitás";
+			}
+			
+
+		}
+
+
+		private void comboBoxSerialPortCOM_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			serial.SetComSelected((string)comboBoxSerialPortCOM.SelectedItem);
+		}
+
+		private void comboBoxSerialPortBaudrate_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			serial.SetBaudrateSelected((string)comboBoxSerialPortBaudrate.SelectedItem);
+		}
+
+		private void serialPortDevice_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+		{
+			SerialDataReceived();
+		}
+
+
+
+		private void SerialDataReceived()
+		{
+			serial.DataReceived();
+		}
+
+
+
+		public void AppendTextSerialData( string value)
+		{
+			if (InvokeRequired)
+			{
+				this.Invoke(new Action<string>(AppendTextSerialData), new object[] { value });
+				return;
+			}
+
+			richTextBoxSerialPortTexts.Text += value;
+
+		}
+
+
+		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
+		{
+
+			if ( checkBoxSerialPortScrollBottom.Checked)
+			{
+				// set the current caret position to the end
+				richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.Text.Length;
+				// scroll it automatically
+				richTextBoxSerialPortTexts.ScrollToCaret();
+			}
+
+		}
+
 
 
     }

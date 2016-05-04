@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JarKonProgrammer));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPageV2programming = new System.Windows.Forms.TabPage();
@@ -49,6 +50,16 @@
 			this.textBoxAtmelProgrammerStandardInformation = new System.Windows.Forms.TextBox();
 			this.buttonAtmelProgrammerSetting = new System.Windows.Forms.Button();
 			this.labelPickAtmelProgrammer = new System.Windows.Forms.Label();
+			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
+			this.comboBoxSerialPortLastCommands = new System.Windows.Forms.ComboBox();
+			this.buttonSerialPortSend = new System.Windows.Forms.Button();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.comboBoxSerialPortBaudrate = new System.Windows.Forms.ComboBox();
+			this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
+			this.checkBoxSerialPortLog = new System.Windows.Forms.CheckBox();
+			this.buttonSerialPortOpen = new System.Windows.Forms.Button();
+			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fájlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.v2ProgramFájlBeállításaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,9 +67,16 @@
 			this.névjegyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.készítetteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
+			this.labelLastCommands = new System.Windows.Forms.Label();
+			this.labelFavouriteCommands = new System.Windows.Forms.Label();
+			this.comboBoxSerialPortFavouriteCommands = new System.Windows.Forms.ComboBox();
+			this.checkBoxSerialPortScrollBottom = new System.Windows.Forms.CheckBox();
+			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
 			this.tabControl.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageFirmware.SuspendLayout();
+			this.tabSerialPort.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -69,12 +87,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl.Controls.Add(this.tabPageV2programming);
 			this.tabControl.Controls.Add(this.tabPageFirmware);
+			this.tabControl.Controls.Add(this.tabSerialPort);
 			this.tabControl.Location = new System.Drawing.Point(0, 27);
 			this.tabControl.MinimumSize = new System.Drawing.Size(300, 200);
 			this.tabControl.Multiline = true;
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(650, 317);
+			this.tabControl.Size = new System.Drawing.Size(665, 317);
 			this.tabControl.TabIndex = 17;
 			// 
 			// tabPageV2programming
@@ -289,6 +308,128 @@
 			this.labelPickAtmelProgrammer.TabIndex = 0;
 			this.labelPickAtmelProgrammer.Text = "Atmel programozó";
 			// 
+			// tabSerialPort
+			// 
+			this.tabSerialPort.Controls.Add(this.checkBoxSerialCopySelected);
+			this.tabSerialPort.Controls.Add(this.checkBoxSerialPortScrollBottom);
+			this.tabSerialPort.Controls.Add(this.comboBoxSerialPortFavouriteCommands);
+			this.tabSerialPort.Controls.Add(this.labelFavouriteCommands);
+			this.tabSerialPort.Controls.Add(this.labelLastCommands);
+			this.tabSerialPort.Controls.Add(this.buttonSerialPortRefresh);
+			this.tabSerialPort.Controls.Add(this.comboBoxSerialPortLastCommands);
+			this.tabSerialPort.Controls.Add(this.buttonSerialPortSend);
+			this.tabSerialPort.Controls.Add(this.textBox1);
+			this.tabSerialPort.Controls.Add(this.comboBoxSerialPortBaudrate);
+			this.tabSerialPort.Controls.Add(this.comboBoxSerialPortCOM);
+			this.tabSerialPort.Controls.Add(this.checkBoxSerialPortLog);
+			this.tabSerialPort.Controls.Add(this.buttonSerialPortOpen);
+			this.tabSerialPort.Controls.Add(this.richTextBoxSerialPortTexts);
+			this.tabSerialPort.Location = new System.Drawing.Point(4, 22);
+			this.tabSerialPort.Name = "tabSerialPort";
+			this.tabSerialPort.Padding = new System.Windows.Forms.Padding(3);
+			this.tabSerialPort.Size = new System.Drawing.Size(657, 291);
+			this.tabSerialPort.TabIndex = 3;
+			this.tabSerialPort.Text = "Soros port";
+			this.tabSerialPort.UseVisualStyleBackColor = true;
+			// 
+			// buttonSerialPortRefresh
+			// 
+			this.buttonSerialPortRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(557, 7);
+			this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
+			this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
+			this.buttonSerialPortRefresh.TabIndex = 8;
+			this.buttonSerialPortRefresh.Text = "Port Frissítés";
+			this.buttonSerialPortRefresh.UseVisualStyleBackColor = true;
+			this.buttonSerialPortRefresh.Click += new System.EventHandler(this.buttonSerialPortRefresh_Click);
+			// 
+			// comboBoxSerialPortLastCommands
+			// 
+			this.comboBoxSerialPortLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortLastCommands.FormattingEnabled = true;
+			this.comboBoxSerialPortLastCommands.Location = new System.Drawing.Point(492, 263);
+			this.comboBoxSerialPortLastCommands.Name = "comboBoxSerialPortLastCommands";
+			this.comboBoxSerialPortLastCommands.Size = new System.Drawing.Size(155, 21);
+			this.comboBoxSerialPortLastCommands.TabIndex = 7;
+			// 
+			// buttonSerialPortSend
+			// 
+			this.buttonSerialPortSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSerialPortSend.Location = new System.Drawing.Point(410, 265);
+			this.buttonSerialPortSend.Name = "buttonSerialPortSend";
+			this.buttonSerialPortSend.Size = new System.Drawing.Size(75, 23);
+			this.buttonSerialPortSend.TabIndex = 6;
+			this.buttonSerialPortSend.Text = "Küldés";
+			this.buttonSerialPortSend.UseVisualStyleBackColor = true;
+			// 
+			// textBox1
+			// 
+			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox1.Location = new System.Drawing.Point(9, 265);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(395, 20);
+			this.textBox1.TabIndex = 5;
+			// 
+			// comboBoxSerialPortBaudrate
+			// 
+			this.comboBoxSerialPortBaudrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
+			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
+            "115200",
+            "9600"});
+			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(469, 37);
+			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
+			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
+			this.comboBoxSerialPortBaudrate.TabIndex = 4;
+			this.comboBoxSerialPortBaudrate.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortBaudrate_SelectedIndexChanged);
+			// 
+			// comboBoxSerialPortCOM
+			// 
+			this.comboBoxSerialPortCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortCOM.FormattingEnabled = true;
+			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(469, 7);
+			this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
+			this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(82, 21);
+			this.comboBoxSerialPortCOM.TabIndex = 3;
+			this.comboBoxSerialPortCOM.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortCOM_SelectedIndexChanged);
+			// 
+			// checkBoxSerialPortLog
+			// 
+			this.checkBoxSerialPortLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialPortLog.AutoSize = true;
+			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(469, 64);
+			this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
+			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(44, 17);
+			this.checkBoxSerialPortLog.TabIndex = 2;
+			this.checkBoxSerialPortLog.Text = "Log";
+			this.checkBoxSerialPortLog.UseVisualStyleBackColor = true;
+			// 
+			// buttonSerialPortOpen
+			// 
+			this.buttonSerialPortOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSerialPortOpen.Location = new System.Drawing.Point(557, 36);
+			this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
+			this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
+			this.buttonSerialPortOpen.TabIndex = 1;
+			this.buttonSerialPortOpen.Text = "Port nyitás";
+			this.buttonSerialPortOpen.UseVisualStyleBackColor = true;
+			this.buttonSerialPortOpen.Click += new System.EventHandler(this.buttonSerialPortOpen_Click);
+			// 
+			// richTextBoxSerialPortTexts
+			// 
+			this.richTextBoxSerialPortTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.richTextBoxSerialPortTexts.Location = new System.Drawing.Point(9, 7);
+			this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
+			this.richTextBoxSerialPortTexts.ReadOnly = true;
+			this.richTextBoxSerialPortTexts.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(454, 251);
+			this.richTextBoxSerialPortTexts.TabIndex = 0;
+			this.richTextBoxSerialPortTexts.Text = "";
+			this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
+			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -351,11 +492,71 @@
 			this.segítségToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
 			this.segítségToolStripMenuItem.Text = "Segítség";
 			// 
+			// serialPortDevice
+			// 
+			this.serialPortDevice.BaudRate = 115200;
+			this.serialPortDevice.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPortDevice_DataReceived);
+			// 
+			// labelLastCommands
+			// 
+			this.labelLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelLastCommands.AutoSize = true;
+			this.labelLastCommands.Location = new System.Drawing.Point(489, 245);
+			this.labelLastCommands.Name = "labelLastCommands";
+			this.labelLastCommands.Size = new System.Drawing.Size(128, 13);
+			this.labelLastCommands.TabIndex = 9;
+			this.labelLastCommands.Text = "Utolsó kiadott parancsok:";
+			// 
+			// labelFavouriteCommands
+			// 
+			this.labelFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelFavouriteCommands.AutoSize = true;
+			this.labelFavouriteCommands.Location = new System.Drawing.Point(492, 198);
+			this.labelFavouriteCommands.Name = "labelFavouriteCommands";
+			this.labelFavouriteCommands.Size = new System.Drawing.Size(106, 13);
+			this.labelFavouriteCommands.TabIndex = 10;
+			this.labelFavouriteCommands.Text = "Kedvenc parancsok:";
+			// 
+			// comboBoxSerialPortFavouriteCommands
+			// 
+			this.comboBoxSerialPortFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortFavouriteCommands.FormattingEnabled = true;
+			this.comboBoxSerialPortFavouriteCommands.Location = new System.Drawing.Point(492, 214);
+			this.comboBoxSerialPortFavouriteCommands.Name = "comboBoxSerialPortFavouriteCommands";
+			this.comboBoxSerialPortFavouriteCommands.Size = new System.Drawing.Size(155, 21);
+			this.comboBoxSerialPortFavouriteCommands.TabIndex = 11;
+			// 
+			// checkBoxSerialPortScrollBottom
+			// 
+			this.checkBoxSerialPortScrollBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialPortScrollBottom.AutoSize = true;
+			this.checkBoxSerialPortScrollBottom.Checked = true;
+			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(469, 88);
+			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
+			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
+			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
+			this.checkBoxSerialPortScrollBottom.Text = "Legördülés";
+			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialCopySelected
+			// 
+			this.checkBoxSerialCopySelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialCopySelected.AutoSize = true;
+			this.checkBoxSerialCopySelected.Checked = true;
+			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(469, 112);
+			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
+			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(140, 17);
+			this.checkBoxSerialCopySelected.TabIndex = 13;
+			this.checkBoxSerialCopySelected.Text = "Kijelölt szöveg másolása";
+			this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
+			// 
 			// JarKonProgrammer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(648, 343);
+			this.ClientSize = new System.Drawing.Size(663, 343);
 			this.Controls.Add(this.tabControl);
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -369,6 +570,8 @@
 			this.tabPageV2programming.PerformLayout();
 			this.tabPageFirmware.ResumeLayout(false);
 			this.tabPageFirmware.PerformLayout();
+			this.tabSerialPort.ResumeLayout(false);
+			this.tabSerialPort.PerformLayout();
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -405,6 +608,22 @@
 		private System.Windows.Forms.Button buttonAtmelProgrammerSetting;
 		private System.Windows.Forms.TextBox textBoxAtmelProgrammerStandardInformation;
 		private System.Windows.Forms.TextBox textBoxAtmelProgrammerPath;
+		private System.Windows.Forms.TabPage tabSerialPort;
+		private System.Windows.Forms.RichTextBox richTextBoxSerialPortTexts;
+		private System.Windows.Forms.Button buttonSerialPortOpen;
+		private System.Windows.Forms.ComboBox comboBoxSerialPortCOM;
+		private System.Windows.Forms.CheckBox checkBoxSerialPortLog;
+		private System.IO.Ports.SerialPort serialPortDevice;
+		private System.Windows.Forms.ComboBox comboBoxSerialPortBaudrate;
+		private System.Windows.Forms.Button buttonSerialPortSend;
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.ComboBox comboBoxSerialPortLastCommands;
+		private System.Windows.Forms.Button buttonSerialPortRefresh;
+		private System.Windows.Forms.Label labelLastCommands;
+		private System.Windows.Forms.Label labelFavouriteCommands;
+		private System.Windows.Forms.ComboBox comboBoxSerialPortFavouriteCommands;
+		private System.Windows.Forms.CheckBox checkBoxSerialPortScrollBottom;
+		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
     }
 }
 
