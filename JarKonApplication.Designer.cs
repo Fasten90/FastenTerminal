@@ -1,4 +1,4 @@
-﻿namespace JarKonLogApplication
+﻿namespace JarKonApplication
 {
     partial class JarKonProgrammer
     {
@@ -51,6 +51,12 @@
 			this.buttonAtmelProgrammerSetting = new System.Windows.Forms.Button();
 			this.labelPickAtmelProgrammer = new System.Windows.Forms.Label();
 			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.buttonCommand2 = new System.Windows.Forms.Button();
+			this.buttonCommand1 = new System.Windows.Forms.Button();
+			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
+			this.checkBoxSerialPortScrollBottom = new System.Windows.Forms.CheckBox();
+			this.labelFavouriteCommands = new System.Windows.Forms.Label();
+			this.labelLastCommands = new System.Windows.Forms.Label();
 			this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
 			this.comboBoxSerialPortLastCommands = new System.Windows.Forms.ComboBox();
 			this.buttonSerialPortSend = new System.Windows.Forms.Button();
@@ -68,11 +74,6 @@
 			this.készítetteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
-			this.labelLastCommands = new System.Windows.Forms.Label();
-			this.labelFavouriteCommands = new System.Windows.Forms.Label();
-			this.comboBoxSerialPortFavouriteCommands = new System.Windows.Forms.ComboBox();
-			this.checkBoxSerialPortScrollBottom = new System.Windows.Forms.CheckBox();
-			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
 			this.tabControl.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageFirmware.SuspendLayout();
@@ -114,7 +115,7 @@
 			this.tabPageV2programming.Location = new System.Drawing.Point(4, 22);
 			this.tabPageV2programming.Name = "tabPageV2programming";
 			this.tabPageV2programming.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageV2programming.Size = new System.Drawing.Size(642, 291);
+			this.tabPageV2programming.Size = new System.Drawing.Size(657, 291);
 			this.tabPageV2programming.TabIndex = 2;
 			this.tabPageV2programming.Text = "Programozás";
 			this.tabPageV2programming.UseVisualStyleBackColor = true;
@@ -265,7 +266,7 @@
 			this.tabPageFirmware.Location = new System.Drawing.Point(4, 22);
 			this.tabPageFirmware.Name = "tabPageFirmware";
 			this.tabPageFirmware.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageFirmware.Size = new System.Drawing.Size(642, 291);
+			this.tabPageFirmware.Size = new System.Drawing.Size(657, 291);
 			this.tabPageFirmware.TabIndex = 1;
 			this.tabPageFirmware.Text = "Beállítások";
 			this.tabPageFirmware.UseVisualStyleBackColor = true;
@@ -310,9 +311,10 @@
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.buttonCommand2);
+			this.tabSerialPort.Controls.Add(this.buttonCommand1);
 			this.tabSerialPort.Controls.Add(this.checkBoxSerialCopySelected);
 			this.tabSerialPort.Controls.Add(this.checkBoxSerialPortScrollBottom);
-			this.tabSerialPort.Controls.Add(this.comboBoxSerialPortFavouriteCommands);
 			this.tabSerialPort.Controls.Add(this.labelFavouriteCommands);
 			this.tabSerialPort.Controls.Add(this.labelLastCommands);
 			this.tabSerialPort.Controls.Add(this.buttonSerialPortRefresh);
@@ -331,6 +333,72 @@
 			this.tabSerialPort.TabIndex = 3;
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
+			// 
+			// buttonCommand2
+			// 
+			this.buttonCommand2.Location = new System.Drawing.Point(472, 179);
+			this.buttonCommand2.Name = "buttonCommand2";
+			this.buttonCommand2.Size = new System.Drawing.Size(103, 23);
+			this.buttonCommand2.TabIndex = 15;
+			this.buttonCommand2.Text = "Command2";
+			this.buttonCommand2.UseVisualStyleBackColor = true;
+			this.buttonCommand2.Click += new System.EventHandler(this.buttonCommand2_Click);
+			// 
+			// buttonCommand1
+			// 
+			this.buttonCommand1.Location = new System.Drawing.Point(472, 149);
+			this.buttonCommand1.Name = "buttonCommand1";
+			this.buttonCommand1.Size = new System.Drawing.Size(103, 23);
+			this.buttonCommand1.TabIndex = 14;
+			this.buttonCommand1.Text = "Command1";
+			this.buttonCommand1.UseVisualStyleBackColor = true;
+			this.buttonCommand1.Click += new System.EventHandler(this.buttonCommand1_Click);
+			// 
+			// checkBoxSerialCopySelected
+			// 
+			this.checkBoxSerialCopySelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialCopySelected.AutoSize = true;
+			this.checkBoxSerialCopySelected.Checked = true;
+			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(469, 112);
+			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
+			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(140, 17);
+			this.checkBoxSerialCopySelected.TabIndex = 13;
+			this.checkBoxSerialCopySelected.Text = "Kijelölt szöveg másolása";
+			this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialPortScrollBottom
+			// 
+			this.checkBoxSerialPortScrollBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialPortScrollBottom.AutoSize = true;
+			this.checkBoxSerialPortScrollBottom.Checked = true;
+			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(469, 88);
+			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
+			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
+			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
+			this.checkBoxSerialPortScrollBottom.Text = "Legördülés";
+			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
+			// 
+			// labelFavouriteCommands
+			// 
+			this.labelFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelFavouriteCommands.AutoSize = true;
+			this.labelFavouriteCommands.Location = new System.Drawing.Point(469, 132);
+			this.labelFavouriteCommands.Name = "labelFavouriteCommands";
+			this.labelFavouriteCommands.Size = new System.Drawing.Size(106, 13);
+			this.labelFavouriteCommands.TabIndex = 10;
+			this.labelFavouriteCommands.Text = "Kedvenc parancsok:";
+			// 
+			// labelLastCommands
+			// 
+			this.labelLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelLastCommands.AutoSize = true;
+			this.labelLastCommands.Location = new System.Drawing.Point(489, 245);
+			this.labelLastCommands.Name = "labelLastCommands";
+			this.labelLastCommands.Size = new System.Drawing.Size(128, 13);
+			this.labelLastCommands.TabIndex = 9;
+			this.labelLastCommands.Text = "Utolsó kiadott parancsok:";
 			// 
 			// buttonSerialPortRefresh
 			// 
@@ -497,61 +565,6 @@
 			this.serialPortDevice.BaudRate = 115200;
 			this.serialPortDevice.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPortDevice_DataReceived);
 			// 
-			// labelLastCommands
-			// 
-			this.labelLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelLastCommands.AutoSize = true;
-			this.labelLastCommands.Location = new System.Drawing.Point(489, 245);
-			this.labelLastCommands.Name = "labelLastCommands";
-			this.labelLastCommands.Size = new System.Drawing.Size(128, 13);
-			this.labelLastCommands.TabIndex = 9;
-			this.labelLastCommands.Text = "Utolsó kiadott parancsok:";
-			// 
-			// labelFavouriteCommands
-			// 
-			this.labelFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelFavouriteCommands.AutoSize = true;
-			this.labelFavouriteCommands.Location = new System.Drawing.Point(492, 198);
-			this.labelFavouriteCommands.Name = "labelFavouriteCommands";
-			this.labelFavouriteCommands.Size = new System.Drawing.Size(106, 13);
-			this.labelFavouriteCommands.TabIndex = 10;
-			this.labelFavouriteCommands.Text = "Kedvenc parancsok:";
-			// 
-			// comboBoxSerialPortFavouriteCommands
-			// 
-			this.comboBoxSerialPortFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxSerialPortFavouriteCommands.FormattingEnabled = true;
-			this.comboBoxSerialPortFavouriteCommands.Location = new System.Drawing.Point(492, 214);
-			this.comboBoxSerialPortFavouriteCommands.Name = "comboBoxSerialPortFavouriteCommands";
-			this.comboBoxSerialPortFavouriteCommands.Size = new System.Drawing.Size(155, 21);
-			this.comboBoxSerialPortFavouriteCommands.TabIndex = 11;
-			// 
-			// checkBoxSerialPortScrollBottom
-			// 
-			this.checkBoxSerialPortScrollBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialPortScrollBottom.AutoSize = true;
-			this.checkBoxSerialPortScrollBottom.Checked = true;
-			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(469, 88);
-			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
-			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
-			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
-			this.checkBoxSerialPortScrollBottom.Text = "Legördülés";
-			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxSerialCopySelected
-			// 
-			this.checkBoxSerialCopySelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialCopySelected.AutoSize = true;
-			this.checkBoxSerialCopySelected.Checked = true;
-			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(469, 112);
-			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
-			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(140, 17);
-			this.checkBoxSerialCopySelected.TabIndex = 13;
-			this.checkBoxSerialCopySelected.Text = "Kijelölt szöveg másolása";
-			this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
-			// 
 			// JarKonProgrammer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -564,7 +577,7 @@
 			this.MinimumSize = new System.Drawing.Size(400, 350);
 			this.Name = "JarKonProgrammer";
 			this.Text = "JarKonProgrammer";
-			this.Load += new System.EventHandler(this.Form1_Load);
+			this.Load += new System.EventHandler(this.FormJarKonApplicationMain_Load);
 			this.tabControl.ResumeLayout(false);
 			this.tabPageV2programming.ResumeLayout(false);
 			this.tabPageV2programming.PerformLayout();
@@ -621,9 +634,10 @@
 		private System.Windows.Forms.Button buttonSerialPortRefresh;
 		private System.Windows.Forms.Label labelLastCommands;
 		private System.Windows.Forms.Label labelFavouriteCommands;
-		private System.Windows.Forms.ComboBox comboBoxSerialPortFavouriteCommands;
 		private System.Windows.Forms.CheckBox checkBoxSerialPortScrollBottom;
 		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
+		private System.Windows.Forms.Button buttonCommand2;
+		private System.Windows.Forms.Button buttonCommand1;
     }
 }
 

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace JarKonLogApplication
+namespace JarKonApplication
 {
 
 	
@@ -34,7 +34,7 @@ namespace JarKonLogApplication
 		public String eepromFile { set; get; }
 
 
-		public void Programming(JarKonProgrammer form, ref Config config)
+		public void ProgrammingProcess(JarKonProgrammer form, ref ProgrammerConfigs config)
         {
 
 			bool success = true;
@@ -60,7 +60,7 @@ namespace JarKonLogApplication
 				outputText = "";
 
 				// Run
-				success = Programming2(command, parameter, form, ref outputText);
+				success = RunProgrammer(command, parameter, form, ref outputText);
 				form.AppendOutputTextBox(outputText);
 
 				form.ProgressBarChange(10);
@@ -81,7 +81,7 @@ namespace JarKonLogApplication
 				outputText = "";
 
 				// Run
-				success = Programming2(command, parameter, form, ref outputText);
+				success = RunProgrammer(command, parameter, form, ref outputText);
 				form.AppendOutputTextBox(outputText);
 
 				form.ProgressBarChange(20);
@@ -101,7 +101,7 @@ namespace JarKonLogApplication
 				outputText = "";
 
 				// Run
-				success = Programming2(command, parameter, form, ref outputText);
+				success = RunProgrammer(command, parameter, form, ref outputText);
 				form.AppendOutputTextBox(outputText);
 
 				form.ProgressBarChange(100);
@@ -118,7 +118,7 @@ namespace JarKonLogApplication
         }
 
 
-		public bool Programming2(String command, String parameter, JarKonProgrammer form, ref String outputText)
+		public bool RunProgrammer(String command, String parameter, JarKonProgrammer form, ref String outputText)
         {
 			
 			///*
@@ -227,7 +227,7 @@ namespace JarKonLogApplication
 
 
 
-		public String GetProgrammerPath (Config config)
+		public String GetProgrammerPath (ProgrammerConfigs config)
 		{
 			if ( this.programmer == ProgrammerType.AtmelProgram)
 			{
@@ -247,7 +247,7 @@ namespace JarKonLogApplication
     }
 
 
-    public class Config
+    public class ProgrammerConfigs
     {
         // Program link
 
@@ -257,7 +257,7 @@ namespace JarKonLogApplication
 
 		/*
 		public List<ProgrammerStruct> Programmers = new List<ProgrammerStruct>();
-		public Config()
+		public ProgrammerConfigs()
 		{
 			ProgrammerStruct program = new ProgrammerStruct();
 			program.programmerType = ProgrammerType.AtmelProgram;
@@ -319,4 +319,50 @@ namespace JarKonLogApplication
 
 
     }
+
+
+	static class ProgrammerConfigHandler
+    {
+
+		static public bool LoadProgrammerConfigFromXml( String ConfigFile, ref ProgrammerConfigs config )
+		{
+
+			// Then in some other function.
+			//Person person = XmlSerialization.ReadFromXmlFile<Person>("C:\person.txt");
+			//List<Person> people = XmlSerialization.ReadFromXmlFile<List<Person>>("C:\people.txt");
+			try
+			{
+				config = XmlSerialization.ReadFromXmlFile<ProgrammerConfigs>(ConfigFile);
+				// EXCEPTION: ha nem találja az adott fájlt
+
+				//Log.SendEventLog("Users.xml flashFile loaded succesful.");
+				Console.WriteLine("ProgrammerConfigs.xml has loaded.");
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Failed to load ProgrammerConfigs.xml");
+				Console.WriteLine(ex.Message);
+
+				return false;
+			}
+
+		}
+
+		static public void SaveProgrammerConfigToXml( String ConfigFile, ProgrammerConfigs config )
+		{
+			// And then in some function.
+			//Person person = new Person() { Name = "Dan", Age = 30; HomeAddress = new Address() { StreetAddress = "123 My St", City = "Regina" }};
+			//List<Person> people = GetListOfPeople();
+			//XmlSerialization.WriteToXmlFile<Person>("C:\person.txt", person);
+			//XmlSerialization.WriteToXmlFile<List<People>>("C:\people.txt", people);
+			XmlSerialization.WriteToXmlFile<ProgrammerConfigs>(ConfigFile, config);
+
+			//Log.SendEventLog("Save to xml has been successful.");
+			Console.WriteLine("ProgrammerConfigs.xml has saved.");
+		}
+
+
+	}
 }

@@ -10,9 +10,10 @@ C:\JarKon\CodeProjects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgram
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonProgrammer.exe.config
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonProgrammer.exe
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonProgrammer.pdb
-C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonLogApplication.JarKonProgrammer.resources
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgrammer.Properties.Resources.resources
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgrammer.csproj.GenerateResource.Cache
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgrammer.exe
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgrammer.pdb
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgrammer.csprojResolveAssemblyReference.cache
+C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonApplication.JarKonProgrammer.resources
+C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonApplication.exe.config

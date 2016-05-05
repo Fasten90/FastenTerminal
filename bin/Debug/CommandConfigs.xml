@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommandConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CommandList>
+    <Command>
+      <CommandString>FirstCommand</CommandString>
+      <CommandName>FirstCommand</CommandName>
+    </Command>
+	<Command>
+      <CommandString>SecondCommand</CommandString>
+      <CommandName>SecondCommand</CommandName>
+    </Command>
+  </CommandList>
+</CommandConfigs>

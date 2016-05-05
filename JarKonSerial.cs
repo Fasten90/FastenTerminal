@@ -1,4 +1,4 @@
-﻿using JarKonLogApplication;
+﻿using JarKonApplication;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -45,7 +45,7 @@ namespace JarKonApplication
 				// Wrong COM
 				String errorMessage = "Error: Empty portname\n";
 				Console.WriteLine(errorMessage);
-				form.AppendTextSerialData("[Programmer] " + errorMessage);
+				form.AppendTextSerialData("[Application] " + errorMessage);
 				return false;
 			}
 			else

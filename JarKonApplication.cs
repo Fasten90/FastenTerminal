@@ -15,16 +15,20 @@ using System.Windows.Forms;
 
 
 
-namespace JarKonLogApplication
+namespace JarKonApplication
 {
     public partial class JarKonProgrammer : Form
     {
 
-        // Config
-        Config config;
-        String configFilePath = @"JarKon\Config.xml";
+        // ProgrammerConfigs
+        ProgrammerConfigs config;
+        String configFilePath = @"JarKon\ProgrammerConfigs.xml";
 
 		JarKonSerial serial;
+
+		CommandHandler command;
+
+		List<Button> commandListOnButtons;
 
 
         public JarKonProgrammer()
@@ -33,12 +37,12 @@ namespace JarKonLogApplication
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormJarKonApplicationMain_Load(object sender, EventArgs e)
         {
 
 
             // Load config
-            if ( ConfigHandler.LoadConfigFromXml(configFilePath, ref config) == true)
+            if ( ProgrammerConfigHandler.LoadProgrammerConfigFromXml(configFilePath, ref config) == true)
 			{
 				// Successful loaded configs
 
@@ -47,13 +51,18 @@ namespace JarKonLogApplication
 			else
 			{
 				// Failed to load configs, create news and save
-				config = new Config();
-				ConfigHandler.SaveConfigToXml(configFilePath, config);
+				config = new ProgrammerConfigs();
+				ProgrammerConfigHandler.SaveProgrammerConfigToXml(configFilePath, config);
 			}
 
 			// Load Serial
 			serial = new JarKonSerial(serialPortDevice, this);
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
+
+			// Load commands
+			command = new CommandHandler(this);
+			LoadCommandsToButtons();
+
         }
 
 
@@ -62,7 +71,7 @@ namespace JarKonLogApplication
 
 			progressBarProgramming.Value = 0;
 
-			Thread t = new Thread(() => config.v2Program.Programming(this, ref config));
+			Thread t = new Thread(() => config.v2Program.ProgrammingProcess(this, ref config));
 			t.Start();
 
         }
@@ -78,18 +87,18 @@ namespace JarKonLogApplication
 			String output = "";
 			textBoxProgramCommand.Text = "";
 			textBoxProgramOutput.Text = "";
-			config.obuProgram.Programming(this, ref command, ref output, ref config);
+			config.obuProgram.ProgrammingProcess(this, ref command, ref output, ref config);
 			textBoxProgramCommand.Text += command;
 			textBoxProgramOutput.Text += output;
 			*/
 
 			progressBarProgramming.Value = 0;
 
-			//Thread t = new Thread(new ParameterizedThreadStart(config.obuProgram.Programming));		
+			//Thread t = new Thread(new ParameterizedThreadStart(config.obuProgram.ProgrammingProcess));		
 			//t.Start(this, ref command, ref output, ref config);
 
 			// Lambda
-			Thread t = new Thread(() => config.obuProgram.Programming(this, ref config));
+			Thread t = new Thread(() => config.obuProgram.ProgrammingProcess(this, ref config));
 			t.Start();
 
 			// Wait for this thread
@@ -103,7 +112,7 @@ namespace JarKonLogApplication
 
 			progressBarProgramming.Value = 0;
 
-			Thread t = new Thread(() => config.tasztaProgram.Programming(this, ref config));
+			Thread t = new Thread(() => config.tasztaProgram.ProgrammingProcess(this, ref config));
 			t.Start();
 		}
 
@@ -113,13 +122,22 @@ namespace JarKonLogApplication
 
 			progressBarProgramming.Value = 0;
 
-			Thread t = new Thread(() => config.gyorulasProgram.Programming(this, ref config));
+			Thread t = new Thread(() => config.gyorulasProgram.ProgrammingProcess(this, ref config));
 			t.Start();
 		}
 
 
 		private void buttonAtmelProgrammerSetting_Click(object sender, EventArgs e)
 		{
+			
+			AtmelProgrammerSetting();
+	
+		}
+
+		private void AtmelProgrammerSetting()
+		{
+
+
 			OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
 
@@ -137,9 +155,9 @@ namespace JarKonLogApplication
 
 					if (fileName != null && filePath != null)
 					{
-						
+
 						String atmelProgrammerPath = filePath + "\\" + fileName;
-						
+
 						config.AtmelProgrammer = atmelProgrammerPath;
 					}
 				}
@@ -152,8 +170,7 @@ namespace JarKonLogApplication
 			textBoxAtmelProgrammerPath.Text = config.AtmelProgrammer;
 
 			// Save config to file
-			ConfigHandler.SaveConfigToXml(configFilePath, config);
-			
+			ProgrammerConfigHandler.SaveProgrammerConfigToXml(configFilePath, config);
 		}
 
 		private void készítetteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -243,7 +260,7 @@ namespace JarKonLogApplication
 		{
 			serial.SerialPortComRefresh();
 
-			if (serial.ComAvailableList != null)
+			if (serial.ComAvailableList != null && serial.ComAvailableList.Length != 0) 
 			{
 				foreach (string s in serial.ComAvailableList)
 				{
@@ -334,6 +351,46 @@ namespace JarKonLogApplication
 				richTextBoxSerialPortTexts.ScrollToCaret();
 			}
 
+		}
+
+
+
+		public void LoadCommandsToButtons()
+		{
+			List<Command> commandList = command.GetCommands();
+
+			commandListOnButtons = new List<Button>();
+
+			// Add buttons
+			commandListOnButtons.Add(buttonCommand1);
+			commandListOnButtons.Add(buttonCommand2);
+
+			int i = 0;
+			foreach (var item in commandList)
+			{
+				// Lépegetés a gombokon
+				commandListOnButtons[i].Text = item.CommandName;
+				i++;
+				if (i >= commandListOnButtons.Count)
+				{
+					break;
+				}
+			}
+			
+		}
+
+
+
+		private void buttonCommand1_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
+		}
+
+
+
+		private void buttonCommand2_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
 		}
 
 
