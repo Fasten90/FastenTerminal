@@ -75,6 +75,7 @@
 			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
+			this.buttonSerialFwUpdate = new System.Windows.Forms.Button();
 			this.tabControl.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageFirmware.SuspendLayout();
@@ -312,6 +313,7 @@
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.buttonSerialFwUpdate);
 			this.tabSerialPort.Controls.Add(this.buttonCommand2);
 			this.tabSerialPort.Controls.Add(this.buttonCommand1);
 			this.tabSerialPort.Controls.Add(this.checkBoxSerialCopySelected);
@@ -574,6 +576,16 @@
 			this.timerProgressBar.Interval = 1000;
 			this.timerProgressBar.Tick += new System.EventHandler(this.timerProgressBar_Tick);
 			// 
+			// buttonSerialFwUpdate
+			// 
+			this.buttonSerialFwUpdate.Location = new System.Drawing.Point(557, 65);
+			this.buttonSerialFwUpdate.Name = "buttonSerialFwUpdate";
+			this.buttonSerialFwUpdate.Size = new System.Drawing.Size(90, 23);
+			this.buttonSerialFwUpdate.TabIndex = 16;
+			this.buttonSerialFwUpdate.Text = "FW update";
+			this.buttonSerialFwUpdate.UseVisualStyleBackColor = true;
+			this.buttonSerialFwUpdate.Click += new System.EventHandler(this.buttonSerialFwUpdate_Click);
+			// 
 			// JarKonDevApplication
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -648,6 +660,7 @@
 		private System.Windows.Forms.Button buttonCommand2;
 		private System.Windows.Forms.Button buttonCommand1;
 		private System.Windows.Forms.Timer timerProgressBar;
+		private System.Windows.Forms.Button buttonSerialFwUpdate;
     }
 }
 

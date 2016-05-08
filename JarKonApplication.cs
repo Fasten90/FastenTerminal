@@ -30,6 +30,7 @@ namespace JarKonApplication
 
 		List<Button> commandListOnButtons;
 
+		FwUpdate fwUpdate;
 
         public JarKonDevApplication()
         {
@@ -434,6 +435,12 @@ namespace JarKonApplication
 				
 			}
 			
+		}
+
+		private void buttonSerialFwUpdate_Click(object sender, EventArgs e)
+		{
+			fwUpdate = new FwUpdate("LidlOS.hex", serial);
+
 		}
 
 
