@@ -16,7 +16,7 @@ namespace JarKonApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new JarKonProgrammer());
+            Application.Run(new JarKonDevApplication());
         }
     }
 }

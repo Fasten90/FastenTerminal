@@ -1,0 +1,22 @@
+2016.05.07. 20:42:57	 EventLog has been started.
+2016.05.07. 20:42:57	 Send command: FirstCommand
+
+2016.05.07. 20:42:57	 [Application] Cannot send message, because there is not opened port
+2016.05.07. 20:42:58	 Send command: SecondCommand
+
+2016.05.07. 20:42:58	 [Application] Cannot send message, because there is not opened port
+2016.05.07. 20:43:00	 Send command: SecondCommand
+
+2016.05.07. 20:43:00	 [Application] Cannot send message, because there is not opened port
+2016.05.07. 20:43:06	 Send command: SecondCommand
+
+2016.05.07. 20:43:06	 [Application] Cannot send message, because there is not opened port
+2016.05.07. 20:44:05	 EventLog has been started.
+2016.05.07. 20:44:05	 Send command: FirstCommand
+
+2016.05.07. 20:44:05	 [Application] Cannot send message, because there is not opened port
+
+2016.05.07. 20:44:05	 Send command: SecondCommand
+
+2016.05.07. 20:44:05	 [Application] Cannot send message, because there is not opened port
+

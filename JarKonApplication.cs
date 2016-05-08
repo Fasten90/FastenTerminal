@@ -17,21 +17,21 @@ using System.Windows.Forms;
 
 namespace JarKonApplication
 {
-    public partial class JarKonProgrammer : Form
+    public partial class JarKonDevApplication : Form
     {
 
         // ProgrammerConfigs
         ProgrammerConfigs config;
         String configFilePath = @"JarKon\ProgrammerConfigs.xml";
 
-		JarKonSerial serial;
+		public JarKonSerial serial;
 
 		CommandHandler command;
 
 		List<Button> commandListOnButtons;
 
 
-        public JarKonProgrammer()
+        public JarKonDevApplication()
         {
             InitializeComponent();
         }
@@ -228,6 +228,13 @@ namespace JarKonApplication
 				return;
 			}
 			progressBarProgramming.Value = value;
+
+			// Nem elegáns megoldás, de ideiglenesen egész jó
+			if (value == 20)
+			{
+				timerProgressBar.Enabled = true;
+				timerProgressBar.Start();
+			}
 		}
 
 		
@@ -391,6 +398,42 @@ namespace JarKonApplication
 		private void buttonCommand2_Click(object sender, EventArgs e)
 		{
 			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
+		}
+
+		private void timerProgressBar_Tick(object sender, EventArgs e)
+		{
+			// Progress bar
+			// 30 sec all time
+			// ( 100-20 ) / 30 = 80/30 =~ 80/40 = 2
+			
+			if ( progressBarProgramming.Value >= 100 )
+			{
+				progressBarProgramming.Enabled = false;
+			}
+			else
+			{
+				progressBarProgramming.Value += 2;
+			}
+		}
+
+		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
+		{
+			// Copy is enabled
+			if ( checkBoxSerialCopySelected.Checked)
+			{
+				// Copy the selected text to the Clipboard.
+
+				if(richTextBoxSerialPortTexts.SelectionLength > 0)
+				{			
+					richTextBoxSerialPortTexts.Copy();
+
+					// TODO: Copy to textbox?
+					Console.WriteLine("Copied texts: " + richTextBoxSerialPortTexts.SelectedText);
+					// TODO: show message? (notify, notification)
+				}
+				
+			}
+			
 		}
 
 

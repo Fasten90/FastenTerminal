@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JarKonApplication
 {
-	class JarKonSerial
+	public class JarKonSerial
 	{
 
 		public string[] ComAvailableList;
@@ -17,10 +17,10 @@ namespace JarKonApplication
 		public string Baudrate = "115200";
 		public bool isOpenedPort = false;
 
-		private JarKonProgrammer form;
+		private JarKonDevApplication form;
 
 
-		public JarKonSerial(System.IO.Ports.SerialPort serial, JarKonProgrammer form)
+		public JarKonSerial(System.IO.Ports.SerialPort serial, JarKonDevApplication form)
 		{
 			this.serial = serial;
 
@@ -101,6 +101,26 @@ namespace JarKonApplication
 			receivedMessage += serial.ReadLine();
 
 			form.AppendTextSerialData(receivedMessage);
+		}
+
+
+		public String SendMessage(String message)
+		{
+			String logMessage;
+
+			if (isOpenedPort)
+			{
+				serial.WriteLine(message);
+
+				logMessage = "[Application] Successful sent message\n";
+				
+			}
+			else
+			{
+				logMessage = "[Application] Cannot send message, because there is not opened port\n";
+			}
+
+			return logMessage;
 		}
 
 

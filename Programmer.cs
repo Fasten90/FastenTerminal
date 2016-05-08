@@ -34,7 +34,7 @@ namespace JarKonApplication
 		public String eepromFile { set; get; }
 
 
-		public void ProgrammingProcess(JarKonProgrammer form, ref ProgrammerConfigs config)
+		public void ProgrammingProcess(JarKonDevApplication form, ref ProgrammerConfigs config)
         {
 
 			bool success = true;
@@ -107,18 +107,25 @@ namespace JarKonApplication
 				form.ProgressBarChange(100);
             }
 
-			if (success == false)
+			if (success == true)
+			{
+				// Successful
+				Common.PlaySound(@"JarKon\Sounds\ProgrammingSuccessful.wav");
+
+			}
+			else
 			{
 				// Error
 				form.AppendOutputTextBox("[Error...]\r\n");
+				Common.PlaySound(@"JarKon\Sounds\ProgrammingError.wav");
 			}
-
+			
 			return;
 
         }
 
 
-		public bool RunProgrammer(String command, String parameter, JarKonProgrammer form, ref String outputText)
+		public bool RunProgrammer(String command, String parameter, JarKonDevApplication form, ref String outputText)
         {
 			
 			///*

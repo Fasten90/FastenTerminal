@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="FwUpdate.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Programmer.cs" />
     <Compile Include="JarKonApplication.cs">
       <SubType>Form</SubType>

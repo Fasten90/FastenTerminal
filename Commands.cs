@@ -50,15 +50,15 @@ namespace JarKonApplication
 	{
 		public CommandConfigs CommandConfig;
 
-		private JarKonProgrammer form;
+		private JarKonDevApplication form;
 
-		public CommandHandler(JarKonProgrammer form)
+		public CommandHandler(JarKonDevApplication form)
 		{
 			this.form = form;
 
 			CommandConfig = new CommandConfigs();
 
-			if ( LoadCommandConfigFromXml("CommandConfigs.xml", ref CommandConfig) == true)
+			if ( LoadCommandConfigFromXml(@"JarKon\CommandConfigs.xml", ref CommandConfig) == true)
 			{
 				// Successful loaded Commands...
 
@@ -66,7 +66,7 @@ namespace JarKonApplication
 			else
 			{
 				// Create new
-				AddNewCommand("FirstCommand", "FirstCommand");
+				AddNewCommand("ThereIsNoAddedCommand", "ThereIsNoAddedCommand");
 			}
 		}
 
@@ -74,7 +74,7 @@ namespace JarKonApplication
 		public void AddNewCommand(String command, String name)
 		{
 			CommandConfig.AddCommand(command, name);
-			SaveCommandConfigToXml("CommandConfigs.xml", CommandConfig);
+			SaveCommandConfigToXml(@"JarKon\CommandConfigs.xml", CommandConfig);
 		}
 
 		
@@ -89,9 +89,30 @@ namespace JarKonApplication
 			// TODO: source... send...
 			// Check serial available, check gsm available...
 
+
 			String message = "Send command: " + command + "\r\n";
 			Console.WriteLine(message);
 			form.AppendTextSerialData("[Application] " + message);
+			Log.SendEventLog(message);
+
+			String messageResult = "";
+
+			switch(source)
+			{
+				case CommandSourceType.Serial:
+					messageResult = form.serial.SendMessage(command);
+					break;
+				case CommandSourceType.GSM:
+					Console.WriteLine("Error... not implemented GSM sending");
+					break;
+				default:
+					Console.WriteLine("Error with source type");
+					break;
+			}
+
+			Console.WriteLine(messageResult);
+			form.AppendTextSerialData(messageResult);
+			Log.SendEventLog(messageResult);
 		}
 
 
@@ -104,7 +125,7 @@ namespace JarKonApplication
 				config = XmlSerialization.ReadFromXmlFile<CommandConfigs>(ConfigFile);
 				// EXCEPTION: ha nem találja az adott fájlt
 
-				//Log.SendEventLog("CommandConfigs.xml flashFile loaded succesful.");
+				//Log.SendEventLog(@"JarKon\CommandConfigs.xml flashFile loaded succesful.");
 				Console.WriteLine("CommandConfigs.xml has loaded.");
 
 				return true;

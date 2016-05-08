@@ -1,6 +1,6 @@
 ﻿namespace JarKonApplication
 {
-    partial class JarKonProgrammer
+    partial class JarKonDevApplication
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JarKonProgrammer));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JarKonDevApplication));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPageV2programming = new System.Windows.Forms.TabPage();
 			this.labelProgrammerGroupST = new System.Windows.Forms.Label();
@@ -74,6 +74,7 @@
 			this.készítetteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
+			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
 			this.tabControl.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageFirmware.SuspendLayout();
@@ -396,9 +397,9 @@
 			this.labelLastCommands.AutoSize = true;
 			this.labelLastCommands.Location = new System.Drawing.Point(489, 245);
 			this.labelLastCommands.Name = "labelLastCommands";
-			this.labelLastCommands.Size = new System.Drawing.Size(128, 13);
+			this.labelLastCommands.Size = new System.Drawing.Size(134, 13);
 			this.labelLastCommands.TabIndex = 9;
-			this.labelLastCommands.Text = "Utolsó kiadott parancsok:";
+			this.labelLastCommands.Text = "Utoljára kiadott parancsok:";
 			// 
 			// buttonSerialPortRefresh
 			// 
@@ -414,6 +415,7 @@
 			// comboBoxSerialPortLastCommands
 			// 
 			this.comboBoxSerialPortLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortLastCommands.Enabled = false;
 			this.comboBoxSerialPortLastCommands.FormattingEnabled = true;
 			this.comboBoxSerialPortLastCommands.Location = new System.Drawing.Point(492, 263);
 			this.comboBoxSerialPortLastCommands.Name = "comboBoxSerialPortLastCommands";
@@ -466,6 +468,7 @@
 			// 
 			this.checkBoxSerialPortLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialPortLog.AutoSize = true;
+			this.checkBoxSerialPortLog.Enabled = false;
 			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(469, 64);
 			this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
 			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(44, 17);
@@ -496,6 +499,7 @@
 			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(454, 251);
 			this.richTextBoxSerialPortTexts.TabIndex = 0;
 			this.richTextBoxSerialPortTexts.Text = "";
+			this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
 			this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
 			// 
 			// menuStrip1
@@ -565,7 +569,12 @@
 			this.serialPortDevice.BaudRate = 115200;
 			this.serialPortDevice.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPortDevice_DataReceived);
 			// 
-			// JarKonProgrammer
+			// timerProgressBar
+			// 
+			this.timerProgressBar.Interval = 1000;
+			this.timerProgressBar.Tick += new System.EventHandler(this.timerProgressBar_Tick);
+			// 
+			// JarKonDevApplication
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -575,8 +584,8 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.MinimumSize = new System.Drawing.Size(400, 350);
-			this.Name = "JarKonProgrammer";
-			this.Text = "JarKonProgrammer";
+			this.Name = "JarKonDevApplication";
+			this.Text = "JarKonDevApplication";
 			this.Load += new System.EventHandler(this.FormJarKonApplicationMain_Load);
 			this.tabControl.ResumeLayout(false);
 			this.tabPageV2programming.ResumeLayout(false);
@@ -638,6 +647,7 @@
 		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
 		private System.Windows.Forms.Button buttonCommand2;
 		private System.Windows.Forms.Button buttonCommand1;
+		private System.Windows.Forms.Timer timerProgressBar;
     }
 }
 
