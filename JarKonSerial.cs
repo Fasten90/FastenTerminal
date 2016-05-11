@@ -110,8 +110,16 @@ namespace JarKonApplication
 
 			if (isOpenedPort)
 			{
-				serial.WriteLine(message);
-
+				try
+				{
+					serial.WriteLine(message);
+				}
+				catch (Exception e)
+				{
+					Log.SendErrorLog(e.Message);
+					logMessage = "[Application] Port error\n";
+				}
+				
 				logMessage = "[Application] Successful sent message\n";
 				
 			}

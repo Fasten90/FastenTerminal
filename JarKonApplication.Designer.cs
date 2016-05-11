@@ -45,12 +45,13 @@
 			this.labelV2Program = new System.Windows.Forms.Label();
 			this.buttonObuProgramming = new System.Windows.Forms.Button();
 			this.buttonV2programming = new System.Windows.Forms.Button();
-			this.tabPageFirmware = new System.Windows.Forms.TabPage();
+			this.tabPageSettings = new System.Windows.Forms.TabPage();
 			this.textBoxAtmelProgrammerPath = new System.Windows.Forms.TextBox();
 			this.textBoxAtmelProgrammerStandardInformation = new System.Windows.Forms.TextBox();
 			this.buttonAtmelProgrammerSetting = new System.Windows.Forms.Button();
 			this.labelPickAtmelProgrammer = new System.Windows.Forms.Label();
 			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.buttonSerialFwUpdate = new System.Windows.Forms.Button();
 			this.buttonCommand2 = new System.Windows.Forms.Button();
 			this.buttonCommand1 = new System.Windows.Forms.Button();
 			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
@@ -75,10 +76,10 @@
 			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
-			this.buttonSerialFwUpdate = new System.Windows.Forms.Button();
+			this.textBoxFWupdateVersionName = new System.Windows.Forms.TextBox();
 			this.tabControl.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
-			this.tabPageFirmware.SuspendLayout();
+			this.tabPageSettings.SuspendLayout();
 			this.tabSerialPort.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -88,15 +89,15 @@
 			this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tabControl.Controls.Add(this.tabPageV2programming);
-			this.tabControl.Controls.Add(this.tabPageFirmware);
 			this.tabControl.Controls.Add(this.tabSerialPort);
+			this.tabControl.Controls.Add(this.tabPageV2programming);
+			this.tabControl.Controls.Add(this.tabPageSettings);
 			this.tabControl.Location = new System.Drawing.Point(0, 27);
 			this.tabControl.MinimumSize = new System.Drawing.Size(300, 200);
 			this.tabControl.Multiline = true;
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(665, 317);
+			this.tabControl.Size = new System.Drawing.Size(731, 317);
 			this.tabControl.TabIndex = 17;
 			// 
 			// tabPageV2programming
@@ -259,19 +260,19 @@
 			this.buttonV2programming.UseVisualStyleBackColor = true;
 			this.buttonV2programming.Click += new System.EventHandler(this.buttonV2programming_Click);
 			// 
-			// tabPageFirmware
+			// tabPageSettings
 			// 
-			this.tabPageFirmware.Controls.Add(this.textBoxAtmelProgrammerPath);
-			this.tabPageFirmware.Controls.Add(this.textBoxAtmelProgrammerStandardInformation);
-			this.tabPageFirmware.Controls.Add(this.buttonAtmelProgrammerSetting);
-			this.tabPageFirmware.Controls.Add(this.labelPickAtmelProgrammer);
-			this.tabPageFirmware.Location = new System.Drawing.Point(4, 22);
-			this.tabPageFirmware.Name = "tabPageFirmware";
-			this.tabPageFirmware.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageFirmware.Size = new System.Drawing.Size(657, 291);
-			this.tabPageFirmware.TabIndex = 1;
-			this.tabPageFirmware.Text = "Beállítások";
-			this.tabPageFirmware.UseVisualStyleBackColor = true;
+			this.tabPageSettings.Controls.Add(this.textBoxAtmelProgrammerPath);
+			this.tabPageSettings.Controls.Add(this.textBoxAtmelProgrammerStandardInformation);
+			this.tabPageSettings.Controls.Add(this.buttonAtmelProgrammerSetting);
+			this.tabPageSettings.Controls.Add(this.labelPickAtmelProgrammer);
+			this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSettings.Name = "tabPageSettings";
+			this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageSettings.Size = new System.Drawing.Size(657, 291);
+			this.tabPageSettings.TabIndex = 1;
+			this.tabPageSettings.Text = "Beállítások";
+			this.tabPageSettings.UseVisualStyleBackColor = true;
 			// 
 			// textBoxAtmelProgrammerPath
 			// 
@@ -313,6 +314,7 @@
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.textBoxFWupdateVersionName);
 			this.tabSerialPort.Controls.Add(this.buttonSerialFwUpdate);
 			this.tabSerialPort.Controls.Add(this.buttonCommand2);
 			this.tabSerialPort.Controls.Add(this.buttonCommand1);
@@ -332,14 +334,26 @@
 			this.tabSerialPort.Location = new System.Drawing.Point(4, 22);
 			this.tabSerialPort.Name = "tabSerialPort";
 			this.tabSerialPort.Padding = new System.Windows.Forms.Padding(3);
-			this.tabSerialPort.Size = new System.Drawing.Size(657, 291);
+			this.tabSerialPort.Size = new System.Drawing.Size(723, 291);
 			this.tabSerialPort.TabIndex = 3;
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
 			// 
+			// buttonSerialFwUpdate
+			// 
+			this.buttonSerialFwUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSerialFwUpdate.Location = new System.Drawing.Point(623, 65);
+			this.buttonSerialFwUpdate.Name = "buttonSerialFwUpdate";
+			this.buttonSerialFwUpdate.Size = new System.Drawing.Size(90, 23);
+			this.buttonSerialFwUpdate.TabIndex = 16;
+			this.buttonSerialFwUpdate.Text = "FW update";
+			this.buttonSerialFwUpdate.UseVisualStyleBackColor = true;
+			this.buttonSerialFwUpdate.Click += new System.EventHandler(this.buttonSerialFwUpdate_Click);
+			// 
 			// buttonCommand2
 			// 
-			this.buttonCommand2.Location = new System.Drawing.Point(472, 179);
+			this.buttonCommand2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonCommand2.Location = new System.Drawing.Point(535, 179);
 			this.buttonCommand2.Name = "buttonCommand2";
 			this.buttonCommand2.Size = new System.Drawing.Size(103, 23);
 			this.buttonCommand2.TabIndex = 15;
@@ -349,7 +363,8 @@
 			// 
 			// buttonCommand1
 			// 
-			this.buttonCommand1.Location = new System.Drawing.Point(472, 149);
+			this.buttonCommand1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonCommand1.Location = new System.Drawing.Point(535, 150);
 			this.buttonCommand1.Name = "buttonCommand1";
 			this.buttonCommand1.Size = new System.Drawing.Size(103, 23);
 			this.buttonCommand1.TabIndex = 14;
@@ -363,11 +378,11 @@
 			this.checkBoxSerialCopySelected.AutoSize = true;
 			this.checkBoxSerialCopySelected.Checked = true;
 			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(469, 112);
+			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(535, 111);
 			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
-			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(140, 17);
+			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(109, 17);
 			this.checkBoxSerialCopySelected.TabIndex = 13;
-			this.checkBoxSerialCopySelected.Text = "Kijelölt szöveg másolása";
+			this.checkBoxSerialCopySelected.Text = "Szöveg másolása";
 			this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSerialPortScrollBottom
@@ -376,7 +391,7 @@
 			this.checkBoxSerialPortScrollBottom.AutoSize = true;
 			this.checkBoxSerialPortScrollBottom.Checked = true;
 			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(469, 88);
+			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(535, 88);
 			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
 			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
 			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
@@ -387,7 +402,7 @@
 			// 
 			this.labelFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFavouriteCommands.AutoSize = true;
-			this.labelFavouriteCommands.Location = new System.Drawing.Point(469, 132);
+			this.labelFavouriteCommands.Location = new System.Drawing.Point(535, 132);
 			this.labelFavouriteCommands.Name = "labelFavouriteCommands";
 			this.labelFavouriteCommands.Size = new System.Drawing.Size(106, 13);
 			this.labelFavouriteCommands.TabIndex = 10;
@@ -397,7 +412,7 @@
 			// 
 			this.labelLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelLastCommands.AutoSize = true;
-			this.labelLastCommands.Location = new System.Drawing.Point(489, 245);
+			this.labelLastCommands.Location = new System.Drawing.Point(555, 245);
 			this.labelLastCommands.Name = "labelLastCommands";
 			this.labelLastCommands.Size = new System.Drawing.Size(134, 13);
 			this.labelLastCommands.TabIndex = 9;
@@ -406,7 +421,7 @@
 			// buttonSerialPortRefresh
 			// 
 			this.buttonSerialPortRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(557, 7);
+			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(623, 7);
 			this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
 			this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
 			this.buttonSerialPortRefresh.TabIndex = 8;
@@ -419,7 +434,7 @@
 			this.comboBoxSerialPortLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSerialPortLastCommands.Enabled = false;
 			this.comboBoxSerialPortLastCommands.FormattingEnabled = true;
-			this.comboBoxSerialPortLastCommands.Location = new System.Drawing.Point(492, 263);
+			this.comboBoxSerialPortLastCommands.Location = new System.Drawing.Point(558, 263);
 			this.comboBoxSerialPortLastCommands.Name = "comboBoxSerialPortLastCommands";
 			this.comboBoxSerialPortLastCommands.Size = new System.Drawing.Size(155, 21);
 			this.comboBoxSerialPortLastCommands.TabIndex = 7;
@@ -427,7 +442,7 @@
 			// buttonSerialPortSend
 			// 
 			this.buttonSerialPortSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortSend.Location = new System.Drawing.Point(410, 265);
+			this.buttonSerialPortSend.Location = new System.Drawing.Point(476, 265);
 			this.buttonSerialPortSend.Name = "buttonSerialPortSend";
 			this.buttonSerialPortSend.Size = new System.Drawing.Size(75, 23);
 			this.buttonSerialPortSend.TabIndex = 6;
@@ -440,7 +455,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox1.Location = new System.Drawing.Point(9, 265);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(395, 20);
+			this.textBox1.Size = new System.Drawing.Size(461, 20);
 			this.textBox1.TabIndex = 5;
 			// 
 			// comboBoxSerialPortBaudrate
@@ -450,7 +465,7 @@
 			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
             "115200",
             "9600"});
-			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(469, 37);
+			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(535, 37);
 			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
 			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
 			this.comboBoxSerialPortBaudrate.TabIndex = 4;
@@ -460,7 +475,7 @@
 			// 
 			this.comboBoxSerialPortCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSerialPortCOM.FormattingEnabled = true;
-			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(469, 7);
+			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(535, 7);
 			this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
 			this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(82, 21);
 			this.comboBoxSerialPortCOM.TabIndex = 3;
@@ -471,7 +486,7 @@
 			this.checkBoxSerialPortLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialPortLog.AutoSize = true;
 			this.checkBoxSerialPortLog.Enabled = false;
-			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(469, 64);
+			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(535, 64);
 			this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
 			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(44, 17);
 			this.checkBoxSerialPortLog.TabIndex = 2;
@@ -481,7 +496,7 @@
 			// buttonSerialPortOpen
 			// 
 			this.buttonSerialPortOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortOpen.Location = new System.Drawing.Point(557, 36);
+			this.buttonSerialPortOpen.Location = new System.Drawing.Point(623, 36);
 			this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
 			this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
 			this.buttonSerialPortOpen.TabIndex = 1;
@@ -498,7 +513,7 @@
 			this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
 			this.richTextBoxSerialPortTexts.ReadOnly = true;
 			this.richTextBoxSerialPortTexts.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(454, 251);
+			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(520, 251);
 			this.richTextBoxSerialPortTexts.TabIndex = 0;
 			this.richTextBoxSerialPortTexts.Text = "";
 			this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
@@ -576,21 +591,20 @@
 			this.timerProgressBar.Interval = 1000;
 			this.timerProgressBar.Tick += new System.EventHandler(this.timerProgressBar_Tick);
 			// 
-			// buttonSerialFwUpdate
+			// textBoxFWupdateVersionName
 			// 
-			this.buttonSerialFwUpdate.Location = new System.Drawing.Point(557, 65);
-			this.buttonSerialFwUpdate.Name = "buttonSerialFwUpdate";
-			this.buttonSerialFwUpdate.Size = new System.Drawing.Size(90, 23);
-			this.buttonSerialFwUpdate.TabIndex = 16;
-			this.buttonSerialFwUpdate.Text = "FW update";
-			this.buttonSerialFwUpdate.UseVisualStyleBackColor = true;
-			this.buttonSerialFwUpdate.Click += new System.EventHandler(this.buttonSerialFwUpdate_Click);
+			this.textBoxFWupdateVersionName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxFWupdateVersionName.Location = new System.Drawing.Point(623, 94);
+			this.textBoxFWupdateVersionName.Name = "textBoxFWupdateVersionName";
+			this.textBoxFWupdateVersionName.Size = new System.Drawing.Size(90, 20);
+			this.textBoxFWupdateVersionName.TabIndex = 17;
+			this.textBoxFWupdateVersionName.Text = "<version>";
 			// 
 			// JarKonDevApplication
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(663, 343);
+			this.ClientSize = new System.Drawing.Size(729, 343);
 			this.Controls.Add(this.tabControl);
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -602,8 +616,8 @@
 			this.tabControl.ResumeLayout(false);
 			this.tabPageV2programming.ResumeLayout(false);
 			this.tabPageV2programming.PerformLayout();
-			this.tabPageFirmware.ResumeLayout(false);
-			this.tabPageFirmware.PerformLayout();
+			this.tabPageSettings.ResumeLayout(false);
+			this.tabPageSettings.PerformLayout();
 			this.tabSerialPort.ResumeLayout(false);
 			this.tabSerialPort.PerformLayout();
 			this.menuStrip1.ResumeLayout(false);
@@ -616,7 +630,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPageFirmware;
+        private System.Windows.Forms.TabPage tabPageSettings;
         private System.Windows.Forms.TabPage tabPageV2programming;
         private System.Windows.Forms.Button buttonV2programming;
         private System.Windows.Forms.Button buttonObuProgramming;
@@ -661,6 +675,7 @@
 		private System.Windows.Forms.Button buttonCommand1;
 		private System.Windows.Forms.Timer timerProgressBar;
 		private System.Windows.Forms.Button buttonSerialFwUpdate;
+		private System.Windows.Forms.TextBox textBoxFWupdateVersionName;
     }
 }
 

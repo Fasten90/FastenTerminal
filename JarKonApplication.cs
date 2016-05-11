@@ -429,7 +429,15 @@ namespace JarKonApplication
 					richTextBoxSerialPortTexts.Copy();
 
 					// TODO: Copy to textbox?
-					Console.WriteLine("Copied texts: " + richTextBoxSerialPortTexts.SelectedText);
+					if (richTextBoxSerialPortTexts.SelectedText.Length < 1000 )
+					{
+						Console.WriteLine("Copied texts: " + richTextBoxSerialPortTexts.SelectedText);
+					}
+					else
+					{
+						Console.WriteLine("Copied long text to clipboard.");
+					}
+					
 					// TODO: show message? (notify, notification)
 				}
 				
@@ -439,7 +447,7 @@ namespace JarKonApplication
 
 		private void buttonSerialFwUpdate_Click(object sender, EventArgs e)
 		{
-			fwUpdate = new FwUpdate("LidlOS.hex", serial);
+			fwUpdate = new FwUpdate("LidlOS.hex", textBoxFWupdateVersionName.Text, serial, this);
 
 		}
 
