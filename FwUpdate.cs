@@ -365,32 +365,22 @@ namespace JarKonApplication
 						{
 							if (ReceivedMessage.Contains("PAGE"))
 							{
-								String pageNumString = ReceivedMessage.Substring(20, 5);
-								try
-								{
-									int pageNum = Int32.Parse(pageNumString);
+								String actualPageNumString = ActualPageNum.ToString("D4");
 
-									if (pageNum == ActualPageNum)
+								if (ReceivedMessage.Contains(actualPageNumString))
+								{
+									if (ReceivedMessage.Contains("OK"))
 									{
-										if (ReceivedMessage.Contains("OK"))
-										{
-											successful = true;
-											return successful;
-										}
-										else if (ReceivedMessage.Contains("ERROR"))
-										{
-											successful = false;
-											return successful;
-										}
+										successful = true;
+										return successful;
+									}
+									else if (ReceivedMessage.Contains("ERROR"))
+									{
+										successful = false;
+										return successful;
 									}
 								}
-								catch (Exception e)
-								{
-									// ...
-								}
-
 							}
-
 						}
 
 						ReceivedFwUpdateMessage = false;
