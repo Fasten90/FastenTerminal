@@ -31,10 +31,15 @@ namespace JarKonApplication
 		FwUpdateSource source;
 		JarKonSerial serial;
 		JarKonDevApplication form;
+		Thread updateThread;
 
 		const int PageAsciiLength = 512;
 		const int InnerPageMaxCount = 4;
 		const int InnerPageAsciiLength = PageAsciiLength / InnerPageMaxCount;
+
+
+		bool ReceivedFwUpdateMessage;
+		String ReceivedMessage;
 
 
 		public FwUpdate(String codeFile, String versionName, JarKonSerial serial, JarKonDevApplication form)
@@ -61,8 +66,8 @@ namespace JarKonApplication
 			//StartFirmWareUpdate(codeFile);
 
 			// Start in new process
-			Thread t = new Thread(() => StartFirmWareUpdate(codeFile));
-			t.Start();
+			updateThread = new Thread(() => StartFirmWareUpdate(codeFile));
+			updateThread.Start();
 			
 	
 		}
@@ -70,17 +75,18 @@ namespace JarKonApplication
 		private void StartFirmWareUpdate(String codeFile)
 		{
 			// Get hex file
-			// TODO:
-			VersionName = "Version1";
+
 
 			// Process code file
 			OpenAndProcessHexFile(codeFile);
 
 			CalculateFullPageNum();
 
+			form.FwUpdateWaitMessage = true;
+
 			// Send "START"
 			SendStartCommand(source);
-			Thread.Sleep(1000);
+			Thread.Sleep(3000);
 
 			// Sending in loop
 			while (ActualPageNum <= FullPageNum)
@@ -91,12 +97,17 @@ namespace JarKonApplication
 				// Send this inner page
 				SendNextInnerPage();
 
-				Thread.Sleep(1000);
+				String text = ActualPageNum.ToString() + "." + ActualInnerPageNum.ToString() + "/" + FullPageNum.ToString();
+				form.AppendFwUpdateState(text);
+
+				Thread.Sleep(3000);
+				
 			}
 
 			// Send "FINISH"
 			SendFinishCommand(source);
 
+			form.FwUpdateWaitMessage = false;
 		}
 
 		private void CalculateFullPageNum()
@@ -198,11 +209,23 @@ namespace JarKonApplication
 			}
 			else
 			{
+				// End of page...
 				// Receive answer !! And check that
-				// TODO: check...
-				ActualInnerPageNum = 1;
-				ActualPageNum++;
-				// Next Page...
+
+				// Check response
+				if ( WaitPageResponse(10000))
+				{
+					ActualInnerPageNum = 1;
+					ActualPageNum++;
+					// Next Page...
+				}
+				else
+				{
+					// Error
+					// Start from inner page 1
+					ActualInnerPageNum = 1;
+				}
+				
 			}
 			
 
@@ -290,8 +313,6 @@ namespace JarKonApplication
 				SendSerialMessage(message);
 			}
 			
-
-
 		}
 
 
@@ -322,5 +343,94 @@ namespace JarKonApplication
 
 		}
 
+
+
+		private bool WaitPageResponse(int maxMiliSecond)
+		{
+
+			bool successful = false;
+
+			if (source == FwUpdateSource.SerialPort)
+			{
+
+				int actualMiliSeond = 0;
+				while (actualMiliSeond < maxMiliSecond)
+				{
+					actualMiliSeond += 100;
+					Thread.Sleep(100);
+
+					if (ReceivedFwUpdateMessage == true)
+					{
+						if (ReceivedMessage.Contains("FWUP"))
+						{
+							if (ReceivedMessage.Contains("PAGE"))
+							{
+								String pageNumString = ReceivedMessage.Substring(20, 5);
+								try
+								{
+									int pageNum = Int32.Parse(pageNumString);
+
+									if (pageNum == ActualPageNum)
+									{
+										if (ReceivedMessage.Contains("OK"))
+										{
+											successful = true;
+											return successful;
+										}
+										else if (ReceivedMessage.Contains("ERROR"))
+										{
+											successful = false;
+											return successful;
+										}
+									}
+								}
+								catch (Exception e)
+								{
+									// ...
+								}
+
+							}
+
+						}
+
+						ReceivedFwUpdateMessage = false;
+					}
+					else
+					{
+						//successful = false;
+					}
+
+				}	// End of while (wait response)
+
+
+				//successful = false;
+			}
+			else
+			{
+				successful = false;
+			}
+
+			return successful;
+
+		}
+
+
+
+		public void ReceivedAnMessage(String message)
+		{
+			ReceivedFwUpdateMessage = true; ;
+			ReceivedMessage = message;
+
+		}
+
+
+		public void FwUpdateStop()
+		{
+			form.FwUpdateWaitMessage = false;
+
+			updateThread.Abort();
+		}
+
 	}
+
 }

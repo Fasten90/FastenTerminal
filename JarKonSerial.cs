@@ -101,6 +101,8 @@ namespace JarKonApplication
 			receivedMessage += serial.ReadLine();
 
 			form.AppendTextSerialData(receivedMessage);
+
+			form.CheckFwUpateMessageAndSend(receivedMessage);
 		}
 
 

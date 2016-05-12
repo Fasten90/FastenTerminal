@@ -32,6 +32,9 @@ namespace JarKonApplication
 
 		FwUpdate fwUpdate;
 
+		public bool FwUpdateWaitMessage;
+
+
         public JarKonDevApplication()
         {
             InitializeComponent();
@@ -348,6 +351,20 @@ namespace JarKonApplication
 		}
 
 
+		public void AppendFwUpdateState( string value)
+		{
+			if (InvokeRequired)
+			{
+				this.Invoke(new Action<string>(AppendFwUpdateState), new object[] { value });
+				return;
+			}
+
+			labelActualFwUpdateState.Text = value;
+
+		}
+		
+
+
 		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
 		{
 
@@ -451,7 +468,43 @@ namespace JarKonApplication
 
 		}
 
+		private void buttonFwUpdateStop_Click(object sender, EventArgs e)
+		{
+			if (fwUpdate != null)
+			{
+				fwUpdate.FwUpdateStop();
+			}
+		}
+
+		private void buttonSerialPortSend_Click(object sender, EventArgs e)
+		{
+
+		}
 
 
-    }
+
+		internal void CheckFwUpateMessageAndSend(string value)
+		{
+			if (InvokeRequired)
+			{
+				this.Invoke(new Action<string>(CheckFwUpateMessageAndSend), new object[] { value });
+				return;
+			}
+
+			if ( FwUpdateWaitMessage == true && fwUpdate != null)
+			{
+				if ( value.Contains("FWUP"))
+				{
+					fwUpdate.ReceivedAnMessage(value);
+				}
+			}
+		}
+
+		private void JarKonDevApplication_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			// Close serial
+			serial.SerialPortComClose();
+
+		}
+	}
 }
