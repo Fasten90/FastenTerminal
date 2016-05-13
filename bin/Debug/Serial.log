@@ -1,0 +1,263 @@
+2016.05.13. 22:46:12	 Serial LOG has been started.
+[39m[30m+CCLK: "04/01/01,01:39:59+08"
+[39m[35m$GPRMC,000003.800,V,,,,,0.00,0.00,060180,,,N*49
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[35m$GPRMC,000013.800,V,,,,,0.00,0.00,060180,,,N*48
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[31mIO: Battery Voltage = 8.00 [V]
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000018.799,V,,,,,0.00,0.00,060180,,,N*4C
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+2016.05.13. 22:46:57	 Serial LOG has been started.
+[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000008.800,V,,,,,0.00,0.00,060180,,,N*42
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[31mIO: Battery Voltage = 8.01 [V]
+[39m[34mRF: Not received message
+[Application] Successful sent message
+
+[39m[34mCommandHandler: Invalid message
+[39m[35m$GPRMC,000013.800,V,,,,,0.00,0.00,060180,,,N*48
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[Application] Successful sent message
+
+[39m[34mCommandHandler: Invalid message
+[39m[35m$GPRMC,000018.799,V,,,,,0.00,0.00,060180,,,N*4C
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.01 [V]
+[39m[31mSysManager: successful sended heartbeat log request queue message
+[39m[34mLOG: Create Heartbeat log
+[39m[34mLOG: 
+  Requested Coordinates: 1
+  Collected Coordinates: 0
+  CoordValidation: 00000000000000000000000000000000
+[39m[34mLOG: 
+  -
+[39m[35mGSM: Successful send to FLASH queue (FLASH_ReceiveQueue)
+[39m[32mFLASH: Received and processed write command
+[39m[30m> 
+[39m[30mSEND OK
+[39m[35mGSM: "SEND OK"
+[39m[35mGSM: TCP message Successful sended:
+[39m[30mLog message
+[39m[35mGSM: Check GSM signal strength
+[39m[30m+CSQ: 27,0
+[39m[35mGSM: Signal Strength = 27
+[39m[35mGSM: Successful send to FLASH queue (FLASH_ReceiveQueue)
+[39m[31mSysManager: Sync TODO
+[39m[32mFLASH: Received and processed write command
+[39m[30m+CCLK: "04/01/01,01:41:01+08"
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35m$PMTK010,001*2E
+[39m[35m$PMTK010,002*2D
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35m$PMTK010,001*2E
+[39m[35m$PMTK010,002*2D
+[39m[35mGPS: Switched on
+[39m[30m> 
+[39m[34mRF: Not received message
+[39m[35mGSM: Successful send to FLASH queue (FLASH_ReceiveQueue)
+[39m[34mRF: Restart, because no UART connection!
+[39m[32mFLASH: Received and processed write command
+[39m[30mSEND OK
+[39m[35mGSM: "SEND OK"
+[39m[35mGSM: TCP message Successful sended:
+[39m[30m&NOTE00170000|215345120516|SYNC
+[39m[30m> 
+[39m[30mSEND OK
+[39m[35mGSM: "SEND OK"
+[39m[35mGSM: TCP message Successful sended:
+[39m[30m&NOTE00380000|215347120516|RFMODUL_NOMESSAGE_RESTART
+[39m[36mGPS > Rx queue is full.
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35mGPS: Always location mode OFF
+[39m[35mGPS: Configured
+[39m[35m$PMTK010,001*2E
+[39m[35m$PMTK010,002*2D
+[39m[35m$GPRMC,235943.068,V,,,,,0.00,0.00,050180,,,N*45
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35m$PMTK001,314,3*36
+[39m[35m$PMTK514,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*2F
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: module power reset!
+[39m[35m$PMTK010,003*2C
+[39m[35m$PMTK001,225,3*35
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35m$PMTK010,001*2E
+[39m[35m$PMTK010,002*2D
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,235943.800,V,,,,,0.00,0.00,050180,,,N*43
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[31mIO: Battery Voltage = 8.01 [V]
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35m$PMTK010,001*2E
+[39m[35m$PMTK010,002*2D
+[39m[35m$GPRMC,235943.800,V,,,,,0.00,0.00,050180,,,N*43
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,235948.799,V,,,,,0.00,0.00,050180,,,N*47
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.00 [V]
+[39m[34mRF: Not received message
+[Application] Successful sent message
+
+[39m[35m$GPRMC,235953.800,V,,,,,0.00,0.00,050180,,,N*42
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mCommandHandler: Received an serial command
+[39m[30m!CTRL_PRINT_POI_ALL|
+[39m[34mCommandHandler: BoxProg header
+[39m[34mCommandHandler: Process BoxProg Command...
+[39m[34mCommandHandler: Control command
+[39m[34mCommandHandler: Process Control Command...
+[39m[34mCommandHandler: Didn't find control command
+[39m[30mCTRL_PRINT_POI_ALL|ERROR_NOT_FINDED_THIS_CONTROL_COMMAND|
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,235958.800,V,,,,,0.00,0.00,050180,,,N*49
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.00 [V]
+[39m[35m$GPRMC,000003.800,V,,,,,0.00,0.00,060180,,,N*49
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000008.800,V,,,,,0.00,0.00,060180,,,N*42
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.00 [V]
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000013.800,V,,,,,0.00,0.00,060180,,,N*48
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000018.799,V,,,,,0.00,0.00,060180,,,N*4C
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35mGSM: Successful send to FLASH queue (FLASH_ReceiveQueue)
+[39m[34mRF: Restart, because no UART connection!
+[39m[32mFLASH: Received and processed write command
+[39m[30m> 
+[39m[31mIO: Battery Voltage = 8.00 [V]
+[39m[30mSEND OK
+[39m[35mGSM: "SEND OK"
+[Application] Successful sent message
+
+[39m[35mGSM: TCP message Successful sended:
+[39m[30m&NOTE00380000|215432120516|RFMODUL_NOMESSAGE_RESTART
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35m$PMTK010,001*2E
+[39m[34mCommandHandler: Received an serial command
+[39m[30m!CTRL_SAY_SYSTIME|
+[39m[34mCommandHandler: BoxProg header
+[39m[34mCommandHandler: Process BoxProg Command...
+[39m[34mCommandHandler: Control command
+[39m[34mCommandHandler: Process Control Command...
+[39m[34mCommandHandler: Didn't find control command
+[39m[30mCTRL_SAY_SYSTIME|ERROR_NOT_FINDED_THIS_CONTROL_COMMAND|
+[39m[35m$PMTK010,002*2D
+[39m[35m$GPRMC,235943.800,V,,,,,0.00,0.00,050180,,,N*43
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35m$PMTK010,001*2E
+[39m[35m$PMTK010,002*2D
+[39m[34mRF: module power reset!
+[39m[35m$GPRMC,235943.800,V,,,,,0.00,0.00,050180,,,N*43
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$PMTK011,MTKGPS*08
+[39m[35m$PMTK010,001*2E
+[39m[35m$PMTK010,002*2D
+[39m[35m$GPRMC,235943.800,V,,,,,0.00,0.00,050180,,,N*43
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.01 [V]
+[39m[35m$GPRMC,235948.799,V,,,,,0.00,0.00,050180,,,N*47
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35mGSM: Check GSM signal strength
+[39m[30m+CSQ: 27,0
+[39m[35mGSM: Signal Strength = 27
+[39m[30m+CCLK: "04/01/01,01:42:05+08"
+[39m[35m$GPRMC,235953.800,V,,,,,0.00,0.00,050180,,,N*42
+[Application] Successful sent message
+
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[34mCommandHandler: Received an serial command
+[39m[30m!CTRL_GPS_COORDINATE|
+[39m[34mCommandHandler: BoxProg header
+[39m[34mCommandHandler: Process BoxProg Command...
+[39m[34mCommandHandler: Control command
+[39m[34mCommandHandler: Process Control Command...
+[39m[30m0.000000_0.000000
+[39m[34mCommandHandler: Found and processed control command
+[39m[30m0.000000_0.000000
+[39m[30mCTRL_GPS_COORDINATE|0.000000_0.000000|
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.01 [V]
+[39m[35m$GPRMC,235958.800,V,,,,,0.00,0.00,050180,,,N*49
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000003.800,V,,,,,0.00,0.00,060180,,,N*49
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.01 [V]
+[39m[35m$GPRMC,000008.800,V,,,,,0.00,0.00,060180,,,N*42
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000013.800,V,,,,,0.00,0.00,060180,,,N*48
+2016.05.13. 22:52:53	 Serial LOG has been started.
+[Application] Cannot send message, because there is not opened port
+
+[Application] Cannot send message, because there is not opened port
+

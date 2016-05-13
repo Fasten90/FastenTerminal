@@ -37,12 +37,24 @@ namespace JarKonApplication
 		const int InnerPageMaxCount = 4;
 		const int InnerPageAsciiLength = PageAsciiLength / InnerPageMaxCount;
 
+		int TimeBetweenSendings;
+		int TimeWaitResponse;
+		int MaximumPageErrorNum;
+
+		public int FullFwUpdateTimeSeconds;
+		public int ActualFwUpdateTimeSeconds;
+		public int NeedFwUpdateTimeSeconds;
+
+
+		int ActualPageErrorNum;
+
 
 		bool ReceivedFwUpdateMessage;
 		String ReceivedMessage;
 
 
-		public FwUpdate(String codeFile, String versionName, JarKonSerial serial, JarKonDevApplication form)
+		public FwUpdate(String codeFile, String versionName, JarKonSerial serial, JarKonDevApplication form,
+			int timeBetweenSendings, int timeWaitResponse, int maximumPageErrorNum)
 		{
 			// TODO:
 
@@ -62,6 +74,10 @@ namespace JarKonApplication
 			this.serial = serial;
 			this.form = form;
 
+			TimeBetweenSendings = timeBetweenSendings;
+			TimeWaitResponse = timeWaitResponse;
+			MaximumPageErrorNum = maximumPageErrorNum;
+			ActualPageErrorNum = 0;
 
 			//StartFirmWareUpdate(codeFile);
 
@@ -86,7 +102,7 @@ namespace JarKonApplication
 
 			// Send "START"
 			SendStartCommand(source);
-			Thread.Sleep(3000);
+			Thread.Sleep(TimeBetweenSendings);
 
 			// Sending in loop
 			while (ActualPageNum <= FullPageNum)
@@ -100,7 +116,9 @@ namespace JarKonApplication
 				String text = ActualPageNum.ToString() + "." + ActualInnerPageNum.ToString() + "/" + FullPageNum.ToString();
 				form.AppendFwUpdateState(text);
 
-				Thread.Sleep(3000);
+				CalculateNeedTime();
+
+				Thread.Sleep(TimeBetweenSendings);
 				
 			}
 
@@ -114,6 +132,18 @@ namespace JarKonApplication
 		{
 			FullPageNum = (int)FullCode.Length / 512;
 		}
+
+
+		private void CalculateNeedTime()
+		{
+			FullFwUpdateTimeSeconds = FullPageNum * InnerPageMaxCount * TimeBetweenSendings / 1000;
+			//ActualFwUpdateTimeSeconds = 0; // TODO:
+			//NeedFwUpdateTimeSeconds = FullFwUpdateTimeSeconds - ActualFwUpdateTimeSeconds;
+			NeedFwUpdateTimeSeconds = (FullPageNum - ActualPageNum) * InnerPageMaxCount * TimeBetweenSendings / 1000 +
+				(FullPageNum - ActualPageNum) * TimeWaitResponse / 2;
+
+		}
+
 
 		private void GetNextInnerPage()
 		{
@@ -213,7 +243,7 @@ namespace JarKonApplication
 				// Receive answer !! And check that
 
 				// Check response
-				if ( WaitPageResponse(10000))
+				if (WaitPageResponse(TimeWaitResponse))
 				{
 					ActualInnerPageNum = 1;
 					ActualPageNum++;
@@ -221,9 +251,17 @@ namespace JarKonApplication
 				}
 				else
 				{
-					// Error
-					// Start from inner page 1
-					ActualInnerPageNum = 1;
+					// Error								
+					if (ActualPageErrorNum < MaximumPageErrorNum)
+					{
+						ActualPageErrorNum++;
+						// Start from inner page 1	
+						ActualInnerPageNum = 1;
+					}
+					else
+					{
+						FwUpdateStop();
+					}
 				}
 				
 			}
@@ -420,6 +458,13 @@ namespace JarKonApplication
 
 			updateThread.Abort();
 		}
+
+
+		public void ActualSecIncrease()
+		{
+			ActualFwUpdateTimeSeconds++;
+		}
+
 
 	}
 

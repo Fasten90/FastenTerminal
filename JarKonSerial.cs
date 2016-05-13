@@ -17,6 +17,8 @@ namespace JarKonApplication
 		public string Baudrate = "115200";
 		public bool isOpenedPort = false;
 
+		public bool NeedLog { get; set; }
+
 		private JarKonDevApplication form;
 
 
@@ -103,6 +105,12 @@ namespace JarKonApplication
 			form.AppendTextSerialData(receivedMessage);
 
 			form.CheckFwUpateMessageAndSend(receivedMessage);
+
+			if (NeedLog)
+			{
+				JarKonSerialLog.SendLog(receivedMessage);
+			}
+			
 		}
 
 
@@ -130,9 +138,14 @@ namespace JarKonApplication
 				logMessage = "[Application] Cannot send message, because there is not opened port\n";
 			}
 
+			if (NeedLog)
+			{
+				JarKonSerialLog.SendLog(logMessage);
+			}
+			
+
 			return logMessage;
 		}
-
 
 	}
 }

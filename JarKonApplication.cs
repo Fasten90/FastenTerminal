@@ -61,6 +61,7 @@ namespace JarKonApplication
 
 			// Load Serial
 			serial = new JarKonSerial(serialPortDevice, this);
+			serial.NeedLog = checkBoxSerialPortLog.Checked;
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
 			// Load commands
@@ -363,6 +364,18 @@ namespace JarKonApplication
 
 		}
 		
+		public void AppendFwUpdateEndTime( string value)
+		{
+			if (InvokeRequired)
+			{
+				this.Invoke(new Action<string>(AppendFwUpdateEndTime), new object[] { value });
+				return;
+			}
+
+			labelFwUpdateNeedTime.Text = value;
+
+		}
+		
 
 
 		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
@@ -418,6 +431,8 @@ namespace JarKonApplication
 			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
 		}
 
+
+
 		private void timerProgressBar_Tick(object sender, EventArgs e)
 		{
 			// Progress bar
@@ -433,6 +448,8 @@ namespace JarKonApplication
 				progressBarProgramming.Value += 2;
 			}
 		}
+
+
 
 		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
 		{
@@ -462,23 +479,48 @@ namespace JarKonApplication
 			
 		}
 
-		private void buttonSerialFwUpdate_Click(object sender, EventArgs e)
+		private void buttonFwUpdate_Click(object sender, EventArgs e)
 		{
-			fwUpdate = new FwUpdate("LidlOS.hex", textBoxFWupdateVersionName.Text, serial, this);
-
-		}
-
-		private void buttonFwUpdateStop_Click(object sender, EventArgs e)
-		{
-			if (fwUpdate != null)
+			if ( fwUpdate == null)
 			{
-				fwUpdate.FwUpdateStop();
+				// There is no fwUpdate
+				int waitResponseTime = Int32.Parse(textBoxTimeWaitResponse.Text);				// TODO: EXCEPTION
+				int waitBetweenSendignTime = Int32.Parse(textBoxTimeWaitBetweenSending.Text);	// TODO: EXCEPTION
+				int maximumPageErrorNum = Int32.Parse(textBoxFwUpdateMaxPageErrorNum.Text);		// TODO: EXCEPTION
+				fwUpdate = new FwUpdate("LidlOS.hex", textBoxFWupdateVersionName.Text,
+					serial, this, waitBetweenSendignTime, waitResponseTime, maximumPageErrorNum);
+
+				//timerFwUpdateActualSec = new System.Windows.Forms.Timer();
+				timerFwUpdateActualSec.Enabled = true;
+				timerFwUpdateActualSec.Start();
+				
+
+				buttonFwUpdateStart.Text = "FW Stop";
+				Log.SendEventLog("FwUpdate started");
 			}
+			else
+			{
+				//if (fwUpdate != null)
+				fwUpdate.FwUpdateStop();
+				fwUpdate = null;
+
+				timerFwUpdateActualSec.Stop();
+
+				buttonFwUpdateStart.Text = "FW Update ";
+				Log.SendEventLog("FwUpdate stopped");
+			}
+
 		}
+
+
 
 		private void buttonSerialPortSend_Click(object sender, EventArgs e)
 		{
-
+			if ( textBoxSerialSendMessage.Text != null)
+			{
+				serial.SendMessage(textBoxSerialSendMessage.Text);
+			}
+			
 		}
 
 
@@ -500,11 +542,42 @@ namespace JarKonApplication
 			}
 		}
 
+
+
 		private void JarKonDevApplication_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			// Close serial
 			serial.SerialPortComClose();
 
 		}
+
+
+
+		private void timerFwUpdateActualSec_Tick(object sender, EventArgs e)
+		{
+			if (fwUpdate != null)
+			{
+				fwUpdate.ActualSecIncrease();
+
+				var span = new TimeSpan(0, 0, fwUpdate.ActualFwUpdateTimeSeconds); //Or TimeSpan.FromSeconds(seconds); (see Jakob C´s answer)
+				var actualTime = string.Format("{0}:{1:00}",
+								(int)span.TotalMinutes,
+								span.Seconds);
+
+				span = new TimeSpan(0, 0, fwUpdate.NeedFwUpdateTimeSeconds); //Or TimeSpan.FromSeconds(seconds); (see Jakob C´s answer)
+				var needlTime = string.Format("{0}:{1:00}",
+								(int)span.TotalMinutes,
+								span.Seconds);
+
+				AppendFwUpdateEndTime(actualTime + " / " + needlTime);
+			}
+		}
+
+		private void checkBoxSerialPortLog_CheckedChanged(object sender, EventArgs e)
+		{
+			serial.NeedLog = checkBoxSerialPortLog.Checked;
+		}
+
+
 	}
 }
