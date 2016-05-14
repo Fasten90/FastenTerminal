@@ -35,6 +35,10 @@ namespace JarKonApplication
 		public bool FwUpdateWaitMessage;
 
 
+
+		const String SerialHeader = "!";
+
+
         public JarKonDevApplication()
         {
             InitializeComponent();
@@ -347,8 +351,52 @@ namespace JarKonApplication
 				return;
 			}
 
-			richTextBoxSerialPortTexts.Text += value;
+			// Original text appending, It Work!!
+			//richTextBoxSerialPortTexts.Text += value;
 
+			// Coloring:
+			// ESC[39mESC[31m
+			//0x1B
+			//const char ESC = '\x1B';
+			//(char)27).ToString());
+
+			// Contain escape
+			if (value.StartsWith(((char)27).ToString()))
+			{
+				Color textColor = Color.Black;
+
+				if (checkBoxSerialTextColouring.Checked)
+				{
+					// Checked coloring
+					textColor = GetColor(value);
+					//richTextBoxSerialPortTexts.SelectionColor = textColor;
+				}
+				else
+				{
+					//richTextBoxSerialPortTexts.SelectionColor = textColor;
+				}
+				// Substring after ESC
+				String textWithoutEscape = value.Substring(10);			// TODO: Elegánsabban kéne kivenni az ESC[... részt
+				richTextBoxSerialPortTexts.SelectionColor = textColor;
+				richTextBoxSerialPortTexts.AppendText(textWithoutEscape); // If you use it, it automatic scroll bottom
+
+				//Select text
+				//int startCount = richTextBoxSerialPortTexts.TextLength;
+				//richTextBoxSerialPortTexts.Text += textWithoutEscape;
+				//richTextBoxSerialPortTexts.Select(startCount, textWithoutEscape.Length);
+				//richTextBoxSerialPortTexts.SelectionColor = textColor;
+			}
+			else
+			{
+				richTextBoxSerialPortTexts.SelectionColor = Color.Black;
+				richTextBoxSerialPortTexts.AppendText(value);
+
+				//int startCount = richTextBoxSerialPortTexts.TextLength;
+				//richTextBoxSerialPortTexts.Text += value;
+				//richTextBoxSerialPortTexts.Select(startCount, value.Length);
+				
+			}
+			
 		}
 
 
@@ -516,11 +564,44 @@ namespace JarKonApplication
 
 		private void buttonSerialPortSend_Click(object sender, EventArgs e)
 		{
-			if ( textBoxSerialSendMessage.Text != null)
+			SerialMessageSending();
+	
+		}
+
+
+
+		private void textBoxSerialSendMessage_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Return)
 			{
-				serial.SendMessage(textBoxSerialSendMessage.Text);
+				// If pressed enter
+				SerialMessageSending();
 			}
-			
+				
+		}
+
+
+
+		private void SerialMessageSending()
+		{
+			if (textBoxSerialSendMessage.Text != null)
+			{
+				String message = "";
+				if (checkBoxSerialHeaderSending.Checked)
+				{
+					message += SerialHeader;
+				}
+
+				message += textBoxSerialSendMessage.Text;
+
+				String messageResult = serial.SendMessage(message);
+
+				Log.SendEventLog(messageResult);
+				AppendTextSerialData(messageResult);
+
+				Log.SendEventLog(message);
+				AppendTextSerialData(message + "\n");			
+			}
 		}
 
 
@@ -576,6 +657,50 @@ namespace JarKonApplication
 		private void checkBoxSerialPortLog_CheckedChanged(object sender, EventArgs e)
 		{
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
+		}
+
+
+
+		private Color GetColor(String escapeMessage)
+		{
+			Color textColor = Color.Black;
+			if (escapeMessage.Contains("[3"))
+			{
+				char colorChar = escapeMessage[8];
+				switch (colorChar)
+				{
+						case '0':
+						textColor = Color.Black;
+						break;
+					case '1':
+						textColor = Color.Red;
+						break;
+					case '2':
+						textColor = Color.Green;
+						break;
+					case '3':
+						textColor = Color.Yellow;
+						break;
+					case '4':
+						textColor = Color.Blue;
+						break;
+					case '5':
+						textColor = Color.Magenta;
+						break;
+					case '6':
+						textColor = Color.Cyan;
+						break;
+					case '7':
+						textColor = Color.White;
+						break;
+					default:
+						break;
+						
+				}
+			}
+
+			return textColor;
+
 		}
 
 

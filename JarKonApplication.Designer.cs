@@ -32,6 +32,17 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JarKonDevApplication));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
+			this.labelConstTextMs1 = new System.Windows.Forms.Label();
+			this.labelConstTextMs2 = new System.Windows.Forms.Label();
+			this.textBoxFwUpdateMaxPageErrorNum = new System.Windows.Forms.TextBox();
+			this.labelConstTextFwUpdateMaxPageError = new System.Windows.Forms.Label();
+			this.labelConstTextCompleteTime = new System.Windows.Forms.Label();
+			this.labelConstTextActualPage = new System.Windows.Forms.Label();
+			this.labelTimeWaitBetweenSending = new System.Windows.Forms.Label();
+			this.labelTimeWaitResponse = new System.Windows.Forms.Label();
+			this.textBoxTimeWaitBetweenSending = new System.Windows.Forms.TextBox();
+			this.textBoxTimeWaitResponse = new System.Windows.Forms.TextBox();
 			this.labelFwUpdateNeedTime = new System.Windows.Forms.Label();
 			this.labelActualFwUpdateState = new System.Windows.Forms.Label();
 			this.textBoxFWupdateVersionName = new System.Windows.Forms.TextBox();
@@ -79,18 +90,8 @@
 			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
-			this.textBoxTimeWaitResponse = new System.Windows.Forms.TextBox();
-			this.textBoxTimeWaitBetweenSending = new System.Windows.Forms.TextBox();
-			this.labelTimeWaitResponse = new System.Windows.Forms.Label();
-			this.labelTimeWaitBetweenSending = new System.Windows.Forms.Label();
-			this.labelConstTextActualPage = new System.Windows.Forms.Label();
-			this.labelConstTextCompleteTime = new System.Windows.Forms.Label();
-			this.labelConstTextFwUpdateMaxPageError = new System.Windows.Forms.Label();
-			this.textBoxFwUpdateMaxPageErrorNum = new System.Windows.Forms.TextBox();
 			this.timerFwUpdateActualSec = new System.Windows.Forms.Timer(this.components);
-			this.labelConstTextMs2 = new System.Windows.Forms.Label();
-			this.labelConstTextMs1 = new System.Windows.Forms.Label();
-			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
+			this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
 			this.tabControl.SuspendLayout();
 			this.tabSerialPort.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
@@ -116,6 +117,7 @@
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.checkBoxSerialTextColouring);
 			this.tabSerialPort.Controls.Add(this.checkBoxSerialHeaderSending);
 			this.tabSerialPort.Controls.Add(this.labelConstTextMs1);
 			this.tabSerialPort.Controls.Add(this.labelConstTextMs2);
@@ -153,6 +155,116 @@
 			this.tabSerialPort.TabIndex = 3;
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialHeaderSending
+			// 
+			this.checkBoxSerialHeaderSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkBoxSerialHeaderSending.AutoSize = true;
+			this.checkBoxSerialHeaderSending.Checked = true;
+			this.checkBoxSerialHeaderSending.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(12, 293);
+			this.checkBoxSerialHeaderSending.Name = "checkBoxSerialHeaderSending";
+			this.checkBoxSerialHeaderSending.Size = new System.Drawing.Size(15, 14);
+			this.checkBoxSerialHeaderSending.TabIndex = 30;
+			this.checkBoxSerialHeaderSending.UseVisualStyleBackColor = true;
+			// 
+			// labelConstTextMs1
+			// 
+			this.labelConstTextMs1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextMs1.AutoSize = true;
+			this.labelConstTextMs1.Location = new System.Drawing.Point(691, 139);
+			this.labelConstTextMs1.Name = "labelConstTextMs1";
+			this.labelConstTextMs1.Size = new System.Drawing.Size(20, 13);
+			this.labelConstTextMs1.TabIndex = 29;
+			this.labelConstTextMs1.Text = "ms";
+			// 
+			// labelConstTextMs2
+			// 
+			this.labelConstTextMs2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextMs2.AutoSize = true;
+			this.labelConstTextMs2.Location = new System.Drawing.Point(691, 183);
+			this.labelConstTextMs2.Name = "labelConstTextMs2";
+			this.labelConstTextMs2.Size = new System.Drawing.Size(20, 13);
+			this.labelConstTextMs2.TabIndex = 28;
+			this.labelConstTextMs2.Text = "ms";
+			// 
+			// textBoxFwUpdateMaxPageErrorNum
+			// 
+			this.textBoxFwUpdateMaxPageErrorNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxFwUpdateMaxPageErrorNum.Location = new System.Drawing.Point(644, 223);
+			this.textBoxFwUpdateMaxPageErrorNum.Name = "textBoxFwUpdateMaxPageErrorNum";
+			this.textBoxFwUpdateMaxPageErrorNum.Size = new System.Drawing.Size(41, 20);
+			this.textBoxFwUpdateMaxPageErrorNum.TabIndex = 27;
+			this.textBoxFwUpdateMaxPageErrorNum.Text = "5";
+			// 
+			// labelConstTextFwUpdateMaxPageError
+			// 
+			this.labelConstTextFwUpdateMaxPageError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextFwUpdateMaxPageError.AutoSize = true;
+			this.labelConstTextFwUpdateMaxPageError.Location = new System.Drawing.Point(645, 207);
+			this.labelConstTextFwUpdateMaxPageError.Name = "labelConstTextFwUpdateMaxPageError";
+			this.labelConstTextFwUpdateMaxPageError.Size = new System.Drawing.Size(83, 13);
+			this.labelConstTextFwUpdateMaxPageError.TabIndex = 26;
+			this.labelConstTextFwUpdateMaxPageError.Text = "Max. page hiba:";
+			// 
+			// labelConstTextCompleteTime
+			// 
+			this.labelConstTextCompleteTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextCompleteTime.AutoSize = true;
+			this.labelConstTextCompleteTime.Location = new System.Drawing.Point(645, 277);
+			this.labelConstTextCompleteTime.Name = "labelConstTextCompleteTime";
+			this.labelConstTextCompleteTime.Size = new System.Drawing.Size(73, 13);
+			this.labelConstTextCompleteTime.TabIndex = 25;
+			this.labelConstTextCompleteTime.Text = "Hátralevő idő:";
+			// 
+			// labelConstTextActualPage
+			// 
+			this.labelConstTextActualPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextActualPage.AutoSize = true;
+			this.labelConstTextActualPage.Location = new System.Drawing.Point(645, 255);
+			this.labelConstTextActualPage.Name = "labelConstTextActualPage";
+			this.labelConstTextActualPage.Size = new System.Drawing.Size(49, 13);
+			this.labelConstTextActualPage.TabIndex = 24;
+			this.labelConstTextActualPage.Text = "Jelenleg:";
+			// 
+			// labelTimeWaitBetweenSending
+			// 
+			this.labelTimeWaitBetweenSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelTimeWaitBetweenSending.AutoSize = true;
+			this.labelTimeWaitBetweenSending.Location = new System.Drawing.Point(641, 159);
+			this.labelTimeWaitBetweenSending.Name = "labelTimeWaitBetweenSending";
+			this.labelTimeWaitBetweenSending.Size = new System.Drawing.Size(96, 13);
+			this.labelTimeWaitBetweenSending.TabIndex = 23;
+			this.labelTimeWaitBetweenSending.Text = "Küldések közti idő:";
+			// 
+			// labelTimeWaitResponse
+			// 
+			this.labelTimeWaitResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelTimeWaitResponse.AutoSize = true;
+			this.labelTimeWaitResponse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.labelTimeWaitResponse.Location = new System.Drawing.Point(639, 121);
+			this.labelTimeWaitResponse.Name = "labelTimeWaitResponse";
+			this.labelTimeWaitResponse.Size = new System.Drawing.Size(89, 13);
+			this.labelTimeWaitResponse.TabIndex = 22;
+			this.labelTimeWaitResponse.Text = "Válasz várási idő:";
+			// 
+			// textBoxTimeWaitBetweenSending
+			// 
+			this.textBoxTimeWaitBetweenSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxTimeWaitBetweenSending.Location = new System.Drawing.Point(644, 180);
+			this.textBoxTimeWaitBetweenSending.Name = "textBoxTimeWaitBetweenSending";
+			this.textBoxTimeWaitBetweenSending.Size = new System.Drawing.Size(41, 20);
+			this.textBoxTimeWaitBetweenSending.TabIndex = 21;
+			this.textBoxTimeWaitBetweenSending.Text = "3000";
+			// 
+			// textBoxTimeWaitResponse
+			// 
+			this.textBoxTimeWaitResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxTimeWaitResponse.Location = new System.Drawing.Point(644, 136);
+			this.textBoxTimeWaitResponse.Name = "textBoxTimeWaitResponse";
+			this.textBoxTimeWaitResponse.Size = new System.Drawing.Size(41, 20);
+			this.textBoxTimeWaitResponse.TabIndex = 20;
+			this.textBoxTimeWaitResponse.Text = "10000";
 			// 
 			// labelFwUpdateNeedTime
 			// 
@@ -305,6 +417,7 @@
 			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(415, 20);
 			this.textBoxSerialSendMessage.TabIndex = 5;
 			this.textBoxSerialSendMessage.Text = "<Küldendő üzenet>";
+			this.textBoxSerialSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialSendMessage_KeyPress);
 			// 
 			// comboBoxSerialPortBaudrate
 			// 
@@ -387,7 +500,7 @@
 			this.tabPageV2programming.Location = new System.Drawing.Point(4, 22);
 			this.tabPageV2programming.Name = "tabPageV2programming";
 			this.tabPageV2programming.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageV2programming.Size = new System.Drawing.Size(723, 291);
+			this.tabPageV2programming.Size = new System.Drawing.Size(741, 316);
 			this.tabPageV2programming.TabIndex = 2;
 			this.tabPageV2programming.Text = "Programozás";
 			this.tabPageV2programming.UseVisualStyleBackColor = true;
@@ -538,7 +651,7 @@
 			this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
 			this.tabPageSettings.Name = "tabPageSettings";
 			this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSettings.Size = new System.Drawing.Size(723, 291);
+			this.tabPageSettings.Size = new System.Drawing.Size(741, 316);
 			this.tabPageSettings.TabIndex = 1;
 			this.tabPageSettings.Text = "Beállítások";
 			this.tabPageSettings.UseVisualStyleBackColor = true;
@@ -653,120 +766,22 @@
 			this.timerProgressBar.Interval = 1000;
 			this.timerProgressBar.Tick += new System.EventHandler(this.timerProgressBar_Tick);
 			// 
-			// textBoxTimeWaitResponse
-			// 
-			this.textBoxTimeWaitResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTimeWaitResponse.Location = new System.Drawing.Point(644, 136);
-			this.textBoxTimeWaitResponse.Name = "textBoxTimeWaitResponse";
-			this.textBoxTimeWaitResponse.Size = new System.Drawing.Size(41, 20);
-			this.textBoxTimeWaitResponse.TabIndex = 20;
-			this.textBoxTimeWaitResponse.Text = "10000";
-			// 
-			// textBoxTimeWaitBetweenSending
-			// 
-			this.textBoxTimeWaitBetweenSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTimeWaitBetweenSending.Location = new System.Drawing.Point(644, 180);
-			this.textBoxTimeWaitBetweenSending.Name = "textBoxTimeWaitBetweenSending";
-			this.textBoxTimeWaitBetweenSending.Size = new System.Drawing.Size(41, 20);
-			this.textBoxTimeWaitBetweenSending.TabIndex = 21;
-			this.textBoxTimeWaitBetweenSending.Text = "3000";
-			// 
-			// labelTimeWaitResponse
-			// 
-			this.labelTimeWaitResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelTimeWaitResponse.AutoSize = true;
-			this.labelTimeWaitResponse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.labelTimeWaitResponse.Location = new System.Drawing.Point(639, 121);
-			this.labelTimeWaitResponse.Name = "labelTimeWaitResponse";
-			this.labelTimeWaitResponse.Size = new System.Drawing.Size(89, 13);
-			this.labelTimeWaitResponse.TabIndex = 22;
-			this.labelTimeWaitResponse.Text = "Válasz várási idő:";
-			// 
-			// labelTimeWaitBetweenSending
-			// 
-			this.labelTimeWaitBetweenSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelTimeWaitBetweenSending.AutoSize = true;
-			this.labelTimeWaitBetweenSending.Location = new System.Drawing.Point(641, 159);
-			this.labelTimeWaitBetweenSending.Name = "labelTimeWaitBetweenSending";
-			this.labelTimeWaitBetweenSending.Size = new System.Drawing.Size(96, 13);
-			this.labelTimeWaitBetweenSending.TabIndex = 23;
-			this.labelTimeWaitBetweenSending.Text = "Küldések közti idő:";
-			// 
-			// labelConstTextActualPage
-			// 
-			this.labelConstTextActualPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextActualPage.AutoSize = true;
-			this.labelConstTextActualPage.Location = new System.Drawing.Point(645, 255);
-			this.labelConstTextActualPage.Name = "labelConstTextActualPage";
-			this.labelConstTextActualPage.Size = new System.Drawing.Size(49, 13);
-			this.labelConstTextActualPage.TabIndex = 24;
-			this.labelConstTextActualPage.Text = "Jelenleg:";
-			// 
-			// labelConstTextCompleteTime
-			// 
-			this.labelConstTextCompleteTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextCompleteTime.AutoSize = true;
-			this.labelConstTextCompleteTime.Location = new System.Drawing.Point(645, 277);
-			this.labelConstTextCompleteTime.Name = "labelConstTextCompleteTime";
-			this.labelConstTextCompleteTime.Size = new System.Drawing.Size(73, 13);
-			this.labelConstTextCompleteTime.TabIndex = 25;
-			this.labelConstTextCompleteTime.Text = "Hátralevő idő:";
-			// 
-			// labelConstTextFwUpdateMaxPageError
-			// 
-			this.labelConstTextFwUpdateMaxPageError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextFwUpdateMaxPageError.AutoSize = true;
-			this.labelConstTextFwUpdateMaxPageError.Location = new System.Drawing.Point(645, 207);
-			this.labelConstTextFwUpdateMaxPageError.Name = "labelConstTextFwUpdateMaxPageError";
-			this.labelConstTextFwUpdateMaxPageError.Size = new System.Drawing.Size(83, 13);
-			this.labelConstTextFwUpdateMaxPageError.TabIndex = 26;
-			this.labelConstTextFwUpdateMaxPageError.Text = "Max. page hiba:";
-			// 
-			// textBoxFwUpdateMaxPageErrorNum
-			// 
-			this.textBoxFwUpdateMaxPageErrorNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxFwUpdateMaxPageErrorNum.Location = new System.Drawing.Point(644, 223);
-			this.textBoxFwUpdateMaxPageErrorNum.Name = "textBoxFwUpdateMaxPageErrorNum";
-			this.textBoxFwUpdateMaxPageErrorNum.Size = new System.Drawing.Size(41, 20);
-			this.textBoxFwUpdateMaxPageErrorNum.TabIndex = 27;
-			this.textBoxFwUpdateMaxPageErrorNum.Text = "5";
-			// 
 			// timerFwUpdateActualSec
 			// 
 			this.timerFwUpdateActualSec.Interval = 1000;
 			this.timerFwUpdateActualSec.Tick += new System.EventHandler(this.timerFwUpdateActualSec_Tick);
 			// 
-			// labelConstTextMs2
+			// checkBoxSerialTextColouring
 			// 
-			this.labelConstTextMs2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextMs2.AutoSize = true;
-			this.labelConstTextMs2.Location = new System.Drawing.Point(691, 183);
-			this.labelConstTextMs2.Name = "labelConstTextMs2";
-			this.labelConstTextMs2.Size = new System.Drawing.Size(20, 13);
-			this.labelConstTextMs2.TabIndex = 28;
-			this.labelConstTextMs2.Text = "ms";
-			// 
-			// labelConstTextMs1
-			// 
-			this.labelConstTextMs1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextMs1.AutoSize = true;
-			this.labelConstTextMs1.Location = new System.Drawing.Point(691, 139);
-			this.labelConstTextMs1.Name = "labelConstTextMs1";
-			this.labelConstTextMs1.Size = new System.Drawing.Size(20, 13);
-			this.labelConstTextMs1.TabIndex = 29;
-			this.labelConstTextMs1.Text = "ms";
-			// 
-			// checkBoxSerialHeaderSending
-			// 
-			this.checkBoxSerialHeaderSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkBoxSerialHeaderSending.AutoSize = true;
-			this.checkBoxSerialHeaderSending.Checked = true;
-			this.checkBoxSerialHeaderSending.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(12, 293);
-			this.checkBoxSerialHeaderSending.Name = "checkBoxSerialHeaderSending";
-			this.checkBoxSerialHeaderSending.Size = new System.Drawing.Size(15, 14);
-			this.checkBoxSerialHeaderSending.TabIndex = 30;
-			this.checkBoxSerialHeaderSending.UseVisualStyleBackColor = true;
+			this.checkBoxSerialTextColouring.AutoSize = true;
+			this.checkBoxSerialTextColouring.Checked = true;
+			this.checkBoxSerialTextColouring.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(535, 131);
+			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
+			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
+			this.checkBoxSerialTextColouring.TabIndex = 31;
+			this.checkBoxSerialTextColouring.Text = "Szöveg színezés";
+			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
 			// 
 			// JarKonDevApplication
 			// 
@@ -859,6 +874,7 @@
 		private System.Windows.Forms.Label labelConstTextMs1;
 		private System.Windows.Forms.Label labelConstTextMs2;
 		private System.Windows.Forms.CheckBox checkBoxSerialHeaderSending;
+		private System.Windows.Forms.CheckBox checkBoxSerialTextColouring;
     }
 }
 

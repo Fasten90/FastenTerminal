@@ -58,3 +58,50 @@
 2016.05.13. 22:06:45	 FwUpdate stopped
 2016.05.13. 22:10:10	 EventLog has been started.
 2016.05.13. 22:10:10	 FwUpdate started
+2016.05.14. 12:47:05	 EventLog has been started.
+2016.05.14. 12:47:05	 [Application] Cannot send message, because there is not opened port
+
+2016.05.14. 12:47:54	 [Application] Successful sent message
+
+2016.05.14. 12:49:45	 EventLog has been started.
+2016.05.14. 12:49:45	 [Application] Successful sent message
+
+2016.05.14. 12:49:45	 !CTRL_SAY_SYSTEM_TIME|
+2016.05.14. 12:50:00	 [Application] Successful sent message
+
+2016.05.14. 12:50:00	 !CTRL_SAY_SYSTEM_TIME|
+2016.05.14. 12:51:42	 EventLog has been started.
+2016.05.14. 12:51:42	 [Application] Successful sent message
+
+2016.05.14. 12:51:42	 !CTRL_SAY_SYSTEM_TIME|
+2016.05.14. 12:51:50	 [Application] Successful sent message
+
+2016.05.14. 12:51:50	 !CTRL_SAY_SYSTEM_TIME|
+2016.05.14. 16:55:17	 EventLog has been started.
+2016.05.14. 16:55:17	 [Application] Successful sent message
+
+2016.05.14. 16:55:17	 !CTRL_LIST_POI|
+2016.05.14. 16:55:22	 [Application] Successful sent message
+
+2016.05.14. 16:55:22	 !CTRL_LIST_POI_ALL|
+2016.05.14. 16:55:33	 [Application] Successful sent message
+
+2016.05.14. 16:55:33	 !CTRL_POI_LIST_ALL|
+2016.05.14. 16:55:36	 [Application] Successful sent message
+
+2016.05.14. 16:55:36	 !CTRL_POI_LIST|
+2016.05.14. 16:55:45	 [Application] Successful sent message
+
+2016.05.14. 16:55:45	 !CTRL_POI_LIST|
+2016.05.14. 16:56:13	 [Application] Successful sent message
+
+2016.05.14. 16:56:13	 !CTRL_POI_LIST|
+2016.05.14. 16:58:05	 [Application] Successful sent message
+
+2016.05.14. 16:58:05	 !CTRL_POI_PRINT_LIST|
+2016.05.14. 16:59:03	 [Application] Successful sent message
+
+2016.05.14. 16:59:03	 !CTRL_GPS_COORDINATE|ENFORCE|47.37754|19.019521|
+2016.05.14. 17:00:24	 [Application] Successful sent message
+
+2016.05.14. 17:00:24	 !CTRL_GPS_COORDINATE|ENFORCE|47.37754|19.019521|

@@ -110,9 +110,10 @@ namespace JarKonApplication
 					break;
 			}
 
-			Console.WriteLine(messageResult);
-			form.AppendTextSerialData(messageResult);
+			//Console.WriteLine(messageResult);
 			Log.SendEventLog(messageResult);
+			form.AppendTextSerialData(messageResult);
+			
 		}
 
 
