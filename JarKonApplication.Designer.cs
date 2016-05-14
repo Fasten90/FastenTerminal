@@ -32,6 +32,8 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JarKonDevApplication));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
+			this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
 			this.labelConstTextMs1 = new System.Windows.Forms.Label();
 			this.labelConstTextMs2 = new System.Windows.Forms.Label();
@@ -91,7 +93,7 @@
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
 			this.timerFwUpdateActualSec = new System.Windows.Forms.Timer(this.components);
-			this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
+			this.labelConstTextSearching = new System.Windows.Forms.Label();
 			this.tabControl.SuspendLayout();
 			this.tabSerialPort.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
@@ -117,6 +119,8 @@
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.labelConstTextSearching);
+			this.tabSerialPort.Controls.Add(this.textBoxSerialTextFind);
 			this.tabSerialPort.Controls.Add(this.checkBoxSerialTextColouring);
 			this.tabSerialPort.Controls.Add(this.checkBoxSerialHeaderSending);
 			this.tabSerialPort.Controls.Add(this.labelConstTextMs1);
@@ -155,6 +159,28 @@
 			this.tabSerialPort.TabIndex = 3;
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
+			// 
+			// textBoxSerialTextFind
+			// 
+			this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSerialTextFind.Location = new System.Drawing.Point(532, 175);
+			this.textBoxSerialTextFind.Name = "textBoxSerialTextFind";
+			this.textBoxSerialTextFind.Size = new System.Drawing.Size(100, 20);
+			this.textBoxSerialTextFind.TabIndex = 32;
+			this.textBoxSerialTextFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialTextFind_KeyPress);
+			// 
+			// checkBoxSerialTextColouring
+			// 
+			this.checkBoxSerialTextColouring.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialTextColouring.AutoSize = true;
+			this.checkBoxSerialTextColouring.Checked = true;
+			this.checkBoxSerialTextColouring.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(534, 135);
+			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
+			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
+			this.checkBoxSerialTextColouring.TabIndex = 31;
+			this.checkBoxSerialTextColouring.Text = "Szöveg színezés";
+			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSerialHeaderSending
 			// 
@@ -295,7 +321,7 @@
 			this.textBoxFWupdateVersionName.Name = "textBoxFWupdateVersionName";
 			this.textBoxFWupdateVersionName.Size = new System.Drawing.Size(90, 20);
 			this.textBoxFWupdateVersionName.TabIndex = 17;
-			this.textBoxFWupdateVersionName.Text = "<version>";
+			this.textBoxFWupdateVersionName.Text = "<verzió>";
 			// 
 			// buttonFwUpdateStart
 			// 
@@ -311,7 +337,7 @@
 			// buttonCommand2
 			// 
 			this.buttonCommand2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCommand2.Location = new System.Drawing.Point(535, 196);
+			this.buttonCommand2.Location = new System.Drawing.Point(532, 243);
 			this.buttonCommand2.Name = "buttonCommand2";
 			this.buttonCommand2.Size = new System.Drawing.Size(103, 23);
 			this.buttonCommand2.TabIndex = 15;
@@ -322,7 +348,7 @@
 			// buttonCommand1
 			// 
 			this.buttonCommand1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCommand1.Location = new System.Drawing.Point(535, 167);
+			this.buttonCommand1.Location = new System.Drawing.Point(532, 214);
 			this.buttonCommand1.Name = "buttonCommand1";
 			this.buttonCommand1.Size = new System.Drawing.Size(103, 23);
 			this.buttonCommand1.TabIndex = 14;
@@ -336,7 +362,7 @@
 			this.checkBoxSerialCopySelected.AutoSize = true;
 			this.checkBoxSerialCopySelected.Checked = true;
 			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(535, 110);
+			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(534, 112);
 			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
 			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(109, 17);
 			this.checkBoxSerialCopySelected.TabIndex = 13;
@@ -360,7 +386,7 @@
 			// 
 			this.labelFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelFavouriteCommands.AutoSize = true;
-			this.labelFavouriteCommands.Location = new System.Drawing.Point(535, 151);
+			this.labelFavouriteCommands.Location = new System.Drawing.Point(532, 196);
 			this.labelFavouriteCommands.Name = "labelFavouriteCommands";
 			this.labelFavouriteCommands.Size = new System.Drawing.Size(106, 13);
 			this.labelFavouriteCommands.TabIndex = 10;
@@ -390,12 +416,12 @@
 			// comboBoxSerialPortLastCommands
 			// 
 			this.comboBoxSerialPortLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxSerialPortLastCommands.Enabled = false;
 			this.comboBoxSerialPortLastCommands.FormattingEnabled = true;
 			this.comboBoxSerialPortLastCommands.Location = new System.Drawing.Point(535, 288);
 			this.comboBoxSerialPortLastCommands.Name = "comboBoxSerialPortLastCommands";
 			this.comboBoxSerialPortLastCommands.Size = new System.Drawing.Size(103, 21);
 			this.comboBoxSerialPortLastCommands.TabIndex = 7;
+			this.comboBoxSerialPortLastCommands.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortLastCommands_SelectedIndexChanged);
 			// 
 			// buttonSerialPortSend
 			// 
@@ -771,17 +797,15 @@
 			this.timerFwUpdateActualSec.Interval = 1000;
 			this.timerFwUpdateActualSec.Tick += new System.EventHandler(this.timerFwUpdateActualSec_Tick);
 			// 
-			// checkBoxSerialTextColouring
+			// labelConstTextSearching
 			// 
-			this.checkBoxSerialTextColouring.AutoSize = true;
-			this.checkBoxSerialTextColouring.Checked = true;
-			this.checkBoxSerialTextColouring.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(535, 131);
-			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
-			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
-			this.checkBoxSerialTextColouring.TabIndex = 31;
-			this.checkBoxSerialTextColouring.Text = "Szöveg színezés";
-			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
+			this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextSearching.AutoSize = true;
+			this.labelConstTextSearching.Location = new System.Drawing.Point(529, 159);
+			this.labelConstTextSearching.Name = "labelConstTextSearching";
+			this.labelConstTextSearching.Size = new System.Drawing.Size(48, 13);
+			this.labelConstTextSearching.TabIndex = 33;
+			this.labelConstTextSearching.Text = "Keresés:";
 			// 
 			// JarKonDevApplication
 			// 
@@ -875,6 +899,8 @@
 		private System.Windows.Forms.Label labelConstTextMs2;
 		private System.Windows.Forms.CheckBox checkBoxSerialHeaderSending;
 		private System.Windows.Forms.CheckBox checkBoxSerialTextColouring;
+		private System.Windows.Forms.TextBox textBoxSerialTextFind;
+		private System.Windows.Forms.Label labelConstTextSearching;
     }
 }
 

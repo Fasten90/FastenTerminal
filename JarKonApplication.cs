@@ -360,42 +360,51 @@ namespace JarKonApplication
 			//const char ESC = '\x1B';
 			//(char)27).ToString());
 
+			Color textColor = Color.Black;
+
 			// Contain escape
 			if (value.StartsWith(((char)27).ToString()))
 			{
-				Color textColor = Color.Black;
-
 				if (checkBoxSerialTextColouring.Checked)
 				{
 					// Checked coloring
 					textColor = GetColor(value);
-					//richTextBoxSerialPortTexts.SelectionColor = textColor;
 				}
 				else
 				{
-					//richTextBoxSerialPortTexts.SelectionColor = textColor;
+					// Standard color
 				}
+
 				// Substring after ESC
 				String textWithoutEscape = value.Substring(10);			// TODO: Elegánsabban kéne kivenni az ESC[... részt
-				richTextBoxSerialPortTexts.SelectionColor = textColor;
-				richTextBoxSerialPortTexts.AppendText(textWithoutEscape); // If you use it, it automatic scroll bottom
-
-				//Select text
-				//int startCount = richTextBoxSerialPortTexts.TextLength;
-				//richTextBoxSerialPortTexts.Text += textWithoutEscape;
-				//richTextBoxSerialPortTexts.Select(startCount, textWithoutEscape.Length);
+				value = textWithoutEscape;
+				
 				//richTextBoxSerialPortTexts.SelectionColor = textColor;
+				//richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
+				
+				/*
+				int startCount = richTextBoxSerialPortTexts.TextLength;
+				richTextBoxSerialPortTexts.Text += value;
+				richTextBoxSerialPortTexts.Select(startCount, value.Length);
+				richTextBoxSerialPortTexts.SelectionColor = textColor;
+				*/
 			}
 			else
 			{
-				richTextBoxSerialPortTexts.SelectionColor = Color.Black;
-				richTextBoxSerialPortTexts.AppendText(value);
 
-				//int startCount = richTextBoxSerialPortTexts.TextLength;
-				//richTextBoxSerialPortTexts.Text += value;
-				//richTextBoxSerialPortTexts.Select(startCount, value.Length);
-				
+				//richTextBoxSerialPortTexts.SelectionColor = Color.Black;
+				//richTextBoxSerialPortTexts.AppendText(value);
+
+				/*
+				int startCount = richTextBoxSerialPortTexts.TextLength;
+				richTextBoxSerialPortTexts.Text += value;
+				richTextBoxSerialPortTexts.Select(startCount, value.Length);
+				richTextBoxSerialPortTexts.SelectionColor = Color.Black;
+				*/
 			}
+
+			richTextBoxSerialPortTexts.SelectionColor = textColor;
+			richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
 			
 		}
 
@@ -565,13 +574,13 @@ namespace JarKonApplication
 		private void buttonSerialPortSend_Click(object sender, EventArgs e)
 		{
 			SerialMessageSending();
-	
 		}
 
 
 
 		private void textBoxSerialSendMessage_KeyPress(object sender, KeyPressEventArgs e)
 		{
+			// If pressed in "SendMessage textbox" enter --> Send the message
 			if (e.KeyChar == (char)Keys.Return)
 			{
 				// If pressed enter
@@ -600,8 +609,40 @@ namespace JarKonApplication
 				AppendTextSerialData(messageResult);
 
 				Log.SendEventLog(message);
-				AppendTextSerialData(message + "\n");			
+				AppendTextSerialData(message + "\n");
+
+				SerialAddLastCommand(message);
 			}
+		}
+
+
+
+		private void SerialAddLastCommand(String message)
+		{
+			String command = "";
+			
+
+			if (message.StartsWith(SerialHeader))
+			{
+				// Copied after '!', if it is serial command
+				command = message.Substring(1);	// TODO: after serial '!'
+			}
+			else
+			{
+				// Copy
+				command = message;
+			}
+
+			if (comboBoxSerialPortLastCommands.FindString(command) >= 0)
+			{
+				// We have this command in the list
+				// TODO: put to top?
+			}
+			else
+			{
+				comboBoxSerialPortLastCommands.Items.Add(command);
+			}
+			
 		}
 
 
@@ -629,7 +670,6 @@ namespace JarKonApplication
 		{
 			// Close serial
 			serial.SerialPortComClose();
-
 		}
 
 
@@ -660,7 +700,11 @@ namespace JarKonApplication
 		}
 
 
-
+		/// <summary>
+		/// Get color from string (within escape sequences ... ESC[31m...
+		/// </summary>
+		/// <param name="escapeMessage"></param>
+		/// <returns></returns>
 		private Color GetColor(String escapeMessage)
 		{
 			Color textColor = Color.Black;
@@ -701,6 +745,39 @@ namespace JarKonApplication
 
 			return textColor;
 
+		}
+
+		private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			// Copy clicked text to sending message text
+			textBoxSerialSendMessage.Text = (String)comboBoxSerialPortLastCommands.SelectedItem;
+		}
+
+
+
+		private void textBoxSerialTextFind_KeyPress(object sender, KeyPressEventArgs e)
+		{
+
+			// Find, if pressed enter
+			if (e.KeyChar == (char)Keys.Return)
+			{
+				// Pressed enter
+				String searchText = textBoxSerialTextFind.Text;
+				int searchTextLength = textBoxSerialTextFind.Text.Length;
+
+				if (searchTextLength > 0)
+				{
+					// Not null search string
+
+					// Find
+					int result = richTextBoxSerialPortTexts.Find(searchText);
+					// Select founded string
+					// TODO: This is the First searched item...
+					richTextBoxSerialPortTexts.Select(result, searchTextLength);
+					richTextBoxSerialPortTexts.SelectionBackColor = Color.Yellow;
+				}
+			}
+				
 		}
 
 
