@@ -1,7 +1,6 @@
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonDevApplication.exe.config
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonDevApplication.exe
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonDevApplication.pdb
-C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.csprojResolveAssemblyReference.cache
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.JarKonDevApplication.resources
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.Properties.Resources.resources
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.csproj.GenerateResource.Cache

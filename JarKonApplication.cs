@@ -456,9 +456,12 @@ namespace JarKonDevApplication
 
 			commandListOnButtons = new List<Button>();
 
-			// Add buttons
+			// Add buttons to Command buttons list
 			commandListOnButtons.Add(buttonCommand1);
 			commandListOnButtons.Add(buttonCommand2);
+			commandListOnButtons.Add(buttonCommand3);
+			commandListOnButtons.Add(buttonCommand4);
+			commandListOnButtons.Add(buttonCommand5);
 
 			int i = 0;
 			foreach (var item in commandList)
@@ -488,6 +491,21 @@ namespace JarKonDevApplication
 			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
 		}
 
+
+		private void buttonCommand3_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
+		}
+
+		private void buttonCommand4_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
+		}
+
+		private void buttonCommand5_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
+		}
 
 
 		private void timerProgressBar_Tick(object sender, EventArgs e)
@@ -779,6 +797,7 @@ namespace JarKonDevApplication
 			}
 				
 		}
+
 
 
 	}
