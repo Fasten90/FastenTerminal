@@ -7,8 +7,8 @@
     <ProjectGuid>{86717FC4-B6E5-48FA-8230-C8A9022642FD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JarKonApplication</RootNamespace>
-    <AssemblyName>JarKonApplication</AssemblyName>
+    <RootNamespace>JarKonDevApplication</RootNamespace>
+    <AssemblyName>JarKonDevApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

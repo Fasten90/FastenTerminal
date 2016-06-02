@@ -1,4 +1,4 @@
-﻿namespace JarKonApplication
+﻿namespace JarKonDevApplication
 {
     partial class JarKonDevApplication
     {
@@ -32,6 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JarKonDevApplication));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.labelConstTextSearching = new System.Windows.Forms.Label();
 			this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
 			this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
@@ -93,7 +94,6 @@
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
 			this.timerFwUpdateActualSec = new System.Windows.Forms.Timer(this.components);
-			this.labelConstTextSearching = new System.Windows.Forms.Label();
 			this.tabControl.SuspendLayout();
 			this.tabSerialPort.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
@@ -160,6 +160,16 @@
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
 			// 
+			// labelConstTextSearching
+			// 
+			this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextSearching.AutoSize = true;
+			this.labelConstTextSearching.Location = new System.Drawing.Point(529, 159);
+			this.labelConstTextSearching.Name = "labelConstTextSearching";
+			this.labelConstTextSearching.Size = new System.Drawing.Size(48, 13);
+			this.labelConstTextSearching.TabIndex = 33;
+			this.labelConstTextSearching.Text = "Keresés:";
+			// 
 			// textBoxSerialTextFind
 			// 
 			this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -217,7 +227,7 @@
 			// textBoxFwUpdateMaxPageErrorNum
 			// 
 			this.textBoxFwUpdateMaxPageErrorNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxFwUpdateMaxPageErrorNum.Location = new System.Drawing.Point(644, 223);
+			this.textBoxFwUpdateMaxPageErrorNum.Location = new System.Drawing.Point(644, 216);
 			this.textBoxFwUpdateMaxPageErrorNum.Name = "textBoxFwUpdateMaxPageErrorNum";
 			this.textBoxFwUpdateMaxPageErrorNum.Size = new System.Drawing.Size(41, 20);
 			this.textBoxFwUpdateMaxPageErrorNum.TabIndex = 27;
@@ -227,7 +237,7 @@
 			// 
 			this.labelConstTextFwUpdateMaxPageError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelConstTextFwUpdateMaxPageError.AutoSize = true;
-			this.labelConstTextFwUpdateMaxPageError.Location = new System.Drawing.Point(645, 207);
+			this.labelConstTextFwUpdateMaxPageError.Location = new System.Drawing.Point(641, 198);
 			this.labelConstTextFwUpdateMaxPageError.Name = "labelConstTextFwUpdateMaxPageError";
 			this.labelConstTextFwUpdateMaxPageError.Size = new System.Drawing.Size(83, 13);
 			this.labelConstTextFwUpdateMaxPageError.TabIndex = 26;
@@ -277,7 +287,7 @@
 			// textBoxTimeWaitBetweenSending
 			// 
 			this.textBoxTimeWaitBetweenSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTimeWaitBetweenSending.Location = new System.Drawing.Point(644, 180);
+			this.textBoxTimeWaitBetweenSending.Location = new System.Drawing.Point(644, 175);
 			this.textBoxTimeWaitBetweenSending.Name = "textBoxTimeWaitBetweenSending";
 			this.textBoxTimeWaitBetweenSending.Size = new System.Drawing.Size(41, 20);
 			this.textBoxTimeWaitBetweenSending.TabIndex = 21;
@@ -796,16 +806,6 @@
 			// 
 			this.timerFwUpdateActualSec.Interval = 1000;
 			this.timerFwUpdateActualSec.Tick += new System.EventHandler(this.timerFwUpdateActualSec_Tick);
-			// 
-			// labelConstTextSearching
-			// 
-			this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextSearching.AutoSize = true;
-			this.labelConstTextSearching.Location = new System.Drawing.Point(529, 159);
-			this.labelConstTextSearching.Name = "labelConstTextSearching";
-			this.labelConstTextSearching.Size = new System.Drawing.Size(48, 13);
-			this.labelConstTextSearching.TabIndex = 33;
-			this.labelConstTextSearching.Text = "Keresés:";
 			// 
 			// JarKonDevApplication
 			// 

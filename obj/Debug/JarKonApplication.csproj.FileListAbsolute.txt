@@ -7,3 +7,7 @@ C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonApplication.exe
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonApplication.pdb
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonApplication.JarKonDevApplication.resources
+C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonDevApplication.exe.config
+C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\bin\Debug\JarKonProgrammer.exe.config
+C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgrammer.exe
+C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonProgrammer.pdb

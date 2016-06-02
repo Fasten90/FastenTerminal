@@ -1,4 +1,4 @@
-﻿using JarKonApplication;
+﻿using JarKonDevApplication;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JarKonApplication
+namespace JarKonDevApplication
 {
 	public class JarKonSerial
 	{
