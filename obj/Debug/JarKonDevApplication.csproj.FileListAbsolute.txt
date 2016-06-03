@@ -6,3 +6,4 @@ C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.csproj.GenerateResource.Cache
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.exe
 C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.pdb
+C:\Engineer\VisualStudio2013Projects\JarKonProgrammer\JarKonProgrammer\obj\Debug\JarKonDevApplication.csprojResolveAssemblyReference.cache

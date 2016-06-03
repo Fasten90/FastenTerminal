@@ -128,3 +128,47 @@
 2016.05.14. 17:34:30	 [Application] Successful sent message
 
 2016.05.14. 17:34:30	 !CTRL_GPS_COORDINATE|
+2016.06.02. 21:37:37	 EventLog has been started.
+2016.06.02. 21:37:37	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:37:37	 !<Küldendő üzenet>
+2016.06.02. 21:37:37	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:37:37	 !<Küldendő üzenet>
+2016.06.02. 21:37:37	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:37:37	 !<Küldendő üzenet>
+2016.06.02. 21:37:41	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:37:41	 !<Küldendő üzenet>
+2016.06.02. 21:37:42	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:37:42	 !<Küldendő üzenet>
+2016.06.02. 21:38:01	 Send command: Command3
+
+2016.06.02. 21:38:01	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:38:03	 Send command: Command4
+
+2016.06.02. 21:38:03	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:38:06	 Send command: SecondCommand
+
+2016.06.02. 21:38:06	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 21:38:07	 Send command: FirstCommand
+
+2016.06.02. 21:38:07	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 22:24:42	 EventLog has been started.
+2016.06.02. 22:24:42	 Send command: FirstCommand
+
+2016.06.02. 22:24:42	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 22:24:43	 Send command: SecondCommand
+
+2016.06.02. 22:24:43	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 22:24:58	 [Application] Cannot send message, because there is not opened port
+
+2016.06.02. 22:24:58	 !<Küldendő üzenet>

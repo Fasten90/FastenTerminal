@@ -104,13 +104,14 @@ namespace JarKonDevApplication
 				success = RunProgrammer(command, parameter, form, ref outputText);
 				form.AppendOutputTextBox(outputText);
 
-				form.ProgressBarChange(100);
+				form.ProgressBarChange(90);
             }
 
 			if (success == true)
 			{
 				// Successful
 				Common.PlaySound(@"JarKon\Sounds\ProgrammingSuccessful.wav");
+				form.ProgressBarChange(100);
 
 			}
 			else
@@ -118,6 +119,7 @@ namespace JarKonDevApplication
 				// Error
 				form.AppendOutputTextBox("[Error...]\r\n");
 				Common.PlaySound(@"JarKon\Sounds\ProgrammingError.wav");
+				form.ProgressBarChange(-1);
 			}
 			
 			return;

@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace JarKonDevApplication
 {
-	static class JarKonSerialLog
+	static class SerialLog
 	{
 		// Copy form "Log.cs"
 
 		static TextWriterTraceListener Logger;
 
 
-		static JarKonSerialLog()
+		static SerialLog()
 		{
-			Logger = new TextWriterTraceListener("Serial.log", "SerialLog");
+			Logger = new TextWriterTraceListener("Log\\Serial.log", "SerialLog");
 
 			SendLog("Serial LOG has been started.", true);
 

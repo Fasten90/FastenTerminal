@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JarKonDevApplication
 {
-	public class JarKonSerial
+	public class Serial
 	{
 
 		public string[] ComAvailableList;
@@ -22,7 +22,7 @@ namespace JarKonDevApplication
 		private JarKonDevApplication form;
 
 
-		public JarKonSerial(System.IO.Ports.SerialPort serial, JarKonDevApplication form)
+		public Serial(System.IO.Ports.SerialPort serial, JarKonDevApplication form)
 		{
 			this.serial = serial;
 
@@ -108,7 +108,7 @@ namespace JarKonDevApplication
 
 			if (NeedLog)
 			{
-				JarKonSerialLog.SendLog(receivedMessage);
+				SerialLog.SendLog(receivedMessage);
 			}
 			
 		}
@@ -140,7 +140,7 @@ namespace JarKonDevApplication
 
 			if (NeedLog)
 			{
-				JarKonSerialLog.SendLog(logMessage);
+				SerialLog.SendLog(logMessage);
 			}
 			
 

@@ -50,7 +50,7 @@
     <Compile Include="Commands.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="FwUpdate.cs" />
-    <Compile Include="JarKonSerialLog.cs" />
+    <Compile Include="SerialLog.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Programmer.cs" />
     <Compile Include="JarKonApplication.cs">
@@ -61,7 +61,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="JarKonSerial.cs" />
+    <Compile Include="Serial.cs" />
     <Compile Include="XmlSerialization.cs" />
     <EmbeddedResource Include="JarKonApplication.resx">
       <DependentUpon>JarKonApplication.cs</DependentUpon>

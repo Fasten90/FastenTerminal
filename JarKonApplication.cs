@@ -24,7 +24,7 @@ namespace JarKonDevApplication
         ProgrammerConfigs config;
         String configFilePath = @"JarKon\ProgrammerConfigs.xml";
 
-		public JarKonSerial serial;
+		public Serial serial;
 
 		CommandHandler command;
 
@@ -64,14 +64,17 @@ namespace JarKonDevApplication
 			}
 
 			// Load Serial
-			serial = new JarKonSerial(serialPortDevice, this);
+			serial = new Serial(serialPortDevice, this);
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
+
+			SerialRefresh();
 
 			// Load commands
 			command = new CommandHandler(this);
 			LoadCommandsToButtons();
 
+			notifyIconApplication.Visible = true;  
         }
 
 
@@ -138,7 +141,7 @@ namespace JarKonDevApplication
 
 		private void buttonAtmelProgrammerSetting_Click(object sender, EventArgs e)
 		{
-			
+			// Clicked "Atmel program setting" button
 			AtmelProgrammerSetting();
 	
 		}
@@ -236,7 +239,6 @@ namespace JarKonDevApplication
 				this.Invoke(new Action<int>(ProgressBarChange), new object[] { value });
 				return;
 			}
-			progressBarProgramming.Value = value;
 
 			// Nem elegáns megoldás, de ideiglenesen egész jó
 			if (value == 20)
@@ -244,6 +246,21 @@ namespace JarKonDevApplication
 				timerProgressBar.Enabled = true;
 				timerProgressBar.Start();
 			}
+			else if (value == 100)
+			{
+				// Sikeres programozás
+				MessageForUser("Sikeres programozás!");
+			}
+			else if (value == -1)
+			{
+				MessageForUser("Hiba! Sikertelen programozás!");
+				value = 0;
+				timerProgressBar.Enabled = false;
+				timerProgressBar.Stop();
+			}
+
+			progressBarProgramming.Value = value;
+
 		}
 
 		
@@ -266,14 +283,39 @@ namespace JarKonDevApplication
 			textBoxProgramOutput.ScrollToCaret();
 		}
 
+
+		private void timerProgressBar_Tick(object sender, EventArgs e)
+		{
+			// Progress bar
+			// 30 sec all time
+			// ( 100-20 ) / 30 = 80/30 =~ 80/40 = 2
+
+			if (progressBarProgramming.Value >= 100)
+			{
+				progressBarProgramming.Enabled = false;
+			}
+			else
+			{
+				progressBarProgramming.Value += 2;
+			}
+		}
+
+
+		////////////////////////////////////////////////
+		//			 SERIAL
+		////////////////////////////////////////////////
+
+
 		private void buttonSerialPortRefresh_Click(object sender, EventArgs e)
 		{
+			// Clicked "Serial Refresh" button
 			SerialRefresh();
 		}
 
 
 		private void SerialRefresh()
 		{
+			// Refresh Serial COM ports
 			serial.SerialPortComRefresh();
 
 			if (serial.ComAvailableList != null && serial.ComAvailableList.Length != 0) 
@@ -478,19 +520,16 @@ namespace JarKonDevApplication
 		}
 
 
-
+		// Favourite commands
 		private void buttonCommand1_Click(object sender, EventArgs e)
 		{
 			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
 		}
 
-
-
 		private void buttonCommand2_Click(object sender, EventArgs e)
 		{
 			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
 		}
-
 
 		private void buttonCommand3_Click(object sender, EventArgs e)
 		{
@@ -505,23 +544,6 @@ namespace JarKonDevApplication
 		private void buttonCommand5_Click(object sender, EventArgs e)
 		{
 			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
-		}
-
-
-		private void timerProgressBar_Tick(object sender, EventArgs e)
-		{
-			// Progress bar
-			// 30 sec all time
-			// ( 100-20 ) / 30 = 80/30 =~ 80/40 = 2
-			
-			if ( progressBarProgramming.Value >= 100 )
-			{
-				progressBarProgramming.Enabled = false;
-			}
-			else
-			{
-				progressBarProgramming.Value += 2;
-			}
 		}
 
 
@@ -688,6 +710,9 @@ namespace JarKonDevApplication
 		{
 			// Close serial
 			serial.SerialPortComClose();
+
+			// Notify close
+			notifyIconApplication.Visible = false;  
 		}
 
 
@@ -782,20 +807,47 @@ namespace JarKonDevApplication
 				// Pressed enter
 				String searchText = textBoxSerialTextFind.Text;
 				int searchTextLength = textBoxSerialTextFind.Text.Length;
+				int startIndex = 0;
 
+				// Search in log, if not null text
 				if (searchTextLength > 0)
 				{
 					// Not null search string
 
 					// Find
-					int result = richTextBoxSerialPortTexts.Find(searchText);
-					// Select founded string
 					// TODO: This is the First searched item...
-					richTextBoxSerialPortTexts.Select(result, searchTextLength);
-					richTextBoxSerialPortTexts.SelectionBackColor = Color.Yellow;
+					//int result = richTextBoxSerialPortTexts.Find(searchText);
+
+					// Find
+					int result = 1;
+					while (( result = richTextBoxSerialPortTexts.Text.IndexOf(searchText, startIndex)) != -1)
+					{
+						// Founded a string
+
+						// Select founded string
+
+						richTextBoxSerialPortTexts.Select(result, searchTextLength);
+						richTextBoxSerialPortTexts.SelectionBackColor = Color.Yellow;
+
+						startIndex = result + searchTextLength;
+					}
 				}
 			}
 				
+		}
+
+
+		/// <summary>
+		/// Notify on taskbar
+		/// </summary>
+		/// <param name="message"></param>
+		private void MessageForUser(String message)
+		{
+
+			notifyIconApplication.BalloonTipText = message;
+			//notifyIconForParent.Text = message;   // Ikon neve
+			notifyIconApplication.BalloonTipTitle = "FastenDev";
+			notifyIconApplication.ShowBalloonTip(1000);
 		}
 
 

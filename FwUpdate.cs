@@ -29,7 +29,7 @@ namespace JarKonDevApplication
 		String VersionName;
 
 		FwUpdateSource source;
-		JarKonSerial serial;
+		Serial serial;
 		JarKonDevApplication form;
 		Thread updateThread;
 
@@ -53,7 +53,7 @@ namespace JarKonDevApplication
 		String ReceivedMessage;
 
 
-		public FwUpdate(String codeFile, String versionName, JarKonSerial serial, JarKonDevApplication form,
+		public FwUpdate(String codeFile, String versionName, Serial serial, JarKonDevApplication form,
 			int timeBetweenSendings, int timeWaitResponse, int maximumPageErrorNum)
 		{
 			// TODO:

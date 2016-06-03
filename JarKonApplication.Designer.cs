@@ -92,6 +92,10 @@
 			this.buttonAtmelProgrammerSetting = new System.Windows.Forms.Button();
 			this.labelPickAtmelProgrammer = new System.Windows.Forms.Label();
 			this.tabPageCalculator = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.labelConstCalculatorDec = new System.Windows.Forms.Label();
+			this.labelConstCalculatorHex = new System.Windows.Forms.Label();
+			this.labelConstCalculatorBinary = new System.Windows.Forms.Label();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fájlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.v2ProgramFájlBeállításaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,10 +106,7 @@
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
 			this.timerFwUpdateActualSec = new System.Windows.Forms.Timer(this.components);
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.labelConstCalculatorDec = new System.Windows.Forms.Label();
-			this.labelConstCalculatorHex = new System.Windows.Forms.Label();
-			this.labelConstCalculatorBinary = new System.Windows.Forms.Label();
+			this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
 			this.tabControl.SuspendLayout();
 			this.tabSerialPort.SuspendLayout();
 			this.tabControlSerialFunctions.SuspendLayout();
@@ -114,8 +115,8 @@
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageSettings.SuspendLayout();
 			this.tabPageCalculator.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
+			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl
@@ -838,6 +839,51 @@
 			this.tabPageCalculator.Text = "Számológép";
 			this.tabPageCalculator.UseVisualStyleBackColor = true;
 			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.ColumnCount = 2;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorDec, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorHex, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorBinary, 0, 2);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(117, 71);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 3;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
+			this.tableLayoutPanel1.TabIndex = 0;
+			// 
+			// labelConstCalculatorDec
+			// 
+			this.labelConstCalculatorDec.AutoSize = true;
+			this.labelConstCalculatorDec.Location = new System.Drawing.Point(3, 0);
+			this.labelConstCalculatorDec.Name = "labelConstCalculatorDec";
+			this.labelConstCalculatorDec.Size = new System.Drawing.Size(52, 13);
+			this.labelConstCalculatorDec.TabIndex = 0;
+			this.labelConstCalculatorDec.Text = "Decimális";
+			this.labelConstCalculatorDec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// labelConstCalculatorHex
+			// 
+			this.labelConstCalculatorHex.AutoSize = true;
+			this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 34);
+			this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
+			this.labelConstCalculatorHex.Size = new System.Drawing.Size(75, 13);
+			this.labelConstCalculatorHex.TabIndex = 1;
+			this.labelConstCalculatorHex.Text = "Hexadecimális";
+			// 
+			// labelConstCalculatorBinary
+			// 
+			this.labelConstCalculatorBinary.AutoSize = true;
+			this.labelConstCalculatorBinary.Location = new System.Drawing.Point(3, 68);
+			this.labelConstCalculatorBinary.Name = "labelConstCalculatorBinary";
+			this.labelConstCalculatorBinary.Size = new System.Drawing.Size(38, 13);
+			this.labelConstCalculatorBinary.TabIndex = 2;
+			this.labelConstCalculatorBinary.Text = "Bináris";
+			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -915,50 +961,11 @@
 			this.timerFwUpdateActualSec.Interval = 1000;
 			this.timerFwUpdateActualSec.Tick += new System.EventHandler(this.timerFwUpdateActualSec_Tick);
 			// 
-			// tableLayoutPanel1
+			// notifyIconApplication
 			// 
-			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorDec, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorHex, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorBinary, 0, 2);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(117, 71);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 3;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
-			this.tableLayoutPanel1.TabIndex = 0;
-			// 
-			// labelConstCalculatorDec
-			// 
-			this.labelConstCalculatorDec.AutoSize = true;
-			this.labelConstCalculatorDec.Location = new System.Drawing.Point(3, 0);
-			this.labelConstCalculatorDec.Name = "labelConstCalculatorDec";
-			this.labelConstCalculatorDec.Size = new System.Drawing.Size(52, 13);
-			this.labelConstCalculatorDec.TabIndex = 0;
-			this.labelConstCalculatorDec.Text = "Decimális";
-			this.labelConstCalculatorDec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// labelConstCalculatorHex
-			// 
-			this.labelConstCalculatorHex.AutoSize = true;
-			this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 34);
-			this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
-			this.labelConstCalculatorHex.Size = new System.Drawing.Size(75, 13);
-			this.labelConstCalculatorHex.TabIndex = 1;
-			this.labelConstCalculatorHex.Text = "Hexadecimális";
-			// 
-			// labelConstCalculatorBinary
-			// 
-			this.labelConstCalculatorBinary.AutoSize = true;
-			this.labelConstCalculatorBinary.Location = new System.Drawing.Point(3, 68);
-			this.labelConstCalculatorBinary.Name = "labelConstCalculatorBinary";
-			this.labelConstCalculatorBinary.Size = new System.Drawing.Size(38, 13);
-			this.labelConstCalculatorBinary.TabIndex = 2;
-			this.labelConstCalculatorBinary.Text = "Bináris";
+			this.notifyIconApplication.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconApplication.Icon")));
+			this.notifyIconApplication.Text = "JarKonDevApplication";
+			this.notifyIconApplication.Visible = true;
 			// 
 			// JarKonDevApplication
 			// 
@@ -987,10 +994,10 @@
 			this.tabPageSettings.ResumeLayout(false);
 			this.tabPageSettings.PerformLayout();
 			this.tabPageCalculator.ResumeLayout(false);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
+			this.menuStrip1.ResumeLayout(false);
+			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1074,6 +1081,7 @@
 		private System.Windows.Forms.Label labelConstCalculatorDec;
 		private System.Windows.Forms.Label labelConstCalculatorHex;
 		private System.Windows.Forms.Label labelConstCalculatorBinary;
+		public System.Windows.Forms.NotifyIcon notifyIconApplication;
     }
 }
 
