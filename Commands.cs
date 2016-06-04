@@ -17,7 +17,7 @@ namespace JarKonDevApplication
 	public class CommandConfigs
 	{
 
-		public List<Command> CommandList;
+		public List<Command> CommandList  { set; get; }
 
 
 		public CommandConfigs()
@@ -52,13 +52,15 @@ namespace JarKonDevApplication
 
 		private JarKonDevApplication form;
 
+		const String CommandConfigFile = @"JarKon\CommandConfigs.xml";
+
 		public CommandHandler(JarKonDevApplication form)
 		{
 			this.form = form;
 
 			CommandConfig = new CommandConfigs();
 
-			if ( LoadCommandConfigFromXml(@"JarKon\CommandConfigs.xml", ref CommandConfig) == true)
+			if (LoadCommandConfigFromXml(CommandConfigFile, ref CommandConfig) == true)
 			{
 				// Successful loaded Commands...
 
@@ -74,7 +76,7 @@ namespace JarKonDevApplication
 		public void AddNewCommand(String command, String name)
 		{
 			CommandConfig.AddCommand(command, name);
-			SaveCommandConfigToXml(@"JarKon\CommandConfigs.xml", CommandConfig);
+			SaveCommandConfigToXml(CommandConfigFile, CommandConfig);
 		}
 
 		

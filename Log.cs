@@ -31,8 +31,8 @@ namespace JarKonDevApplication
 
 		static Log()
 		{
-			EventLogger = new TextWriterTraceListener("Log\\Events.log", "EventLog");
-			ErrorLogger = new TextWriterTraceListener("Log\\Errors.log", "ErrorLog");
+			EventLogger = new TextWriterTraceListener("Events.log", "EventLog");
+			ErrorLogger = new TextWriterTraceListener("Errors.log", "ErrorLog");
 
 			SendEventLog("EventLog has been started.");
 			SendErrorLog("ErrorLog has been started.");

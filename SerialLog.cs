@@ -16,7 +16,7 @@ namespace JarKonDevApplication
 
 		static SerialLog()
 		{
-			Logger = new TextWriterTraceListener("Log\\Serial.log", "SerialLog");
+			Logger = new TextWriterTraceListener("Serial.log", "SerialLog");
 
 			SendLog("Serial LOG has been started.", true);
 

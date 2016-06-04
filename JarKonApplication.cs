@@ -23,12 +23,16 @@ namespace JarKonDevApplication
         // ProgrammerConfigs
         ProgrammerConfigs config;
         String configFilePath = @"JarKon\ProgrammerConfigs.xml";
+		// TODO: átrakni a configFile-t
 
 		public Serial serial;
 
-		CommandHandler command;
+		public CommandHandler command;
 
 		List<Button> commandListOnButtons;
+
+		//public BindingSource commandList;
+		public List<Command> commandList;
 
 		FwUpdate fwUpdate;
 
@@ -36,7 +40,7 @@ namespace JarKonDevApplication
 
 
 
-		const String SerialHeader = "!";
+		const String SerialHeader = "!";	// TODO: delete
 
 
         public JarKonDevApplication()
@@ -74,8 +78,16 @@ namespace JarKonDevApplication
 			command = new CommandHandler(this);
 			LoadCommandsToButtons();
 
+			LoadCommandsToSetting();
+
+
+			// Message Header type
+			LoadMessageHeaders();
+
+			// Notify
 			notifyIconApplication.Visible = true;  
         }
+
 
 
         private void buttonV2programming_Click(object sender, EventArgs e)
@@ -520,6 +532,35 @@ namespace JarKonDevApplication
 		}
 
 
+		private void LoadMessageHeaders()
+		{
+			// Add message headers
+			comboBoxSerialHeaderType.Items.Add("!");
+			comboBoxSerialHeaderType.Items.Add("BxPgHeader");
+		}
+
+
+		public void LoadCommandsToSetting()
+		{
+			dataGridViewSettingsFavouriteCommands.AutoGenerateColumns = true;
+
+			// TODO: Not worked...
+
+			//commandList = new List<Command>();
+
+			//commandList = new BindingSource();
+			//commandList.DataSource = command.GetCommands();
+			//dataGridViewSettingsFavouriteCommands.DataSource =
+
+			commandList = command.GetCommands();
+			dataGridViewSettingsFavouriteCommands.DataSource = commandList;
+
+			//dataGridViewSettingsFavouriteCommands.DataSource = command.GetCommands();
+
+			//dataGridViewSettingsFavouriteCommands.DataSource = command.CommandConfig.CommandList;
+		}
+
+
 		// Favourite commands
 		private void buttonCommand1_Click(object sender, EventArgs e)
 		{
@@ -638,9 +679,11 @@ namespace JarKonDevApplication
 				String message = "";
 				if (checkBoxSerialHeaderSending.Checked)
 				{
-					message += SerialHeader;
+					// Add header, if need
+					message += (String)comboBoxSerialHeaderType.SelectedItem;
 				}
 
+				// Append command text
 				message += textBoxSerialSendMessage.Text;
 
 				String messageResult = serial.SendMessage(message);
@@ -848,6 +891,50 @@ namespace JarKonDevApplication
 			//notifyIconForParent.Text = message;   // Ikon neve
 			notifyIconApplication.BalloonTipTitle = "FastenDev";
 			notifyIconApplication.ShowBalloonTip(1000);
+		}
+
+
+		////////////////////////////////
+		// Calculator
+		////////////////////////////////
+
+		public enum CalculateType
+		{
+			Decimal,
+			Hexadecimal,
+			Binary
+		}
+
+
+		private void textBoxCalculatorDec_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			// If pressed in enter
+			if (e.KeyChar == (char)Keys.Return)
+			{
+				// If pressed enter
+				Calculate(CalculateType.Decimal);
+			}
+		}
+
+		private void Calculate(CalculateType calculateType)
+		{
+			// Calculate
+
+			switch(calculateType)
+			{
+				case CalculateType.Decimal:
+
+					Int32 value = Int32.Parse(textBoxCalculatorDec.Text);
+					textBoxCalculatorHex.Text = value.ToString("X2");	// "x" is good
+					break;
+
+					// TODO:...
+			}
+		}
+
+		private void buttonSettingsFavCommandsRefresh_Click(object sender, EventArgs e)
+		{
+			LoadCommandsToSetting();
 		}
 
 

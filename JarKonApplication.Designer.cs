@@ -32,6 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JarKonDevApplication));
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.comboBoxSerialHeaderType = new System.Windows.Forms.ComboBox();
 			this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
 			this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
 			this.buttonCommand5 = new System.Windows.Forms.Button();
@@ -87,6 +88,9 @@
 			this.buttonObuProgramming = new System.Windows.Forms.Button();
 			this.buttonV2programming = new System.Windows.Forms.Button();
 			this.tabPageSettings = new System.Windows.Forms.TabPage();
+			this.dataGridViewSettingsFavouriteCommands = new System.Windows.Forms.DataGridView();
+			this.buttonSettingsFavCommandsRefresh = new System.Windows.Forms.Button();
+			this.groupBoxSettingsFavouriteCommands = new System.Windows.Forms.GroupBox();
 			this.textBoxAtmelProgrammerPath = new System.Windows.Forms.TextBox();
 			this.textBoxAtmelProgrammerStandardInformation = new System.Windows.Forms.TextBox();
 			this.buttonAtmelProgrammerSetting = new System.Windows.Forms.Button();
@@ -94,8 +98,11 @@
 			this.tabPageCalculator = new System.Windows.Forms.TabPage();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.labelConstCalculatorDec = new System.Windows.Forms.Label();
-			this.labelConstCalculatorHex = new System.Windows.Forms.Label();
 			this.labelConstCalculatorBinary = new System.Windows.Forms.Label();
+			this.textBoxCalculatorDec = new System.Windows.Forms.TextBox();
+			this.textBoxCalculatorHex = new System.Windows.Forms.TextBox();
+			this.textBoxCalculatorBin = new System.Windows.Forms.TextBox();
+			this.labelConstCalculatorHex = new System.Windows.Forms.Label();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fájlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.v2ProgramFájlBeállításaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,6 +121,8 @@
 			this.tabPageSerialFwUpdate.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageSettings.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavouriteCommands)).BeginInit();
+			this.groupBoxSettingsFavouriteCommands.SuspendLayout();
 			this.tabPageCalculator.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
@@ -138,6 +147,7 @@
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.comboBoxSerialHeaderType);
 			this.tabSerialPort.Controls.Add(this.tabControlSerialFunctions);
 			this.tabSerialPort.Controls.Add(this.labelConstTextSearching);
 			this.tabSerialPort.Controls.Add(this.textBoxSerialTextFind);
@@ -160,6 +170,15 @@
 			this.tabSerialPort.TabIndex = 3;
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
+			// 
+			// comboBoxSerialHeaderType
+			// 
+			this.comboBoxSerialHeaderType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.comboBoxSerialHeaderType.FormattingEnabled = true;
+			this.comboBoxSerialHeaderType.Location = new System.Drawing.Point(6, 343);
+			this.comboBoxSerialHeaderType.Name = "comboBoxSerialHeaderType";
+			this.comboBoxSerialHeaderType.Size = new System.Drawing.Size(82, 21);
+			this.comboBoxSerialHeaderType.TabIndex = 35;
 			// 
 			// tabControlSerialFunctions
 			// 
@@ -374,7 +393,7 @@
 			// 
 			this.labelConstTextMs1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelConstTextMs1.AutoSize = true;
-			this.labelConstTextMs1.Location = new System.Drawing.Point(162, 66);
+			this.labelConstTextMs1.Location = new System.Drawing.Point(158, 66);
 			this.labelConstTextMs1.Name = "labelConstTextMs1";
 			this.labelConstTextMs1.Size = new System.Drawing.Size(20, 13);
 			this.labelConstTextMs1.TabIndex = 29;
@@ -395,7 +414,7 @@
 			// 
 			this.labelConstTextMs2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelConstTextMs2.AutoSize = true;
-			this.labelConstTextMs2.Location = new System.Drawing.Point(162, 89);
+			this.labelConstTextMs2.Location = new System.Drawing.Point(158, 89);
 			this.labelConstTextMs2.Name = "labelConstTextMs2";
 			this.labelConstTextMs2.Size = new System.Drawing.Size(20, 13);
 			this.labelConstTextMs2.TabIndex = 28;
@@ -488,7 +507,7 @@
 			this.checkBoxSerialHeaderSending.AutoSize = true;
 			this.checkBoxSerialHeaderSending.Checked = true;
 			this.checkBoxSerialHeaderSending.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(12, 346);
+			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(94, 346);
 			this.checkBoxSerialHeaderSending.Name = "checkBoxSerialHeaderSending";
 			this.checkBoxSerialHeaderSending.Size = new System.Drawing.Size(15, 14);
 			this.checkBoxSerialHeaderSending.TabIndex = 30;
@@ -546,9 +565,9 @@
 			// 
 			this.textBoxSerialSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSerialSendMessage.Location = new System.Drawing.Point(33, 343);
+			this.textBoxSerialSendMessage.Location = new System.Drawing.Point(115, 343);
 			this.textBoxSerialSendMessage.Name = "textBoxSerialSendMessage";
-			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(424, 20);
+			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(342, 20);
 			this.textBoxSerialSendMessage.TabIndex = 5;
 			this.textBoxSerialSendMessage.Text = "<Küldendő üzenet>";
 			this.textBoxSerialSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialSendMessage_KeyPress);
@@ -670,7 +689,7 @@
 			// 
 			this.progressBarProgramming.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.progressBarProgramming.Enabled = false;
-			this.progressBarProgramming.Location = new System.Drawing.Point(8, 259);
+			this.progressBarProgramming.Location = new System.Drawing.Point(3, 343);
 			this.progressBarProgramming.Name = "progressBarProgramming";
 			this.progressBarProgramming.Size = new System.Drawing.Size(181, 23);
 			this.progressBarProgramming.TabIndex = 11;
@@ -716,7 +735,7 @@
 			this.textBoxProgramOutput.Name = "textBoxProgramOutput";
 			this.textBoxProgramOutput.ReadOnly = true;
 			this.textBoxProgramOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxProgramOutput.Size = new System.Drawing.Size(518, 130);
+			this.textBoxProgramOutput.Size = new System.Drawing.Size(552, 214);
 			this.textBoxProgramOutput.TabIndex = 6;
 			this.textBoxProgramOutput.TextChanged += new System.EventHandler(this.textBoxProgramOutput_TextChanged);
 			// 
@@ -741,7 +760,7 @@
 			this.textBoxProgramCommand.Name = "textBoxProgramCommand";
 			this.textBoxProgramCommand.ReadOnly = true;
 			this.textBoxProgramCommand.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxProgramCommand.Size = new System.Drawing.Size(518, 112);
+			this.textBoxProgramCommand.Size = new System.Drawing.Size(552, 114);
 			this.textBoxProgramCommand.TabIndex = 4;
 			this.textBoxProgramCommand.TextChanged += new System.EventHandler(this.textBoxProgramCommand_TextChanged);
 			// 
@@ -778,6 +797,8 @@
 			// 
 			// tabPageSettings
 			// 
+			this.tabPageSettings.Controls.Add(this.buttonSettingsFavCommandsRefresh);
+			this.tabPageSettings.Controls.Add(this.groupBoxSettingsFavouriteCommands);
 			this.tabPageSettings.Controls.Add(this.textBoxAtmelProgrammerPath);
 			this.tabPageSettings.Controls.Add(this.textBoxAtmelProgrammerStandardInformation);
 			this.tabPageSettings.Controls.Add(this.buttonAtmelProgrammerSetting);
@@ -790,22 +811,60 @@
 			this.tabPageSettings.Text = "Beállítások";
 			this.tabPageSettings.UseVisualStyleBackColor = true;
 			// 
+			// dataGridViewSettingsFavouriteCommands
+			// 
+			this.dataGridViewSettingsFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dataGridViewSettingsFavouriteCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridViewSettingsFavouriteCommands.Location = new System.Drawing.Point(6, 19);
+			this.dataGridViewSettingsFavouriteCommands.Name = "dataGridViewSettingsFavouriteCommands";
+			this.dataGridViewSettingsFavouriteCommands.Size = new System.Drawing.Size(270, 160);
+			this.dataGridViewSettingsFavouriteCommands.TabIndex = 8;
+			// 
+			// buttonSettingsFavCommandsRefresh
+			// 
+			this.buttonSettingsFavCommandsRefresh.Enabled = false;
+			this.buttonSettingsFavCommandsRefresh.Location = new System.Drawing.Point(316, 184);
+			this.buttonSettingsFavCommandsRefresh.Name = "buttonSettingsFavCommandsRefresh";
+			this.buttonSettingsFavCommandsRefresh.Size = new System.Drawing.Size(75, 23);
+			this.buttonSettingsFavCommandsRefresh.TabIndex = 7;
+			this.buttonSettingsFavCommandsRefresh.Text = "Frissítés";
+			this.buttonSettingsFavCommandsRefresh.UseVisualStyleBackColor = true;
+			this.buttonSettingsFavCommandsRefresh.Click += new System.EventHandler(this.buttonSettingsFavCommandsRefresh_Click);
+			// 
+			// groupBoxSettingsFavouriteCommands
+			// 
+			this.groupBoxSettingsFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.groupBoxSettingsFavouriteCommands.Controls.Add(this.dataGridViewSettingsFavouriteCommands);
+			this.groupBoxSettingsFavouriteCommands.Location = new System.Drawing.Point(28, 175);
+			this.groupBoxSettingsFavouriteCommands.Name = "groupBoxSettingsFavouriteCommands";
+			this.groupBoxSettingsFavouriteCommands.Size = new System.Drawing.Size(282, 185);
+			this.groupBoxSettingsFavouriteCommands.TabIndex = 6;
+			this.groupBoxSettingsFavouriteCommands.TabStop = false;
+			this.groupBoxSettingsFavouriteCommands.Text = "Kedvenc parancsok";
+			// 
 			// textBoxAtmelProgrammerPath
 			// 
+			this.textBoxAtmelProgrammerPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxAtmelProgrammerPath.Location = new System.Drawing.Point(122, 25);
 			this.textBoxAtmelProgrammerPath.Multiline = true;
 			this.textBoxAtmelProgrammerPath.Name = "textBoxAtmelProgrammerPath";
-			this.textBoxAtmelProgrammerPath.Size = new System.Drawing.Size(502, 54);
+			this.textBoxAtmelProgrammerPath.Size = new System.Drawing.Size(622, 54);
 			this.textBoxAtmelProgrammerPath.TabIndex = 5;
 			this.textBoxAtmelProgrammerPath.Text = "--AtmelProgrammerPath--";
 			// 
 			// textBoxAtmelProgrammerStandardInformation
 			// 
+			this.textBoxAtmelProgrammerStandardInformation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxAtmelProgrammerStandardInformation.Enabled = false;
 			this.textBoxAtmelProgrammerStandardInformation.Location = new System.Drawing.Point(28, 94);
 			this.textBoxAtmelProgrammerStandardInformation.Multiline = true;
 			this.textBoxAtmelProgrammerStandardInformation.Name = "textBoxAtmelProgrammerStandardInformation";
-			this.textBoxAtmelProgrammerStandardInformation.Size = new System.Drawing.Size(596, 60);
+			this.textBoxAtmelProgrammerStandardInformation.Size = new System.Drawing.Size(716, 60);
 			this.textBoxAtmelProgrammerStandardInformation.TabIndex = 4;
 			this.textBoxAtmelProgrammerStandardInformation.Text = resources.GetString("textBoxAtmelProgrammerStandardInformation.Text");
 			// 
@@ -841,19 +900,23 @@
 			// 
 			// tableLayoutPanel1
 			// 
+			this.tableLayoutPanel1.AutoSize = true;
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorDec, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorHex, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorBinary, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorDec, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorHex, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorBin, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorHex, 0, 1);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(117, 71);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 3;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(212, 100);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// labelConstCalculatorDec
@@ -866,15 +929,6 @@
 			this.labelConstCalculatorDec.Text = "Decimális";
 			this.labelConstCalculatorDec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// labelConstCalculatorHex
-			// 
-			this.labelConstCalculatorHex.AutoSize = true;
-			this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 34);
-			this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
-			this.labelConstCalculatorHex.Size = new System.Drawing.Size(75, 13);
-			this.labelConstCalculatorHex.TabIndex = 1;
-			this.labelConstCalculatorHex.Text = "Hexadecimális";
-			// 
 			// labelConstCalculatorBinary
 			// 
 			this.labelConstCalculatorBinary.AutoSize = true;
@@ -883,6 +937,37 @@
 			this.labelConstCalculatorBinary.Size = new System.Drawing.Size(38, 13);
 			this.labelConstCalculatorBinary.TabIndex = 2;
 			this.labelConstCalculatorBinary.Text = "Bináris";
+			// 
+			// textBoxCalculatorDec
+			// 
+			this.textBoxCalculatorDec.Location = new System.Drawing.Point(109, 3);
+			this.textBoxCalculatorDec.Name = "textBoxCalculatorDec";
+			this.textBoxCalculatorDec.Size = new System.Drawing.Size(100, 20);
+			this.textBoxCalculatorDec.TabIndex = 3;
+			this.textBoxCalculatorDec.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorDec_KeyPress);
+			// 
+			// textBoxCalculatorHex
+			// 
+			this.textBoxCalculatorHex.Location = new System.Drawing.Point(109, 37);
+			this.textBoxCalculatorHex.Name = "textBoxCalculatorHex";
+			this.textBoxCalculatorHex.Size = new System.Drawing.Size(100, 20);
+			this.textBoxCalculatorHex.TabIndex = 4;
+			// 
+			// textBoxCalculatorBin
+			// 
+			this.textBoxCalculatorBin.Location = new System.Drawing.Point(109, 71);
+			this.textBoxCalculatorBin.Name = "textBoxCalculatorBin";
+			this.textBoxCalculatorBin.Size = new System.Drawing.Size(100, 20);
+			this.textBoxCalculatorBin.TabIndex = 5;
+			// 
+			// labelConstCalculatorHex
+			// 
+			this.labelConstCalculatorHex.AutoSize = true;
+			this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 34);
+			this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
+			this.labelConstCalculatorHex.Size = new System.Drawing.Size(75, 13);
+			this.labelConstCalculatorHex.TabIndex = 1;
+			this.labelConstCalculatorHex.Text = "Hexadecimális";
 			// 
 			// menuStrip1
 			// 
@@ -993,7 +1078,10 @@
 			this.tabPageV2programming.PerformLayout();
 			this.tabPageSettings.ResumeLayout(false);
 			this.tabPageSettings.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavouriteCommands)).EndInit();
+			this.groupBoxSettingsFavouriteCommands.ResumeLayout(false);
 			this.tabPageCalculator.ResumeLayout(false);
+			this.tabPageCalculator.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.menuStrip1.ResumeLayout(false);
@@ -1082,6 +1170,13 @@
 		private System.Windows.Forms.Label labelConstCalculatorHex;
 		private System.Windows.Forms.Label labelConstCalculatorBinary;
 		public System.Windows.Forms.NotifyIcon notifyIconApplication;
+		private System.Windows.Forms.TextBox textBoxCalculatorDec;
+		private System.Windows.Forms.TextBox textBoxCalculatorHex;
+		private System.Windows.Forms.TextBox textBoxCalculatorBin;
+		private System.Windows.Forms.ComboBox comboBoxSerialHeaderType;
+		private System.Windows.Forms.GroupBox groupBoxSettingsFavouriteCommands;
+		private System.Windows.Forms.Button buttonSettingsFavCommandsRefresh;
+		private System.Windows.Forms.DataGridView dataGridViewSettingsFavouriteCommands;
     }
 }
 
