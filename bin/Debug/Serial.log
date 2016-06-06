@@ -3263,3 +3263,72 @@ DEV: Anonymus
 2016.06.04. 14:23:23	 Serial LOG has been started.
 [Application] Cannot send message, because there is not opened port
 
+2016.06.06. 19:35:40	 Serial LOG has been started.
+[Application] Successful sent message
+
+[Application] Successful sent message
+
+[Application] Successful sent message
+
+[Application] Successful sent message
+
+[Application] Successful sent message
+
+[Application] Successful sent message
+
+2016.06.06. 19:36:15	 Serial LOG has been started.
+[35m$GPRMC,000053.799,V,,,,,0.00,0.00,060180,,,N*43
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000058.799,V,,,,,0.00,0.00,060180,,,N*48
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.29 [V]
+2016.06.06. 19:41:25	 Serial LOG has been started.
+[34mRF: Not received message
+[39m[35m$GPRMC,000053.799,V,,,,,0.00,0.00,060180,,,N*43
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[Application] Successful sent message
+
+[39m[34mCommandHandler: Invalid message
+[39m[34mRF: Not received message
+[39m[31mIO: Battery Voltage = 8.27 [V]
+[39m[35m$GPRMC,000058.799,V,,,,,0.00,0.00,060180,,,N*48
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[Application] Successful sent message
+
+[39m[34mCommandHandler: Invalid message
+[39m[35m$GPRMC,000103.799,V,,,,,0.00,0.00,060180,,,N*47
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[34mRF: Not received message
+[39m[34mRF: Not received message
+[39m[35m$GPRMC,000108.799,V,,,,,0.00,0.00,060180,,,N*4C
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[31mIO: Battery Voltage = 8.28 [V]
+[39m[34mRF: Not received message
+[39m[35mGSM: Successful send to FLASH queue (FLASH_ReceiveQueue)
+[39m[34mRF: Restart, because no UART connection!
+[39m[32mFLASH: Received and processed write command
+[39m[30m> 
+[39m[35m$GPRMC,000113.799,V,,,,,0.00,0.00,060180,,,N*46
+[39m[35m$GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[39m[35mGPS: Invalid coordinate
+[39m[31mSYSTIME: ERROR with DateTime
+[39m[30mSEND OK
+[39m[35mGSM: "SEND OK"
+[39m[35mGSM: TCP message Successful sended:
+[39m[30m&NOTE00380000|163702140516|RFMODUL_NOMESSAGE_RESTART
+[39m[34mRF: module power reset!

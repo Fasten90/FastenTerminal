@@ -16,6 +16,7 @@ namespace JarKonDevApplication
 		public System.IO.Ports.SerialPort serial;
 		public string Baudrate = "115200";
 		public bool isOpenedPort = false;
+		private const Int32 preferredBaudrate = 115200;
 
 		public bool NeedLog { get; set; }
 
@@ -54,6 +55,15 @@ namespace JarKonDevApplication
 			{
 				// Good COM
 				serial.PortName = ComSelected;
+				if ( Baudrate != "")
+				{
+					serial.BaudRate = Int32.Parse(Baudrate);
+				}
+				else
+				{
+					serial.BaudRate = preferredBaudrate;
+				}
+				
 				try
 				{
 					serial.Open();

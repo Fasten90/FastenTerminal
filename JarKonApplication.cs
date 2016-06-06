@@ -332,6 +332,10 @@ namespace JarKonDevApplication
 
 			if (serial.ComAvailableList != null && serial.ComAvailableList.Length != 0) 
 			{
+				// Clear
+				comboBoxSerialPortCOM.Items.Clear();
+
+				// Load new values
 				foreach (string s in serial.ComAvailableList)
 				{
 					comboBoxSerialPortCOM.Items.Add(s);
