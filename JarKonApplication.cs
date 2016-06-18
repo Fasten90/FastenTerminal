@@ -38,6 +38,7 @@ namespace JarKonDevApplication
 
 		public bool FwUpdateWaitMessage;
 
+		bool SerialMessageTextBoxEntered = false;
 
 
 		const String SerialHeader = "!";	// TODO: delete
@@ -465,6 +466,30 @@ namespace JarKonDevApplication
 			richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
 			
 		}
+
+
+
+		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
+		{
+			DeleteSerialTexts();
+		}
+
+		private void DeleteSerialTexts()
+		{
+			richTextBoxSerialPortTexts.Clear();
+		}
+
+
+		private void textBoxSerialSendMessage_Enter(object sender, EventArgs e)
+		{
+			// Enter on SerialMessage TextBox
+			if (SerialMessageTextBoxEntered == false)
+			{
+				textBoxSerialSendMessage.Clear();
+				SerialMessageTextBoxEntered = true;
+			}
+		}
+
 
 
 		public void AppendFwUpdateState( string value)

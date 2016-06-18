@@ -88,9 +88,9 @@
 			this.buttonObuProgramming = new System.Windows.Forms.Button();
 			this.buttonV2programming = new System.Windows.Forms.Button();
 			this.tabPageSettings = new System.Windows.Forms.TabPage();
-			this.dataGridViewSettingsFavouriteCommands = new System.Windows.Forms.DataGridView();
 			this.buttonSettingsFavCommandsRefresh = new System.Windows.Forms.Button();
 			this.groupBoxSettingsFavouriteCommands = new System.Windows.Forms.GroupBox();
+			this.dataGridViewSettingsFavouriteCommands = new System.Windows.Forms.DataGridView();
 			this.textBoxAtmelProgrammerPath = new System.Windows.Forms.TextBox();
 			this.textBoxAtmelProgrammerStandardInformation = new System.Windows.Forms.TextBox();
 			this.buttonAtmelProgrammerSetting = new System.Windows.Forms.Button();
@@ -114,6 +114,7 @@
 			this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
 			this.timerFwUpdateActualSec = new System.Windows.Forms.Timer(this.components);
 			this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
+			this.buttonClearSerialTexts = new System.Windows.Forms.Button();
 			this.tabControl.SuspendLayout();
 			this.tabSerialPort.SuspendLayout();
 			this.tabControlSerialFunctions.SuspendLayout();
@@ -121,8 +122,8 @@
 			this.tabPageSerialFwUpdate.SuspendLayout();
 			this.tabPageV2programming.SuspendLayout();
 			this.tabPageSettings.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavouriteCommands)).BeginInit();
 			this.groupBoxSettingsFavouriteCommands.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavouriteCommands)).BeginInit();
 			this.tabPageCalculator.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
@@ -142,11 +143,12 @@
 			this.tabControl.Multiline = true;
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(758, 395);
+			this.tabControl.Size = new System.Drawing.Size(760, 421);
 			this.tabControl.TabIndex = 17;
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.buttonClearSerialTexts);
 			this.tabSerialPort.Controls.Add(this.comboBoxSerialHeaderType);
 			this.tabSerialPort.Controls.Add(this.tabControlSerialFunctions);
 			this.tabSerialPort.Controls.Add(this.labelConstTextSearching);
@@ -166,7 +168,7 @@
 			this.tabSerialPort.Location = new System.Drawing.Point(4, 22);
 			this.tabSerialPort.Name = "tabSerialPort";
 			this.tabSerialPort.Padding = new System.Windows.Forms.Padding(3);
-			this.tabSerialPort.Size = new System.Drawing.Size(750, 369);
+			this.tabSerialPort.Size = new System.Drawing.Size(752, 395);
 			this.tabSerialPort.TabIndex = 3;
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
@@ -175,7 +177,7 @@
 			// 
 			this.comboBoxSerialHeaderType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.comboBoxSerialHeaderType.FormattingEnabled = true;
-			this.comboBoxSerialHeaderType.Location = new System.Drawing.Point(6, 343);
+			this.comboBoxSerialHeaderType.Location = new System.Drawing.Point(6, 369);
 			this.comboBoxSerialHeaderType.Name = "comboBoxSerialHeaderType";
 			this.comboBoxSerialHeaderType.Size = new System.Drawing.Size(82, 21);
 			this.comboBoxSerialHeaderType.TabIndex = 35;
@@ -186,10 +188,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommands);
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialFwUpdate);
-			this.tabControlSerialFunctions.Location = new System.Drawing.Point(544, 130);
+			this.tabControlSerialFunctions.Location = new System.Drawing.Point(546, 155);
 			this.tabControlSerialFunctions.Name = "tabControlSerialFunctions";
 			this.tabControlSerialFunctions.SelectedIndex = 0;
-			this.tabControlSerialFunctions.Size = new System.Drawing.Size(206, 236);
+			this.tabControlSerialFunctions.Size = new System.Drawing.Size(206, 237);
 			this.tabControlSerialFunctions.TabIndex = 34;
 			// 
 			// tabPageSerialCommands
@@ -205,7 +207,7 @@
 			this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 22);
 			this.tabPageSerialCommands.Name = "tabPageSerialCommands";
 			this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 210);
+			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 211);
 			this.tabPageSerialCommands.TabIndex = 0;
 			this.tabPageSerialCommands.Text = "Parancs";
 			this.tabPageSerialCommands.UseVisualStyleBackColor = true;
@@ -315,7 +317,7 @@
 			this.tabPageSerialFwUpdate.Location = new System.Drawing.Point(4, 22);
 			this.tabPageSerialFwUpdate.Name = "tabPageSerialFwUpdate";
 			this.tabPageSerialFwUpdate.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialFwUpdate.Size = new System.Drawing.Size(198, 210);
+			this.tabPageSerialFwUpdate.Size = new System.Drawing.Size(198, 212);
 			this.tabPageSerialFwUpdate.TabIndex = 1;
 			this.tabPageSerialFwUpdate.Text = "FW Update";
 			this.tabPageSerialFwUpdate.UseVisualStyleBackColor = true;
@@ -473,7 +475,7 @@
 			// 
 			this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelConstTextSearching.AutoSize = true;
-			this.labelConstTextSearching.Location = new System.Drawing.Point(578, 107);
+			this.labelConstTextSearching.Location = new System.Drawing.Point(674, 109);
 			this.labelConstTextSearching.Name = "labelConstTextSearching";
 			this.labelConstTextSearching.Size = new System.Drawing.Size(48, 13);
 			this.labelConstTextSearching.TabIndex = 33;
@@ -482,9 +484,9 @@
 			// textBoxSerialTextFind
 			// 
 			this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSerialTextFind.Location = new System.Drawing.Point(631, 104);
+			this.textBoxSerialTextFind.Location = new System.Drawing.Point(652, 129);
 			this.textBoxSerialTextFind.Name = "textBoxSerialTextFind";
-			this.textBoxSerialTextFind.Size = new System.Drawing.Size(100, 20);
+			this.textBoxSerialTextFind.Size = new System.Drawing.Size(90, 20);
 			this.textBoxSerialTextFind.TabIndex = 32;
 			this.textBoxSerialTextFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialTextFind_KeyPress);
 			// 
@@ -494,7 +496,7 @@
 			this.checkBoxSerialTextColouring.AutoSize = true;
 			this.checkBoxSerialTextColouring.Checked = true;
 			this.checkBoxSerialTextColouring.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(631, 86);
+			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(546, 132);
 			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
 			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
 			this.checkBoxSerialTextColouring.TabIndex = 31;
@@ -505,9 +507,7 @@
 			// 
 			this.checkBoxSerialHeaderSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkBoxSerialHeaderSending.AutoSize = true;
-			this.checkBoxSerialHeaderSending.Checked = true;
-			this.checkBoxSerialHeaderSending.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(94, 346);
+			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(94, 372);
 			this.checkBoxSerialHeaderSending.Name = "checkBoxSerialHeaderSending";
 			this.checkBoxSerialHeaderSending.Size = new System.Drawing.Size(15, 14);
 			this.checkBoxSerialHeaderSending.TabIndex = 30;
@@ -519,7 +519,7 @@
 			this.checkBoxSerialCopySelected.AutoSize = true;
 			this.checkBoxSerialCopySelected.Checked = true;
 			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(631, 63);
+			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(546, 109);
 			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
 			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(109, 17);
 			this.checkBoxSerialCopySelected.TabIndex = 13;
@@ -532,7 +532,7 @@
 			this.checkBoxSerialPortScrollBottom.AutoSize = true;
 			this.checkBoxSerialPortScrollBottom.Checked = true;
 			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(544, 87);
+			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(546, 87);
 			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
 			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
 			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
@@ -542,7 +542,7 @@
 			// buttonSerialPortRefresh
 			// 
 			this.buttonSerialPortRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(650, 7);
+			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(652, 7);
 			this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
 			this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
 			this.buttonSerialPortRefresh.TabIndex = 8;
@@ -553,7 +553,7 @@
 			// buttonSerialPortSend
 			// 
 			this.buttonSerialPortSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortSend.Location = new System.Drawing.Point(463, 341);
+			this.buttonSerialPortSend.Location = new System.Drawing.Point(465, 367);
 			this.buttonSerialPortSend.Name = "buttonSerialPortSend";
 			this.buttonSerialPortSend.Size = new System.Drawing.Size(75, 23);
 			this.buttonSerialPortSend.TabIndex = 6;
@@ -565,11 +565,13 @@
 			// 
 			this.textBoxSerialSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSerialSendMessage.Location = new System.Drawing.Point(115, 343);
+			this.textBoxSerialSendMessage.Location = new System.Drawing.Point(115, 369);
+			this.textBoxSerialSendMessage.MaxLength = 256;
 			this.textBoxSerialSendMessage.Name = "textBoxSerialSendMessage";
-			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(342, 20);
+			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(344, 20);
 			this.textBoxSerialSendMessage.TabIndex = 5;
 			this.textBoxSerialSendMessage.Text = "<Küldendő üzenet>";
+			this.textBoxSerialSendMessage.Enter += new System.EventHandler(this.textBoxSerialSendMessage_Enter);
 			this.textBoxSerialSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialSendMessage_KeyPress);
 			// 
 			// comboBoxSerialPortBaudrate
@@ -579,7 +581,7 @@
 			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
             "115200",
             "9600"});
-			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(544, 36);
+			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(546, 36);
 			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
 			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
 			this.comboBoxSerialPortBaudrate.TabIndex = 4;
@@ -589,7 +591,7 @@
 			// 
 			this.comboBoxSerialPortCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSerialPortCOM.FormattingEnabled = true;
-			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(544, 7);
+			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(546, 7);
 			this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
 			this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(82, 21);
 			this.comboBoxSerialPortCOM.TabIndex = 3;
@@ -601,7 +603,7 @@
 			this.checkBoxSerialPortLog.AutoSize = true;
 			this.checkBoxSerialPortLog.Checked = true;
 			this.checkBoxSerialPortLog.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(544, 63);
+			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(546, 63);
 			this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
 			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(44, 17);
 			this.checkBoxSerialPortLog.TabIndex = 2;
@@ -612,7 +614,7 @@
 			// buttonSerialPortOpen
 			// 
 			this.buttonSerialPortOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortOpen.Location = new System.Drawing.Point(650, 36);
+			this.buttonSerialPortOpen.Location = new System.Drawing.Point(652, 36);
 			this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
 			this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
 			this.buttonSerialPortOpen.TabIndex = 1;
@@ -629,7 +631,7 @@
 			this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
 			this.richTextBoxSerialPortTexts.ReadOnly = true;
 			this.richTextBoxSerialPortTexts.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(529, 329);
+			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(531, 355);
 			this.richTextBoxSerialPortTexts.TabIndex = 0;
 			this.richTextBoxSerialPortTexts.Text = "";
 			this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
@@ -811,17 +813,6 @@
 			this.tabPageSettings.Text = "Beállítások";
 			this.tabPageSettings.UseVisualStyleBackColor = true;
 			// 
-			// dataGridViewSettingsFavouriteCommands
-			// 
-			this.dataGridViewSettingsFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.dataGridViewSettingsFavouriteCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridViewSettingsFavouriteCommands.Location = new System.Drawing.Point(6, 19);
-			this.dataGridViewSettingsFavouriteCommands.Name = "dataGridViewSettingsFavouriteCommands";
-			this.dataGridViewSettingsFavouriteCommands.Size = new System.Drawing.Size(270, 160);
-			this.dataGridViewSettingsFavouriteCommands.TabIndex = 8;
-			// 
 			// buttonSettingsFavCommandsRefresh
 			// 
 			this.buttonSettingsFavCommandsRefresh.Enabled = false;
@@ -844,6 +835,17 @@
 			this.groupBoxSettingsFavouriteCommands.TabIndex = 6;
 			this.groupBoxSettingsFavouriteCommands.TabStop = false;
 			this.groupBoxSettingsFavouriteCommands.Text = "Kedvenc parancsok";
+			// 
+			// dataGridViewSettingsFavouriteCommands
+			// 
+			this.dataGridViewSettingsFavouriteCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dataGridViewSettingsFavouriteCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridViewSettingsFavouriteCommands.Location = new System.Drawing.Point(6, 19);
+			this.dataGridViewSettingsFavouriteCommands.Name = "dataGridViewSettingsFavouriteCommands";
+			this.dataGridViewSettingsFavouriteCommands.Size = new System.Drawing.Size(270, 160);
+			this.dataGridViewSettingsFavouriteCommands.TabIndex = 8;
 			// 
 			// textBoxAtmelProgrammerPath
 			// 
@@ -1052,11 +1054,21 @@
 			this.notifyIconApplication.Text = "JarKonDevApplication";
 			this.notifyIconApplication.Visible = true;
 			// 
+			// buttonClearSerialTexts
+			// 
+			this.buttonClearSerialTexts.Location = new System.Drawing.Point(652, 65);
+			this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
+			this.buttonClearSerialTexts.Size = new System.Drawing.Size(90, 23);
+			this.buttonClearSerialTexts.TabIndex = 36;
+			this.buttonClearSerialTexts.Text = "Képernyő törlés";
+			this.buttonClearSerialTexts.UseVisualStyleBackColor = true;
+			this.buttonClearSerialTexts.Click += new System.EventHandler(this.buttonClearSerialTexts_Click);
+			// 
 			// JarKonDevApplication
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(756, 421);
+			this.ClientSize = new System.Drawing.Size(758, 447);
 			this.Controls.Add(this.tabControl);
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1078,8 +1090,8 @@
 			this.tabPageV2programming.PerformLayout();
 			this.tabPageSettings.ResumeLayout(false);
 			this.tabPageSettings.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavouriteCommands)).EndInit();
 			this.groupBoxSettingsFavouriteCommands.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavouriteCommands)).EndInit();
 			this.tabPageCalculator.ResumeLayout(false);
 			this.tabPageCalculator.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
@@ -1177,6 +1189,7 @@
 		private System.Windows.Forms.GroupBox groupBoxSettingsFavouriteCommands;
 		private System.Windows.Forms.Button buttonSettingsFavCommandsRefresh;
 		private System.Windows.Forms.DataGridView dataGridViewSettingsFavouriteCommands;
+		private System.Windows.Forms.Button buttonClearSerialTexts;
     }
 }
 
