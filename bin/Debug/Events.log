@@ -508,3 +508,8 @@
 2016.06.23. 19:54:47	 [Application] Cannot send message, because there is not opened port
 
 2016.06.23. 19:54:47	 <Küldendő üzenet>
+2016.06.23. 21:08:50	 EventLog has been started.
+2016.06.23. 21:08:51	 Send command: FirstCommand
+
+2016.06.23. 21:08:51	 [Application] Cannot send message, because there is not opened port
+

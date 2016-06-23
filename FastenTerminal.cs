@@ -684,7 +684,7 @@ namespace FastenTerminal
 
 			notifyIconApplication.BalloonTipText = message;
 			//notifyIconForParent.Text = message;   // Ikon neve
-			notifyIconApplication.BalloonTipTitle = "FastenDev";
+			notifyIconApplication.BalloonTipTitle = "FastenTerminal";
 			notifyIconApplication.ShowBalloonTip(1000);
 		}
 
