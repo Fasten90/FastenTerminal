@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace JarKonDevApplication
+namespace FastenTerminal
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace JarKonDevApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new JarKonDevApplication());
+            Application.Run(new FastenTerminal());
         }
     }
 }

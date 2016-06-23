@@ -1,11 +1,11 @@
-﻿using JarKonDevApplication;
+﻿using FastenTerminal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JarKonDevApplication
+namespace FastenTerminal
 {
 	public class Command
 	{
@@ -50,11 +50,11 @@ namespace JarKonDevApplication
 	{
 		public CommandConfigs CommandConfig;
 
-		private JarKonDevApplication form;
+		private FastenTerminal form;
 
 		const String CommandConfigFile = @"JarKon\CommandConfigs.xml";
 
-		public CommandHandler(JarKonDevApplication form)
+		public CommandHandler(FastenTerminal form)
 		{
 			this.form = form;
 

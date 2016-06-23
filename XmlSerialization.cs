@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace JarKonDevApplication
+namespace FastenTerminal
 {
     /// <summary>
     /// Functions for performing common XML Serialization operations.

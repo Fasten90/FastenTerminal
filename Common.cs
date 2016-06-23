@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JarKonDevApplication
+namespace FastenTerminal
 {
 	public static class Common
 	{

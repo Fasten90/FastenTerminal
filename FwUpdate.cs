@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace JarKonDevApplication
+namespace FastenTerminal
 {
 	public enum FwUpdateSource
 	{
@@ -30,7 +30,7 @@ namespace JarKonDevApplication
 
 		FwUpdateSource source;
 		Serial serial;
-		JarKonDevApplication form;
+		FastenTerminal form;
 		Thread updateThread;
 
 		const int PageAsciiLength = 512;
@@ -53,7 +53,7 @@ namespace JarKonDevApplication
 		String ReceivedMessage;
 
 
-		public FwUpdate(String codeFile, String versionName, Serial serial, JarKonDevApplication form,
+		public FwUpdate(String codeFile, String versionName, Serial serial, FastenTerminal form,
 			int timeBetweenSendings, int timeWaitResponse, int maximumPageErrorNum)
 		{
 			// TODO:

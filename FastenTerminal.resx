@@ -117,23 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textBoxAtmelProgrammerStandardInformation.Text" xml:space="preserve">
-    <value>Az Atmel programozó elérési útvonala általában: "C:\Program Files\Atmel\Studio\7.0\atbackend\atprogram". Ha a gépen nincs installálva az AtmelStudio, akkor használd a JarKonProgrammer könyvtárában található AtmelStudio-t: "\JarKonProgrammer\JarKon\Atmel\atprogram"</value>
-  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>2, 2</value>
   </metadata>
   <metadata name="serialPortDevice.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>102, 1</value>
   </metadata>
-  <metadata name="timerProgressBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>241, 1</value>
-  </metadata>
   <metadata name="timerFwUpdateActualSec.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>366, 1</value>
+    <value>228, 2</value>
   </metadata>
   <metadata name="notifyIconApplication.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>536, 2</value>
+    <value>399, 2</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="notifyIconApplication.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

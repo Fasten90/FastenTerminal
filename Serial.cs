@@ -1,4 +1,4 @@
-﻿using JarKonDevApplication;
+﻿using FastenTerminal;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JarKonDevApplication
+namespace FastenTerminal
 {
 	public class Serial
 	{
@@ -20,10 +20,10 @@ namespace JarKonDevApplication
 
 		public bool NeedLog { get; set; }
 
-		private JarKonDevApplication form;
+		private FastenTerminal form;
 
 
-		public Serial(System.IO.Ports.SerialPort serial, JarKonDevApplication form)
+		public Serial(System.IO.Ports.SerialPort serial, FastenTerminal form)
 		{
 			this.serial = serial;
 
