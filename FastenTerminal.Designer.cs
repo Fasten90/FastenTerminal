@@ -289,6 +289,7 @@
 			// 
 			// buttonClearSerialTexts
 			// 
+			this.buttonClearSerialTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonClearSerialTexts.Location = new System.Drawing.Point(652, 65);
 			this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
 			this.buttonClearSerialTexts.Size = new System.Drawing.Size(90, 23);
@@ -783,7 +784,6 @@
 			this.ClientSize = new System.Drawing.Size(758, 447);
 			this.Controls.Add(this.tabControl);
 			this.Controls.Add(this.menuStrip1);
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
 			this.MinimumSize = new System.Drawing.Size(400, 350);
 			this.Name = "FastenTerminal";
