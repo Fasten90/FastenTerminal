@@ -17,6 +17,7 @@ namespace FastenTerminal
 		public string Baudrate = "115200";
 		public bool isOpenedPort = false;
 		private const Int32 preferredBaudrate = 115200;
+		public bool needToConvertHex = false;
 
 		public bool NeedLog { get; set; }
 
@@ -108,9 +109,23 @@ namespace FastenTerminal
 
 		public void DataReceived()
 		{
+			// Event function - received serial message
+
 			string receivedMessage = "";
 
-			receivedMessage += serial.ReadLine();
+			//receivedMessage += serial.ReadLine();		// Old version: Has problem, if not received a string with newline
+			//receivedMessage += serial.ReadExisting();	// Good, but now we converted to hex if need
+
+			if (needToConvertHex)
+			{
+				// Convert hex
+				receivedMessage += Common.ToHexString(serial.ReadExisting());
+			}
+			else
+			{
+				// Not need to convert hex
+				receivedMessage += serial.ReadExisting();
+			}
 
 			form.AppendTextSerialData(receivedMessage);
 

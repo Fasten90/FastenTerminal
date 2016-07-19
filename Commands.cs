@@ -9,8 +9,8 @@ namespace FastenTerminal
 {
 	public class Command
 	{
-		public String CommandString;
-		public String CommandName;
+		public String CommandString { set; get; }
+		public String CommandName { set; get; }
 	}
 
 
@@ -52,7 +52,7 @@ namespace FastenTerminal
 
 		private FastenTerminal form;
 
-		const String CommandConfigFile = @"JarKon\CommandConfigs.xml";
+		const String CommandConfigFile = @"CommandConfigs.xml";
 
 		public CommandHandler(FastenTerminal form)
 		{

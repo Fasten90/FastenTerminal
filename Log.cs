@@ -31,7 +31,7 @@ namespace FastenTerminal
 
 		static Log()
 		{
-			EventLogger = new TextWriterTraceListener("Events.log", "EventLog");
+			EventLogger = new TextWriterTraceListener( "Events.log", "EventLog");
 			ErrorLogger = new TextWriterTraceListener("Errors.log", "ErrorLog");
 
 			SendEventLog("EventLog has been started.");

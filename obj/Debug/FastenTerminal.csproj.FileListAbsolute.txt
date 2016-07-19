@@ -6,3 +6,4 @@ c:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\Fas
 c:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.csproj.GenerateResource.Cache
 c:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.exe
 c:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.pdb
+C:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.csprojResolveAssemblyReference.cache

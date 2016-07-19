@@ -19,7 +19,11 @@ namespace FastenTerminal
 {
     public partial class FastenTerminal : Form
     {
+		// Configs:
+		public const bool NotifyIsEnabled = false;
 
+
+		// Others
 
 		public Serial serial;
 
@@ -35,6 +39,8 @@ namespace FastenTerminal
 		public bool FwUpdateWaitMessage;
 
 		bool SerialMessageTextBoxEntered = false;
+
+		int SerialMessageActualCaret = 0;
 
 
 		const String SerialHeader = "!";	// TODO: delete
@@ -68,7 +74,10 @@ namespace FastenTerminal
 			LoadMessageHeaders();
 
 			// Notify
-			notifyIconApplication.Visible = true;  
+			if (NotifyIsEnabled)
+			{ 
+				notifyIconApplication.Visible = true;  
+			}
         }
 
 
@@ -216,6 +225,7 @@ namespace FastenTerminal
 			}
 			else
 			{
+				// If not started with Escape
 
 				//richTextBoxSerialPortTexts.SelectionColor = Color.Black;
 				//richTextBoxSerialPortTexts.AppendText(value);
@@ -228,9 +238,12 @@ namespace FastenTerminal
 				*/
 			}
 
+			richTextBoxSerialPortTexts.Text += value;
+
+			/*
 			richTextBoxSerialPortTexts.SelectionColor = textColor;
 			richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
-			
+			*/
 		}
 
 
@@ -294,6 +307,13 @@ namespace FastenTerminal
 				// scroll it automatically
 				richTextBoxSerialPortTexts.ScrollToCaret();
 			}
+			else
+			{
+				// Selection start is equal then last cliked position
+
+				// scroll it automatically
+				//richTextBoxSerialPortTexts.ScrollToCaret();	// Wrong, scroll top/bot
+			}
 
 		}
 
@@ -337,7 +357,7 @@ namespace FastenTerminal
 
 		public void LoadCommandsToSetting()
 		{
-			//          dataGridViewSettingsFavouriteCommands.AutoGenerateColumns = true;
+
 
 			// TODO: Not worked...
 
@@ -347,12 +367,18 @@ namespace FastenTerminal
 			//commandList.DataSource = command.GetCommands();
 			//dataGridViewSettingsFavouriteCommands.DataSource =
 
-			//              commandList = command.GetCommands();
-			//              dataGridViewSettingsFavouriteCommands.DataSource = commandList;
+
 
 			//dataGridViewSettingsFavouriteCommands.DataSource = command.GetCommands();
 
 			//dataGridViewSettingsFavouriteCommands.DataSource = command.CommandConfig.CommandList;
+
+
+			// Mode 1
+			dataGridViewSettingsFavCommands.AutoGenerateColumns = true;
+			commandList = command.GetCommands();
+			dataGridViewSettingsFavCommands.DataSource = commandList;
+			dataGridViewSettingsFavCommands.Refresh();
 		}
 
 
@@ -481,13 +507,14 @@ namespace FastenTerminal
 				// Append command text
 				message += textBoxSerialSendMessage.Text;
 
+				// Successful or not successful
 				String messageResult = serial.SendMessage(message);
-
 				Log.SendEventLog(messageResult);
 				AppendTextSerialData(messageResult);
 
+				// The message
 				Log.SendEventLog(message);
-				AppendTextSerialData(message + "\n");
+				AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
 
 				SerialAddLastCommand(message);
 			}
@@ -549,8 +576,11 @@ namespace FastenTerminal
 			// Close serial
 			serial.SerialPortComClose();
 
-			// Notify close
-			notifyIconApplication.Visible = false;  
+			if (NotifyIsEnabled)
+			{
+				// Notify close
+				notifyIconApplication.Visible = false;
+			}
 		}
 
 
@@ -681,12 +711,40 @@ namespace FastenTerminal
 		/// <param name="message"></param>
 		private void MessageForUser(String message)
 		{
-
-			notifyIconApplication.BalloonTipText = message;
-			//notifyIconForParent.Text = message;   // Ikon neve
-			notifyIconApplication.BalloonTipTitle = "FastenTerminal";
-			notifyIconApplication.ShowBalloonTip(1000);
+			if (NotifyIsEnabled)
+			{
+				notifyIconApplication.BalloonTipText = message;
+				//notifyIconForParent.Text = message;   // Ikon neve
+				notifyIconApplication.BalloonTipTitle = "FastenTerminal";
+				notifyIconApplication.ShowBalloonTip(1000);
+			}
 		}
+
+
+
+		private void FastenTerminal_Leave(object sender, EventArgs e)
+		{
+			// Main form leave event
+			// if clicked other window or etc.
+
+			// TODO: Save the text position if not active window
+			// TODO: NOW, NOT WORKING !!!!!!!!!!!!!!!!!!!!!
+			SerialMessageActualCaret = richTextBoxSerialPortTexts.SelectionStart;
+
+			/*
+			int caretPos = txtLog.Text.Length;
+			txtLog.Text += Environment.NewLine + text;
+			txtLog.Select(caretPos, 0);
+			txtLog.ScrollToLine(txtLog.GetLineIndexFromCharacterIndex(caretPos));
+			*/
+		}
+
+		private void checkBoxSerialHex_CheckStateChanged(object sender, EventArgs e)
+		{
+			// Serial print in hex (look at serial class)
+			serial.needToConvertHex = checkBoxSerialHex.Checked;
+		}
+
 
 
 		////////////////////////////////
@@ -725,11 +783,6 @@ namespace FastenTerminal
 
 					// TODO:...
 			}
-		}
-
-		private void buttonSettingsFavCommandsRefresh_Click(object sender, EventArgs e)
-		{
-			LoadCommandsToSetting();
 		}
 
 

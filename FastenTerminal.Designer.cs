@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FastenTerminal));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fájlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.v2ProgramFájlBeállításaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +91,10 @@
 			this.checkBoxSerialPortLog = new System.Windows.Forms.CheckBox();
 			this.buttonSerialPortOpen = new System.Windows.Forms.Button();
 			this.tabControl = new System.Windows.Forms.TabControl();
+			this.tabPageSettings = new System.Windows.Forms.TabPage();
+			this.labelConstSettingsFavCommandsText = new System.Windows.Forms.Label();
+			this.dataGridViewSettingsFavCommands = new System.Windows.Forms.DataGridView();
+			this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
 			this.menuStrip1.SuspendLayout();
 			this.tabPageCalculator.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -100,6 +103,8 @@
 			this.tabPageSerialCommands.SuspendLayout();
 			this.tabPageSerialFwUpdate.SuspendLayout();
 			this.tabControl.SuspendLayout();
+			this.tabPageSettings.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavCommands)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -174,9 +179,7 @@
 			// 
 			// notifyIconApplication
 			// 
-			this.notifyIconApplication.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconApplication.Icon")));
 			this.notifyIconApplication.Text = "FastenTerminal";
-			this.notifyIconApplication.Visible = true;
 			// 
 			// tabPageCalculator
 			// 
@@ -262,6 +265,7 @@
 			// 
 			// tabSerialPort
 			// 
+			this.tabSerialPort.Controls.Add(this.checkBoxSerialHex);
 			this.tabSerialPort.Controls.Add(this.buttonClearSerialTexts);
 			this.tabSerialPort.Controls.Add(this.comboBoxSerialHeaderType);
 			this.tabSerialPort.Controls.Add(this.tabControlSerialFunctions);
@@ -624,7 +628,7 @@
 			this.textBoxSerialSendMessage.Name = "textBoxSerialSendMessage";
 			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(344, 20);
 			this.textBoxSerialSendMessage.TabIndex = 5;
-			this.textBoxSerialSendMessage.Text = "<Küldendő üzenet>";
+			this.textBoxSerialSendMessage.Text = "<Sending message with \\r\\n>";
 			this.textBoxSerialSendMessage.Enter += new System.EventHandler(this.textBoxSerialSendMessage_Enter);
 			this.textBoxSerialSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialSendMessage_KeyPress);
 			// 
@@ -633,6 +637,7 @@
 			this.richTextBoxSerialPortTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.richTextBoxSerialPortTexts.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.richTextBoxSerialPortTexts.Location = new System.Drawing.Point(9, 7);
 			this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
 			this.richTextBoxSerialPortTexts.ReadOnly = true;
@@ -769,6 +774,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl.Controls.Add(this.tabSerialPort);
 			this.tabControl.Controls.Add(this.tabPageCalculator);
+			this.tabControl.Controls.Add(this.tabPageSettings);
 			this.tabControl.Location = new System.Drawing.Point(0, 27);
 			this.tabControl.MinimumSize = new System.Drawing.Size(300, 200);
 			this.tabControl.Multiline = true;
@@ -776,6 +782,49 @@
 			this.tabControl.SelectedIndex = 0;
 			this.tabControl.Size = new System.Drawing.Size(760, 421);
 			this.tabControl.TabIndex = 17;
+			// 
+			// tabPageSettings
+			// 
+			this.tabPageSettings.Controls.Add(this.labelConstSettingsFavCommandsText);
+			this.tabPageSettings.Controls.Add(this.dataGridViewSettingsFavCommands);
+			this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSettings.Name = "tabPageSettings";
+			this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageSettings.Size = new System.Drawing.Size(752, 395);
+			this.tabPageSettings.TabIndex = 5;
+			this.tabPageSettings.Text = "Beállítások";
+			this.tabPageSettings.UseVisualStyleBackColor = true;
+			// 
+			// labelConstSettingsFavCommandsText
+			// 
+			this.labelConstSettingsFavCommandsText.AutoSize = true;
+			this.labelConstSettingsFavCommandsText.Location = new System.Drawing.Point(5, 7);
+			this.labelConstSettingsFavCommandsText.Name = "labelConstSettingsFavCommandsText";
+			this.labelConstSettingsFavCommandsText.Size = new System.Drawing.Size(106, 13);
+			this.labelConstSettingsFavCommandsText.TabIndex = 1;
+			this.labelConstSettingsFavCommandsText.Text = "Kedvenc parancsok:";
+			// 
+			// dataGridViewSettingsFavCommands
+			// 
+			this.dataGridViewSettingsFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.dataGridViewSettingsFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridViewSettingsFavCommands.Location = new System.Drawing.Point(3, 23);
+			this.dataGridViewSettingsFavCommands.Name = "dataGridViewSettingsFavCommands";
+			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(339, 369);
+			this.dataGridViewSettingsFavCommands.TabIndex = 0;
+			// 
+			// checkBoxSerialHex
+			// 
+			this.checkBoxSerialHex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialHex.AutoSize = true;
+			this.checkBoxSerialHex.Location = new System.Drawing.Point(596, 63);
+			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
+			this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
+			this.checkBoxSerialHex.TabIndex = 37;
+			this.checkBoxSerialHex.Text = "Hex";
+			this.checkBoxSerialHex.UseVisualStyleBackColor = true;
+			this.checkBoxSerialHex.CheckStateChanged += new System.EventHandler(this.checkBoxSerialHex_CheckStateChanged);
 			// 
 			// FastenTerminal
 			// 
@@ -785,11 +834,12 @@
 			this.Controls.Add(this.tabControl);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
-			this.MinimumSize = new System.Drawing.Size(400, 350);
+			this.MinimumSize = new System.Drawing.Size(600, 485);
 			this.Name = "FastenTerminal";
 			this.Text = "FastenTerminal";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.JarKonDevApplication_FormClosing);
 			this.Load += new System.EventHandler(this.FormFastenTerminalMain_Load);
+			this.Leave += new System.EventHandler(this.FastenTerminal_Leave);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.tabPageCalculator.ResumeLayout(false);
@@ -804,6 +854,9 @@
 			this.tabPageSerialFwUpdate.ResumeLayout(false);
 			this.tabPageSerialFwUpdate.PerformLayout();
 			this.tabControl.ResumeLayout(false);
+			this.tabPageSettings.ResumeLayout(false);
+			this.tabPageSettings.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavCommands)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -873,6 +926,10 @@
 		private System.Windows.Forms.CheckBox checkBoxSerialPortLog;
 		private System.Windows.Forms.Button buttonSerialPortOpen;
 		private System.Windows.Forms.TabControl tabControl;
+		private System.Windows.Forms.TabPage tabPageSettings;
+		private System.Windows.Forms.DataGridView dataGridViewSettingsFavCommands;
+		private System.Windows.Forms.Label labelConstSettingsFavCommandsText;
+		private System.Windows.Forms.CheckBox checkBoxSerialHex;
     }
 }
 
