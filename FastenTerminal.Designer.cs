@@ -48,6 +48,7 @@
 			this.textBoxCalculatorBin = new System.Windows.Forms.TextBox();
 			this.labelConstCalculatorHex = new System.Windows.Forms.Label();
 			this.tabSerialPort = new System.Windows.Forms.TabPage();
+			this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
 			this.buttonClearSerialTexts = new System.Windows.Forms.Button();
 			this.comboBoxSerialHeaderType = new System.Windows.Forms.ComboBox();
 			this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
@@ -94,7 +95,6 @@
 			this.tabPageSettings = new System.Windows.Forms.TabPage();
 			this.labelConstSettingsFavCommandsText = new System.Windows.Forms.Label();
 			this.dataGridViewSettingsFavCommands = new System.Windows.Forms.DataGridView();
-			this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
 			this.menuStrip1.SuspendLayout();
 			this.tabPageCalculator.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -170,6 +170,7 @@
 			// serialPortDevice
 			// 
 			this.serialPortDevice.BaudRate = 115200;
+			this.serialPortDevice.ErrorReceived += new System.IO.Ports.SerialErrorReceivedEventHandler(this.serialPortDevice_ErrorReceived);
 			this.serialPortDevice.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPortDevice_DataReceived);
 			// 
 			// timerFwUpdateActualSec
@@ -290,6 +291,18 @@
 			this.tabSerialPort.TabIndex = 3;
 			this.tabSerialPort.Text = "Soros port";
 			this.tabSerialPort.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialHex
+			// 
+			this.checkBoxSerialHex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialHex.AutoSize = true;
+			this.checkBoxSerialHex.Location = new System.Drawing.Point(596, 63);
+			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
+			this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
+			this.checkBoxSerialHex.TabIndex = 37;
+			this.checkBoxSerialHex.Text = "Hex";
+			this.checkBoxSerialHex.UseVisualStyleBackColor = true;
+			this.checkBoxSerialHex.CheckStateChanged += new System.EventHandler(this.checkBoxSerialHex_CheckStateChanged);
 			// 
 			// buttonClearSerialTexts
 			// 
@@ -813,18 +826,6 @@
 			this.dataGridViewSettingsFavCommands.Name = "dataGridViewSettingsFavCommands";
 			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(339, 369);
 			this.dataGridViewSettingsFavCommands.TabIndex = 0;
-			// 
-			// checkBoxSerialHex
-			// 
-			this.checkBoxSerialHex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialHex.AutoSize = true;
-			this.checkBoxSerialHex.Location = new System.Drawing.Point(596, 63);
-			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
-			this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
-			this.checkBoxSerialHex.TabIndex = 37;
-			this.checkBoxSerialHex.Text = "Hex";
-			this.checkBoxSerialHex.UseVisualStyleBackColor = true;
-			this.checkBoxSerialHex.CheckStateChanged += new System.EventHandler(this.checkBoxSerialHex_CheckStateChanged);
 			// 
 			// FastenTerminal
 			// 

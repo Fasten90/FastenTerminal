@@ -264,6 +264,7 @@ namespace FastenTerminal
 			// Enter on SerialMessage TextBox
 			if (SerialMessageTextBoxEntered == false)
 			{
+				// Clear textbox first time
 				textBoxSerialSendMessage.Clear();
 				SerialMessageTextBoxEntered = true;
 			}
@@ -335,7 +336,7 @@ namespace FastenTerminal
 			int i = 0;
 			foreach (var item in commandList)
 			{
-				// Lépegetés a gombokon
+				// Step on buttons
 				commandListOnButtons[i].Text = item.CommandName;
 				i++;
 				if (i >= commandListOnButtons.Count)
@@ -357,22 +358,7 @@ namespace FastenTerminal
 
 		public void LoadCommandsToSetting()
 		{
-
-
-			// TODO: Not worked...
-
-			//commandList = new List<Command>();
-
-			//commandList = new BindingSource();
-			//commandList.DataSource = command.GetCommands();
-			//dataGridViewSettingsFavouriteCommands.DataSource =
-
-
-
-			//dataGridViewSettingsFavouriteCommands.DataSource = command.GetCommands();
-
-			//dataGridViewSettingsFavouriteCommands.DataSource = command.CommandConfig.CommandList;
-
+			// Load favourite commands to Settings -> FavCommands dataGridView
 
 			// Mode 1
 			dataGridViewSettingsFavCommands.AutoGenerateColumns = true;
@@ -382,7 +368,10 @@ namespace FastenTerminal
 		}
 
 
+		////////////////////
 		// Favourite commands
+		////////////////////
+
 		private void buttonCommand1_Click(object sender, EventArgs e)
 		{
 			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
@@ -783,6 +772,13 @@ namespace FastenTerminal
 
 					// TODO:...
 			}
+		}
+
+		private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
+		{
+
+			Log.SendErrorLog("Serial: Error received");
+
 		}
 
 

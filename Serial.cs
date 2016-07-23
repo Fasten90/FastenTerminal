@@ -48,7 +48,7 @@ namespace FastenTerminal
 			{
 				// Wrong COM
 				String errorMessage = "Error: Empty portname\n";
-				Console.WriteLine(errorMessage);
+				Log.SendErrorLog(errorMessage);
 				form.AppendTextSerialData("[Application] " + errorMessage);
 				return false;
 			}
@@ -68,14 +68,14 @@ namespace FastenTerminal
 				try
 				{
 					serial.Open();
-					Console.WriteLine("Opened serial port");
+					Log.SendEventLog("Opened serial port");
 					isOpenedPort = true;
 					return true;
 				}
 				catch (Exception e)
 				{
 					String errorMessage = "Error with port opening.\n";
-					Console.WriteLine(errorMessage + e.Message);
+					Log.SendErrorLog(errorMessage + e.Message);
 					form.AppendTextSerialData("[Programmer] " + errorMessage);
 					return false;
 				}
@@ -101,8 +101,16 @@ namespace FastenTerminal
 
 		public void SerialPortComClose()
 		{
-			serial.Close();
-			Console.WriteLine("Closed Serial port");
+			try
+			{
+				serial.Close();
+			}
+			catch (Exception e)
+			{
+
+			}
+
+			Log.SendEventLog("Closed Serial port");
 			isOpenedPort = false;
 		}
 
@@ -147,16 +155,17 @@ namespace FastenTerminal
 			{
 				try
 				{
+					// Send
 					serial.WriteLine(message);
+					// Successful
+					logMessage = "[Application] Successful sent message\n";
 				}
 				catch (Exception e)
 				{
 					Log.SendErrorLog(e.Message);
 					logMessage = "[Application] Port error\n";
 				}
-				
-				logMessage = "[Application] Successful sent message\n";
-				
+						
 			}
 			else
 			{
