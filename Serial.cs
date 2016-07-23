@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// For timer
+using System.Windows.Forms;
+
 namespace FastenTerminal
 {
 	public class Serial
@@ -18,6 +21,11 @@ namespace FastenTerminal
 		public bool isOpenedPort = false;
 		private const Int32 preferredBaudrate = 115200;
 		public bool needToConvertHex = false;
+
+		public bool PeriodSendingEnable = false;
+		public decimal PeriodSendingTime = 5;
+		private Timer PeriodSendingTimer;
+		private string PeriodSendingMessage = "";
 
 		public bool NeedLog { get; set; }
 
@@ -179,6 +187,60 @@ namespace FastenTerminal
 			
 
 			return logMessage;
+		}
+
+
+		public void PeriodSendingStart(decimal sec, string message)
+		{
+			// Start periodical sending
+			PeriodSendingEnable = true;
+			PeriodSendingTime = sec;
+			PeriodSendingMessage = message;
+
+			// Start timer
+			PeriodSendingTimer = new Timer();
+			PeriodSendingTimer.Interval = (int)PeriodSendingTime * 1000;	// =millisec
+			PeriodSendingTimer.Enabled = true;
+			PeriodSendingTimer.Start();
+			PeriodSendingTimer.Tick += new System.EventHandler(this.timerPeriodTimerSending_Tick);
+
+			// Log
+			string logMessage = "[Application] Periodical message sending started...\n" +
+				"  Time: " + PeriodSendingTime.ToString() + "  Message: " + PeriodSendingMessage + "\n";
+
+			form.AppendTextSerialData(logMessage);
+			Log.SendEventLog(logMessage);
+
+		}
+
+		public void PeriodSendingStop()
+		{
+			// Stop periodical sending
+			PeriodSendingEnable = false;
+
+			// Stop timer
+			PeriodSendingTimer.Stop();
+			PeriodSendingTimer.Enabled = false;
+
+			// Log
+			string logMessage = "[Application] Periodical message sending stopped";
+
+			form.AppendTextSerialData(logMessage);
+			Log.SendEventLog(logMessage);
+
+		}
+
+
+		private void timerPeriodTimerSending_Tick(object sender, EventArgs e)
+		{
+			// Period Sending time actual
+
+			// Send message
+			SendMessage(PeriodSendingMessage + "\r\n");	// TODO: univerzálisra csinálás
+
+			// Log
+
+			form.AppendTextSerialData("[Application] Periodical sending message:\n" + PeriodSendingMessage +"\n");
 		}
 
 	}

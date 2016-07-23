@@ -29,29 +29,24 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.fájlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.v2ProgramFájlBeállításaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.kilépésToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.névjegyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.készítetteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.segítségToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.timerFwUpdateActualSec = new System.Windows.Forms.Timer(this.components);
 			this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
-			this.tabPageCalculator = new System.Windows.Forms.TabPage();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.labelConstCalculatorDec = new System.Windows.Forms.Label();
-			this.labelConstCalculatorBinary = new System.Windows.Forms.Label();
-			this.textBoxCalculatorDec = new System.Windows.Forms.TextBox();
-			this.textBoxCalculatorHex = new System.Windows.Forms.TextBox();
-			this.textBoxCalculatorBin = new System.Windows.Forms.TextBox();
-			this.labelConstCalculatorHex = new System.Windows.Forms.Label();
-			this.tabSerialPort = new System.Windows.Forms.TabPage();
-			this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
 			this.buttonClearSerialTexts = new System.Windows.Forms.Button();
+			this.labelConstTextSearching = new System.Windows.Forms.Label();
+			this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
 			this.comboBoxSerialHeaderType = new System.Windows.Forms.ComboBox();
 			this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
+			this.tabPageSerialCommunicationSettings = new System.Windows.Forms.TabPage();
+			this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
+			this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
+			this.buttonSerialPortOpen = new System.Windows.Forms.Button();
+			this.checkBoxSerialPortLog = new System.Windows.Forms.CheckBox();
+			this.comboBoxSerialPortBaudrate = new System.Windows.Forms.ComboBox();
+			this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
+			this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
+			this.checkBoxSerialPortScrollBottom = new System.Windows.Forms.CheckBox();
+			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
 			this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
 			this.buttonCommand5 = new System.Windows.Forms.Button();
 			this.buttonCommand4 = new System.Windows.Forms.Button();
@@ -61,6 +56,23 @@
 			this.labelLastCommands = new System.Windows.Forms.Label();
 			this.buttonCommand1 = new System.Windows.Forms.Button();
 			this.buttonCommand2 = new System.Windows.Forms.Button();
+			this.tabPageSerialPeriodSending = new System.Windows.Forms.TabPage();
+			this.labelSerialPeriodSendingConstTextMessage = new System.Windows.Forms.Label();
+			this.textBoxPeriodSendingMessage = new System.Windows.Forms.TextBox();
+			this.buttonSerialPeriodSendingStart = new System.Windows.Forms.Button();
+			this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
+			this.numericUpDownSerialPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
+			this.tabPageCalculator = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.labelConstCalculatorDec = new System.Windows.Forms.Label();
+			this.labelConstCalculatorBinary = new System.Windows.Forms.Label();
+			this.textBoxCalculatorDec = new System.Windows.Forms.TextBox();
+			this.textBoxCalculatorHex = new System.Windows.Forms.TextBox();
+			this.textBoxCalculatorBin = new System.Windows.Forms.TextBox();
+			this.labelConstCalculatorHex = new System.Windows.Forms.Label();
+			this.tabPageSerialCommandSettings = new System.Windows.Forms.TabPage();
+			this.labelConstSettingsFavCommandsText = new System.Windows.Forms.Label();
+			this.dataGridViewSettingsFavCommands = new System.Windows.Forms.DataGridView();
 			this.tabPageSerialFwUpdate = new System.Windows.Forms.TabPage();
 			this.labelConstTextFwUpdateVersion = new System.Windows.Forms.Label();
 			this.textBoxFWupdateVersionName = new System.Windows.Forms.TextBox();
@@ -77,95 +89,21 @@
 			this.labelConstTextActualPage = new System.Windows.Forms.Label();
 			this.labelConstTextFwUpdateMaxPageError = new System.Windows.Forms.Label();
 			this.labelConstTextCompleteTime = new System.Windows.Forms.Label();
-			this.labelConstTextSearching = new System.Windows.Forms.Label();
-			this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
 			this.textBoxSerialSendMessage = new System.Windows.Forms.TextBox();
 			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
-			this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
-			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
-			this.checkBoxSerialPortScrollBottom = new System.Windows.Forms.CheckBox();
-			this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
 			this.buttonSerialPortSend = new System.Windows.Forms.Button();
-			this.comboBoxSerialPortBaudrate = new System.Windows.Forms.ComboBox();
-			this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
-			this.checkBoxSerialPortLog = new System.Windows.Forms.CheckBox();
-			this.buttonSerialPortOpen = new System.Windows.Forms.Button();
-			this.tabControl = new System.Windows.Forms.TabControl();
-			this.tabPageSettings = new System.Windows.Forms.TabPage();
-			this.labelConstSettingsFavCommandsText = new System.Windows.Forms.Label();
-			this.dataGridViewSettingsFavCommands = new System.Windows.Forms.DataGridView();
-			this.menuStrip1.SuspendLayout();
+			this.tabControlSerialFunctions.SuspendLayout();
+			this.tabPageSerialCommunicationSettings.SuspendLayout();
+			this.tabPageSerialCommands.SuspendLayout();
+			this.tabPageSerialPeriodSending.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).BeginInit();
 			this.tabPageCalculator.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.tabSerialPort.SuspendLayout();
-			this.tabControlSerialFunctions.SuspendLayout();
-			this.tabPageSerialCommands.SuspendLayout();
-			this.tabPageSerialFwUpdate.SuspendLayout();
-			this.tabControl.SuspendLayout();
-			this.tabPageSettings.SuspendLayout();
+			this.tabPageSerialCommandSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavCommands)).BeginInit();
+			this.tabPageSerialFwUpdate.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// menuStrip1
-			// 
-			this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fájlToolStripMenuItem,
-            this.névjegyToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(4, -1);
-			this.menuStrip1.MinimumSize = new System.Drawing.Size(100, 20);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(100, 24);
-			this.menuStrip1.TabIndex = 18;
-			this.menuStrip1.Text = "menuStrip1";
-			// 
-			// fájlToolStripMenuItem
-			// 
-			this.fájlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.v2ProgramFájlBeállításaToolStripMenuItem,
-            this.kilépésToolStripMenuItem});
-			this.fájlToolStripMenuItem.Enabled = false;
-			this.fájlToolStripMenuItem.Name = "fájlToolStripMenuItem";
-			this.fájlToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-			this.fájlToolStripMenuItem.Text = "Fájl";
-			// 
-			// v2ProgramFájlBeállításaToolStripMenuItem
-			// 
-			this.v2ProgramFájlBeállításaToolStripMenuItem.Name = "v2ProgramFájlBeállításaToolStripMenuItem";
-			this.v2ProgramFájlBeállításaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-			this.v2ProgramFájlBeállításaToolStripMenuItem.Text = "V2 program fájl beállítása";
-			// 
-			// kilépésToolStripMenuItem
-			// 
-			this.kilépésToolStripMenuItem.Name = "kilépésToolStripMenuItem";
-			this.kilépésToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-			this.kilépésToolStripMenuItem.Text = "Kilépés";
-			this.kilépésToolStripMenuItem.Click += new System.EventHandler(this.kilépésToolStripMenuItem_Click);
-			// 
-			// névjegyToolStripMenuItem
-			// 
-			this.névjegyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.készítetteToolStripMenuItem,
-            this.segítségToolStripMenuItem});
-			this.névjegyToolStripMenuItem.Enabled = false;
-			this.névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
-			this.névjegyToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-			this.névjegyToolStripMenuItem.Text = "Súgó";
-			// 
-			// készítetteToolStripMenuItem
-			// 
-			this.készítetteToolStripMenuItem.Name = "készítetteToolStripMenuItem";
-			this.készítetteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-			// 
-			// segítségToolStripMenuItem
-			// 
-			this.segítségToolStripMenuItem.Name = "segítségToolStripMenuItem";
-			this.segítségToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-			this.segítségToolStripMenuItem.Text = "Segítség";
 			// 
 			// serialPortDevice
 			// 
@@ -182,132 +120,10 @@
 			// 
 			this.notifyIconApplication.Text = "FastenTerminal";
 			// 
-			// tabPageCalculator
-			// 
-			this.tabPageCalculator.Controls.Add(this.tableLayoutPanel1);
-			this.tabPageCalculator.Location = new System.Drawing.Point(4, 22);
-			this.tabPageCalculator.Name = "tabPageCalculator";
-			this.tabPageCalculator.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageCalculator.Size = new System.Drawing.Size(752, 395);
-			this.tabPageCalculator.TabIndex = 4;
-			this.tabPageCalculator.Text = "Számológép";
-			this.tabPageCalculator.UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel1
-			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorDec, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorBinary, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorDec, 1, 0);
-			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorHex, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorBin, 1, 2);
-			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorHex, 0, 1);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(117, 71);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 3;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(212, 100);
-			this.tableLayoutPanel1.TabIndex = 0;
-			// 
-			// labelConstCalculatorDec
-			// 
-			this.labelConstCalculatorDec.AutoSize = true;
-			this.labelConstCalculatorDec.Location = new System.Drawing.Point(3, 0);
-			this.labelConstCalculatorDec.Name = "labelConstCalculatorDec";
-			this.labelConstCalculatorDec.Size = new System.Drawing.Size(52, 13);
-			this.labelConstCalculatorDec.TabIndex = 0;
-			this.labelConstCalculatorDec.Text = "Decimális";
-			this.labelConstCalculatorDec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// labelConstCalculatorBinary
-			// 
-			this.labelConstCalculatorBinary.AutoSize = true;
-			this.labelConstCalculatorBinary.Location = new System.Drawing.Point(3, 68);
-			this.labelConstCalculatorBinary.Name = "labelConstCalculatorBinary";
-			this.labelConstCalculatorBinary.Size = new System.Drawing.Size(38, 13);
-			this.labelConstCalculatorBinary.TabIndex = 2;
-			this.labelConstCalculatorBinary.Text = "Bináris";
-			// 
-			// textBoxCalculatorDec
-			// 
-			this.textBoxCalculatorDec.Location = new System.Drawing.Point(109, 3);
-			this.textBoxCalculatorDec.Name = "textBoxCalculatorDec";
-			this.textBoxCalculatorDec.Size = new System.Drawing.Size(100, 20);
-			this.textBoxCalculatorDec.TabIndex = 3;
-			this.textBoxCalculatorDec.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorDec_KeyPress);
-			// 
-			// textBoxCalculatorHex
-			// 
-			this.textBoxCalculatorHex.Location = new System.Drawing.Point(109, 37);
-			this.textBoxCalculatorHex.Name = "textBoxCalculatorHex";
-			this.textBoxCalculatorHex.Size = new System.Drawing.Size(100, 20);
-			this.textBoxCalculatorHex.TabIndex = 4;
-			// 
-			// textBoxCalculatorBin
-			// 
-			this.textBoxCalculatorBin.Location = new System.Drawing.Point(109, 71);
-			this.textBoxCalculatorBin.Name = "textBoxCalculatorBin";
-			this.textBoxCalculatorBin.Size = new System.Drawing.Size(100, 20);
-			this.textBoxCalculatorBin.TabIndex = 5;
-			// 
-			// labelConstCalculatorHex
-			// 
-			this.labelConstCalculatorHex.AutoSize = true;
-			this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 34);
-			this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
-			this.labelConstCalculatorHex.Size = new System.Drawing.Size(75, 13);
-			this.labelConstCalculatorHex.TabIndex = 1;
-			this.labelConstCalculatorHex.Text = "Hexadecimális";
-			// 
-			// tabSerialPort
-			// 
-			this.tabSerialPort.Controls.Add(this.checkBoxSerialHex);
-			this.tabSerialPort.Controls.Add(this.buttonClearSerialTexts);
-			this.tabSerialPort.Controls.Add(this.comboBoxSerialHeaderType);
-			this.tabSerialPort.Controls.Add(this.tabControlSerialFunctions);
-			this.tabSerialPort.Controls.Add(this.labelConstTextSearching);
-			this.tabSerialPort.Controls.Add(this.textBoxSerialTextFind);
-			this.tabSerialPort.Controls.Add(this.textBoxSerialSendMessage);
-			this.tabSerialPort.Controls.Add(this.richTextBoxSerialPortTexts);
-			this.tabSerialPort.Controls.Add(this.checkBoxSerialTextColouring);
-			this.tabSerialPort.Controls.Add(this.checkBoxSerialHeaderSending);
-			this.tabSerialPort.Controls.Add(this.checkBoxSerialCopySelected);
-			this.tabSerialPort.Controls.Add(this.checkBoxSerialPortScrollBottom);
-			this.tabSerialPort.Controls.Add(this.buttonSerialPortRefresh);
-			this.tabSerialPort.Controls.Add(this.buttonSerialPortSend);
-			this.tabSerialPort.Controls.Add(this.comboBoxSerialPortBaudrate);
-			this.tabSerialPort.Controls.Add(this.comboBoxSerialPortCOM);
-			this.tabSerialPort.Controls.Add(this.checkBoxSerialPortLog);
-			this.tabSerialPort.Controls.Add(this.buttonSerialPortOpen);
-			this.tabSerialPort.Location = new System.Drawing.Point(4, 22);
-			this.tabSerialPort.Name = "tabSerialPort";
-			this.tabSerialPort.Padding = new System.Windows.Forms.Padding(3);
-			this.tabSerialPort.Size = new System.Drawing.Size(752, 395);
-			this.tabSerialPort.TabIndex = 3;
-			this.tabSerialPort.Text = "Soros port";
-			this.tabSerialPort.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxSerialHex
-			// 
-			this.checkBoxSerialHex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialHex.AutoSize = true;
-			this.checkBoxSerialHex.Location = new System.Drawing.Point(596, 63);
-			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
-			this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
-			this.checkBoxSerialHex.TabIndex = 37;
-			this.checkBoxSerialHex.Text = "Hex";
-			this.checkBoxSerialHex.UseVisualStyleBackColor = true;
-			this.checkBoxSerialHex.CheckStateChanged += new System.EventHandler(this.checkBoxSerialHex_CheckStateChanged);
-			// 
 			// buttonClearSerialTexts
 			// 
 			this.buttonClearSerialTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonClearSerialTexts.Location = new System.Drawing.Point(652, 65);
+			this.buttonClearSerialTexts.Location = new System.Drawing.Point(656, 30);
 			this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
 			this.buttonClearSerialTexts.Size = new System.Drawing.Size(90, 23);
 			this.buttonClearSerialTexts.TabIndex = 36;
@@ -315,26 +131,178 @@
 			this.buttonClearSerialTexts.UseVisualStyleBackColor = true;
 			this.buttonClearSerialTexts.Click += new System.EventHandler(this.buttonClearSerialTexts_Click);
 			// 
+			// labelConstTextSearching
+			// 
+			this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelConstTextSearching.AutoSize = true;
+			this.labelConstTextSearching.Location = new System.Drawing.Point(540, 7);
+			this.labelConstTextSearching.Name = "labelConstTextSearching";
+			this.labelConstTextSearching.Size = new System.Drawing.Size(48, 13);
+			this.labelConstTextSearching.TabIndex = 33;
+			this.labelConstTextSearching.Text = "Keresés:";
+			// 
+			// textBoxSerialTextFind
+			// 
+			this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxSerialTextFind.Location = new System.Drawing.Point(594, 4);
+			this.textBoxSerialTextFind.Name = "textBoxSerialTextFind";
+			this.textBoxSerialTextFind.Size = new System.Drawing.Size(152, 20);
+			this.textBoxSerialTextFind.TabIndex = 32;
+			this.textBoxSerialTextFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialTextFind_KeyPress);
+			// 
 			// comboBoxSerialHeaderType
 			// 
 			this.comboBoxSerialHeaderType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.comboBoxSerialHeaderType.FormattingEnabled = true;
-			this.comboBoxSerialHeaderType.Location = new System.Drawing.Point(6, 369);
+			this.comboBoxSerialHeaderType.Location = new System.Drawing.Point(3, 418);
 			this.comboBoxSerialHeaderType.Name = "comboBoxSerialHeaderType";
-			this.comboBoxSerialHeaderType.Size = new System.Drawing.Size(82, 21);
-			this.comboBoxSerialHeaderType.TabIndex = 35;
+			this.comboBoxSerialHeaderType.Size = new System.Drawing.Size(79, 21);
+			this.comboBoxSerialHeaderType.TabIndex = 42;
 			// 
 			// tabControlSerialFunctions
 			// 
 			this.tabControlSerialFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommunicationSettings);
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommands);
+			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialPeriodSending);
+			this.tabControlSerialFunctions.Controls.Add(this.tabPageCalculator);
+			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommandSettings);
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialFwUpdate);
-			this.tabControlSerialFunctions.Location = new System.Drawing.Point(546, 155);
+			this.tabControlSerialFunctions.Location = new System.Drawing.Point(540, 59);
 			this.tabControlSerialFunctions.Name = "tabControlSerialFunctions";
 			this.tabControlSerialFunctions.SelectedIndex = 0;
-			this.tabControlSerialFunctions.Size = new System.Drawing.Size(206, 237);
-			this.tabControlSerialFunctions.TabIndex = 34;
+			this.tabControlSerialFunctions.Size = new System.Drawing.Size(206, 380);
+			this.tabControlSerialFunctions.TabIndex = 41;
+			// 
+			// tabPageSerialCommunicationSettings
+			// 
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialHex);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortCOM);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortOpen);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialPortLog);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortBaudrate);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortRefresh);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialTextColouring);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialPortScrollBottom);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialCopySelected);
+			this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialCommunicationSettings.Name = "tabPageSerialCommunicationSettings";
+			this.tabPageSerialCommunicationSettings.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialCommunicationSettings.TabIndex = 3;
+			this.tabPageSerialCommunicationSettings.Text = "Konfiguráció";
+			this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialHex
+			// 
+			this.checkBoxSerialHex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialHex.AutoSize = true;
+			this.checkBoxSerialHex.Location = new System.Drawing.Point(6, 154);
+			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
+			this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
+			this.checkBoxSerialHex.TabIndex = 37;
+			this.checkBoxSerialHex.Text = "Hex";
+			this.checkBoxSerialHex.UseVisualStyleBackColor = true;
+			this.checkBoxSerialHex.CheckStateChanged += new System.EventHandler(this.checkBoxSerialHex_CheckStateChanged);
+			// 
+			// comboBoxSerialPortCOM
+			// 
+			this.comboBoxSerialPortCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortCOM.FormattingEnabled = true;
+			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(6, 6);
+			this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
+			this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(82, 21);
+			this.comboBoxSerialPortCOM.TabIndex = 3;
+			this.comboBoxSerialPortCOM.Text = "<port>";
+			this.comboBoxSerialPortCOM.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortCOM_SelectedIndexChanged);
+			// 
+			// buttonSerialPortOpen
+			// 
+			this.buttonSerialPortOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSerialPortOpen.Location = new System.Drawing.Point(102, 35);
+			this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
+			this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
+			this.buttonSerialPortOpen.TabIndex = 1;
+			this.buttonSerialPortOpen.Text = "Port nyitás";
+			this.buttonSerialPortOpen.UseVisualStyleBackColor = true;
+			this.buttonSerialPortOpen.Click += new System.EventHandler(this.buttonSerialPortOpen_Click);
+			// 
+			// checkBoxSerialPortLog
+			// 
+			this.checkBoxSerialPortLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialPortLog.AutoSize = true;
+			this.checkBoxSerialPortLog.Checked = true;
+			this.checkBoxSerialPortLog.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(6, 62);
+			this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
+			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(91, 17);
+			this.checkBoxSerialPortLog.TabIndex = 2;
+			this.checkBoxSerialPortLog.Text = "Logolás fájlba";
+			this.checkBoxSerialPortLog.UseVisualStyleBackColor = true;
+			this.checkBoxSerialPortLog.CheckedChanged += new System.EventHandler(this.checkBoxSerialPortLog_CheckedChanged);
+			// 
+			// comboBoxSerialPortBaudrate
+			// 
+			this.comboBoxSerialPortBaudrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
+			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
+            "115200",
+            "9600"});
+			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(6, 35);
+			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
+			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
+			this.comboBoxSerialPortBaudrate.TabIndex = 4;
+			this.comboBoxSerialPortBaudrate.Text = "<baudrate>";
+			this.comboBoxSerialPortBaudrate.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortBaudrate_SelectedIndexChanged);
+			// 
+			// buttonSerialPortRefresh
+			// 
+			this.buttonSerialPortRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(102, 6);
+			this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
+			this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
+			this.buttonSerialPortRefresh.TabIndex = 8;
+			this.buttonSerialPortRefresh.Text = "Port Frissítés";
+			this.buttonSerialPortRefresh.UseVisualStyleBackColor = true;
+			this.buttonSerialPortRefresh.Click += new System.EventHandler(this.buttonSerialPortRefresh_Click);
+			// 
+			// checkBoxSerialTextColouring
+			// 
+			this.checkBoxSerialTextColouring.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialTextColouring.AutoSize = true;
+			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(6, 131);
+			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
+			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
+			this.checkBoxSerialTextColouring.TabIndex = 31;
+			this.checkBoxSerialTextColouring.Text = "Szöveg színezés";
+			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialPortScrollBottom
+			// 
+			this.checkBoxSerialPortScrollBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialPortScrollBottom.AutoSize = true;
+			this.checkBoxSerialPortScrollBottom.Checked = true;
+			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(6, 86);
+			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
+			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
+			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
+			this.checkBoxSerialPortScrollBottom.Text = "Legördülés";
+			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialCopySelected
+			// 
+			this.checkBoxSerialCopySelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBoxSerialCopySelected.AutoSize = true;
+			this.checkBoxSerialCopySelected.Checked = true;
+			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 108);
+			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
+			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(109, 17);
+			this.checkBoxSerialCopySelected.TabIndex = 13;
+			this.checkBoxSerialCopySelected.Text = "Szöveg másolása";
+			this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
 			// 
 			// tabPageSerialCommands
 			// 
@@ -349,7 +317,7 @@
 			this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 22);
 			this.tabPageSerialCommands.Name = "tabPageSerialCommands";
 			this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 211);
+			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 354);
 			this.tabPageSerialCommands.TabIndex = 0;
 			this.tabPageSerialCommands.Text = "Parancs";
 			this.tabPageSerialCommands.UseVisualStyleBackColor = true;
@@ -439,6 +407,187 @@
 			this.buttonCommand2.UseVisualStyleBackColor = true;
 			this.buttonCommand2.Click += new System.EventHandler(this.buttonCommand2_Click);
 			// 
+			// tabPageSerialPeriodSending
+			// 
+			this.tabPageSerialPeriodSending.Controls.Add(this.labelSerialPeriodSendingConstTextMessage);
+			this.tabPageSerialPeriodSending.Controls.Add(this.textBoxPeriodSendingMessage);
+			this.tabPageSerialPeriodSending.Controls.Add(this.buttonSerialPeriodSendingStart);
+			this.tabPageSerialPeriodSending.Controls.Add(this.labelSerialPeriodSendingConstText);
+			this.tabPageSerialPeriodSending.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
+			this.tabPageSerialPeriodSending.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialPeriodSending.Name = "tabPageSerialPeriodSending";
+			this.tabPageSerialPeriodSending.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialPeriodSending.TabIndex = 2;
+			this.tabPageSerialPeriodSending.Text = "Periodikus küldés";
+			this.tabPageSerialPeriodSending.UseVisualStyleBackColor = true;
+			// 
+			// labelSerialPeriodSendingConstTextMessage
+			// 
+			this.labelSerialPeriodSendingConstTextMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelSerialPeriodSendingConstTextMessage.AutoSize = true;
+			this.labelSerialPeriodSendingConstTextMessage.Location = new System.Drawing.Point(4, 47);
+			this.labelSerialPeriodSendingConstTextMessage.Name = "labelSerialPeriodSendingConstTextMessage";
+			this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(98, 13);
+			this.labelSerialPeriodSendingConstTextMessage.TabIndex = 4;
+			this.labelSerialPeriodSendingConstTextMessage.Text = "Kiküldendő üzenet:";
+			// 
+			// textBoxPeriodSendingMessage
+			// 
+			this.textBoxPeriodSendingMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxPeriodSendingMessage.Location = new System.Drawing.Point(6, 63);
+			this.textBoxPeriodSendingMessage.Name = "textBoxPeriodSendingMessage";
+			this.textBoxPeriodSendingMessage.Size = new System.Drawing.Size(186, 20);
+			this.textBoxPeriodSendingMessage.TabIndex = 3;
+			this.textBoxPeriodSendingMessage.Text = "<Periodikusan kiküldendő üzenet>";
+			// 
+			// buttonSerialPeriodSendingStart
+			// 
+			this.buttonSerialPeriodSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonSerialPeriodSendingStart.Location = new System.Drawing.Point(142, 8);
+			this.buttonSerialPeriodSendingStart.Name = "buttonSerialPeriodSendingStart";
+			this.buttonSerialPeriodSendingStart.Size = new System.Drawing.Size(50, 23);
+			this.buttonSerialPeriodSendingStart.TabIndex = 2;
+			this.buttonSerialPeriodSendingStart.Text = "Start";
+			this.buttonSerialPeriodSendingStart.UseVisualStyleBackColor = true;
+			this.buttonSerialPeriodSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
+			// 
+			// labelSerialPeriodSendingConstText
+			// 
+			this.labelSerialPeriodSendingConstText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelSerialPeriodSendingConstText.AutoSize = true;
+			this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(3, 13);
+			this.labelSerialPeriodSendingConstText.Name = "labelSerialPeriodSendingConstText";
+			this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(63, 13);
+			this.labelSerialPeriodSendingConstText.TabIndex = 1;
+			this.labelSerialPeriodSendingConstText.Text = "Másodperc:";
+			// 
+			// numericUpDownSerialPeriodSendingTime
+			// 
+			this.numericUpDownSerialPeriodSendingTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(72, 11);
+			this.numericUpDownSerialPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
+			this.numericUpDownSerialPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
+			this.numericUpDownSerialPeriodSendingTime.TabIndex = 0;
+			this.numericUpDownSerialPeriodSendingTime.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+			// 
+			// tabPageCalculator
+			// 
+			this.tabPageCalculator.Controls.Add(this.tableLayoutPanel1);
+			this.tabPageCalculator.Location = new System.Drawing.Point(4, 22);
+			this.tabPageCalculator.Name = "tabPageCalculator";
+			this.tabPageCalculator.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageCalculator.Size = new System.Drawing.Size(198, 354);
+			this.tabPageCalculator.TabIndex = 4;
+			this.tabPageCalculator.Text = "Számológép";
+			this.tabPageCalculator.UseVisualStyleBackColor = true;
+			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.AutoSize = true;
+			this.tableLayoutPanel1.ColumnCount = 2;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.36123F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.63876F));
+			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorDec, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorBinary, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorDec, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorHex, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorBin, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorHex, 0, 1);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 3;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 88);
+			this.tableLayoutPanel1.TabIndex = 1;
+			// 
+			// labelConstCalculatorDec
+			// 
+			this.labelConstCalculatorDec.AutoSize = true;
+			this.labelConstCalculatorDec.Location = new System.Drawing.Point(3, 0);
+			this.labelConstCalculatorDec.Name = "labelConstCalculatorDec";
+			this.labelConstCalculatorDec.Size = new System.Drawing.Size(52, 13);
+			this.labelConstCalculatorDec.TabIndex = 0;
+			this.labelConstCalculatorDec.Text = "Decimális";
+			this.labelConstCalculatorDec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// labelConstCalculatorBinary
+			// 
+			this.labelConstCalculatorBinary.AutoSize = true;
+			this.labelConstCalculatorBinary.Location = new System.Drawing.Point(3, 56);
+			this.labelConstCalculatorBinary.Name = "labelConstCalculatorBinary";
+			this.labelConstCalculatorBinary.Size = new System.Drawing.Size(38, 13);
+			this.labelConstCalculatorBinary.TabIndex = 2;
+			this.labelConstCalculatorBinary.Text = "Bináris";
+			// 
+			// textBoxCalculatorDec
+			// 
+			this.textBoxCalculatorDec.Location = new System.Drawing.Point(84, 3);
+			this.textBoxCalculatorDec.Name = "textBoxCalculatorDec";
+			this.textBoxCalculatorDec.Size = new System.Drawing.Size(100, 20);
+			this.textBoxCalculatorDec.TabIndex = 3;
+			this.textBoxCalculatorDec.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorDec_KeyPress);
+			// 
+			// textBoxCalculatorHex
+			// 
+			this.textBoxCalculatorHex.Location = new System.Drawing.Point(84, 31);
+			this.textBoxCalculatorHex.Name = "textBoxCalculatorHex";
+			this.textBoxCalculatorHex.Size = new System.Drawing.Size(100, 20);
+			this.textBoxCalculatorHex.TabIndex = 4;
+			// 
+			// textBoxCalculatorBin
+			// 
+			this.textBoxCalculatorBin.Location = new System.Drawing.Point(84, 59);
+			this.textBoxCalculatorBin.Name = "textBoxCalculatorBin";
+			this.textBoxCalculatorBin.Size = new System.Drawing.Size(100, 20);
+			this.textBoxCalculatorBin.TabIndex = 5;
+			// 
+			// labelConstCalculatorHex
+			// 
+			this.labelConstCalculatorHex.AutoSize = true;
+			this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 28);
+			this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
+			this.labelConstCalculatorHex.Size = new System.Drawing.Size(75, 13);
+			this.labelConstCalculatorHex.TabIndex = 1;
+			this.labelConstCalculatorHex.Text = "Hexadecimális";
+			// 
+			// tabPageSerialCommandSettings
+			// 
+			this.tabPageSerialCommandSettings.Controls.Add(this.labelConstSettingsFavCommandsText);
+			this.tabPageSerialCommandSettings.Controls.Add(this.dataGridViewSettingsFavCommands);
+			this.tabPageSerialCommandSettings.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialCommandSettings.Name = "tabPageSerialCommandSettings";
+			this.tabPageSerialCommandSettings.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageSerialCommandSettings.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialCommandSettings.TabIndex = 5;
+			this.tabPageSerialCommandSettings.Text = "Parancsok szerkesztése";
+			this.tabPageSerialCommandSettings.UseVisualStyleBackColor = true;
+			// 
+			// labelConstSettingsFavCommandsText
+			// 
+			this.labelConstSettingsFavCommandsText.AutoSize = true;
+			this.labelConstSettingsFavCommandsText.Location = new System.Drawing.Point(8, 7);
+			this.labelConstSettingsFavCommandsText.Name = "labelConstSettingsFavCommandsText";
+			this.labelConstSettingsFavCommandsText.Size = new System.Drawing.Size(106, 13);
+			this.labelConstSettingsFavCommandsText.TabIndex = 22;
+			this.labelConstSettingsFavCommandsText.Text = "Kedvenc parancsok:";
+			// 
+			// dataGridViewSettingsFavCommands
+			// 
+			this.dataGridViewSettingsFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.dataGridViewSettingsFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridViewSettingsFavCommands.Location = new System.Drawing.Point(3, 23);
+			this.dataGridViewSettingsFavCommands.Name = "dataGridViewSettingsFavCommands";
+			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(192, 328);
+			this.dataGridViewSettingsFavCommands.TabIndex = 21;
+			// 
 			// tabPageSerialFwUpdate
 			// 
 			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextFwUpdateVersion);
@@ -459,7 +608,7 @@
 			this.tabPageSerialFwUpdate.Location = new System.Drawing.Point(4, 22);
 			this.tabPageSerialFwUpdate.Name = "tabPageSerialFwUpdate";
 			this.tabPageSerialFwUpdate.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialFwUpdate.Size = new System.Drawing.Size(198, 211);
+			this.tabPageSerialFwUpdate.Size = new System.Drawing.Size(198, 354);
 			this.tabPageSerialFwUpdate.TabIndex = 1;
 			this.tabPageSerialFwUpdate.Text = "FW Update";
 			this.tabPageSerialFwUpdate.UseVisualStyleBackColor = true;
@@ -613,34 +762,15 @@
 			this.labelConstTextCompleteTime.TabIndex = 25;
 			this.labelConstTextCompleteTime.Text = "Hátralevő idő:";
 			// 
-			// labelConstTextSearching
-			// 
-			this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextSearching.AutoSize = true;
-			this.labelConstTextSearching.Location = new System.Drawing.Point(674, 109);
-			this.labelConstTextSearching.Name = "labelConstTextSearching";
-			this.labelConstTextSearching.Size = new System.Drawing.Size(48, 13);
-			this.labelConstTextSearching.TabIndex = 33;
-			this.labelConstTextSearching.Text = "Keresés:";
-			// 
-			// textBoxSerialTextFind
-			// 
-			this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSerialTextFind.Location = new System.Drawing.Point(652, 129);
-			this.textBoxSerialTextFind.Name = "textBoxSerialTextFind";
-			this.textBoxSerialTextFind.Size = new System.Drawing.Size(90, 20);
-			this.textBoxSerialTextFind.TabIndex = 32;
-			this.textBoxSerialTextFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialTextFind_KeyPress);
-			// 
 			// textBoxSerialSendMessage
 			// 
 			this.textBoxSerialSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSerialSendMessage.Location = new System.Drawing.Point(115, 369);
+			this.textBoxSerialSendMessage.Location = new System.Drawing.Point(109, 418);
 			this.textBoxSerialSendMessage.MaxLength = 256;
 			this.textBoxSerialSendMessage.Name = "textBoxSerialSendMessage";
 			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(344, 20);
-			this.textBoxSerialSendMessage.TabIndex = 5;
+			this.textBoxSerialSendMessage.TabIndex = 38;
 			this.textBoxSerialSendMessage.Text = "<Sending message with \\r\\n>";
 			this.textBoxSerialSendMessage.Enter += new System.EventHandler(this.textBoxSerialSendMessage_Enter);
 			this.textBoxSerialSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialSendMessage_KeyPress);
@@ -651,213 +781,74 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.richTextBoxSerialPortTexts.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.richTextBoxSerialPortTexts.Location = new System.Drawing.Point(9, 7);
+			this.richTextBoxSerialPortTexts.Location = new System.Drawing.Point(3, 4);
 			this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
 			this.richTextBoxSerialPortTexts.ReadOnly = true;
 			this.richTextBoxSerialPortTexts.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(531, 355);
-			this.richTextBoxSerialPortTexts.TabIndex = 0;
+			this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(531, 406);
+			this.richTextBoxSerialPortTexts.TabIndex = 37;
 			this.richTextBoxSerialPortTexts.Text = "";
 			this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
 			this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
-			// 
-			// checkBoxSerialTextColouring
-			// 
-			this.checkBoxSerialTextColouring.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialTextColouring.AutoSize = true;
-			this.checkBoxSerialTextColouring.Checked = true;
-			this.checkBoxSerialTextColouring.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(546, 132);
-			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
-			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
-			this.checkBoxSerialTextColouring.TabIndex = 31;
-			this.checkBoxSerialTextColouring.Text = "Szöveg színezés";
-			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSerialHeaderSending
 			// 
 			this.checkBoxSerialHeaderSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkBoxSerialHeaderSending.AutoSize = true;
-			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(94, 372);
+			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(88, 421);
 			this.checkBoxSerialHeaderSending.Name = "checkBoxSerialHeaderSending";
 			this.checkBoxSerialHeaderSending.Size = new System.Drawing.Size(15, 14);
-			this.checkBoxSerialHeaderSending.TabIndex = 30;
+			this.checkBoxSerialHeaderSending.TabIndex = 40;
 			this.checkBoxSerialHeaderSending.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxSerialCopySelected
-			// 
-			this.checkBoxSerialCopySelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialCopySelected.AutoSize = true;
-			this.checkBoxSerialCopySelected.Checked = true;
-			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(546, 109);
-			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
-			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(109, 17);
-			this.checkBoxSerialCopySelected.TabIndex = 13;
-			this.checkBoxSerialCopySelected.Text = "Szöveg másolása";
-			this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxSerialPortScrollBottom
-			// 
-			this.checkBoxSerialPortScrollBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialPortScrollBottom.AutoSize = true;
-			this.checkBoxSerialPortScrollBottom.Checked = true;
-			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(546, 87);
-			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
-			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
-			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
-			this.checkBoxSerialPortScrollBottom.Text = "Legördülés";
-			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
-			// 
-			// buttonSerialPortRefresh
-			// 
-			this.buttonSerialPortRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(652, 7);
-			this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
-			this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
-			this.buttonSerialPortRefresh.TabIndex = 8;
-			this.buttonSerialPortRefresh.Text = "Port Frissítés";
-			this.buttonSerialPortRefresh.UseVisualStyleBackColor = true;
-			this.buttonSerialPortRefresh.Click += new System.EventHandler(this.buttonSerialPortRefresh_Click);
 			// 
 			// buttonSerialPortSend
 			// 
 			this.buttonSerialPortSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortSend.Location = new System.Drawing.Point(465, 367);
+			this.buttonSerialPortSend.Location = new System.Drawing.Point(459, 416);
 			this.buttonSerialPortSend.Name = "buttonSerialPortSend";
 			this.buttonSerialPortSend.Size = new System.Drawing.Size(75, 23);
-			this.buttonSerialPortSend.TabIndex = 6;
+			this.buttonSerialPortSend.TabIndex = 39;
 			this.buttonSerialPortSend.Text = "Küldés";
 			this.buttonSerialPortSend.UseVisualStyleBackColor = true;
 			this.buttonSerialPortSend.Click += new System.EventHandler(this.buttonSerialPortSend_Click);
-			// 
-			// comboBoxSerialPortBaudrate
-			// 
-			this.comboBoxSerialPortBaudrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
-			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
-            "115200",
-            "9600"});
-			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(546, 36);
-			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
-			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
-			this.comboBoxSerialPortBaudrate.TabIndex = 4;
-			this.comboBoxSerialPortBaudrate.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortBaudrate_SelectedIndexChanged);
-			// 
-			// comboBoxSerialPortCOM
-			// 
-			this.comboBoxSerialPortCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxSerialPortCOM.FormattingEnabled = true;
-			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(546, 7);
-			this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
-			this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(82, 21);
-			this.comboBoxSerialPortCOM.TabIndex = 3;
-			this.comboBoxSerialPortCOM.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortCOM_SelectedIndexChanged);
-			// 
-			// checkBoxSerialPortLog
-			// 
-			this.checkBoxSerialPortLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkBoxSerialPortLog.AutoSize = true;
-			this.checkBoxSerialPortLog.Checked = true;
-			this.checkBoxSerialPortLog.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(546, 63);
-			this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
-			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(44, 17);
-			this.checkBoxSerialPortLog.TabIndex = 2;
-			this.checkBoxSerialPortLog.Text = "Log";
-			this.checkBoxSerialPortLog.UseVisualStyleBackColor = true;
-			this.checkBoxSerialPortLog.CheckedChanged += new System.EventHandler(this.checkBoxSerialPortLog_CheckedChanged);
-			// 
-			// buttonSerialPortOpen
-			// 
-			this.buttonSerialPortOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSerialPortOpen.Location = new System.Drawing.Point(652, 36);
-			this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
-			this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
-			this.buttonSerialPortOpen.TabIndex = 1;
-			this.buttonSerialPortOpen.Text = "Port nyitás";
-			this.buttonSerialPortOpen.UseVisualStyleBackColor = true;
-			this.buttonSerialPortOpen.Click += new System.EventHandler(this.buttonSerialPortOpen_Click);
-			// 
-			// tabControl
-			// 
-			this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tabControl.Controls.Add(this.tabSerialPort);
-			this.tabControl.Controls.Add(this.tabPageCalculator);
-			this.tabControl.Controls.Add(this.tabPageSettings);
-			this.tabControl.Location = new System.Drawing.Point(0, 27);
-			this.tabControl.MinimumSize = new System.Drawing.Size(300, 200);
-			this.tabControl.Multiline = true;
-			this.tabControl.Name = "tabControl";
-			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(760, 421);
-			this.tabControl.TabIndex = 17;
-			// 
-			// tabPageSettings
-			// 
-			this.tabPageSettings.Controls.Add(this.labelConstSettingsFavCommandsText);
-			this.tabPageSettings.Controls.Add(this.dataGridViewSettingsFavCommands);
-			this.tabPageSettings.Location = new System.Drawing.Point(4, 22);
-			this.tabPageSettings.Name = "tabPageSettings";
-			this.tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSettings.Size = new System.Drawing.Size(752, 395);
-			this.tabPageSettings.TabIndex = 5;
-			this.tabPageSettings.Text = "Beállítások";
-			this.tabPageSettings.UseVisualStyleBackColor = true;
-			// 
-			// labelConstSettingsFavCommandsText
-			// 
-			this.labelConstSettingsFavCommandsText.AutoSize = true;
-			this.labelConstSettingsFavCommandsText.Location = new System.Drawing.Point(5, 7);
-			this.labelConstSettingsFavCommandsText.Name = "labelConstSettingsFavCommandsText";
-			this.labelConstSettingsFavCommandsText.Size = new System.Drawing.Size(106, 13);
-			this.labelConstSettingsFavCommandsText.TabIndex = 1;
-			this.labelConstSettingsFavCommandsText.Text = "Kedvenc parancsok:";
-			// 
-			// dataGridViewSettingsFavCommands
-			// 
-			this.dataGridViewSettingsFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.dataGridViewSettingsFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridViewSettingsFavCommands.Location = new System.Drawing.Point(3, 23);
-			this.dataGridViewSettingsFavCommands.Name = "dataGridViewSettingsFavCommands";
-			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(339, 369);
-			this.dataGridViewSettingsFavCommands.TabIndex = 0;
 			// 
 			// FastenTerminal
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(758, 447);
-			this.Controls.Add(this.tabControl);
-			this.Controls.Add(this.menuStrip1);
-			this.MainMenuStrip = this.menuStrip1;
+			this.Controls.Add(this.comboBoxSerialHeaderType);
+			this.Controls.Add(this.tabControlSerialFunctions);
+			this.Controls.Add(this.textBoxSerialSendMessage);
+			this.Controls.Add(this.richTextBoxSerialPortTexts);
+			this.Controls.Add(this.checkBoxSerialHeaderSending);
+			this.Controls.Add(this.buttonSerialPortSend);
+			this.Controls.Add(this.buttonClearSerialTexts);
+			this.Controls.Add(this.labelConstTextSearching);
+			this.Controls.Add(this.textBoxSerialTextFind);
 			this.MinimumSize = new System.Drawing.Size(600, 485);
 			this.Name = "FastenTerminal";
 			this.Text = "FastenTerminal";
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.JarKonDevApplication_FormClosing);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FastenTerminal_FormClosing);
 			this.Load += new System.EventHandler(this.FormFastenTerminalMain_Load);
 			this.Leave += new System.EventHandler(this.FastenTerminal_Leave);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.tabControlSerialFunctions.ResumeLayout(false);
+			this.tabPageSerialCommunicationSettings.ResumeLayout(false);
+			this.tabPageSerialCommunicationSettings.PerformLayout();
+			this.tabPageSerialCommands.ResumeLayout(false);
+			this.tabPageSerialCommands.PerformLayout();
+			this.tabPageSerialPeriodSending.ResumeLayout(false);
+			this.tabPageSerialPeriodSending.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).EndInit();
 			this.tabPageCalculator.ResumeLayout(false);
 			this.tabPageCalculator.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			this.tabSerialPort.ResumeLayout(false);
-			this.tabSerialPort.PerformLayout();
-			this.tabControlSerialFunctions.ResumeLayout(false);
-			this.tabPageSerialCommands.ResumeLayout(false);
-			this.tabPageSerialCommands.PerformLayout();
+			this.tabPageSerialCommandSettings.ResumeLayout(false);
+			this.tabPageSerialCommandSettings.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavCommands)).EndInit();
 			this.tabPageSerialFwUpdate.ResumeLayout(false);
 			this.tabPageSerialFwUpdate.PerformLayout();
-			this.tabControl.ResumeLayout(false);
-			this.tabPageSettings.ResumeLayout(false);
-			this.tabPageSettings.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavCommands)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -865,26 +856,12 @@
 
         #endregion
 
-		private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fájlToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem v2ProgramFájlBeállításaToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem kilépésToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem névjegyToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem készítetteToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem segítségToolStripMenuItem;
 		private System.IO.Ports.SerialPort serialPortDevice;
 		private System.Windows.Forms.Timer timerFwUpdateActualSec;
 		public System.Windows.Forms.NotifyIcon notifyIconApplication;
-		private System.Windows.Forms.TabPage tabPageCalculator;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.Label labelConstCalculatorDec;
-		private System.Windows.Forms.Label labelConstCalculatorBinary;
-		private System.Windows.Forms.TextBox textBoxCalculatorDec;
-		private System.Windows.Forms.TextBox textBoxCalculatorHex;
-		private System.Windows.Forms.TextBox textBoxCalculatorBin;
-		private System.Windows.Forms.Label labelConstCalculatorHex;
-		private System.Windows.Forms.TabPage tabSerialPort;
 		private System.Windows.Forms.Button buttonClearSerialTexts;
+		private System.Windows.Forms.Label labelConstTextSearching;
+		private System.Windows.Forms.TextBox textBoxSerialTextFind;
 		private System.Windows.Forms.ComboBox comboBoxSerialHeaderType;
 		private System.Windows.Forms.TabControl tabControlSerialFunctions;
 		private System.Windows.Forms.TabPage tabPageSerialCommands;
@@ -912,25 +889,37 @@
 		private System.Windows.Forms.Label labelConstTextActualPage;
 		private System.Windows.Forms.Label labelConstTextFwUpdateMaxPageError;
 		private System.Windows.Forms.Label labelConstTextCompleteTime;
-		private System.Windows.Forms.Label labelConstTextSearching;
-		private System.Windows.Forms.TextBox textBoxSerialTextFind;
+		private System.Windows.Forms.TabPage tabPageSerialPeriodSending;
+		private System.Windows.Forms.TabPage tabPageSerialCommunicationSettings;
+		private System.Windows.Forms.CheckBox checkBoxSerialHex;
+		private System.Windows.Forms.ComboBox comboBoxSerialPortCOM;
+		private System.Windows.Forms.Button buttonSerialPortOpen;
+		private System.Windows.Forms.CheckBox checkBoxSerialPortLog;
+		private System.Windows.Forms.ComboBox comboBoxSerialPortBaudrate;
+		private System.Windows.Forms.Button buttonSerialPortRefresh;
+		private System.Windows.Forms.CheckBox checkBoxSerialTextColouring;
+		private System.Windows.Forms.CheckBox checkBoxSerialPortScrollBottom;
+		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
+		private System.Windows.Forms.TabPage tabPageCalculator;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private System.Windows.Forms.Label labelConstCalculatorDec;
+		private System.Windows.Forms.Label labelConstCalculatorBinary;
+		private System.Windows.Forms.TextBox textBoxCalculatorDec;
+		private System.Windows.Forms.TextBox textBoxCalculatorHex;
+		private System.Windows.Forms.TextBox textBoxCalculatorBin;
+		private System.Windows.Forms.Label labelConstCalculatorHex;
+		private System.Windows.Forms.TabPage tabPageSerialCommandSettings;
+		private System.Windows.Forms.Label labelConstSettingsFavCommandsText;
+		private System.Windows.Forms.DataGridView dataGridViewSettingsFavCommands;
 		private System.Windows.Forms.TextBox textBoxSerialSendMessage;
 		private System.Windows.Forms.RichTextBox richTextBoxSerialPortTexts;
-		private System.Windows.Forms.CheckBox checkBoxSerialTextColouring;
 		private System.Windows.Forms.CheckBox checkBoxSerialHeaderSending;
-		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
-		private System.Windows.Forms.CheckBox checkBoxSerialPortScrollBottom;
-		private System.Windows.Forms.Button buttonSerialPortRefresh;
 		private System.Windows.Forms.Button buttonSerialPortSend;
-		private System.Windows.Forms.ComboBox comboBoxSerialPortBaudrate;
-		private System.Windows.Forms.ComboBox comboBoxSerialPortCOM;
-		private System.Windows.Forms.CheckBox checkBoxSerialPortLog;
-		private System.Windows.Forms.Button buttonSerialPortOpen;
-		private System.Windows.Forms.TabControl tabControl;
-		private System.Windows.Forms.TabPage tabPageSettings;
-		private System.Windows.Forms.DataGridView dataGridViewSettingsFavCommands;
-		private System.Windows.Forms.Label labelConstSettingsFavCommandsText;
-		private System.Windows.Forms.CheckBox checkBoxSerialHex;
+		private System.Windows.Forms.Button buttonSerialPeriodSendingStart;
+		private System.Windows.Forms.Label labelSerialPeriodSendingConstText;
+		private System.Windows.Forms.NumericUpDown numericUpDownSerialPeriodSendingTime;
+		private System.Windows.Forms.TextBox textBoxPeriodSendingMessage;
+		private System.Windows.Forms.Label labelSerialPeriodSendingConstTextMessage;
     }
 }
 

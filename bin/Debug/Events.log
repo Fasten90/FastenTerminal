@@ -774,3 +774,192 @@
 2016.07.19. 20:50:43	 Valami
 2016.07.21. 22:11:11	 EventLog has been started.
 2016.07.21. 22:13:49	 Closed Serial port
+2016.07.23. 20:33:06	 EventLog has been started.
+2016.07.23. 20:33:06	 Closed Serial port
+2016.07.23. 22:18:24	 EventLog has been started.
+2016.07.23. 22:18:24	 Closed Serial port
+2016.07.23. 22:19:27	 EventLog has been started.
+2016.07.23. 22:19:27	 Closed Serial port
+2016.07.23. 22:31:28	 EventLog has been started.
+2016.07.23. 22:31:28	 Opened serial port
+2016.07.23. 22:31:30	 [Application] Successful sent message
+
+2016.07.23. 22:31:30	 <Sending message with \r\n>
+2016.07.23. 22:31:31	 [Application] Successful sent message
+
+2016.07.23. 22:31:31	 <Sending message with \r\n>
+2016.07.23. 22:31:32	 [Application] Successful sent message
+
+2016.07.23. 22:31:32	 <Sending message with \r\n>
+2016.07.23. 22:32:16	 Closed Serial port
+2016.07.23. 22:41:32	 EventLog has been started.
+2016.07.23. 22:41:32	 Opened serial port
+2016.07.23. 22:41:34	 [Application] Successful sent message
+
+2016.07.23. 22:41:34	 <Sending message with \r\n>
+2016.07.23. 22:41:35	 [Application] Successful sent message
+
+2016.07.23. 22:41:35	 <Sending message with \r\n>
+2016.07.23. 22:41:35	 [Application] Successful sent message
+
+2016.07.23. 22:41:35	 <Sending message with \r\n>
+2016.07.23. 22:41:38	 Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+2016.07.23. 22:41:59	 Closed Serial port
+2016.07.23. 22:43:55	 EventLog has been started.
+2016.07.23. 22:43:55	 Opened serial port
+2016.07.23. 22:43:58	 [Application] Successful sent message
+
+2016.07.23. 22:43:58	 <Sending message with \r\n>
+2016.07.23. 22:44:03	 Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+2016.07.23. 22:44:21	 Periodical message sending stopped
+2016.07.23. 22:44:25	 Periodical message sending started...
+  Time: 5  Message: valami amerika
+2016.07.23. 22:44:44	 [Application] Successful sent message
+
+2016.07.23. 22:44:44	 <Sending message with \r\n>
+2016.07.23. 22:44:44	 [Application] Successful sent message
+
+2016.07.23. 22:44:44	 <Sending message with \r\n>
+2016.07.23. 22:44:44	 [Application] Successful sent message
+
+2016.07.23. 22:44:44	 <Sending message with \r\n>
+2016.07.23. 22:44:44	 [Application] Successful sent message
+
+2016.07.23. 22:44:44	 <Sending message with \r\n>
+2016.07.23. 22:44:45	 [Application] Successful sent message
+
+2016.07.23. 22:44:45	 <Sending message with \r\n>
+2016.07.23. 22:44:45	 [Application] Successful sent message
+
+2016.07.23. 22:44:45	 <Sending message with \r\n>
+2016.07.23. 22:44:45	 [Application] Successful sent message
+
+2016.07.23. 22:44:45	 <Sending message with \r\n>
+2016.07.23. 22:44:46	 [Application] Successful sent message
+
+2016.07.23. 22:44:46	 <Sending message with \r\n>
+2016.07.23. 22:44:46	 [Application] Successful sent message
+
+2016.07.23. 22:44:46	 <Sending message with \r\n>
+2016.07.23. 22:44:46	 [Application] Successful sent message
+
+2016.07.23. 22:44:46	 <Sending message with \r\n>
+2016.07.23. 22:45:32	 Closed Serial port
+2016.07.23. 22:48:01	 EventLog has been started.
+2016.07.23. 22:48:01	 Send command: Command1
+
+2016.07.23. 22:48:01	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 22:48:01	 Send command: FirstCommand
+
+2016.07.23. 22:48:01	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 22:48:04	 Send command: FirstCommand
+
+2016.07.23. 22:48:04	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 22:48:06	 Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+2016.07.23. 22:48:27	 Closed Serial port
+2016.07.23. 22:48:27	 Application closed
+2016.07.23. 22:50:00	 EventLog has been started.
+2016.07.23. 22:50:00	 Closed Serial port
+2016.07.23. 22:50:00	 Application closed
+2016.07.23. 22:54:05	 EventLog has been started.
+2016.07.23. 22:54:05	 Opened serial port
+2016.07.23. 22:54:08	 [Application] Successful sent message
+
+2016.07.23. 22:54:08	 <Sending message with \r\n>
+2016.07.23. 22:54:18	 Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.23. 22:54:26	 Periodical message sending stopped
+2016.07.23. 22:54:28	 Closed Serial port
+2016.07.23. 22:54:28	 Application closed
+2016.07.23. 22:56:11	 EventLog has been started.
+2016.07.23. 22:56:11	 Clicked periodical message starting, but there is no opened port
+2016.07.23. 22:56:12	 Clicked periodical message starting, but there is no opened port
+2016.07.23. 22:56:19	 Opened serial port
+2016.07.23. 22:56:23	 Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.23. 22:56:40	 Periodical message sending stopped
+2016.07.23. 22:56:43	 Closed Serial port
+2016.07.23. 22:56:43	 Application closed
+2016.07.23. 22:58:13	 EventLog has been started.
+2016.07.23. 22:58:13	 [Application] There is no opened port, you can't start periodical message sending
+
+2016.07.23. 22:58:17	 Send command: Command1
+
+2016.07.23. 22:58:17	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 22:58:30	 Closed Serial port
+2016.07.23. 22:58:30	 Application closed
+2016.07.23. 23:01:34	 EventLog has been started.
+2016.07.23. 23:01:34	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:34	 <Sending message with \r\n>
+2016.07.23. 23:01:34	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:34	 <Sending message with \r\n>
+2016.07.23. 23:01:34	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:34	 <Sending message with \r\n>
+2016.07.23. 23:01:35	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:35	 <Sending message with \r\n>
+2016.07.23. 23:01:35	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:35	 <Sending message with \r\n>
+2016.07.23. 23:01:35	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:35	 <Sending message with \r\n>
+2016.07.23. 23:01:35	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:35	 <Sending message with \r\n>
+2016.07.23. 23:01:35	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:35	 <Sending message with \r\n>
+2016.07.23. 23:01:36	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:36	 <Sending message with \r\n>
+2016.07.23. 23:01:36	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:36	 <Sending message with \r\n>
+2016.07.23. 23:01:36	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:36	 <Sending message with \r\n>
+2016.07.23. 23:01:36	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:36	 <Sending message with \r\n>
+2016.07.23. 23:01:36	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:36	 <Sending message with \r\n>
+2016.07.23. 23:01:36	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:36	 <Sending message with \r\n>
+2016.07.23. 23:01:37	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:37	 <Sending message with \r\n>
+2016.07.23. 23:01:37	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:37	 <Sending message with \r\n>
+2016.07.23. 23:01:37	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:37	 <Sending message with \r\n>
+2016.07.23. 23:01:37	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:37	 <Sending message with \r\n>
+2016.07.23. 23:01:37	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:37	 <Sending message with \r\n>
+2016.07.23. 23:01:38	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:38	 <Sending message with \r\n>
+2016.07.23. 23:01:38	 [Application] Cannot send message, because there is not opened port
+
+2016.07.23. 23:01:38	 <Sending message with \r\n>
+2016.07.23. 23:01:39	 Closed Serial port
+2016.07.23. 23:01:39	 Application closed

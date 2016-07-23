@@ -81,14 +81,6 @@ namespace FastenTerminal
         }
 
 
-
-		private void kilépésToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Application.Exit();
-		}
-
-
-
 		////////////////////////////////////////////////
 		//			 SERIAL
 		////////////////////////////////////////////////
@@ -301,7 +293,7 @@ namespace FastenTerminal
 		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
 		{
 
-			if ( checkBoxSerialPortScrollBottom.Checked)
+			if (checkBoxSerialPortScrollBottom.Checked)
 			{
 				// set the current caret position to the end
 				richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.Text.Length;
@@ -368,9 +360,9 @@ namespace FastenTerminal
 		}
 
 
-		////////////////////
-		// Favourite commands
-		////////////////////
+		//////////////////////////////////
+		//		Favourite commands
+		//////////////////////////////////
 
 		private void buttonCommand1_Click(object sender, EventArgs e)
 		{
@@ -560,10 +552,17 @@ namespace FastenTerminal
 
 
 
-		private void JarKonDevApplication_FormClosing(object sender, FormClosingEventArgs e)
+		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
 		{
+			// Close event
+
 			// Close serial
 			serial.SerialPortComClose();
+
+			// Log closed
+			Log.SendEventLog("Application closed");
+			Log.SendErrorLog("Application closed");
+
 
 			if (NotifyIsEnabled)
 			{
@@ -781,7 +780,39 @@ namespace FastenTerminal
 
 		}
 
+		private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
+		{
+			// Clicked Serial - Period sending start-stop button
+
+			if(serial.PeriodSendingEnable)
+			{
+				// Now, enabled, so need to stop
+				serial.PeriodSendingStop();
+
+				buttonSerialPeriodSendingStart.Text = "Start";
+			}
+			else
+			{
+				// Now disabled, need to be enabling & starting
+
+				// Has opened port?
+				if(serial.isOpenedPort)
+				{
+					// Has opened port
+				serial.PeriodSendingStart(numericUpDownSerialPeriodSendingTime.Value,
+					textBoxPeriodSendingMessage.Text);
+
+				buttonSerialPeriodSendingStart.Text = "Stop";
+				}
+				else
+				{
+					string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
+					AppendTextSerialData(logMessage);
+					Log.SendEventLog(logMessage);
+				}
+			}
+		}
 
 
-	}
-}
+	}	// End of class
+}	// End of namespace
