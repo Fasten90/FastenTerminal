@@ -11,6 +11,13 @@ using System.Windows.Forms;
 
 namespace FastenTerminal
 {
+
+	public class SerialConfig
+	{
+
+	}
+
+
 	public class Serial
 	{
 
@@ -20,16 +27,23 @@ namespace FastenTerminal
 		public string Baudrate = "115200";
 		public bool isOpenedPort = false;
 		private const Int32 preferredBaudrate = 115200;
-		public bool needToConvertHex = false;
+
+		public bool needToConvertHex { get; set; }
+		public bool needAppendPerRPerN { get; set; }
 
 		public bool PeriodSendingEnable = false;
 		public decimal PeriodSendingTime = 5;
 		private Timer PeriodSendingTimer;
 		private string PeriodSendingMessage = "";
 
+		// LOG
 		public bool NeedLog { get; set; }
+		public bool LogWithDateTime { get; set; }
+		String logMessageToFile = "";
+		
 
 		private FastenTerminal form;
+
 
 
 		public Serial(System.IO.Ports.SerialPort serial, FastenTerminal form)
@@ -115,7 +129,7 @@ namespace FastenTerminal
 			}
 			catch (Exception e)
 			{
-
+				Log.SendErrorLog(e.Message);
 			}
 
 			Log.SendEventLog("Closed Serial port");
@@ -143,21 +157,60 @@ namespace FastenTerminal
 				receivedMessage += serial.ReadExisting();
 			}
 
+			// Print on output text
 			form.AppendTextSerialData(receivedMessage);
 
 			form.CheckFwUpateMessageAndSend(receivedMessage);
 
+			// Log
 			if (NeedLog)
 			{
-				SerialLog.SendLog(receivedMessage);
+				// OLD version: PROBLEM: once character is printed one line
+				//SerialLog.SendLog(receivedMessage);
+
+				// Log with line
+
+				// Append texts
+				logMessageToFile += receivedMessage;
+		
+				// Is contain line breakingM
+				if ( receivedMessage.Contains('\r')
+					|| receivedMessage.Contains('\n')
+					|| receivedMessage.Contains('\0')
+					)
+				{
+					// Contain line breaking, print to LOG
+					if (LogWithDateTime)
+					{
+						// Put DateTime
+						SerialLog.SendLog(logMessageToFile,true);
+					}
+					else
+					{
+						// Do not put DateTime
+						SerialLog.SendLog(logMessageToFile);
+
+					}
+					logMessageToFile = "";
+				}
+				else
+				{
+					// Need to be containing and appending received message
+				}
+				
 			}
 			
 		}
 
 
-		public String SendMessage(String message)
+		public String SendMessage(String message, bool printOutput=false)
 		{
 			String logMessage;
+
+			if (needAppendPerRPerN)
+			{
+				message += "\r\n";
+			}
 
 			if (isOpenedPort)
 			{
@@ -166,7 +219,7 @@ namespace FastenTerminal
 					// Send
 					serial.WriteLine(message);
 					// Successful
-					logMessage = "[Application] Successful sent message\n";
+					logMessage = "[Application] Successful sent message\t" + message + "\n";
 				}
 				catch (Exception e)
 				{
@@ -178,13 +231,22 @@ namespace FastenTerminal
 			else
 			{
 				logMessage = "[Application] Cannot send message, because there is not opened port\n";
+
+				if(PeriodSendingEnable)
+				{
+					PeriodSendingStop();
+				}
 			}
 
 			if (NeedLog)
 			{
-				SerialLog.SendLog(logMessage);
+				SerialLog.SendLog(logMessage,true);
 			}
-			
+
+			if(printOutput)
+			{
+				form.AppendTextSerialData(logMessage);
+			}
 
 			return logMessage;
 		}
@@ -223,7 +285,7 @@ namespace FastenTerminal
 			PeriodSendingTimer.Enabled = false;
 
 			// Log
-			string logMessage = "[Application] Periodical message sending stopped";
+			string logMessage = "[Application] Periodical message sending stopped\n";
 
 			form.AppendTextSerialData(logMessage);
 			Log.SendEventLog(logMessage);
@@ -236,11 +298,10 @@ namespace FastenTerminal
 			// Period Sending time actual
 
 			// Send message
-			SendMessage(PeriodSendingMessage + "\r\n");	// TODO: univerzálisra csinálás
+			SendMessage(PeriodSendingMessage, true);
 
 			// Log
-
-			form.AppendTextSerialData("[Application] Periodical sending message:\n" + PeriodSendingMessage +"\n");
+			//form.AppendTextSerialData("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");
 		}
 
 	}

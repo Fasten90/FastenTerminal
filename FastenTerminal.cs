@@ -41,6 +41,7 @@ namespace FastenTerminal
 		bool SerialMessageTextBoxEntered = false;
 
 		int SerialMessageActualCaret = 0;
+		int SerialMessageActualSelectionLength = 0;
 
 
 		const String SerialHeader = "!";	// TODO: delete
@@ -58,8 +59,11 @@ namespace FastenTerminal
 
 			// Load Serial
 			serial = new Serial(serialPortDevice, this);
+
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
+			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
+
 
 			SerialRefresh();
 
@@ -157,13 +161,6 @@ namespace FastenTerminal
 
 		private void serialPortDevice_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
 		{
-			SerialDataReceived();
-		}
-
-
-
-		private void SerialDataReceived()
-		{
 			serial.DataReceived();
 		}
 
@@ -180,56 +177,55 @@ namespace FastenTerminal
 			// Original text appending, It Work!!
 			//richTextBoxSerialPortTexts.Text += value;
 
-			// Coloring:
-			// ESC[39mESC[31m
-			//0x1B
-			//const char ESC = '\x1B';
-			//(char)27).ToString());
-
-			Color textColor = Color.Black;
-
-			// Contain escape
-			if (value.StartsWith(((char)27).ToString()))
+			if (checkBoxSerialTextColouring.Checked)
 			{
-				if (checkBoxSerialTextColouring.Checked)
+
+				// Coloring:
+				// ESC[39mESC[31m
+				//0x1B
+				//const char ESC = '\x1B';
+				//(char)27).ToString());
+
+				// Contain escape
+				if (value.StartsWith(((char)27).ToString()))
 				{
+
+					Color textColor = Color.Black;
+				
 					// Checked coloring
 					textColor = GetColor(value);
+			
+					// Substring after ESC
+					String textWithoutEscape = value.Substring(10);			// TODO: Elegánsabban kéne kivenni az ESC[... részt
+					value = textWithoutEscape;
+				
+					//richTextBoxSerialPortTexts.SelectionColor = textColor;
+					//richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
+				
+					/*
+					int startCount = richTextBoxSerialPortTexts.TextLength;
+					richTextBoxSerialPortTexts.Text += value;
+					richTextBoxSerialPortTexts.Select(startCount, value.Length);
+					richTextBoxSerialPortTexts.SelectionColor = textColor;
+					*/
 				}
 				else
 				{
-					// Standard color
+					// If not started with Escape
+
+					//richTextBoxSerialPortTexts.SelectionColor = Color.Black;
+					//richTextBoxSerialPortTexts.AppendText(value);
+
+					/*
+					int startCount = richTextBoxSerialPortTexts.TextLength;
+					richTextBoxSerialPortTexts.Text += value;
+					richTextBoxSerialPortTexts.Select(startCount, value.Length);
+					richTextBoxSerialPortTexts.SelectionColor = Color.Black;
+					*/
 				}
-
-				// Substring after ESC
-				String textWithoutEscape = value.Substring(10);			// TODO: Elegánsabban kéne kivenni az ESC[... részt
-				value = textWithoutEscape;
-				
-				//richTextBoxSerialPortTexts.SelectionColor = textColor;
-				//richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
-				
-				/*
-				int startCount = richTextBoxSerialPortTexts.TextLength;
-				richTextBoxSerialPortTexts.Text += value;
-				richTextBoxSerialPortTexts.Select(startCount, value.Length);
-				richTextBoxSerialPortTexts.SelectionColor = textColor;
-				*/
-			}
-			else
-			{
-				// If not started with Escape
-
-				//richTextBoxSerialPortTexts.SelectionColor = Color.Black;
-				//richTextBoxSerialPortTexts.AppendText(value);
-
-				/*
-				int startCount = richTextBoxSerialPortTexts.TextLength;
-				richTextBoxSerialPortTexts.Text += value;
-				richTextBoxSerialPortTexts.Select(startCount, value.Length);
-				richTextBoxSerialPortTexts.SelectionColor = Color.Black;
-				*/
 			}
 
+			// Append texts
 			richTextBoxSerialPortTexts.Text += value;
 
 			/*
@@ -256,7 +252,7 @@ namespace FastenTerminal
 			// Enter on SerialMessage TextBox
 			if (SerialMessageTextBoxEntered == false)
 			{
-				// Clear textbox first time
+				// Clear textbox at first time
 				textBoxSerialSendMessage.Clear();
 				SerialMessageTextBoxEntered = true;
 			}
@@ -275,6 +271,7 @@ namespace FastenTerminal
 			labelActualFwUpdateState.Text = value;
 
 		}
+
 		
 		public void AppendFwUpdateEndTime( string value)
 		{
@@ -302,13 +299,60 @@ namespace FastenTerminal
 			}
 			else
 			{
+				/*
 				// Selection start is equal then last cliked position
-
+				richTextBoxSerialPortTexts.SelectionStart = SerialMessageActualCaret;
 				// scroll it automatically
-				//richTextBoxSerialPortTexts.ScrollToCaret();	// Wrong, scroll top/bot
+				richTextBoxSerialPortTexts.ScrollToCaret();	// scroll top/bot without selection start setting
+				*/
+				richTextBoxSerialPortTexts.Select(SerialMessageActualCaret, SerialMessageActualSelectionLength);
+				
 			}
 
 		}
+
+
+
+		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
+		{
+			// Selected a text
+			if (richTextBoxSerialPortTexts.SelectionStart != 0)
+			{
+				SerialMessageActualCaret = richTextBoxSerialPortTexts.SelectionStart;
+			}
+			if (richTextBoxSerialPortTexts.SelectionLength != 0)
+			{
+				SerialMessageActualSelectionLength = richTextBoxSerialPortTexts.SelectionLength;
+			}
+
+			// Copy is enabled
+			if (checkBoxSerialCopySelected.Checked)
+			{
+				// Copy the selected text to the Clipboard.
+
+				if (richTextBoxSerialPortTexts.SelectionLength > 0)
+				{
+					richTextBoxSerialPortTexts.Copy();
+
+					// TODO: Copy to textbox?
+					if (richTextBoxSerialPortTexts.SelectedText.Length < 1000)
+					{
+						Console.WriteLine("Copied texts: " + richTextBoxSerialPortTexts.SelectedText);
+					}
+					else
+					{
+						Console.WriteLine("Copied long text to clipboard.");
+					}
+
+					// TODO: show message? (notify, notification)
+				}
+
+			}
+
+		}
+
+
+
 
 
 
@@ -391,33 +435,6 @@ namespace FastenTerminal
 
 
 
-		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
-		{
-			// Copy is enabled
-			if ( checkBoxSerialCopySelected.Checked)
-			{
-				// Copy the selected text to the Clipboard.
-
-				if(richTextBoxSerialPortTexts.SelectionLength > 0)
-				{			
-					richTextBoxSerialPortTexts.Copy();
-
-					// TODO: Copy to textbox?
-					if (richTextBoxSerialPortTexts.SelectedText.Length < 1000 )
-					{
-						Console.WriteLine("Copied texts: " + richTextBoxSerialPortTexts.SelectedText);
-					}
-					else
-					{
-						Console.WriteLine("Copied long text to clipboard.");
-					}
-					
-					// TODO: show message? (notify, notification)
-				}
-				
-			}
-			
-		}
 
 		private void buttonFwUpdate_Click(object sender, EventArgs e)
 		{
@@ -489,13 +506,13 @@ namespace FastenTerminal
 				message += textBoxSerialSendMessage.Text;
 
 				// Successful or not successful
-				String messageResult = serial.SendMessage(message);
+				String messageResult = serial.SendMessage(message, true);
 				Log.SendEventLog(messageResult);
-				AppendTextSerialData(messageResult);
+				//AppendTextSerialData(messageResult);
 
 				// The message
-				Log.SendEventLog(message);
-				AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
+				//Log.SendEventLog(message);
+				//AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
 
 				SerialAddLastCommand(message);
 			}
@@ -709,24 +726,6 @@ namespace FastenTerminal
 		}
 
 
-
-		private void FastenTerminal_Leave(object sender, EventArgs e)
-		{
-			// Main form leave event
-			// if clicked other window or etc.
-
-			// TODO: Save the text position if not active window
-			// TODO: NOW, NOT WORKING !!!!!!!!!!!!!!!!!!!!!
-			SerialMessageActualCaret = richTextBoxSerialPortTexts.SelectionStart;
-
-			/*
-			int caretPos = txtLog.Text.Length;
-			txtLog.Text += Environment.NewLine + text;
-			txtLog.Select(caretPos, 0);
-			txtLog.ScrollToLine(txtLog.GetLineIndexFromCharacterIndex(caretPos));
-			*/
-		}
-
 		private void checkBoxSerialHex_CheckStateChanged(object sender, EventArgs e)
 		{
 			// Serial print in hex (look at serial class)
@@ -767,11 +766,64 @@ namespace FastenTerminal
 
 					Int32 value = Int32.Parse(textBoxCalculatorDec.Text);
 					textBoxCalculatorHex.Text = value.ToString("X2");	// "x" is good
+					textBoxCalculatorBin.Text = DecimalToBinary(value);
 					break;
 
-					// TODO:...
+				case CalculateType.Binary:
+
+					break;
+
+				case CalculateType.Hexadecimal:
+
+					break;
+
+				default:
+
+					break;
+					
 			}
 		}
+
+
+		public string DecimalToBinary(int value)
+		{
+			string binaryValue = "";
+			int i = 0;
+
+			while(value >= 0)
+			{
+				i++;
+				// Put digit
+				if((value % 2) == 1)
+				{
+					binaryValue = "1" + binaryValue;
+				}
+				else
+				{
+					binaryValue = "0" + binaryValue;
+				}
+
+				// Put space
+				if ((i % 4) == 0)
+				{
+					binaryValue = " " + binaryValue;
+				}
+
+				// Shift value
+				value >>= 1;
+
+				if(value == 0)
+				{
+					break;
+				}
+
+			}
+
+			return binaryValue;
+		}
+
+		////////////////////////////////////////////////////////////////////////////
+
 
 		private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
 		{
@@ -811,6 +863,17 @@ namespace FastenTerminal
 					Log.SendEventLog(logMessage);
 				}
 			}
+		}
+
+		private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
+		{
+			// Need to log with DateTime?
+			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
+		}
+
+		private void checkSerialAppendPerRPerN_CheckedChanged(object sender, EventArgs e)
+		{
+			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
 		}
 
 

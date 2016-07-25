@@ -963,3 +963,376 @@
 2016.07.23. 23:01:38	 <Sending message with \r\n>
 2016.07.23. 23:01:39	 Closed Serial port
 2016.07.23. 23:01:39	 Application closed
+2016.07.25. 18:38:39	 EventLog has been started.
+2016.07.25. 18:38:40	 Opened serial port
+2016.07.25. 18:38:42	 [Application] Successful sent message
+
+2016.07.25. 18:38:42	 <Sending message with \r\n>
+2016.07.25. 18:38:43	 [Application] Successful sent message
+
+2016.07.25. 18:38:43	 <Sending message with \r\n>
+2016.07.25. 18:38:50	 [Application] Successful sent message
+
+2016.07.25. 18:38:50	 <Sending message with \r\n>
+2016.07.25. 18:38:58	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 18:39:14	 [Application] Periodical message sending stopped
+2016.07.25. 18:39:18	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccc
+
+2016.07.25. 18:39:32	 Closed Serial port
+2016.07.25. 18:39:57	 Closed Serial port
+2016.07.25. 18:39:57	 Application closed
+2016.07.25. 18:41:42	 EventLog has been started.
+2016.07.25. 18:41:42	 Opened serial port
+2016.07.25. 18:41:49	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet>
+
+2016.07.25. 18:41:58	 Closed Serial port
+2016.07.25. 18:41:58	 [Application] Periodical message sending stopped
+2016.07.25. 18:42:21	 Closed Serial port
+2016.07.25. 18:42:21	 Application closed
+2016.07.25. 18:48:25	 EventLog has been started.
+2016.07.25. 18:48:25	 [Application] There is no opened port, you can't start periodical message sending
+
+2016.07.25. 18:48:33	 Opened serial port
+2016.07.25. 18:48:37	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 18:48:41	 Closed Serial port
+2016.07.25. 18:48:41	 [Application] Periodical message sending stopped
+
+2016.07.25. 18:48:57	 Opened serial port
+2016.07.25. 18:49:07	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet>
+
+2016.07.25. 18:49:45	 [Application] Successful sent message
+
+2016.07.25. 18:49:45	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:46	 [Application] Successful sent message
+
+2016.07.25. 18:49:46	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:47	 [Application] Successful sent message
+
+2016.07.25. 18:49:47	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:48	 [Application] Successful sent message
+
+2016.07.25. 18:49:48	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:49	 [Application] Successful sent message
+
+2016.07.25. 18:49:49	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:50	 [Application] Successful sent message
+
+2016.07.25. 18:49:50	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:52	 [Application] Successful sent message
+
+2016.07.25. 18:49:52	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:53	 [Application] Successful sent message
+
+2016.07.25. 18:49:53	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:54	 [Application] Successful sent message
+
+2016.07.25. 18:49:54	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:55	 [Application] Successful sent message
+
+2016.07.25. 18:49:55	 <Periodikusan kiküldendő üzenet>
+2016.07.25. 18:49:58	 Closed Serial port
+2016.07.25. 18:49:58	 [Application] Periodical message sending stopped
+
+2016.07.25. 18:50:13	 Opened serial port
+2016.07.25. 18:50:21	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet><Periodikusan kiküldendő üzenet>
+
+2016.07.25. 19:14:10	 EventLog has been started.
+2016.07.25. 19:14:10	 Opened serial port
+2016.07.25. 19:14:11	 [Application] Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 19:14:59	 [Application] Periodical message sending stopped
+
+2016.07.25. 19:15:00	 Closed Serial port
+2016.07.25. 19:15:00	 Application closed
+2016.07.25. 19:17:02	 EventLog has been started.
+2016.07.25. 19:17:02	 Opened serial port
+2016.07.25. 19:17:10	 [Application] Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 19:17:23	 [Application] Periodical message sending stopped
+
+2016.07.25. 19:17:47	 Closed Serial port
+2016.07.25. 19:17:47	 Application closed
+2016.07.25. 19:20:22	 EventLog has been started.
+2016.07.25. 19:20:22	 Opened serial port
+2016.07.25. 19:20:26	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 19:20:52	 [Application] Periodical message sending stopped
+
+2016.07.25. 19:21:02	 [Application] Periodical message sending started...
+  Time: 1  Message: THEMESSAGE
+
+2016.07.25. 19:21:15	 Closed Serial port
+2016.07.25. 19:21:15	 Application closed
+2016.07.25. 19:22:40	 EventLog has been started.
+2016.07.25. 19:22:40	 [Application] Cannot send message, because there is not opened port
+
+2016.07.25. 19:22:40	 <Sending message with \r\n>
+2016.07.25. 19:22:42	 Opened serial port
+2016.07.25. 19:22:43	 [Application] Successful sent message
+[<Sending message with \r\n>]
+
+2016.07.25. 19:22:43	 <Sending message with \r\n>
+2016.07.25. 19:22:54	 Closed Serial port
+2016.07.25. 19:22:54	 Application closed
+2016.07.25. 19:30:21	 EventLog has been started.
+2016.07.25. 19:30:21	 Opened serial port
+2016.07.25. 19:30:23	 [Application] Successful sent message
+[<Sending message with \r\n>]
+
+2016.07.25. 19:30:23	 [Application] Successful sent message
+[<Sending message with \r\n>]
+
+2016.07.25. 19:30:25	 [Application] Successful sent message
+[<Sending message with \r\n>]
+
+2016.07.25. 19:30:28	 [Application] Successful sent message
+[<Sending message with \r\n>]
+
+2016.07.25. 19:30:41	 [Application] Periodical message sending started...
+  Time: 1  Message: ............................
+
+2016.07.25. 19:30:54	 [Application] Periodical message sending stopped
+
+2016.07.25. 19:30:55	 Closed Serial port
+2016.07.25. 19:30:55	 Application closed
+2016.07.25. 19:33:31	 EventLog has been started.
+2016.07.25. 19:33:31	 Opened serial port
+2016.07.25. 19:33:46	 [Application] Periodical message sending started...
+  Time: 1  Message: aaaaaaaaaaaabbbbbbbbbbbbb
+
+2016.07.25. 19:35:02	 [Application] Periodical message sending stopped
+
+2016.07.25. 19:36:00	 Closed Serial port
+2016.07.25. 19:36:00	 Application closed
+2016.07.25. 19:36:38	 EventLog has been started.
+2016.07.25. 19:36:38	 [Application] Cannot send message, because there is not opened port
+
+2016.07.25. 19:36:42	 Send command: FirstCommand
+
+2016.07.25. 19:36:42	 [Application] Cannot send message, because there is not opened port
+
+2016.07.25. 19:36:42	 Send command: SecondCommand
+
+2016.07.25. 19:36:42	 [Application] Cannot send message, because there is not opened port
+
+2016.07.25. 19:36:51	 [Application] There is no opened port, you can't start periodical message sending
+
+2016.07.25. 19:37:00	 Opened serial port
+2016.07.25. 19:37:13	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 19:37:32	 [Application] Periodical message sending stopped
+
+2016.07.25. 19:37:46	 Closed Serial port
+2016.07.25. 19:37:46	 Application closed
+2016.07.25. 20:06:30	 EventLog has been started.
+2016.07.25. 20:06:30	 [Application] Cannot send message, because there is not opened port
+
+2016.07.25. 20:06:31	 [Application] Cannot send message, because there is not opened port
+
+2016.07.25. 20:06:33	 Opened serial port
+2016.07.25. 20:06:34	 [Application] Successful sent message	<Sending message with \r\n>
+
+2016.07.25. 20:06:36	 [Application] Successful sent message	<Sending message with \r\n>
+
+2016.07.25. 20:06:38	 [Application] Successful sent message	<Sending message with \r\n>
+
+2016.07.25. 20:06:45	 Send command: FirstCommand
+2016.07.25. 20:06:45	 [Application] Successful sent message	FirstCommand
+
+2016.07.25. 20:06:51	 Send command: SecondCommand
+2016.07.25. 20:06:51	 [Application] Successful sent message	SecondCommand
+
+2016.07.25. 20:07:18	 Send command: FirstCommand
+2016.07.25. 20:07:18	 [Application] Successful sent message	FirstCommand
+
+2016.07.25. 20:07:20	 Closed Serial port
+2016.07.25. 20:07:20	 Application closed
+2016.07.25. 20:08:15	 EventLog has been started.
+2016.07.25. 20:08:15	 Opened serial port
+2016.07.25. 20:08:16	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 20:08:17	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 20:08:19	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 20:08:21	 Send command: FirstCommand
+2016.07.25. 20:08:21	 [Application] Successful sent message	FirstCommand
+
+
+2016.07.25. 20:08:23	 Send command: SecondCommand
+2016.07.25. 20:08:23	 [Application] Successful sent message	SecondCommand
+
+
+2016.07.25. 20:08:24	 Send command: Command3
+2016.07.25. 20:08:24	 [Application] Successful sent message	Command3
+
+
+2016.07.25. 20:08:26	 Send command: Command3
+2016.07.25. 20:08:26	 [Application] Successful sent message	Command3
+
+
+2016.07.25. 20:08:32	 Closed Serial port
+2016.07.25. 20:08:32	 Application closed
+2016.07.25. 20:25:47	 EventLog has been started.
+2016.07.25. 20:25:47	 [Application] There is no opened port, you can't start periodical message sending
+
+2016.07.25. 20:25:50	 [Application] There is no opened port, you can't start periodical message sending
+
+2016.07.25. 20:25:53	 Opened serial port
+2016.07.25. 20:26:09	 [Application] Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 20:26:50	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 20:26:56	 [Application] Periodical message sending stopped
+
+2016.07.25. 20:27:07	 Closed Serial port
+2016.07.25. 20:27:07	 Application closed
+2016.07.25. 20:37:55	 EventLog has been started.
+2016.07.25. 20:37:55	 Closed Serial port
+2016.07.25. 20:37:55	 Application closed
+2016.07.25. 20:42:20	 EventLog has been started.
+2016.07.25. 20:42:20	 Opened serial port
+2016.07.25. 20:42:24	 [Application] Periodical message sending started...
+  Time: 5  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 20:42:25	 [Application] Periodical message sending stopped
+
+2016.07.25. 20:42:27	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 20:47:34	 EventLog has been started.
+2016.07.25. 20:47:34	 Opened serial port
+2016.07.25. 20:47:38	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 20:55:44	 EventLog has been started.
+2016.07.25. 20:55:44	 Opened serial port
+2016.07.25. 20:56:04	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 20:57:47	 Closed Serial port
+2016.07.25. 20:57:47	 Application closed
+2016.07.25. 21:04:23	 EventLog has been started.
+2016.07.25. 21:04:23	 Opened serial port
+2016.07.25. 21:04:27	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 21:04:55	 Closed Serial port
+2016.07.25. 21:04:55	 Application closed
+2016.07.25. 21:08:09	 EventLog has been started.
+2016.07.25. 21:08:09	 Opened serial port
+2016.07.25. 21:08:15	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 21:09:13	 Closed Serial port
+2016.07.25. 21:09:13	 Application closed
+2016.07.25. 21:10:11	 EventLog has been started.
+2016.07.25. 21:10:11	 Opened serial port
+2016.07.25. 21:10:16	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 21:13:14	 EventLog has been started.
+2016.07.25. 21:13:14	 Opened serial port
+2016.07.25. 21:13:17	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 21:13:19	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:13:19	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:13:19	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:13:19	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:13:19	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:13:20	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:13:20	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:13:20	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:14:22	 EventLog has been started.
+2016.07.25. 21:14:22	 Opened serial port
+2016.07.25. 21:14:25	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 21:14:30	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:14:30	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:14:30	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:14:30	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:14:30	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:02	 Closed Serial port
+2016.07.25. 21:15:02	 Application closed
+2016.07.25. 21:15:30	 EventLog has been started.
+2016.07.25. 21:15:30	 Opened serial port
+2016.07.25. 21:15:33	 [Application] Periodical message sending started...
+  Time: 1  Message: <Periodikusan kiküldendő üzenet>
+
+2016.07.25. 21:15:33	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:33	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:34	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:34	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:34	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:34	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:34	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:34	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:35	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:35	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.07.25. 21:15:42	 Closed Serial port
+2016.07.25. 21:15:42	 Application closed

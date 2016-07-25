@@ -93,6 +93,8 @@
 			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
 			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
 			this.buttonSerialPortSend = new System.Windows.Forms.Button();
+			this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
+			this.checkBoxSerialAppendPerRPerN = new System.Windows.Forms.CheckBox();
 			this.tabControlSerialFunctions.SuspendLayout();
 			this.tabPageSerialCommunicationSettings.SuspendLayout();
 			this.tabPageSerialCommands.SuspendLayout();
@@ -170,6 +172,7 @@
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommandSettings);
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialFwUpdate);
 			this.tabControlSerialFunctions.Location = new System.Drawing.Point(540, 59);
+			this.tabControlSerialFunctions.Multiline = true;
 			this.tabControlSerialFunctions.Name = "tabControlSerialFunctions";
 			this.tabControlSerialFunctions.SelectedIndex = 0;
 			this.tabControlSerialFunctions.Size = new System.Drawing.Size(206, 380);
@@ -177,6 +180,8 @@
 			// 
 			// tabPageSerialCommunicationSettings
 			// 
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialAppendPerRPerN);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogWithDateTime);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialHex);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortCOM);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortOpen);
@@ -186,10 +191,10 @@
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialTextColouring);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialPortScrollBottom);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialCopySelected);
-			this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 58);
 			this.tabPageSerialCommunicationSettings.Name = "tabPageSerialCommunicationSettings";
 			this.tabPageSerialCommunicationSettings.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialCommunicationSettings.TabIndex = 3;
 			this.tabPageSerialCommunicationSettings.Text = "Konfiguráció";
 			this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
@@ -198,7 +203,7 @@
 			// 
 			this.checkBoxSerialHex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialHex.AutoSize = true;
-			this.checkBoxSerialHex.Location = new System.Drawing.Point(6, 154);
+			this.checkBoxSerialHex.Location = new System.Drawing.Point(6, 177);
 			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
 			this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
 			this.checkBoxSerialHex.TabIndex = 37;
@@ -271,7 +276,7 @@
 			// 
 			this.checkBoxSerialTextColouring.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialTextColouring.AutoSize = true;
-			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(6, 131);
+			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(6, 154);
 			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
 			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
 			this.checkBoxSerialTextColouring.TabIndex = 31;
@@ -284,7 +289,7 @@
 			this.checkBoxSerialPortScrollBottom.AutoSize = true;
 			this.checkBoxSerialPortScrollBottom.Checked = true;
 			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(6, 86);
+			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(6, 108);
 			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
 			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
 			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
@@ -297,7 +302,7 @@
 			this.checkBoxSerialCopySelected.AutoSize = true;
 			this.checkBoxSerialCopySelected.Checked = true;
 			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 108);
+			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 131);
 			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
 			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(109, 17);
 			this.checkBoxSerialCopySelected.TabIndex = 13;
@@ -314,10 +319,10 @@
 			this.tabPageSerialCommands.Controls.Add(this.labelLastCommands);
 			this.tabPageSerialCommands.Controls.Add(this.buttonCommand1);
 			this.tabPageSerialCommands.Controls.Add(this.buttonCommand2);
-			this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 58);
 			this.tabPageSerialCommands.Name = "tabPageSerialCommands";
 			this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialCommands.TabIndex = 0;
 			this.tabPageSerialCommands.Text = "Parancs";
 			this.tabPageSerialCommands.UseVisualStyleBackColor = true;
@@ -414,10 +419,10 @@
 			this.tabPageSerialPeriodSending.Controls.Add(this.buttonSerialPeriodSendingStart);
 			this.tabPageSerialPeriodSending.Controls.Add(this.labelSerialPeriodSendingConstText);
 			this.tabPageSerialPeriodSending.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
-			this.tabPageSerialPeriodSending.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialPeriodSending.Location = new System.Drawing.Point(4, 58);
 			this.tabPageSerialPeriodSending.Name = "tabPageSerialPeriodSending";
 			this.tabPageSerialPeriodSending.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialPeriodSending.TabIndex = 2;
 			this.tabPageSerialPeriodSending.Text = "Periodikus küldés";
 			this.tabPageSerialPeriodSending.UseVisualStyleBackColor = true;
@@ -478,10 +483,10 @@
 			// tabPageCalculator
 			// 
 			this.tabPageCalculator.Controls.Add(this.tableLayoutPanel1);
-			this.tabPageCalculator.Location = new System.Drawing.Point(4, 22);
+			this.tabPageCalculator.Location = new System.Drawing.Point(4, 58);
 			this.tabPageCalculator.Name = "tabPageCalculator";
 			this.tabPageCalculator.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageCalculator.Size = new System.Drawing.Size(198, 354);
+			this.tabPageCalculator.Size = new System.Drawing.Size(198, 318);
 			this.tabPageCalculator.TabIndex = 4;
 			this.tabPageCalculator.Text = "Számológép";
 			this.tabPageCalculator.UseVisualStyleBackColor = true;
@@ -561,10 +566,10 @@
 			// 
 			this.tabPageSerialCommandSettings.Controls.Add(this.labelConstSettingsFavCommandsText);
 			this.tabPageSerialCommandSettings.Controls.Add(this.dataGridViewSettingsFavCommands);
-			this.tabPageSerialCommandSettings.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialCommandSettings.Location = new System.Drawing.Point(4, 58);
 			this.tabPageSerialCommandSettings.Name = "tabPageSerialCommandSettings";
 			this.tabPageSerialCommandSettings.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialCommandSettings.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialCommandSettings.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialCommandSettings.TabIndex = 5;
 			this.tabPageSerialCommandSettings.Text = "Parancsok szerkesztése";
 			this.tabPageSerialCommandSettings.UseVisualStyleBackColor = true;
@@ -585,7 +590,7 @@
 			this.dataGridViewSettingsFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewSettingsFavCommands.Location = new System.Drawing.Point(3, 23);
 			this.dataGridViewSettingsFavCommands.Name = "dataGridViewSettingsFavCommands";
-			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(192, 328);
+			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(192, 292);
 			this.dataGridViewSettingsFavCommands.TabIndex = 21;
 			// 
 			// tabPageSerialFwUpdate
@@ -605,10 +610,10 @@
 			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextActualPage);
 			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextFwUpdateMaxPageError);
 			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextCompleteTime);
-			this.tabPageSerialFwUpdate.Location = new System.Drawing.Point(4, 22);
+			this.tabPageSerialFwUpdate.Location = new System.Drawing.Point(4, 58);
 			this.tabPageSerialFwUpdate.Name = "tabPageSerialFwUpdate";
 			this.tabPageSerialFwUpdate.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialFwUpdate.Size = new System.Drawing.Size(198, 354);
+			this.tabPageSerialFwUpdate.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialFwUpdate.TabIndex = 1;
 			this.tabPageSerialFwUpdate.Text = "FW Update";
 			this.tabPageSerialFwUpdate.UseVisualStyleBackColor = true;
@@ -812,6 +817,30 @@
 			this.buttonSerialPortSend.UseVisualStyleBackColor = true;
 			this.buttonSerialPortSend.Click += new System.EventHandler(this.buttonSerialPortSend_Click);
 			// 
+			// checkBoxLogWithDateTime
+			// 
+			this.checkBoxLogWithDateTime.AutoSize = true;
+			this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 85);
+			this.checkBoxLogWithDateTime.Name = "checkBoxLogWithDateTime";
+			this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(111, 17);
+			this.checkBoxLogWithDateTime.TabIndex = 38;
+			this.checkBoxLogWithDateTime.Text = "Logolás dátummal";
+			this.checkBoxLogWithDateTime.UseVisualStyleBackColor = true;
+			this.checkBoxLogWithDateTime.CheckedChanged += new System.EventHandler(this.checkBoxLogWithDateTime_CheckedChanged);
+			// 
+			// checkBoxSerialAppendPerRPerN
+			// 
+			this.checkBoxSerialAppendPerRPerN.AutoSize = true;
+			this.checkBoxSerialAppendPerRPerN.Checked = true;
+			this.checkBoxSerialAppendPerRPerN.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialAppendPerRPerN.Location = new System.Drawing.Point(6, 201);
+			this.checkBoxSerialAppendPerRPerN.Name = "checkBoxSerialAppendPerRPerN";
+			this.checkBoxSerialAppendPerRPerN.Size = new System.Drawing.Size(45, 17);
+			this.checkBoxSerialAppendPerRPerN.TabIndex = 39;
+			this.checkBoxSerialAppendPerRPerN.Text = "\\r\\n";
+			this.checkBoxSerialAppendPerRPerN.UseVisualStyleBackColor = true;
+			this.checkBoxSerialAppendPerRPerN.CheckedChanged += new System.EventHandler(this.checkSerialAppendPerRPerN_CheckedChanged);
+			// 
 			// FastenTerminal
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -831,7 +860,6 @@
 			this.Text = "FastenTerminal";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FastenTerminal_FormClosing);
 			this.Load += new System.EventHandler(this.FormFastenTerminalMain_Load);
-			this.Leave += new System.EventHandler(this.FastenTerminal_Leave);
 			this.tabControlSerialFunctions.ResumeLayout(false);
 			this.tabPageSerialCommunicationSettings.ResumeLayout(false);
 			this.tabPageSerialCommunicationSettings.PerformLayout();
@@ -920,6 +948,8 @@
 		private System.Windows.Forms.NumericUpDown numericUpDownSerialPeriodSendingTime;
 		private System.Windows.Forms.TextBox textBoxPeriodSendingMessage;
 		private System.Windows.Forms.Label labelSerialPeriodSendingConstTextMessage;
+		private System.Windows.Forms.CheckBox checkBoxLogWithDateTime;
+		private System.Windows.Forms.CheckBox checkBoxSerialAppendPerRPerN;
     }
 }
 

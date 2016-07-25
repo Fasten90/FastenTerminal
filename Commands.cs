@@ -92,7 +92,7 @@ namespace FastenTerminal
 			// Check serial available, check gsm available...
 
 
-			String message = "Send command: " + command + "\r\n";
+			String message = "Send command: " + command;	// +"\r\n";	SendMessage() függvényben lett
 			Console.WriteLine(message);
 			form.AppendTextSerialData("[Application] " + message);
 			Log.SendEventLog(message);
@@ -102,7 +102,7 @@ namespace FastenTerminal
 			switch(source)
 			{
 				case CommandSourceType.Serial:
-					messageResult = form.serial.SendMessage(command);
+					messageResult = form.serial.SendMessage(command,true);
 					break;
 				case CommandSourceType.GSM:
 					Console.WriteLine("Error... not implemented GSM sending");
@@ -114,7 +114,7 @@ namespace FastenTerminal
 
 			//Console.WriteLine(messageResult);
 			Log.SendEventLog(messageResult);
-			form.AppendTextSerialData(messageResult);
+			//form.AppendTextSerialData(messageResult);
 			
 		}
 
