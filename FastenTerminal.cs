@@ -46,6 +46,7 @@ namespace FastenTerminal
 
 		const String SerialHeader = "!";	// TODO: delete
 
+		//bool isSearching = false;	// TODO: delete
 
         public FastenTerminal()
         {
@@ -151,12 +152,13 @@ namespace FastenTerminal
 
 		private void comboBoxSerialPortCOM_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			serial.SetComSelected((string)comboBoxSerialPortCOM.SelectedItem);
+			serial.ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
 		}
 
+			
 		private void comboBoxSerialPortBaudrate_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			serial.SetBaudrateSelected((string)comboBoxSerialPortBaudrate.SelectedItem);
+			serial.Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
 		}
 
 		private void serialPortDevice_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -177,6 +179,8 @@ namespace FastenTerminal
 			// Original text appending, It Work!!
 			//richTextBoxSerialPortTexts.Text += value;
 
+			Color textColor = Color.Black;
+
 			if (checkBoxSerialTextColouring.Checked)
 			{
 
@@ -190,7 +194,6 @@ namespace FastenTerminal
 				if (value.StartsWith(((char)27).ToString()))
 				{
 
-					Color textColor = Color.Black;
 				
 					// Checked coloring
 					textColor = GetColor(value);
@@ -315,6 +318,7 @@ namespace FastenTerminal
 
 		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
 		{
+
 			// Selected a text
 			if (richTextBoxSerialPortTexts.SelectionStart != 0)
 			{
@@ -687,6 +691,11 @@ namespace FastenTerminal
 				{
 					// Not null search string
 
+					// Search started flag: for TextChange event skipping
+					//isSearching = true;
+					this.richTextBoxSerialPortTexts.SelectionChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
+					this.richTextBoxSerialPortTexts.TextChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
+
 					// Find
 					// TODO: This is the First searched item...
 					//int result = richTextBoxSerialPortTexts.Find(searchText);
@@ -704,6 +713,13 @@ namespace FastenTerminal
 
 						startIndex = result + searchTextLength;
 					}
+
+					// End of finding
+
+					// Search started flag: for TextChange event skipping
+					//isSearching = false;
+					this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
+					this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
 				}
 			}
 				
@@ -738,13 +754,9 @@ namespace FastenTerminal
 		// Calculator
 		////////////////////////////////
 
-		public enum CalculateType
-		{
-			Decimal,
-			Hexadecimal,
-			Binary
-		}
-
+		String decimalString;
+		String hexadecimalString;
+		String binaryString;
 
 		private void textBoxCalculatorDec_KeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -752,75 +764,15 @@ namespace FastenTerminal
 			if (e.KeyChar == (char)Keys.Return)
 			{
 				// If pressed enter
-				Calculate(CalculateType.Decimal);
+				Calculator.Calculate(CalculateType.Decimal, textBoxCalculatorDec.Text,
+							ref decimalString, ref hexadecimalString, ref binaryString);
+
+				textBoxCalculatorDec.Text = decimalString;
+				textBoxCalculatorHex.Text = hexadecimalString;
+				textBoxCalculatorBin.Text = binaryString;
 			}
 		}
 
-		private void Calculate(CalculateType calculateType)
-		{
-			// Calculate
-
-			switch(calculateType)
-			{
-				case CalculateType.Decimal:
-
-					Int32 value = Int32.Parse(textBoxCalculatorDec.Text);
-					textBoxCalculatorHex.Text = value.ToString("X2");	// "x" is good
-					textBoxCalculatorBin.Text = DecimalToBinary(value);
-					break;
-
-				case CalculateType.Binary:
-
-					break;
-
-				case CalculateType.Hexadecimal:
-
-					break;
-
-				default:
-
-					break;
-					
-			}
-		}
-
-
-		public string DecimalToBinary(int value)
-		{
-			string binaryValue = "";
-			int i = 0;
-
-			while(value >= 0)
-			{
-				i++;
-				// Put digit
-				if((value % 2) == 1)
-				{
-					binaryValue = "1" + binaryValue;
-				}
-				else
-				{
-					binaryValue = "0" + binaryValue;
-				}
-
-				// Put space
-				if ((i % 4) == 0)
-				{
-					binaryValue = " " + binaryValue;
-				}
-
-				// Shift value
-				value >>= 1;
-
-				if(value == 0)
-				{
-					break;
-				}
-
-			}
-
-			return binaryValue;
-		}
 
 		////////////////////////////////////////////////////////////////////////////
 
@@ -874,6 +826,36 @@ namespace FastenTerminal
 		private void checkSerialAppendPerRPerN_CheckedChanged(object sender, EventArgs e)
 		{
 			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
+		}
+
+		private void textBoxCalculatorHex_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			// If pressed in enter
+			if (e.KeyChar == (char)Keys.Return)
+			{
+				// If pressed enter
+				Calculator.Calculate(CalculateType.Hexadecimal, textBoxCalculatorHex.Text,
+							ref decimalString, ref hexadecimalString, ref binaryString);
+
+				textBoxCalculatorDec.Text = decimalString;
+				textBoxCalculatorHex.Text = hexadecimalString;
+				textBoxCalculatorBin.Text = binaryString;
+			}
+		}
+
+		private void textBoxCalculatorBin_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			// If pressed in enter
+			if (e.KeyChar == (char)Keys.Return)
+			{
+				// If pressed enter
+				Calculator.Calculate(CalculateType.Binary, textBoxCalculatorBin.Text,
+							ref decimalString, ref hexadecimalString, ref binaryString);
+
+				textBoxCalculatorDec.Text = decimalString;
+				textBoxCalculatorHex.Text = hexadecimalString;
+				textBoxCalculatorBin.Text = binaryString;
+			}
 		}
 
 

@@ -40,7 +40,9 @@ namespace FastenTerminal
 		public bool NeedLog { get; set; }
 		public bool LogWithDateTime { get; set; }
 		String logMessageToFile = "";
-		
+
+		// For "\r\n" break detect. if "\r" received last character, it is true
+		bool LastCharIsPerR = false;
 
 		private FastenTerminal form;
 
@@ -58,9 +60,8 @@ namespace FastenTerminal
 
 		public void SerialPortComRefresh()
 		{
-
+			// Get active ports
 			ComAvailableList = SerialPort.GetPortNames();
-
 		}
 
 
@@ -109,17 +110,6 @@ namespace FastenTerminal
 		}
 
 
-		public void SetComSelected(string com)
-		{
-			ComSelected = com;
-		}
-
-		public void SetBaudrateSelected(string baudrate)
-		{
-			Baudrate = baudrate;
-		}
-
-
 
 		public void SerialPortComClose()
 		{
@@ -160,25 +150,56 @@ namespace FastenTerminal
 			// Print on output text
 			form.AppendTextSerialData(receivedMessage);
 
-			form.CheckFwUpateMessageAndSend(receivedMessage);
+			//TODO: Do in AppenTextSerialData...
+			//form.CheckFwUpateMessageAndSend(receivedMessage);
 
 			// Log
 			if (NeedLog)
 			{
 				// OLD version: PROBLEM: once character is printed one line
+				// Example: received "Fasten", printed in log sometimes, "F", "a", "st", "en" "\r\n"
 				//SerialLog.SendLog(receivedMessage);
 
 				// Log with line
 
 				// Append texts
-				logMessageToFile += receivedMessage;
+				if (LastCharIsPerR)
+				{
+					// Last char is \r, now if start character \n, do not put newline
+					if (receivedMessage.StartsWith("\n"))
+					{
+						// Started with "\n", do not put it	
+						logMessageToFile += receivedMessage.Substring(1);
+					}
+					else
+					{
+						// Normal message, not start with "\n"
+						logMessageToFile += receivedMessage;
+					}
+				}
+				else
+				{
+					// Last char is not \r, it is ok
+					logMessageToFile += receivedMessage;
+				}
 		
-				// Is contain line breakingM
+				// Is contain line breaking
 				if ( receivedMessage.Contains('\r')
 					|| receivedMessage.Contains('\n')
 					|| receivedMessage.Contains('\0')
 					)
 				{
+					if (receivedMessage.EndsWith("\r"))
+					{
+						// End with "\r"
+						LastCharIsPerR = true;
+					}
+					else
+					{
+						// Not end with "\r"
+						LastCharIsPerR = false;
+					}
+
 					// Contain line breaking, print to LOG
 					if (LogWithDateTime)
 					{
@@ -189,7 +210,6 @@ namespace FastenTerminal
 					{
 						// Do not put DateTime
 						SerialLog.SendLog(logMessageToFile);
-
 					}
 					logMessageToFile = "";
 				}

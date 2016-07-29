@@ -38,6 +38,8 @@
 			this.comboBoxSerialHeaderType = new System.Windows.Forms.ComboBox();
 			this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
 			this.tabPageSerialCommunicationSettings = new System.Windows.Forms.TabPage();
+			this.checkBoxSerialAppendPerRPerN = new System.Windows.Forms.CheckBox();
+			this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
 			this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
 			this.buttonSerialPortOpen = new System.Windows.Forms.Button();
@@ -93,8 +95,6 @@
 			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
 			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
 			this.buttonSerialPortSend = new System.Windows.Forms.Button();
-			this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
-			this.checkBoxSerialAppendPerRPerN = new System.Windows.Forms.CheckBox();
 			this.tabControlSerialFunctions.SuspendLayout();
 			this.tabPageSerialCommunicationSettings.SuspendLayout();
 			this.tabPageSerialCommands.SuspendLayout();
@@ -198,6 +198,30 @@
 			this.tabPageSerialCommunicationSettings.TabIndex = 3;
 			this.tabPageSerialCommunicationSettings.Text = "Konfiguráció";
 			this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
+			// 
+			// checkBoxSerialAppendPerRPerN
+			// 
+			this.checkBoxSerialAppendPerRPerN.AutoSize = true;
+			this.checkBoxSerialAppendPerRPerN.Checked = true;
+			this.checkBoxSerialAppendPerRPerN.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialAppendPerRPerN.Location = new System.Drawing.Point(6, 201);
+			this.checkBoxSerialAppendPerRPerN.Name = "checkBoxSerialAppendPerRPerN";
+			this.checkBoxSerialAppendPerRPerN.Size = new System.Drawing.Size(45, 17);
+			this.checkBoxSerialAppendPerRPerN.TabIndex = 39;
+			this.checkBoxSerialAppendPerRPerN.Text = "\\r\\n";
+			this.checkBoxSerialAppendPerRPerN.UseVisualStyleBackColor = true;
+			this.checkBoxSerialAppendPerRPerN.CheckedChanged += new System.EventHandler(this.checkSerialAppendPerRPerN_CheckedChanged);
+			// 
+			// checkBoxLogWithDateTime
+			// 
+			this.checkBoxLogWithDateTime.AutoSize = true;
+			this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 85);
+			this.checkBoxLogWithDateTime.Name = "checkBoxLogWithDateTime";
+			this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(111, 17);
+			this.checkBoxLogWithDateTime.TabIndex = 38;
+			this.checkBoxLogWithDateTime.Text = "Logolás dátummal";
+			this.checkBoxLogWithDateTime.UseVisualStyleBackColor = true;
+			this.checkBoxLogWithDateTime.CheckedChanged += new System.EventHandler(this.checkBoxLogWithDateTime_CheckedChanged);
 			// 
 			// checkBoxSerialHex
 			// 
@@ -545,6 +569,7 @@
 			this.textBoxCalculatorHex.Name = "textBoxCalculatorHex";
 			this.textBoxCalculatorHex.Size = new System.Drawing.Size(100, 20);
 			this.textBoxCalculatorHex.TabIndex = 4;
+			this.textBoxCalculatorHex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorHex_KeyPress);
 			// 
 			// textBoxCalculatorBin
 			// 
@@ -552,6 +577,7 @@
 			this.textBoxCalculatorBin.Name = "textBoxCalculatorBin";
 			this.textBoxCalculatorBin.Size = new System.Drawing.Size(100, 20);
 			this.textBoxCalculatorBin.TabIndex = 5;
+			this.textBoxCalculatorBin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorBin_KeyPress);
 			// 
 			// labelConstCalculatorHex
 			// 
@@ -816,30 +842,6 @@
 			this.buttonSerialPortSend.Text = "Küldés";
 			this.buttonSerialPortSend.UseVisualStyleBackColor = true;
 			this.buttonSerialPortSend.Click += new System.EventHandler(this.buttonSerialPortSend_Click);
-			// 
-			// checkBoxLogWithDateTime
-			// 
-			this.checkBoxLogWithDateTime.AutoSize = true;
-			this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 85);
-			this.checkBoxLogWithDateTime.Name = "checkBoxLogWithDateTime";
-			this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(111, 17);
-			this.checkBoxLogWithDateTime.TabIndex = 38;
-			this.checkBoxLogWithDateTime.Text = "Logolás dátummal";
-			this.checkBoxLogWithDateTime.UseVisualStyleBackColor = true;
-			this.checkBoxLogWithDateTime.CheckedChanged += new System.EventHandler(this.checkBoxLogWithDateTime_CheckedChanged);
-			// 
-			// checkBoxSerialAppendPerRPerN
-			// 
-			this.checkBoxSerialAppendPerRPerN.AutoSize = true;
-			this.checkBoxSerialAppendPerRPerN.Checked = true;
-			this.checkBoxSerialAppendPerRPerN.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialAppendPerRPerN.Location = new System.Drawing.Point(6, 201);
-			this.checkBoxSerialAppendPerRPerN.Name = "checkBoxSerialAppendPerRPerN";
-			this.checkBoxSerialAppendPerRPerN.Size = new System.Drawing.Size(45, 17);
-			this.checkBoxSerialAppendPerRPerN.TabIndex = 39;
-			this.checkBoxSerialAppendPerRPerN.Text = "\\r\\n";
-			this.checkBoxSerialAppendPerRPerN.UseVisualStyleBackColor = true;
-			this.checkBoxSerialAppendPerRPerN.CheckedChanged += new System.EventHandler(this.checkSerialAppendPerRPerN_CheckedChanged);
 			// 
 			// FastenTerminal
 			// 
