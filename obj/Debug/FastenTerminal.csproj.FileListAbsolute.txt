@@ -7,3 +7,7 @@ c:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\Fas
 c:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.exe
 c:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.pdb
 C:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.csprojResolveAssemblyReference.cache
+C:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\bin\Debug\FastenTerminal.exe.manifest
+C:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\bin\Debug\FastenTerminal.application
+C:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.exe.manifest
+C:\Engineer\VisualStudio2013Projects\FastenTerminal\FastenTerminal\obj\Debug\FastenTerminal.application

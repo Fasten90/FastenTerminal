@@ -27,6 +27,7 @@ namespace FastenTerminal
 		public string Baudrate = "115200";
 		public bool isOpenedPort = false;
 		private const Int32 preferredBaudrate = 115200;
+		public string stateInfo = "";
 
 		public bool needToConvertHex { get; set; }
 		public bool needAppendPerRPerN { get; set; }
@@ -91,6 +92,7 @@ namespace FastenTerminal
 				try
 				{
 					serial.Open();
+					stateInfo = serial.PortName + " - " + serial.BaudRate;
 					String message = "[Application] Successful open serial port. " +
 									serial.PortName + " " + serial.BaudRate + "\n";
 					Log.SendEventLog(message);
@@ -119,13 +121,16 @@ namespace FastenTerminal
 			try
 			{
 				serial.Close();
+				stateInfo = "Closed";
 			}
 			catch (Exception e)
 			{
 				Log.SendErrorLog(e.Message);
 			}
 
-			Log.SendEventLog("Closed Serial port");
+			String message = "[Application] Closed Serial port";
+			form.AppendTextSerialData(message);
+			Log.SendEventLog(message);
 			isOpenedPort = false;
 		}
 

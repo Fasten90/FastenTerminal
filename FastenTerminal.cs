@@ -22,6 +22,7 @@ namespace FastenTerminal
 		// Configs:
 		public const bool NotifyIsEnabled = false;
 
+		private const String ApplicationName = "FastenTerminal";
 
 		// Others
 
@@ -130,23 +131,33 @@ namespace FastenTerminal
 
 		private void SerialOpenClose()
 		{
+			// Is opened?
 			if (serial.isOpenedPort == false)
 			{
-				// If not opened
+				// If not opened, open
 				if (serial.SerialPortComOpen())
 				{
+					// Successful port opening
 					buttonSerialPortOpen.Text = "Port bezárása";
 				}
 
 			}
 			else
 			{
-				// If opened
+				// If opened, close
 				serial.SerialPortComClose();
 				buttonSerialPortOpen.Text = "Port nyitás";
 			}
-			
 
+			// Refresh application name
+			RefreshTitle();		
+		}
+
+
+		private void RefreshTitle()
+		{
+			// For example: "FastenTerminal - COM9 - 9600"
+			this.Text = ApplicationName + " - " + serial.stateInfo;
 		}
 
 
