@@ -4,4 +4,9 @@ bin/Debug/Events.log
 
 *.exe
 *.pdb
+*.log
+
 bin/Debug/FastenTerminal.exe
+bin/Debug/FastenTerminal.pdb
+obj/Debug/FastenTerminal.exe
+obj/Debug/FastenTerminal.pdb
