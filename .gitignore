@@ -1,4 +1,7 @@
 bin/Debug/Serial.log
-bin/Debug/Serial.log
 bin/Debug/Errors.log
 bin/Debug/Events.log
+
+*.exe
+*.pdb
+bin/Debug/FastenTerminal.exe

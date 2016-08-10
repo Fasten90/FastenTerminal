@@ -70,9 +70,9 @@ namespace FastenTerminal
 			if (ComSelected == null || ComSelected == "")
 			{
 				// Wrong COM
-				String errorMessage = "Error: Empty portname\n";
+				String errorMessage = "[Application] Error: Empty portname\n";
 				Log.SendErrorLog(errorMessage);
-				form.AppendTextSerialData("[Application] " + errorMessage);
+				form.AppendTextSerialData(errorMessage);
 				return false;
 			}
 			else
@@ -91,15 +91,18 @@ namespace FastenTerminal
 				try
 				{
 					serial.Open();
-					Log.SendEventLog("Opened serial port");
+					String message = "[Application] Successful open serial port. " +
+									serial.PortName + " " + serial.BaudRate + "\n";
+					Log.SendEventLog(message);
+					form.AppendTextSerialData(message);
 					isOpenedPort = true;
 					return true;
 				}
 				catch (Exception e)
 				{
-					String errorMessage = "Error with port opening.\n";
+					String errorMessage = "[Application] Error with port opening.\n";
 					Log.SendErrorLog(errorMessage + e.Message);
-					form.AppendTextSerialData("[Programmer] " + errorMessage);
+					form.AppendTextSerialData(errorMessage);
 					return false;
 				}
 				
@@ -237,7 +240,9 @@ namespace FastenTerminal
 				try
 				{
 					// Send
-					serial.WriteLine(message);
+					//serial.WriteLine(message);	// Be careful, sending with newline '\n' character
+					serial.Write(message);			// Send without newline
+
 					// Successful
 					logMessage = "[Application] Successful sent message\t" + message + "\n";
 				}

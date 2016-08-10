@@ -2125,3 +2125,229 @@
 2016.07.29. 22:21:57	 EventLog has been started.
 2016.07.29. 22:21:57	 Closed Serial port
 2016.07.29. 22:21:57	 Application closed
+2016.08.10. 11:15:07	 EventLog has been started.
+2016.08.10. 11:15:10	 Opened serial port
+2016.08.10. 11:16:06	 [Application] Periodical message sending started...
+  Time: 5  Message: S32.9 32.9 32.7 32.7 00.0 30.0 E0--------------- R-- 0.0.0.1 2D
+
+2016.08.10. 11:32:39	 [Application] Periodical message sending stopped
+
+2016.08.10. 11:32:49	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:32:56	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:26	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:28	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:29	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:29	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:30	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:30	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:30	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:30	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:31	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:31	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:35	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:35	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:36	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:36	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:33:36	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:38:06	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:38:16	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:38:17	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:38:18	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:39:14	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:42:59	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:47:22	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:52:38	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:54:56	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:55:17	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 11:55:18	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:34	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:34	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:35	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:35	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:42	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:48	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:51	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:00:53	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:01:22	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:28:01	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:32:05	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:46:18	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:46:52	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:46:53	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:46:53	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:46:57	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:47:00	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:47:01	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:47:32	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:50:05	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:50:13	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:50:15	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 12:50:29	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E-------------D-- R-- 0.0.0.1 3B
+
+
+2016.08.10. 12:51:04	 Closed Serial port
+2016.08.10. 12:51:04	 Closed Serial port
+2016.08.10. 12:51:04	 Application closed
+2016.08.10. 16:20:53	 EventLog has been started.
+2016.08.10. 16:20:53	 [Application] Successful open serial port. COM15 9600
+
+2016.08.10. 16:21:03	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.08.10. 16:21:46	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:22:05	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:22:39	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:31:51	 EventLog has been started.
+2016.08.10. 16:31:51	 [Application] Successful open serial port. COM15 9600
+
+2016.08.10. 16:32:17	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.08.10. 16:32:20	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.08.10. 16:32:23	 [Application] Successful sent message	<Sending message with \r\n>
+
+
+2016.08.10. 16:32:51	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:33:12	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:34:37	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:34:45	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:52:26	 [Application] Successful sent message	M32.9 32.9 32.7 32.7 00.0 30.0 E---------------- R-- 0.0.0.1 24
+
+
+2016.08.10. 16:53:21	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
+2016.08.10. 17:04:52	 [Application] Successful sent message	durva
+
+
+2016.08.10. 17:05:02	 [Application] Successful sent message	durva
+
+
+2016.08.10. 17:05:05	 [Application] Successful sent message	durva
+
+
+2016.08.10. 17:05:05	 [Application] Successful sent message	durva
+
+
+2016.08.10. 17:05:05	 [Application] Successful sent message	durva
+
+
+2016.08.10. 17:05:09	 [Application] Successful sent message	M00.0 00.0 00.0 00.0 00.0 30.0 E-1234------B---F R-- 0.0.0.1 34
+
+
