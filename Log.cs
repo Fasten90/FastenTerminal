@@ -43,14 +43,14 @@ namespace FastenTerminal
 
 		static public void SendEventLog(String text)
 		{
-			EventLogger.WriteLine(DateTime.Now.ToString() + "\t " + text);
+			EventLogger.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\t " + text);
 			EventLogger.Flush();
 			Console.WriteLine(text);
 		}
 
 		static public void SendErrorLog(String text)
 		{
-			ErrorLogger.WriteLine(DateTime.Now.ToString() + "\t " + text);
+			ErrorLogger.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\t " + text);
 			ErrorLogger.Flush();
 			Console.WriteLine(text);
 		}

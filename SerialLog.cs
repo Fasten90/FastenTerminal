@@ -26,7 +26,7 @@ namespace FastenTerminal
 		{
 			if (putDatetime)
 			{
-				Logger.WriteLine(DateTime.Now.ToString() + "\t " + text);
+				Logger.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\t " + text);
 			}
 			else
 			{

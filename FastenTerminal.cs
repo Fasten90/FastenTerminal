@@ -222,16 +222,29 @@ namespace FastenTerminal
 
 		private void serialPortDevice_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
 		{
-			serial.DataReceived();
+			SerialReceive();
 		}
 
 
 
-		public void AppendTextSerialData( string value)
+		private void SerialReceive()
 		{
 			if (InvokeRequired)
 			{
-				this.Invoke(new Action<string>(AppendTextSerialData), new object[] { value });
+				this.BeginInvoke(new Action(SerialReceive), new object[] { });
+				return;
+			}
+
+			serial.Receive();
+		}
+
+
+
+		public void AppendTextSerialLogData( string value)
+		{
+			if (InvokeRequired)
+			{
+				this.Invoke(new Action<string>(AppendTextSerialLogData), new object[] { value });
 				return;
 			}
 
@@ -599,7 +612,7 @@ namespace FastenTerminal
 				else
 				{
 					string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
-					AppendTextSerialData(logMessage);
+					AppendTextSerialLogData(logMessage);
 					Log.SendEventLog(logMessage);
 				}
 			}
