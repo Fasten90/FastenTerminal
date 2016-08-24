@@ -26,9 +26,9 @@ namespace FastenTerminal
 		public string[] ComAvailableList;
 		public string ComSelected = "";
 		public System.IO.Ports.SerialPort serial;
-		public string Baudrate = "9600";
+		public string Baudrate = "115200";
 		public bool isOpenedPort = false;
-		private const Int32 preferredBaudrate = 9600;
+		private const Int32 preferredBaudrate = 115200;
 		public string stateInfo = "";
 
 		public bool receiverModeBinary = false; // TODO:

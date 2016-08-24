@@ -214,12 +214,12 @@
 			// comboBoxSerialPortCOM
 			// 
 			this.comboBoxSerialPortCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortCOM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxSerialPortCOM.FormattingEnabled = true;
 			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(6, 6);
 			this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
 			this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(82, 21);
 			this.comboBoxSerialPortCOM.TabIndex = 3;
-			this.comboBoxSerialPortCOM.Text = "<port>";
 			this.comboBoxSerialPortCOM.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortCOM_SelectedIndexChanged);
 			// 
 			// buttonSerialPortOpen
@@ -373,6 +373,7 @@
 			// comboBoxSerialPortLastCommands
 			// 
 			this.comboBoxSerialPortLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialPortLastCommands.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxSerialPortLastCommands.FormattingEnabled = true;
 			this.comboBoxSerialPortLastCommands.Location = new System.Drawing.Point(6, 183);
 			this.comboBoxSerialPortLastCommands.Name = "comboBoxSerialPortLastCommands";
