@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FastenTerminal.exe" size="49152">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FastenTerminal.exe" size="39920">
       <assemblyIdentity name="FastenTerminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lqqvqPDqEU5m8ArK+pPiLjj94riXh0MVDk5P4kn1JeI=</dsig:DigestValue>
+        <dsig:DigestValue>ZRfmpUH3Fmuv2wyg4dcNgE3aO/irOSgDUve9ij9EkpQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

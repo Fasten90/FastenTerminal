@@ -39,12 +39,6 @@ namespace FastenTerminal
 	}
 
 
-	public enum CommandSourceType
-	{
-		Serial,
-		GSM
-	}
-
 
 	public class CommandHandler
 	{
@@ -52,8 +46,12 @@ namespace FastenTerminal
 
 		private FastenTerminal form;
 
+
+		// Configs
 		const String CommandConfigFile = @"CommandConfigs.xml";
 
+
+		// TODO: szebb megoldás a formra átadás helyett?
 		public CommandHandler(FastenTerminal form)
 		{
 			this.form = form;
@@ -63,7 +61,6 @@ namespace FastenTerminal
 			if (LoadCommandConfigFromXml(CommandConfigFile, ref CommandConfig) == true)
 			{
 				// Successful loaded Commands...
-
 			}
 			else
 			{
@@ -86,35 +83,21 @@ namespace FastenTerminal
 		}
 
 
-		public void SendCommand(String command, CommandSourceType source)
+		public void SendCommand(String command)
 		{
-			// TODO: source... send...
-			// Check serial available, check gsm available...
-
-
-			String message = "Send command: " + command;	// +"\r\n";	SendMessage() függvényben lett
-			Console.WriteLine(message);
-			form.AppendTextSerialData("[Application] " + message);
+			// +"\r\n";	SendMessage() függvényben lett
+			String message = "[Application] Send command: " + command;
+			form.AppendTextSerialData(message);
 			Log.SendEventLog(message);
+
 
 			String messageResult = "";
 
-			switch(source)
-			{
-				case CommandSourceType.Serial:
-					messageResult = form.serial.SendMessage(command,true);
-					break;
-				case CommandSourceType.GSM:
-					Console.WriteLine("Error... not implemented GSM sending");
-					break;
-				default:
-					Console.WriteLine("Error with source type");
-					break;
-			}
+			// Send on serial
+			messageResult = form.serial.SendMessage(command,true);
 
-			//Console.WriteLine(messageResult);
+
 			Log.SendEventLog(messageResult);
-			//form.AppendTextSerialData(messageResult);
 			
 		}
 
@@ -128,28 +111,27 @@ namespace FastenTerminal
 				config = XmlSerialization.ReadFromXmlFile<CommandConfigs>(ConfigFile);
 				// EXCEPTION: ha nem találja az adott fájlt
 
-				//Log.SendEventLog(@"JarKon\CommandConfigs.xml flashFile loaded succesful.");
-				Console.WriteLine("CommandConfigs.xml has loaded.");
+				Log.SendEventLog("CommandConfigs.xml has loaded.");
 
 				return true;
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Failed to load CommandConfigs.xml");
-				Console.WriteLine(e.Message);
+				Log.SendErrorLog("Failed to load CommandConfigs.xml" + e.Message);
 
 				return false;
 			}
 
 		}
 
+
+
 		public void SaveCommandConfigToXml(String ConfigFile, CommandConfigs config)
 		{
 
 			XmlSerialization.WriteToXmlFile<CommandConfigs>(ConfigFile, config);
 
-			//Log.SendEventLog("Save to CommandConfigs.xml has been successful.");
-			Console.WriteLine("CommandConfigs.xml has saved.");
+			Log.SendEventLog("CommandConfigs.xml has saved.");
 		}
 
 

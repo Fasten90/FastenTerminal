@@ -158,8 +158,6 @@ namespace FastenTerminal
 			// Print on output text
 			form.AppendTextSerialData(receivedMessage);
 
-			//TODO: Do in AppenTextSerialData...
-			//form.CheckFwUpateMessageAndSend(receivedMessage);
 
 			// Log
 			if (NeedLog)

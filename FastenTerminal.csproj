@@ -86,7 +86,6 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Common.cs" />
-    <Compile Include="FwUpdate.cs" />
     <Compile Include="SerialLog.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="FastenTerminal.cs">

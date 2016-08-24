@@ -30,7 +30,6 @@
         {
 			this.components = new System.ComponentModel.Container();
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
-			this.timerFwUpdateActualSec = new System.Windows.Forms.Timer(this.components);
 			this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
 			this.buttonClearSerialTexts = new System.Windows.Forms.Button();
 			this.labelConstTextSearching = new System.Windows.Forms.Label();
@@ -75,22 +74,6 @@
 			this.tabPageSerialCommandSettings = new System.Windows.Forms.TabPage();
 			this.labelConstSettingsFavCommandsText = new System.Windows.Forms.Label();
 			this.dataGridViewSettingsFavCommands = new System.Windows.Forms.DataGridView();
-			this.tabPageSerialFwUpdate = new System.Windows.Forms.TabPage();
-			this.labelConstTextFwUpdateVersion = new System.Windows.Forms.Label();
-			this.textBoxFWupdateVersionName = new System.Windows.Forms.TextBox();
-			this.labelActualFwUpdateState = new System.Windows.Forms.Label();
-			this.labelFwUpdateNeedTime = new System.Windows.Forms.Label();
-			this.textBoxTimeWaitResponse = new System.Windows.Forms.TextBox();
-			this.textBoxTimeWaitBetweenSending = new System.Windows.Forms.TextBox();
-			this.buttonFwUpdateStart = new System.Windows.Forms.Button();
-			this.labelConstTextMs1 = new System.Windows.Forms.Label();
-			this.labelTimeWaitResponse = new System.Windows.Forms.Label();
-			this.labelConstTextMs2 = new System.Windows.Forms.Label();
-			this.labelTimeWaitBetweenSending = new System.Windows.Forms.Label();
-			this.textBoxFwUpdateMaxPageErrorNum = new System.Windows.Forms.TextBox();
-			this.labelConstTextActualPage = new System.Windows.Forms.Label();
-			this.labelConstTextFwUpdateMaxPageError = new System.Windows.Forms.Label();
-			this.labelConstTextCompleteTime = new System.Windows.Forms.Label();
 			this.textBoxSerialSendMessage = new System.Windows.Forms.TextBox();
 			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
 			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
@@ -104,7 +87,6 @@
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabPageSerialCommandSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavCommands)).BeginInit();
-			this.tabPageSerialFwUpdate.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// serialPortDevice
@@ -112,11 +94,6 @@
 			this.serialPortDevice.BaudRate = 115200;
 			this.serialPortDevice.ErrorReceived += new System.IO.Ports.SerialErrorReceivedEventHandler(this.serialPortDevice_ErrorReceived);
 			this.serialPortDevice.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPortDevice_DataReceived);
-			// 
-			// timerFwUpdateActualSec
-			// 
-			this.timerFwUpdateActualSec.Interval = 1000;
-			this.timerFwUpdateActualSec.Tick += new System.EventHandler(this.timerFwUpdateActualSec_Tick);
 			// 
 			// notifyIconApplication
 			// 
@@ -170,7 +147,6 @@
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialPeriodSending);
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageCalculator);
 			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommandSettings);
-			this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialFwUpdate);
 			this.tabControlSerialFunctions.Location = new System.Drawing.Point(540, 59);
 			this.tabControlSerialFunctions.Multiline = true;
 			this.tabControlSerialFunctions.Name = "tabControlSerialFunctions";
@@ -619,180 +595,6 @@
 			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(192, 292);
 			this.dataGridViewSettingsFavCommands.TabIndex = 21;
 			// 
-			// tabPageSerialFwUpdate
-			// 
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextFwUpdateVersion);
-			this.tabPageSerialFwUpdate.Controls.Add(this.textBoxFWupdateVersionName);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelActualFwUpdateState);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelFwUpdateNeedTime);
-			this.tabPageSerialFwUpdate.Controls.Add(this.textBoxTimeWaitResponse);
-			this.tabPageSerialFwUpdate.Controls.Add(this.textBoxTimeWaitBetweenSending);
-			this.tabPageSerialFwUpdate.Controls.Add(this.buttonFwUpdateStart);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextMs1);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelTimeWaitResponse);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextMs2);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelTimeWaitBetweenSending);
-			this.tabPageSerialFwUpdate.Controls.Add(this.textBoxFwUpdateMaxPageErrorNum);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextActualPage);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextFwUpdateMaxPageError);
-			this.tabPageSerialFwUpdate.Controls.Add(this.labelConstTextCompleteTime);
-			this.tabPageSerialFwUpdate.Location = new System.Drawing.Point(4, 58);
-			this.tabPageSerialFwUpdate.Name = "tabPageSerialFwUpdate";
-			this.tabPageSerialFwUpdate.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialFwUpdate.Size = new System.Drawing.Size(198, 318);
-			this.tabPageSerialFwUpdate.TabIndex = 1;
-			this.tabPageSerialFwUpdate.Text = "FW Update";
-			this.tabPageSerialFwUpdate.UseVisualStyleBackColor = true;
-			// 
-			// labelConstTextFwUpdateVersion
-			// 
-			this.labelConstTextFwUpdateVersion.AutoSize = true;
-			this.labelConstTextFwUpdateVersion.Location = new System.Drawing.Point(9, 37);
-			this.labelConstTextFwUpdateVersion.Name = "labelConstTextFwUpdateVersion";
-			this.labelConstTextFwUpdateVersion.Size = new System.Drawing.Size(39, 13);
-			this.labelConstTextFwUpdateVersion.TabIndex = 30;
-			this.labelConstTextFwUpdateVersion.Text = "Verzió:";
-			// 
-			// textBoxFWupdateVersionName
-			// 
-			this.textBoxFWupdateVersionName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxFWupdateVersionName.Location = new System.Drawing.Point(57, 34);
-			this.textBoxFWupdateVersionName.Name = "textBoxFWupdateVersionName";
-			this.textBoxFWupdateVersionName.Size = new System.Drawing.Size(99, 20);
-			this.textBoxFWupdateVersionName.TabIndex = 17;
-			this.textBoxFWupdateVersionName.Text = "<verzió>";
-			// 
-			// labelActualFwUpdateState
-			// 
-			this.labelActualFwUpdateState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelActualFwUpdateState.AutoSize = true;
-			this.labelActualFwUpdateState.Location = new System.Drawing.Point(64, 145);
-			this.labelActualFwUpdateState.MinimumSize = new System.Drawing.Size(40, 0);
-			this.labelActualFwUpdateState.Name = "labelActualFwUpdateState";
-			this.labelActualFwUpdateState.Size = new System.Drawing.Size(40, 13);
-			this.labelActualFwUpdateState.TabIndex = 18;
-			this.labelActualFwUpdateState.Text = "-";
-			// 
-			// labelFwUpdateNeedTime
-			// 
-			this.labelFwUpdateNeedTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelFwUpdateNeedTime.AutoSize = true;
-			this.labelFwUpdateNeedTime.Location = new System.Drawing.Point(88, 171);
-			this.labelFwUpdateNeedTime.MinimumSize = new System.Drawing.Size(90, 0);
-			this.labelFwUpdateNeedTime.Name = "labelFwUpdateNeedTime";
-			this.labelFwUpdateNeedTime.Size = new System.Drawing.Size(90, 13);
-			this.labelFwUpdateNeedTime.TabIndex = 19;
-			this.labelFwUpdateNeedTime.Text = "-";
-			// 
-			// textBoxTimeWaitResponse
-			// 
-			this.textBoxTimeWaitResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTimeWaitResponse.Location = new System.Drawing.Point(115, 63);
-			this.textBoxTimeWaitResponse.Name = "textBoxTimeWaitResponse";
-			this.textBoxTimeWaitResponse.Size = new System.Drawing.Size(41, 20);
-			this.textBoxTimeWaitResponse.TabIndex = 20;
-			this.textBoxTimeWaitResponse.Text = "10000";
-			// 
-			// textBoxTimeWaitBetweenSending
-			// 
-			this.textBoxTimeWaitBetweenSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTimeWaitBetweenSending.Location = new System.Drawing.Point(115, 89);
-			this.textBoxTimeWaitBetweenSending.Name = "textBoxTimeWaitBetweenSending";
-			this.textBoxTimeWaitBetweenSending.Size = new System.Drawing.Size(41, 20);
-			this.textBoxTimeWaitBetweenSending.TabIndex = 21;
-			this.textBoxTimeWaitBetweenSending.Text = "3000";
-			// 
-			// buttonFwUpdateStart
-			// 
-			this.buttonFwUpdateStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonFwUpdateStart.Location = new System.Drawing.Point(12, 5);
-			this.buttonFwUpdateStart.Name = "buttonFwUpdateStart";
-			this.buttonFwUpdateStart.Size = new System.Drawing.Size(125, 23);
-			this.buttonFwUpdateStart.TabIndex = 16;
-			this.buttonFwUpdateStart.Text = "FW Update start";
-			this.buttonFwUpdateStart.UseVisualStyleBackColor = true;
-			this.buttonFwUpdateStart.Click += new System.EventHandler(this.buttonFwUpdate_Click);
-			// 
-			// labelConstTextMs1
-			// 
-			this.labelConstTextMs1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextMs1.AutoSize = true;
-			this.labelConstTextMs1.Location = new System.Drawing.Point(158, 66);
-			this.labelConstTextMs1.Name = "labelConstTextMs1";
-			this.labelConstTextMs1.Size = new System.Drawing.Size(20, 13);
-			this.labelConstTextMs1.TabIndex = 29;
-			this.labelConstTextMs1.Text = "ms";
-			// 
-			// labelTimeWaitResponse
-			// 
-			this.labelTimeWaitResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelTimeWaitResponse.AutoSize = true;
-			this.labelTimeWaitResponse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.labelTimeWaitResponse.Location = new System.Drawing.Point(9, 66);
-			this.labelTimeWaitResponse.Name = "labelTimeWaitResponse";
-			this.labelTimeWaitResponse.Size = new System.Drawing.Size(89, 13);
-			this.labelTimeWaitResponse.TabIndex = 22;
-			this.labelTimeWaitResponse.Text = "Válasz várási idő:";
-			// 
-			// labelConstTextMs2
-			// 
-			this.labelConstTextMs2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextMs2.AutoSize = true;
-			this.labelConstTextMs2.Location = new System.Drawing.Point(158, 89);
-			this.labelConstTextMs2.Name = "labelConstTextMs2";
-			this.labelConstTextMs2.Size = new System.Drawing.Size(20, 13);
-			this.labelConstTextMs2.TabIndex = 28;
-			this.labelConstTextMs2.Text = "ms";
-			// 
-			// labelTimeWaitBetweenSending
-			// 
-			this.labelTimeWaitBetweenSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelTimeWaitBetweenSending.AutoSize = true;
-			this.labelTimeWaitBetweenSending.Location = new System.Drawing.Point(9, 92);
-			this.labelTimeWaitBetweenSending.Name = "labelTimeWaitBetweenSending";
-			this.labelTimeWaitBetweenSending.Size = new System.Drawing.Size(96, 13);
-			this.labelTimeWaitBetweenSending.TabIndex = 23;
-			this.labelTimeWaitBetweenSending.Text = "Küldések közti idő:";
-			// 
-			// textBoxFwUpdateMaxPageErrorNum
-			// 
-			this.textBoxFwUpdateMaxPageErrorNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxFwUpdateMaxPageErrorNum.Location = new System.Drawing.Point(115, 116);
-			this.textBoxFwUpdateMaxPageErrorNum.Name = "textBoxFwUpdateMaxPageErrorNum";
-			this.textBoxFwUpdateMaxPageErrorNum.Size = new System.Drawing.Size(41, 20);
-			this.textBoxFwUpdateMaxPageErrorNum.TabIndex = 27;
-			this.textBoxFwUpdateMaxPageErrorNum.Text = "5";
-			// 
-			// labelConstTextActualPage
-			// 
-			this.labelConstTextActualPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextActualPage.AutoSize = true;
-			this.labelConstTextActualPage.Location = new System.Drawing.Point(9, 145);
-			this.labelConstTextActualPage.Name = "labelConstTextActualPage";
-			this.labelConstTextActualPage.Size = new System.Drawing.Size(49, 13);
-			this.labelConstTextActualPage.TabIndex = 24;
-			this.labelConstTextActualPage.Text = "Jelenleg:";
-			// 
-			// labelConstTextFwUpdateMaxPageError
-			// 
-			this.labelConstTextFwUpdateMaxPageError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextFwUpdateMaxPageError.AutoSize = true;
-			this.labelConstTextFwUpdateMaxPageError.Location = new System.Drawing.Point(9, 119);
-			this.labelConstTextFwUpdateMaxPageError.Name = "labelConstTextFwUpdateMaxPageError";
-			this.labelConstTextFwUpdateMaxPageError.Size = new System.Drawing.Size(83, 13);
-			this.labelConstTextFwUpdateMaxPageError.TabIndex = 26;
-			this.labelConstTextFwUpdateMaxPageError.Text = "Max. page hiba:";
-			// 
-			// labelConstTextCompleteTime
-			// 
-			this.labelConstTextCompleteTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelConstTextCompleteTime.AutoSize = true;
-			this.labelConstTextCompleteTime.Location = new System.Drawing.Point(9, 171);
-			this.labelConstTextCompleteTime.Name = "labelConstTextCompleteTime";
-			this.labelConstTextCompleteTime.Size = new System.Drawing.Size(73, 13);
-			this.labelConstTextCompleteTime.TabIndex = 25;
-			this.labelConstTextCompleteTime.Text = "Hátralevő idő:";
-			// 
 			// textBoxSerialSendMessage
 			// 
 			this.textBoxSerialSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -877,8 +679,6 @@
 			this.tabPageSerialCommandSettings.ResumeLayout(false);
 			this.tabPageSerialCommandSettings.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewSettingsFavCommands)).EndInit();
-			this.tabPageSerialFwUpdate.ResumeLayout(false);
-			this.tabPageSerialFwUpdate.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -887,7 +687,6 @@
         #endregion
 
 		private System.IO.Ports.SerialPort serialPortDevice;
-		private System.Windows.Forms.Timer timerFwUpdateActualSec;
 		public System.Windows.Forms.NotifyIcon notifyIconApplication;
 		private System.Windows.Forms.Button buttonClearSerialTexts;
 		private System.Windows.Forms.Label labelConstTextSearching;
@@ -903,22 +702,6 @@
 		private System.Windows.Forms.Label labelLastCommands;
 		private System.Windows.Forms.Button buttonCommand1;
 		private System.Windows.Forms.Button buttonCommand2;
-		private System.Windows.Forms.TabPage tabPageSerialFwUpdate;
-		private System.Windows.Forms.Label labelConstTextFwUpdateVersion;
-		private System.Windows.Forms.TextBox textBoxFWupdateVersionName;
-		private System.Windows.Forms.Label labelActualFwUpdateState;
-		private System.Windows.Forms.Label labelFwUpdateNeedTime;
-		private System.Windows.Forms.TextBox textBoxTimeWaitResponse;
-		private System.Windows.Forms.TextBox textBoxTimeWaitBetweenSending;
-		private System.Windows.Forms.Button buttonFwUpdateStart;
-		private System.Windows.Forms.Label labelConstTextMs1;
-		private System.Windows.Forms.Label labelTimeWaitResponse;
-		private System.Windows.Forms.Label labelConstTextMs2;
-		private System.Windows.Forms.Label labelTimeWaitBetweenSending;
-		private System.Windows.Forms.TextBox textBoxFwUpdateMaxPageErrorNum;
-		private System.Windows.Forms.Label labelConstTextActualPage;
-		private System.Windows.Forms.Label labelConstTextFwUpdateMaxPageError;
-		private System.Windows.Forms.Label labelConstTextCompleteTime;
 		private System.Windows.Forms.TabPage tabPageSerialPeriodSending;
 		private System.Windows.Forms.TabPage tabPageSerialCommunicationSettings;
 		private System.Windows.Forms.CheckBox checkBoxSerialHex;

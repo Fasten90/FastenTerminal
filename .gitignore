@@ -14,3 +14,9 @@ obj/Debug/FastenTerminal.pdb
 bin/Debug/app.publish/Application Files/*
 
 
+*.cache
+
+obj/*
+obj\*
+
+obj/Debug/*

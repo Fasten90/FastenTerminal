@@ -20,7 +20,7 @@ namespace FastenTerminal
     public partial class FastenTerminal : Form
     {
 		// Configs:
-		public const bool NotifyIsEnabled = false;
+		public bool NotifyIsEnabled = false;
 
 		private const String ApplicationName = "FastenTerminal";
 
@@ -35,7 +35,6 @@ namespace FastenTerminal
 		//public BindingSource commandList;
 		public List<Command> commandList;
 
-		FwUpdate fwUpdate;
 
 		public bool FwUpdateWaitMessage;
 
@@ -45,11 +44,13 @@ namespace FastenTerminal
 		int SerialMessageActualSelectionLength = 0;
 
 
-		const String SerialHeader = "!";	// TODO: delete
+		// For Calculator
+		String decimalString;
+		String hexadecimalString;
+		String binaryString;
 
-		//bool isSearching = false;	// TODO: delete
 
-        public FastenTerminal()
+		public FastenTerminal()
         {
             InitializeComponent();
         }
@@ -85,6 +86,52 @@ namespace FastenTerminal
 				notifyIconApplication.Visible = true;  
 			}
         }
+
+
+
+		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			// Close event
+
+			// Close serial
+			serial.SerialPortComClose();
+
+			// Log closed
+			Log.SendEventLog("Application closed");
+			Log.SendErrorLog("Application closed");
+
+
+			if (NotifyIsEnabled)
+			{
+				// Notify close
+				notifyIconApplication.Visible = false;
+			}
+		}
+
+
+
+		private void RefreshTitle()
+		{
+			// For example: "FastenTerminal - COM9 - 9600"
+			this.Text = ApplicationName + " - " + serial.stateInfo;
+		}
+
+
+
+		/// <summary>
+		/// Notify on taskbar
+		/// </summary>
+		/// <param name="message"></param>
+		private void MessageForUser(String message)
+		{
+			if (NotifyIsEnabled)
+			{
+				notifyIconApplication.BalloonTipText = message;
+				//notifyIconForParent.Text = message;   // Ikon neve
+				notifyIconApplication.BalloonTipTitle = "FastenTerminal";
+				notifyIconApplication.ShowBalloonTip(1000);
+			}
+		}
 
 
 		////////////////////////////////////////////////
@@ -124,10 +171,14 @@ namespace FastenTerminal
 			//comboBoxSerialPortCOM.DataSource = serial.ComAvailableList;
 		}
 
+
+
 		private void buttonSerialPortOpen_Click(object sender, EventArgs e)
 		{
 			SerialOpenClose();
 		}
+
+
 
 		private void SerialOpenClose()
 		{
@@ -154,23 +205,20 @@ namespace FastenTerminal
 		}
 
 
-		private void RefreshTitle()
-		{
-			// For example: "FastenTerminal - COM9 - 9600"
-			this.Text = ApplicationName + " - " + serial.stateInfo;
-		}
-
 
 		private void comboBoxSerialPortCOM_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			serial.ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
 		}
 
+
 			
 		private void comboBoxSerialPortBaudrate_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			serial.Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
 		}
+
+
 
 		private void serialPortDevice_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
 		{
@@ -255,10 +303,13 @@ namespace FastenTerminal
 			DeleteSerialTexts();
 		}
 
+
+
 		private void DeleteSerialTexts()
 		{
 			richTextBoxSerialPortTexts.Clear();
 		}
+
 
 
 		private void textBoxSerialSendMessage_Enter(object sender, EventArgs e)
@@ -272,33 +323,6 @@ namespace FastenTerminal
 			}
 		}
 
-
-
-		public void AppendFwUpdateState( string value)
-		{
-			if (InvokeRequired)
-			{
-				this.Invoke(new Action<string>(AppendFwUpdateState), new object[] { value });
-				return;
-			}
-
-			labelActualFwUpdateState.Text = value;
-
-		}
-
-		
-		public void AppendFwUpdateEndTime( string value)
-		{
-			if (InvokeRequired)
-			{
-				this.Invoke(new Action<string>(AppendFwUpdateEndTime), new object[] { value });
-				return;
-			}
-
-			labelFwUpdateNeedTime.Text = value;
-
-		}
-		
 
 
 		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
@@ -367,125 +391,6 @@ namespace FastenTerminal
 		}
 
 
-
-
-
-
-		public void LoadCommandsToButtons()
-		{
-			List<Command> commandList = command.GetCommands();
-
-			commandListOnButtons = new List<Button>();
-
-			// Add buttons to Command buttons list
-			commandListOnButtons.Add(buttonCommand1);
-			commandListOnButtons.Add(buttonCommand2);
-			commandListOnButtons.Add(buttonCommand3);
-			commandListOnButtons.Add(buttonCommand4);
-			commandListOnButtons.Add(buttonCommand5);
-
-			int i = 0;
-			foreach (var item in commandList)
-			{
-				// Step on buttons
-				commandListOnButtons[i].Text = item.CommandName;
-				i++;
-				if (i >= commandListOnButtons.Count)
-				{
-					break;
-				}
-			}
-			
-		}
-
-
-		private void LoadMessageHeaders()
-		{
-			// Add message headers
-			comboBoxSerialHeaderType.Items.Add("!");
-			comboBoxSerialHeaderType.Items.Add("BxPgHeader");
-		}
-
-
-		public void LoadCommandsToSetting()
-		{
-			// Load favourite commands to Settings -> FavCommands dataGridView
-
-			// Mode 1
-			dataGridViewSettingsFavCommands.AutoGenerateColumns = true;
-			commandList = command.GetCommands();
-			dataGridViewSettingsFavCommands.DataSource = commandList;
-			dataGridViewSettingsFavCommands.Refresh();
-		}
-
-
-		//////////////////////////////////
-		//		Favourite commands
-		//////////////////////////////////
-
-		private void buttonCommand1_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
-		}
-
-		private void buttonCommand2_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
-		}
-
-		private void buttonCommand3_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
-		}
-
-		private void buttonCommand4_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
-		}
-
-		private void buttonCommand5_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text, CommandSourceType.Serial);
-		}
-
-
-
-
-		private void buttonFwUpdate_Click(object sender, EventArgs e)
-		{
-			if ( fwUpdate == null)
-			{
-				// There is no fwUpdate
-				int waitResponseTime = Int32.Parse(textBoxTimeWaitResponse.Text);				// TODO: EXCEPTION
-				int waitBetweenSendignTime = Int32.Parse(textBoxTimeWaitBetweenSending.Text);	// TODO: EXCEPTION
-				int maximumPageErrorNum = Int32.Parse(textBoxFwUpdateMaxPageErrorNum.Text);		// TODO: EXCEPTION
-				fwUpdate = new FwUpdate("LidlOS.hex", textBoxFWupdateVersionName.Text,
-					serial, this, waitBetweenSendignTime, waitResponseTime, maximumPageErrorNum);
-
-				//timerFwUpdateActualSec = new System.Windows.Forms.Timer();
-				timerFwUpdateActualSec.Enabled = true;
-				timerFwUpdateActualSec.Start();
-				
-
-				buttonFwUpdateStart.Text = "FW Stop";
-				Log.SendEventLog("FwUpdate started");
-			}
-			else
-			{
-				//if (fwUpdate != null)
-				fwUpdate.FwUpdateStop();
-				fwUpdate = null;
-
-				timerFwUpdateActualSec.Stop();
-
-				buttonFwUpdateStart.Text = "FW Update ";
-				Log.SendEventLog("FwUpdate stopped");
-			}
-
-		}
-
-
-
 		private void buttonSerialPortSend_Click(object sender, EventArgs e)
 		{
 			SerialMessageSending();
@@ -501,7 +406,7 @@ namespace FastenTerminal
 				// If pressed enter
 				SerialMessageSending();
 			}
-				
+
 		}
 
 
@@ -535,100 +440,12 @@ namespace FastenTerminal
 
 
 
-		private void SerialAddLastCommand(String message)
-		{
-			String command = "";
-			
-
-			if (message.StartsWith(SerialHeader))
-			{
-				// Copied after '!', if it is serial command
-				command = message.Substring(1);	// TODO: after serial '!'
-			}
-			else
-			{
-				// Copy
-				command = message;
-			}
-
-			if (comboBoxSerialPortLastCommands.FindString(command) >= 0)
-			{
-				// We have this command in the list
-				// TODO: put to top?
-			}
-			else
-			{
-				comboBoxSerialPortLastCommands.Items.Add(command);
-			}
-			
-		}
-
-
-
-		internal void CheckFwUpateMessageAndSend(string value)
-		{
-			if (InvokeRequired)
-			{
-				this.Invoke(new Action<string>(CheckFwUpateMessageAndSend), new object[] { value });
-				return;
-			}
-
-			if ( FwUpdateWaitMessage == true && fwUpdate != null)
-			{
-				if ( value.Contains("FWUP"))
-				{
-					fwUpdate.ReceivedAnMessage(value);
-				}
-			}
-		}
-
-
-
-		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			// Close event
-
-			// Close serial
-			serial.SerialPortComClose();
-
-			// Log closed
-			Log.SendEventLog("Application closed");
-			Log.SendErrorLog("Application closed");
-
-
-			if (NotifyIsEnabled)
-			{
-				// Notify close
-				notifyIconApplication.Visible = false;
-			}
-		}
-
-
-
-		private void timerFwUpdateActualSec_Tick(object sender, EventArgs e)
-		{
-			if (fwUpdate != null)
-			{
-				fwUpdate.ActualSecIncrease();
-
-				var span = new TimeSpan(0, 0, fwUpdate.ActualFwUpdateTimeSeconds); //Or TimeSpan.FromSeconds(seconds); (see Jakob C´s answer)
-				var actualTime = string.Format("{0}:{1:00}",
-								(int)span.TotalMinutes,
-								span.Seconds);
-
-				span = new TimeSpan(0, 0, fwUpdate.NeedFwUpdateTimeSeconds); //Or TimeSpan.FromSeconds(seconds); (see Jakob C´s answer)
-				var needlTime = string.Format("{0}:{1:00}",
-								(int)span.TotalMinutes,
-								span.Seconds);
-
-				AppendFwUpdateEndTime(actualTime + " / " + needlTime);
-			}
-		}
 
 		private void checkBoxSerialPortLog_CheckedChanged(object sender, EventArgs e)
 		{
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
 		}
+
 
 
 		/// <summary>
@@ -644,7 +461,7 @@ namespace FastenTerminal
 				char colorChar = escapeMessage[8];
 				switch (colorChar)
 				{
-						case '0':
+					case '0':
 						textColor = Color.Black;
 						break;
 					case '1':
@@ -670,18 +487,12 @@ namespace FastenTerminal
 						break;
 					default:
 						break;
-						
+
 				}
 			}
 
 			return textColor;
 
-		}
-
-		private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			// Copy clicked text to sending message text
-			textBoxSerialSendMessage.Text = (String)comboBoxSerialPortLastCommands.SelectedItem;
 		}
 
 
@@ -693,64 +504,55 @@ namespace FastenTerminal
 			if (e.KeyChar == (char)Keys.Return)
 			{
 				// Pressed enter
-				String searchText = textBoxSerialTextFind.Text;
-				int searchTextLength = textBoxSerialTextFind.Text.Length;
-				int startIndex = 0;
-
-				// Search in log, if not null text
-				if (searchTextLength > 0)
-				{
-					// Not null search string
-
-					// Search started flag: for TextChange event skipping
-					//isSearching = true;
-					this.richTextBoxSerialPortTexts.SelectionChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
-					this.richTextBoxSerialPortTexts.TextChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
-
-					// Find
-					// TODO: This is the First searched item...
-					//int result = richTextBoxSerialPortTexts.Find(searchText);
-
-					// Find
-					int result = 1;
-					while (( result = richTextBoxSerialPortTexts.Text.IndexOf(searchText, startIndex)) != -1)
-					{
-						// Founded a string
-
-						// Select founded string
-
-						richTextBoxSerialPortTexts.Select(result, searchTextLength);
-						richTextBoxSerialPortTexts.SelectionBackColor = Color.Yellow;
-
-						startIndex = result + searchTextLength;
-					}
-
-					// End of finding
-
-					// Search started flag: for TextChange event skipping
-					//isSearching = false;
-					this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
-					this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
-				}
+				FindText();
 			}
-				
 		}
 
 
-		/// <summary>
-		/// Notify on taskbar
-		/// </summary>
-		/// <param name="message"></param>
-		private void MessageForUser(String message)
+
+		private void FindText()
 		{
-			if (NotifyIsEnabled)
+			String searchText = textBoxSerialTextFind.Text;
+			int searchTextLength = textBoxSerialTextFind.Text.Length;
+			int startIndex = 0;
+
+			// Search in log, if not null text
+			if (searchTextLength > 0)
 			{
-				notifyIconApplication.BalloonTipText = message;
-				//notifyIconForParent.Text = message;   // Ikon neve
-				notifyIconApplication.BalloonTipTitle = "FastenTerminal";
-				notifyIconApplication.ShowBalloonTip(1000);
+				// Not null search string
+
+				// Search started flag: for TextChange event skipping
+				//isSearching = true;
+				this.richTextBoxSerialPortTexts.SelectionChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
+				this.richTextBoxSerialPortTexts.TextChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
+
+				// Find
+				// TODO: This is the First searched item...
+				//int result = richTextBoxSerialPortTexts.Find(searchText);
+
+				// Find
+				int result = 1;
+				while ((result = richTextBoxSerialPortTexts.Text.IndexOf(searchText, startIndex)) != -1)
+				{
+					// Founded a string
+
+					// Select founded string
+
+					richTextBoxSerialPortTexts.Select(result, searchTextLength);
+					richTextBoxSerialPortTexts.SelectionBackColor = Color.Yellow;
+
+					startIndex = result + searchTextLength;
+				}
+
+				// End of finding
+
+				// Search started flag: for TextChange event skipping
+				//isSearching = false;
+				this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
+				this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
 			}
 		}
+
 
 
 		private void checkBoxSerialHex_CheckStateChanged(object sender, EventArgs e)
@@ -761,13 +563,182 @@ namespace FastenTerminal
 
 
 
+		private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
+		{
+
+			Log.SendErrorLog("Serial: Error received");
+
+		}
+
+
+
+		private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
+		{
+			// Clicked Serial - Period sending start-stop button
+
+			if (serial.PeriodSendingEnable)
+			{
+				// Now, enabled, so need to stop
+				serial.PeriodSendingStop();
+
+				buttonSerialPeriodSendingStart.Text = "Start";
+			}
+			else
+			{
+				// Now disabled, need to be enabling & starting
+
+				// Has opened port?
+				if (serial.isOpenedPort)
+				{
+					// Has opened port
+					serial.PeriodSendingStart(numericUpDownSerialPeriodSendingTime.Value,
+						textBoxPeriodSendingMessage.Text);
+
+					buttonSerialPeriodSendingStart.Text = "Stop";
+				}
+				else
+				{
+					string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
+					AppendTextSerialData(logMessage);
+					Log.SendEventLog(logMessage);
+				}
+			}
+		}
+
+
+
+		private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
+		{
+			// Need to log with DateTime?
+			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
+		}
+
+
+
+		private void checkSerialAppendPerRPerN_CheckedChanged(object sender, EventArgs e)
+		{
+			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
+		}
+
+
+
+		private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			// Copy clicked text to sending message text
+			textBoxSerialSendMessage.Text = (String)comboBoxSerialPortLastCommands.SelectedItem;
+		}
+
+
+
+		//////////////////////////////
+		//		Favourite commands
+		//////////////////////////////
+
+
+		public void LoadCommandsToButtons()
+		{
+			List<Command> commandList = command.GetCommands();
+
+			commandListOnButtons = new List<Button>();
+
+			// Add buttons to Command buttons list
+			commandListOnButtons.Add(buttonCommand1);
+			commandListOnButtons.Add(buttonCommand2);
+			commandListOnButtons.Add(buttonCommand3);
+			commandListOnButtons.Add(buttonCommand4);
+			commandListOnButtons.Add(buttonCommand5);
+
+			int i = 0;
+			foreach (var item in commandList)
+			{
+				// Step on buttons
+				commandListOnButtons[i].Text = item.CommandName;
+				i++;
+				if (i >= commandListOnButtons.Count)
+				{
+					break;
+				}
+			}
+			
+		}
+
+
+
+		private void LoadMessageHeaders()
+		{
+			// Add message headers
+			comboBoxSerialHeaderType.Items.Add("!");
+			comboBoxSerialHeaderType.Items.Add("BxPgHeader");
+		}
+
+
+
+		public void LoadCommandsToSetting()
+		{
+			// Load favourite commands to Settings -> FavCommands dataGridView
+
+			// Mode 1
+			dataGridViewSettingsFavCommands.AutoGenerateColumns = true;
+			commandList = command.GetCommands();
+			dataGridViewSettingsFavCommands.DataSource = commandList;
+			dataGridViewSettingsFavCommands.Refresh();
+		}
+
+
+
+		private void buttonCommand1_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text);
+		}
+
+		private void buttonCommand2_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text);
+		}
+
+		private void buttonCommand3_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text);
+		}
+
+		private void buttonCommand4_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text);
+		}
+
+		private void buttonCommand5_Click(object sender, EventArgs e)
+		{
+			command.SendCommand(((Button)sender).Text);
+		}
+
+
+
+		private void SerialAddLastCommand(String message)
+		{
+			String command = "";
+			
+			// Copy
+			command = message;
+
+			if (comboBoxSerialPortLastCommands.FindString(command) >= 0)
+			{
+				// We have this command in the list
+				// TODO: put to top?
+			}
+			else
+			{
+				comboBoxSerialPortLastCommands.Items.Add(command);
+			}
+			
+		}
+
+
+
 		////////////////////////////////
-		// Calculator
+		//		Calculator
 		////////////////////////////////
 
-		String decimalString;
-		String hexadecimalString;
-		String binaryString;
+
 
 		private void textBoxCalculatorDec_KeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -785,59 +756,6 @@ namespace FastenTerminal
 		}
 
 
-		////////////////////////////////////////////////////////////////////////////
-
-
-		private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
-		{
-
-			Log.SendErrorLog("Serial: Error received");
-
-		}
-
-		private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
-		{
-			// Clicked Serial - Period sending start-stop button
-
-			if(serial.PeriodSendingEnable)
-			{
-				// Now, enabled, so need to stop
-				serial.PeriodSendingStop();
-
-				buttonSerialPeriodSendingStart.Text = "Start";
-			}
-			else
-			{
-				// Now disabled, need to be enabling & starting
-
-				// Has opened port?
-				if(serial.isOpenedPort)
-				{
-					// Has opened port
-				serial.PeriodSendingStart(numericUpDownSerialPeriodSendingTime.Value,
-					textBoxPeriodSendingMessage.Text);
-
-				buttonSerialPeriodSendingStart.Text = "Stop";
-				}
-				else
-				{
-					string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
-					AppendTextSerialData(logMessage);
-					Log.SendEventLog(logMessage);
-				}
-			}
-		}
-
-		private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
-		{
-			// Need to log with DateTime?
-			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
-		}
-
-		private void checkSerialAppendPerRPerN_CheckedChanged(object sender, EventArgs e)
-		{
-			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
-		}
 
 		private void textBoxCalculatorHex_KeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -853,6 +771,8 @@ namespace FastenTerminal
 				textBoxCalculatorBin.Text = binaryString;
 			}
 		}
+
+
 
 		private void textBoxCalculatorBin_KeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -870,5 +790,11 @@ namespace FastenTerminal
 		}
 
 
-	}	// End of class
+		////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	}   // End of class
 }	// End of namespace
