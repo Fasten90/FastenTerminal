@@ -1,6 +1,6 @@
 ﻿namespace FastenTerminal
 {
-    partial class FastenTerminal
+    partial class FormFastenTerminal
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFastenTerminal));
 			this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
 			this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
 			this.buttonClearSerialTexts = new System.Windows.Forms.Button();
@@ -646,7 +647,7 @@
 			this.buttonSerialPortSend.UseVisualStyleBackColor = true;
 			this.buttonSerialPortSend.Click += new System.EventHandler(this.buttonSerialPortSend_Click);
 			// 
-			// FastenTerminal
+			// FormFastenTerminal
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -660,8 +661,9 @@
 			this.Controls.Add(this.buttonClearSerialTexts);
 			this.Controls.Add(this.labelConstTextSearching);
 			this.Controls.Add(this.textBoxSerialTextFind);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(600, 485);
-			this.Name = "FastenTerminal";
+			this.Name = "FormFastenTerminal";
 			this.Text = "FastenTerminal";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FastenTerminal_FormClosing);
 			this.Load += new System.EventHandler(this.FormFastenTerminalMain_Load);

@@ -16,7 +16,7 @@ namespace FastenTerminal
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FastenTerminal());
+            Application.Run(new FormFastenTerminal());
         }
     }
 }

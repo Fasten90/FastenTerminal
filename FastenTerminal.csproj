@@ -55,8 +55,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>FastenTerminalIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>052973D54CE586063CE074AF96C98621528AA4C9</ManifestCertificateThumbprint>
@@ -88,18 +87,18 @@
     <Compile Include="Common.cs" />
     <Compile Include="SerialLog.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="FastenTerminal.cs">
+    <Compile Include="FormFastenTerminal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FastenTerminal.Designer.cs">
-      <DependentUpon>FastenTerminal.cs</DependentUpon>
+    <Compile Include="FormFastenTerminal.Designer.cs">
+      <DependentUpon>FormFastenTerminal.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serial.cs" />
     <Compile Include="XmlSerialization.cs" />
-    <EmbeddedResource Include="FastenTerminal.resx">
-      <DependentUpon>FastenTerminal.cs</DependentUpon>
+    <EmbeddedResource Include="FormFastenTerminal.resx">
+      <DependentUpon>FormFastenTerminal.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -142,6 +141,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FastenTerminalIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

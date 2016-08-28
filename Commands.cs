@@ -44,7 +44,7 @@ namespace FastenTerminal
 	{
 		public CommandConfigs CommandConfig;
 
-		private FastenTerminal form;
+		private FormFastenTerminal form;
 
 
 		// Configs
@@ -52,7 +52,7 @@ namespace FastenTerminal
 
 
 		// TODO: szebb megoldás a formra átadás helyett?
-		public CommandHandler(FastenTerminal form)
+		public CommandHandler(FormFastenTerminal form)
 		{
 			this.form = form;
 

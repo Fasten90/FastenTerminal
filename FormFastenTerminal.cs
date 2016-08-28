@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace FastenTerminal
 {
-    public partial class FastenTerminal : Form
+    public partial class FormFastenTerminal : Form
     {
 		// Configs:
 		public bool NotifyIsEnabled = false;
@@ -50,7 +50,7 @@ namespace FastenTerminal
 		String binaryString;
 
 
-		public FastenTerminal()
+		public FormFastenTerminal()
         {
             InitializeComponent();
         }

@@ -58,11 +58,11 @@ namespace FastenTerminal
 
 
 
-		private FastenTerminal form;
+		private FormFastenTerminal form;
 
 
 
-		public Serial(System.IO.Ports.SerialPort serial, FastenTerminal form)
+		public Serial(System.IO.Ports.SerialPort serial, FormFastenTerminal form)
 		{
 			this.serial = serial;
 
