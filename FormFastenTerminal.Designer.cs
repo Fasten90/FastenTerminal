@@ -254,7 +254,9 @@
 			this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
 			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
             "115200",
-            "9600"});
+            "2400",
+            "9600",
+            "57600"});
 			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(6, 35);
 			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
 			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);

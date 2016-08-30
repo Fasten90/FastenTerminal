@@ -94,6 +94,7 @@ namespace FastenTerminal
 			// Close event
 
 			// Close serial
+			serial.needPrint = false;
 			serial.SerialPortComClose();
 
 			// Log closed

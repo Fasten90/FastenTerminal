@@ -57,8 +57,11 @@ namespace FastenTerminal
 		private Object serialMessageLock = new Object();
 
 
-
 		private FormFastenTerminal form;
+
+		// For secure closing
+		public bool needPrint = true;
+
 
 
 
@@ -148,7 +151,10 @@ namespace FastenTerminal
 			}
 
 			String message = "[Application] Closed Serial port";
-			form.AppendTextSerialLogData(message);
+			if(needPrint)
+			{
+				form.AppendTextSerialLogData(message);
+			}
 			Log.SendEventLog(message);
 
 			stateInfo = "Closed";

@@ -3078,3 +3078,152 @@
 2016-08-28 21:26:04	 EventLog has been started.
 2016-08-28 21:26:04	 CommandConfigs.xml has loaded.
 2016-08-28 21:26:26	 Application closed
+2016-08-30 20:45:45	 EventLog has been started.
+2016-08-30 20:45:45	 CommandConfigs.xml has loaded.
+2016-08-30 20:47:18	 [Application] Successful open serial port. COM8 57600
+
+2016-08-30 20:47:23	 [Application] Closed Serial port
+2016-08-30 20:47:36	 [Application] Successful open serial port. COM8 115200
+
+2016-08-30 20:52:42	 [Application] Successful sent message	help
+
+
+2016-08-30 20:53:53	 Application closed
+2016-08-30 21:01:48	 EventLog has been started.
+2016-08-30 21:01:48	 CommandConfigs.xml has loaded.
+2016-08-30 21:02:51	 [Application] Successful open serial port. COM8 115200
+
+2016-08-30 21:02:54	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:56	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:57	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:57	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:58	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:58	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:59	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:59	 [Application] Successful sent message	help
+
+
+2016-08-30 21:02:59	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:01	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:02	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:03	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:04	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:05	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:06	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:06	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:06	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:06	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:06	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:07	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:08	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:08	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:08	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:08	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:08	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:08	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:08	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:09	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:10	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:11	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:13	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:14	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:15	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:16	 [Application] Successful sent message	help
+
+
+2016-08-30 21:03:23	 Application closed
+2016-08-30 21:03:23	 [Application] Closed Serial port
