@@ -107,7 +107,7 @@
 			this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
 			this.buttonClearSerialTexts.Size = new System.Drawing.Size(90, 23);
 			this.buttonClearSerialTexts.TabIndex = 36;
-			this.buttonClearSerialTexts.Text = "Képernyő törlés";
+			this.buttonClearSerialTexts.Text = "Clear screen";
 			this.buttonClearSerialTexts.UseVisualStyleBackColor = true;
 			this.buttonClearSerialTexts.Click += new System.EventHandler(this.buttonClearSerialTexts_Click);
 			// 
@@ -117,9 +117,9 @@
 			this.labelConstTextSearching.AutoSize = true;
 			this.labelConstTextSearching.Location = new System.Drawing.Point(540, 7);
 			this.labelConstTextSearching.Name = "labelConstTextSearching";
-			this.labelConstTextSearching.Size = new System.Drawing.Size(48, 13);
+			this.labelConstTextSearching.Size = new System.Drawing.Size(44, 13);
 			this.labelConstTextSearching.TabIndex = 33;
-			this.labelConstTextSearching.Text = "Keresés:";
+			this.labelConstTextSearching.Text = "Search:";
 			// 
 			// textBoxSerialTextFind
 			// 
@@ -173,7 +173,7 @@
 			this.tabPageSerialCommunicationSettings.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialCommunicationSettings.TabIndex = 3;
-			this.tabPageSerialCommunicationSettings.Text = "Konfiguráció";
+			this.tabPageSerialCommunicationSettings.Text = "Configuration";
 			this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSerialAppendPerRPerN
@@ -194,15 +194,14 @@
 			this.checkBoxLogWithDateTime.AutoSize = true;
 			this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 85);
 			this.checkBoxLogWithDateTime.Name = "checkBoxLogWithDateTime";
-			this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(111, 17);
+			this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(90, 17);
 			this.checkBoxLogWithDateTime.TabIndex = 38;
-			this.checkBoxLogWithDateTime.Text = "Logolás dátummal";
+			this.checkBoxLogWithDateTime.Text = "Log with date";
 			this.checkBoxLogWithDateTime.UseVisualStyleBackColor = true;
 			this.checkBoxLogWithDateTime.CheckedChanged += new System.EventHandler(this.checkBoxLogWithDateTime_CheckedChanged);
 			// 
 			// checkBoxSerialHex
 			// 
-			this.checkBoxSerialHex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialHex.AutoSize = true;
 			this.checkBoxSerialHex.Location = new System.Drawing.Point(6, 177);
 			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
@@ -230,21 +229,20 @@
 			this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
 			this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
 			this.buttonSerialPortOpen.TabIndex = 1;
-			this.buttonSerialPortOpen.Text = "Port nyitás";
+			this.buttonSerialPortOpen.Text = "Port open";
 			this.buttonSerialPortOpen.UseVisualStyleBackColor = true;
 			this.buttonSerialPortOpen.Click += new System.EventHandler(this.buttonSerialPortOpen_Click);
 			// 
 			// checkBoxSerialPortLog
 			// 
-			this.checkBoxSerialPortLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialPortLog.AutoSize = true;
 			this.checkBoxSerialPortLog.Checked = true;
 			this.checkBoxSerialPortLog.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBoxSerialPortLog.Location = new System.Drawing.Point(6, 62);
 			this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
-			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(91, 17);
+			this.checkBoxSerialPortLog.Size = new System.Drawing.Size(72, 17);
 			this.checkBoxSerialPortLog.TabIndex = 2;
-			this.checkBoxSerialPortLog.Text = "Logolás fájlba";
+			this.checkBoxSerialPortLog.Text = "Log to file";
 			this.checkBoxSerialPortLog.UseVisualStyleBackColor = true;
 			this.checkBoxSerialPortLog.CheckedChanged += new System.EventHandler(this.checkBoxSerialPortLog_CheckedChanged);
 			// 
@@ -271,45 +269,42 @@
 			this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
 			this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
 			this.buttonSerialPortRefresh.TabIndex = 8;
-			this.buttonSerialPortRefresh.Text = "Port Frissítés";
+			this.buttonSerialPortRefresh.Text = "Port Refresh";
 			this.buttonSerialPortRefresh.UseVisualStyleBackColor = true;
 			this.buttonSerialPortRefresh.Click += new System.EventHandler(this.buttonSerialPortRefresh_Click);
 			// 
 			// checkBoxSerialTextColouring
 			// 
-			this.checkBoxSerialTextColouring.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialTextColouring.AutoSize = true;
 			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(6, 154);
 			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
-			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(107, 17);
+			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(161, 17);
 			this.checkBoxSerialTextColouring.TabIndex = 31;
-			this.checkBoxSerialTextColouring.Text = "Szöveg színezés";
+			this.checkBoxSerialTextColouring.Text = "Text colouring (Escape seq.)";
 			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSerialPortScrollBottom
 			// 
-			this.checkBoxSerialPortScrollBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialPortScrollBottom.AutoSize = true;
 			this.checkBoxSerialPortScrollBottom.Checked = true;
 			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(6, 108);
 			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
-			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(78, 17);
+			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(66, 17);
 			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
-			this.checkBoxSerialPortScrollBottom.Text = "Legördülés";
+			this.checkBoxSerialPortScrollBottom.Text = "Scrolling";
 			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSerialCopySelected
 			// 
-			this.checkBoxSerialCopySelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxSerialCopySelected.AutoSize = true;
 			this.checkBoxSerialCopySelected.Checked = true;
 			this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 131);
 			this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
-			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(109, 17);
+			this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(137, 17);
 			this.checkBoxSerialCopySelected.TabIndex = 13;
-			this.checkBoxSerialCopySelected.Text = "Szöveg másolása";
+			this.checkBoxSerialCopySelected.Text = "Copy text with selecting";
 			this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
 			// 
 			// tabPageSerialCommands
@@ -327,7 +322,7 @@
 			this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialCommands.TabIndex = 0;
-			this.tabPageSerialCommands.Text = "Parancs";
+			this.tabPageSerialCommands.Text = "Commands";
 			this.tabPageSerialCommands.UseVisualStyleBackColor = true;
 			// 
 			// buttonCommand5
@@ -369,9 +364,9 @@
 			this.labelFavouriteCommands.AutoSize = true;
 			this.labelFavouriteCommands.Location = new System.Drawing.Point(3, 3);
 			this.labelFavouriteCommands.Name = "labelFavouriteCommands";
-			this.labelFavouriteCommands.Size = new System.Drawing.Size(106, 13);
+			this.labelFavouriteCommands.Size = new System.Drawing.Size(108, 13);
 			this.labelFavouriteCommands.TabIndex = 10;
-			this.labelFavouriteCommands.Text = "Kedvenc parancsok:";
+			this.labelFavouriteCommands.Text = "Favourite commands:";
 			// 
 			// comboBoxSerialPortLastCommands
 			// 
@@ -390,9 +385,9 @@
 			this.labelLastCommands.AutoSize = true;
 			this.labelLastCommands.Location = new System.Drawing.Point(3, 167);
 			this.labelLastCommands.Name = "labelLastCommands";
-			this.labelLastCommands.Size = new System.Drawing.Size(134, 13);
+			this.labelLastCommands.Size = new System.Drawing.Size(84, 13);
 			this.labelLastCommands.TabIndex = 9;
-			this.labelLastCommands.Text = "Utoljára kiadott parancsok:";
+			this.labelLastCommands.Text = "Last commands:";
 			// 
 			// buttonCommand1
 			// 
@@ -428,7 +423,7 @@
 			this.tabPageSerialPeriodSending.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialPeriodSending.TabIndex = 2;
-			this.tabPageSerialPeriodSending.Text = "Periodikus küldés";
+			this.tabPageSerialPeriodSending.Text = "Periodical sending";
 			this.tabPageSerialPeriodSending.UseVisualStyleBackColor = true;
 			// 
 			// labelSerialPeriodSendingConstTextMessage
@@ -437,9 +432,9 @@
 			this.labelSerialPeriodSendingConstTextMessage.AutoSize = true;
 			this.labelSerialPeriodSendingConstTextMessage.Location = new System.Drawing.Point(4, 47);
 			this.labelSerialPeriodSendingConstTextMessage.Name = "labelSerialPeriodSendingConstTextMessage";
-			this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(98, 13);
+			this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(97, 13);
 			this.labelSerialPeriodSendingConstTextMessage.TabIndex = 4;
-			this.labelSerialPeriodSendingConstTextMessage.Text = "Kiküldendő üzenet:";
+			this.labelSerialPeriodSendingConstTextMessage.Text = "Sending message::";
 			// 
 			// textBoxPeriodSendingMessage
 			// 
@@ -448,7 +443,7 @@
 			this.textBoxPeriodSendingMessage.Name = "textBoxPeriodSendingMessage";
 			this.textBoxPeriodSendingMessage.Size = new System.Drawing.Size(186, 20);
 			this.textBoxPeriodSendingMessage.TabIndex = 3;
-			this.textBoxPeriodSendingMessage.Text = "<Periodikusan kiküldendő üzenet>";
+			this.textBoxPeriodSendingMessage.Text = "<Periodical sending message>";
 			// 
 			// buttonSerialPeriodSendingStart
 			// 
@@ -467,9 +462,9 @@
 			this.labelSerialPeriodSendingConstText.AutoSize = true;
 			this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(3, 13);
 			this.labelSerialPeriodSendingConstText.Name = "labelSerialPeriodSendingConstText";
-			this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(63, 13);
+			this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(47, 13);
 			this.labelSerialPeriodSendingConstText.TabIndex = 1;
-			this.labelSerialPeriodSendingConstText.Text = "Másodperc:";
+			this.labelSerialPeriodSendingConstText.Text = "Second:";
 			// 
 			// numericUpDownSerialPeriodSendingTime
 			// 
@@ -492,7 +487,7 @@
 			this.tabPageCalculator.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPageCalculator.Size = new System.Drawing.Size(198, 318);
 			this.tabPageCalculator.TabIndex = 4;
-			this.tabPageCalculator.Text = "Számológép";
+			this.tabPageCalculator.Text = "Calculator";
 			this.tabPageCalculator.UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel1
@@ -521,9 +516,9 @@
 			this.labelConstCalculatorDec.AutoSize = true;
 			this.labelConstCalculatorDec.Location = new System.Drawing.Point(3, 0);
 			this.labelConstCalculatorDec.Name = "labelConstCalculatorDec";
-			this.labelConstCalculatorDec.Size = new System.Drawing.Size(52, 13);
+			this.labelConstCalculatorDec.Size = new System.Drawing.Size(45, 13);
 			this.labelConstCalculatorDec.TabIndex = 0;
-			this.labelConstCalculatorDec.Text = "Decimális";
+			this.labelConstCalculatorDec.Text = "Decimal";
 			this.labelConstCalculatorDec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// labelConstCalculatorBinary
@@ -531,9 +526,9 @@
 			this.labelConstCalculatorBinary.AutoSize = true;
 			this.labelConstCalculatorBinary.Location = new System.Drawing.Point(3, 56);
 			this.labelConstCalculatorBinary.Name = "labelConstCalculatorBinary";
-			this.labelConstCalculatorBinary.Size = new System.Drawing.Size(38, 13);
+			this.labelConstCalculatorBinary.Size = new System.Drawing.Size(36, 13);
 			this.labelConstCalculatorBinary.TabIndex = 2;
-			this.labelConstCalculatorBinary.Text = "Bináris";
+			this.labelConstCalculatorBinary.Text = "Binary";
 			// 
 			// textBoxCalculatorDec
 			// 
@@ -564,9 +559,9 @@
 			this.labelConstCalculatorHex.AutoSize = true;
 			this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 28);
 			this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
-			this.labelConstCalculatorHex.Size = new System.Drawing.Size(75, 13);
+			this.labelConstCalculatorHex.Size = new System.Drawing.Size(68, 13);
 			this.labelConstCalculatorHex.TabIndex = 1;
-			this.labelConstCalculatorHex.Text = "Hexadecimális";
+			this.labelConstCalculatorHex.Text = "Hexadecimal";
 			// 
 			// tabPageSerialCommandSettings
 			// 
@@ -577,7 +572,7 @@
 			this.tabPageSerialCommandSettings.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPageSerialCommandSettings.Size = new System.Drawing.Size(198, 318);
 			this.tabPageSerialCommandSettings.TabIndex = 5;
-			this.tabPageSerialCommandSettings.Text = "Parancsok szerkesztése";
+			this.tabPageSerialCommandSettings.Text = "Edit Commands";
 			this.tabPageSerialCommandSettings.UseVisualStyleBackColor = true;
 			// 
 			// labelConstSettingsFavCommandsText
@@ -585,9 +580,9 @@
 			this.labelConstSettingsFavCommandsText.AutoSize = true;
 			this.labelConstSettingsFavCommandsText.Location = new System.Drawing.Point(8, 7);
 			this.labelConstSettingsFavCommandsText.Name = "labelConstSettingsFavCommandsText";
-			this.labelConstSettingsFavCommandsText.Size = new System.Drawing.Size(106, 13);
+			this.labelConstSettingsFavCommandsText.Size = new System.Drawing.Size(108, 13);
 			this.labelConstSettingsFavCommandsText.TabIndex = 22;
-			this.labelConstSettingsFavCommandsText.Text = "Kedvenc parancsok:";
+			this.labelConstSettingsFavCommandsText.Text = "Favourite commands:";
 			// 
 			// dataGridViewSettingsFavCommands
 			// 
@@ -645,7 +640,7 @@
 			this.buttonSerialPortSend.Name = "buttonSerialPortSend";
 			this.buttonSerialPortSend.Size = new System.Drawing.Size(75, 23);
 			this.buttonSerialPortSend.TabIndex = 39;
-			this.buttonSerialPortSend.Text = "Küldés";
+			this.buttonSerialPortSend.Text = "Send";
 			this.buttonSerialPortSend.UseVisualStyleBackColor = true;
 			this.buttonSerialPortSend.Click += new System.EventHandler(this.buttonSerialPortSend_Click);
 			// 

@@ -190,7 +190,7 @@ namespace FastenTerminal
 				if (serial.SerialPortComOpen())
 				{
 					// Successful port opening
-					buttonSerialPortOpen.Text = "Port bezárása";
+					buttonSerialPortOpen.Text = "Port close";
 				}
 
 			}
@@ -198,7 +198,7 @@ namespace FastenTerminal
 			{
 				// If opened, close
 				serial.SerialPortComClose();
-				buttonSerialPortOpen.Text = "Port nyitás";
+				buttonSerialPortOpen.Text = "Port open";
 			}
 
 			// Refresh application name
@@ -682,7 +682,6 @@ namespace FastenTerminal
 		{
 			// Add message headers
 			comboBoxSerialHeaderType.Items.Add("!");
-			comboBoxSerialHeaderType.Items.Add("BxPgHeader");
 		}
 
 
