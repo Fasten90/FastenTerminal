@@ -14,14 +14,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="FastenTerminal.exe.manifest" size="3991">
+    <dependentAssembly dependencyType="install" codebase="FastenTerminal.exe.manifest" size="4394">
       <assemblyIdentity name="FastenTerminal.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="hu" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>aqcGES5qOgUm6HyWzkc/EGw1OYT8CyVyC/GIfwacev8=</dsig:DigestValue>
+        <dsig:DigestValue>CpsyZ8SbieiI05XOJLzmUjlejFv9YNgst5INyc91gGk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

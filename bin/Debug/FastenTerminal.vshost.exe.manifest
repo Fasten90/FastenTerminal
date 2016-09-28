@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
   <asmv1:assemblyIdentity name="FastenTerminal.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="hu" processorArchitecture="msil" type="win32" />
-  <description asmv2:iconFile="FastenTerminalIcon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <description asmv2:iconFile="FastenTerminalIcon2.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="FastenTerminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FastenTerminal.exe" size="144880">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FastenTerminal.exe" size="177648">
       <assemblyIdentity name="FastenTerminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lHeMTrJEdh0rGDjBA7FKSf8EgDi/j91sHDCMCn7Os9I=</dsig:DigestValue>
+        <dsig:DigestValue>ysRNKvpS1HI0YTjZ+1z8I41D/ogExzOaoYl5I1TyXKI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -70,6 +70,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>sBU8/8IX2cf5ZA6NaJrCCb0s9/CEC3nqSNLboYkG5pg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="FastenTerminalIcon2.ico" size="67646">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>c1Lo/KwbGa1yEL4oU9/VGDt4+TQ8SP4k/bOpb252N34=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
