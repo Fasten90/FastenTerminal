@@ -16,7 +16,7 @@ namespace FastenTerminal
 
 	public class SerialConfig
 	{
-
+		// TODO: implement this
 	}
 
 

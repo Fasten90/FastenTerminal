@@ -63,8 +63,11 @@ namespace FastenTerminal
 			// Load Serial
 			serial = new Serial(serialPortDevice, this);
 
+			// Serial config
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
+			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
+			
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
 
@@ -76,9 +79,6 @@ namespace FastenTerminal
 
 			LoadCommandsToSetting();
 
-
-			// Message Header type
-			LoadMessageHeaders();
 
 			// Notify
 			if (NotifyIsEnabled)
@@ -326,19 +326,6 @@ namespace FastenTerminal
 
 
 
-		private void textBoxSerialSendMessage_Enter(object sender, EventArgs e)
-		{
-			// Enter on SerialMessage TextBox
-			if (SerialMessageTextBoxEntered == false)
-			{
-				// Clear textbox at first time
-				textBoxSerialSendMessage.Clear();
-				SerialMessageTextBoxEntered = true;
-			}
-		}
-
-
-
 		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
 		{
 
@@ -399,10 +386,9 @@ namespace FastenTerminal
 
 					// TODO: show message? (notify, notification)
 				}
-
 			}
-
 		}
+
 
 
 		private void buttonSerialPortSend_Click(object sender, EventArgs e)
@@ -412,7 +398,7 @@ namespace FastenTerminal
 
 
 
-		private void textBoxSerialSendMessage_KeyPress(object sender, KeyPressEventArgs e)
+		private void comboBoxSerialSendMessage_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			// If pressed in "SendMessage textbox" enter --> Send the message
 			if (e.KeyChar == (char)Keys.Return)
@@ -420,24 +406,43 @@ namespace FastenTerminal
 				// If pressed enter
 				SerialMessageSending();
 			}
+		}
 
+
+
+		private void SerialMessageTextClearAndSave()
+		{
+			// Need clear text?
+			if (checkBoxSerialConfigClearSendMessageTextAfterSend.Checked)
+			{
+				// Clear text
+				comboBoxSerialSendingText.Text = "";
+			}
+		}
+
+
+
+		private void comboBoxSerialSendMessage_Enter(object sender, EventArgs e)
+		{
+			// Enter on SerialMessage TextBox
+			if (SerialMessageTextBoxEntered == false)
+			{
+				// Clear textbox at first time
+				comboBoxSerialSendingText.Text = "";
+				SerialMessageTextBoxEntered = true;
+			}
 		}
 
 
 
 		private void SerialMessageSending()
 		{
-			if (textBoxSerialSendMessage.Text != null)
+			if (comboBoxSerialSendingText.Text != null)
 			{
 				String message = "";
-				if (checkBoxSerialHeaderSending.Checked)
-				{
-					// Add header, if need
-					message += (String)comboBoxSerialHeaderType.SelectedItem;
-				}
 
 				// Append command text
-				message += textBoxSerialSendMessage.Text;
+				message += comboBoxSerialSendingText.Text;
 
 				// Successful or not successful
 				String messageResult = serial.SendMessage(message, true);
@@ -449,6 +454,8 @@ namespace FastenTerminal
 				//AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
 
 				SerialAddLastCommand(message);
+
+				SerialMessageTextClearAndSave();
 			}
 		}
 
@@ -639,7 +646,7 @@ namespace FastenTerminal
 		private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			// Copy clicked text to sending message text
-			textBoxSerialSendMessage.Text = (String)comboBoxSerialPortLastCommands.SelectedItem;
+			comboBoxSerialSendingText.Text = (String)comboBoxSerialSendingText.SelectedItem;
 		}
 
 
@@ -674,14 +681,6 @@ namespace FastenTerminal
 				}
 			}
 			
-		}
-
-
-
-		private void LoadMessageHeaders()
-		{
-			// Add message headers
-			comboBoxSerialHeaderType.Items.Add("!");
 		}
 
 
@@ -733,14 +732,14 @@ namespace FastenTerminal
 			// Copy
 			command = message;
 
-			if (comboBoxSerialPortLastCommands.FindString(command) >= 0)
+			if (comboBoxSerialSendingText.FindString(command) >= 0)
 			{
 				// We have this command in the list
 				// TODO: put to top?
 			}
 			else
 			{
-				comboBoxSerialPortLastCommands.Items.Add(command);
+				comboBoxSerialSendingText.Items.Add(command);
 			}
 			
 		}
@@ -800,6 +799,12 @@ namespace FastenTerminal
 				textBoxCalculatorHex.Text = hexadecimalString;
 				textBoxCalculatorBin.Text = binaryString;
 			}
+		}
+
+		private void checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
+		{
+			// Do nothing
+
 		}
 
 

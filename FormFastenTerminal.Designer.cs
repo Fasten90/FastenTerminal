@@ -35,7 +35,6 @@
 			this.buttonClearSerialTexts = new System.Windows.Forms.Button();
 			this.labelConstTextSearching = new System.Windows.Forms.Label();
 			this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
-			this.comboBoxSerialHeaderType = new System.Windows.Forms.ComboBox();
 			this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
 			this.tabPageSerialCommunicationSettings = new System.Windows.Forms.TabPage();
 			this.checkBoxSerialAppendPerRPerN = new System.Windows.Forms.CheckBox();
@@ -54,8 +53,6 @@
 			this.buttonCommand4 = new System.Windows.Forms.Button();
 			this.buttonCommand3 = new System.Windows.Forms.Button();
 			this.labelFavouriteCommands = new System.Windows.Forms.Label();
-			this.comboBoxSerialPortLastCommands = new System.Windows.Forms.ComboBox();
-			this.labelLastCommands = new System.Windows.Forms.Label();
 			this.buttonCommand1 = new System.Windows.Forms.Button();
 			this.buttonCommand2 = new System.Windows.Forms.Button();
 			this.tabPageSerialPeriodSending = new System.Windows.Forms.TabPage();
@@ -75,10 +72,10 @@
 			this.tabPageSerialCommandSettings = new System.Windows.Forms.TabPage();
 			this.labelConstSettingsFavCommandsText = new System.Windows.Forms.Label();
 			this.dataGridViewSettingsFavCommands = new System.Windows.Forms.DataGridView();
-			this.textBoxSerialSendMessage = new System.Windows.Forms.TextBox();
 			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
-			this.checkBoxSerialHeaderSending = new System.Windows.Forms.CheckBox();
 			this.buttonSerialPortSend = new System.Windows.Forms.Button();
+			this.comboBoxSerialSendingText = new System.Windows.Forms.ComboBox();
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend = new System.Windows.Forms.CheckBox();
 			this.tabControlSerialFunctions.SuspendLayout();
 			this.tabPageSerialCommunicationSettings.SuspendLayout();
 			this.tabPageSerialCommands.SuspendLayout();
@@ -130,15 +127,6 @@
 			this.textBoxSerialTextFind.TabIndex = 32;
 			this.textBoxSerialTextFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialTextFind_KeyPress);
 			// 
-			// comboBoxSerialHeaderType
-			// 
-			this.comboBoxSerialHeaderType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.comboBoxSerialHeaderType.FormattingEnabled = true;
-			this.comboBoxSerialHeaderType.Location = new System.Drawing.Point(3, 418);
-			this.comboBoxSerialHeaderType.Name = "comboBoxSerialHeaderType";
-			this.comboBoxSerialHeaderType.Size = new System.Drawing.Size(79, 21);
-			this.comboBoxSerialHeaderType.TabIndex = 42;
-			// 
 			// tabControlSerialFunctions
 			// 
 			this.tabControlSerialFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -157,6 +145,7 @@
 			// 
 			// tabPageSerialCommunicationSettings
 			// 
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialConfigClearSendMessageTextAfterSend);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialAppendPerRPerN);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogWithDateTime);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialHex);
@@ -192,6 +181,8 @@
 			// checkBoxLogWithDateTime
 			// 
 			this.checkBoxLogWithDateTime.AutoSize = true;
+			this.checkBoxLogWithDateTime.Checked = true;
+			this.checkBoxLogWithDateTime.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 85);
 			this.checkBoxLogWithDateTime.Name = "checkBoxLogWithDateTime";
 			this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(90, 17);
@@ -213,7 +204,6 @@
 			// 
 			// comboBoxSerialPortCOM
 			// 
-			this.comboBoxSerialPortCOM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSerialPortCOM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxSerialPortCOM.FormattingEnabled = true;
 			this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(6, 6);
@@ -224,7 +214,6 @@
 			// 
 			// buttonSerialPortOpen
 			// 
-			this.buttonSerialPortOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSerialPortOpen.Location = new System.Drawing.Point(102, 35);
 			this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
 			this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
@@ -248,7 +237,6 @@
 			// 
 			// comboBoxSerialPortBaudrate
 			// 
-			this.comboBoxSerialPortBaudrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
 			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
             "115200",
@@ -264,7 +252,6 @@
 			// 
 			// buttonSerialPortRefresh
 			// 
-			this.buttonSerialPortRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSerialPortRefresh.Location = new System.Drawing.Point(102, 6);
 			this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
 			this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
@@ -313,8 +300,6 @@
 			this.tabPageSerialCommands.Controls.Add(this.buttonCommand4);
 			this.tabPageSerialCommands.Controls.Add(this.buttonCommand3);
 			this.tabPageSerialCommands.Controls.Add(this.labelFavouriteCommands);
-			this.tabPageSerialCommands.Controls.Add(this.comboBoxSerialPortLastCommands);
-			this.tabPageSerialCommands.Controls.Add(this.labelLastCommands);
 			this.tabPageSerialCommands.Controls.Add(this.buttonCommand1);
 			this.tabPageSerialCommands.Controls.Add(this.buttonCommand2);
 			this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 58);
@@ -367,27 +352,6 @@
 			this.labelFavouriteCommands.Size = new System.Drawing.Size(108, 13);
 			this.labelFavouriteCommands.TabIndex = 10;
 			this.labelFavouriteCommands.Text = "Favourite commands:";
-			// 
-			// comboBoxSerialPortLastCommands
-			// 
-			this.comboBoxSerialPortLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxSerialPortLastCommands.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxSerialPortLastCommands.FormattingEnabled = true;
-			this.comboBoxSerialPortLastCommands.Location = new System.Drawing.Point(6, 183);
-			this.comboBoxSerialPortLastCommands.Name = "comboBoxSerialPortLastCommands";
-			this.comboBoxSerialPortLastCommands.Size = new System.Drawing.Size(103, 21);
-			this.comboBoxSerialPortLastCommands.TabIndex = 7;
-			this.comboBoxSerialPortLastCommands.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortLastCommands_SelectedIndexChanged);
-			// 
-			// labelLastCommands
-			// 
-			this.labelLastCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelLastCommands.AutoSize = true;
-			this.labelLastCommands.Location = new System.Drawing.Point(3, 167);
-			this.labelLastCommands.Name = "labelLastCommands";
-			this.labelLastCommands.Size = new System.Drawing.Size(84, 13);
-			this.labelLastCommands.TabIndex = 9;
-			this.labelLastCommands.Text = "Last commands:";
 			// 
 			// buttonCommand1
 			// 
@@ -594,19 +558,6 @@
 			this.dataGridViewSettingsFavCommands.Size = new System.Drawing.Size(192, 292);
 			this.dataGridViewSettingsFavCommands.TabIndex = 21;
 			// 
-			// textBoxSerialSendMessage
-			// 
-			this.textBoxSerialSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxSerialSendMessage.Location = new System.Drawing.Point(109, 418);
-			this.textBoxSerialSendMessage.MaxLength = 256;
-			this.textBoxSerialSendMessage.Name = "textBoxSerialSendMessage";
-			this.textBoxSerialSendMessage.Size = new System.Drawing.Size(344, 20);
-			this.textBoxSerialSendMessage.TabIndex = 38;
-			this.textBoxSerialSendMessage.Text = "<Sending message with \\r\\n>";
-			this.textBoxSerialSendMessage.Enter += new System.EventHandler(this.textBoxSerialSendMessage_Enter);
-			this.textBoxSerialSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialSendMessage_KeyPress);
-			// 
 			// richTextBoxSerialPortTexts
 			// 
 			this.richTextBoxSerialPortTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -623,16 +574,6 @@
 			this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
 			this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
 			// 
-			// checkBoxSerialHeaderSending
-			// 
-			this.checkBoxSerialHeaderSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkBoxSerialHeaderSending.AutoSize = true;
-			this.checkBoxSerialHeaderSending.Location = new System.Drawing.Point(88, 421);
-			this.checkBoxSerialHeaderSending.Name = "checkBoxSerialHeaderSending";
-			this.checkBoxSerialHeaderSending.Size = new System.Drawing.Size(15, 14);
-			this.checkBoxSerialHeaderSending.TabIndex = 40;
-			this.checkBoxSerialHeaderSending.UseVisualStyleBackColor = true;
-			// 
 			// buttonSerialPortSend
 			// 
 			this.buttonSerialPortSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -644,16 +585,38 @@
 			this.buttonSerialPortSend.UseVisualStyleBackColor = true;
 			this.buttonSerialPortSend.Click += new System.EventHandler(this.buttonSerialPortSend_Click);
 			// 
+			// comboBoxSerialSendingText
+			// 
+			this.comboBoxSerialSendingText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxSerialSendingText.FormattingEnabled = true;
+			this.comboBoxSerialSendingText.Location = new System.Drawing.Point(3, 418);
+			this.comboBoxSerialSendingText.Name = "comboBoxSerialSendingText";
+			this.comboBoxSerialSendingText.Size = new System.Drawing.Size(450, 21);
+			this.comboBoxSerialSendingText.TabIndex = 42;
+			this.comboBoxSerialSendingText.Text = "<Sending message with \\r\\n>";
+			this.comboBoxSerialSendingText.Enter += new System.EventHandler(this.comboBoxSerialSendMessage_Enter);
+			this.comboBoxSerialSendingText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSerialSendMessage_KeyPress);
+			// 
+			// checkBoxSerialConfigClearSendMessageTextAfterSend
+			// 
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.AutoSize = true;
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(4, 225);
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Name = "checkBoxSerialConfigClearSendMessageTextAfterSend";
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Size = new System.Drawing.Size(100, 17);
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.TabIndex = 40;
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Text = "Clear after send";
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.UseVisualStyleBackColor = true;
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.CheckedChanged += new System.EventHandler(this.checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged);
+			// 
 			// FormFastenTerminal
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(758, 447);
-			this.Controls.Add(this.comboBoxSerialHeaderType);
+			this.Controls.Add(this.comboBoxSerialSendingText);
 			this.Controls.Add(this.tabControlSerialFunctions);
-			this.Controls.Add(this.textBoxSerialSendMessage);
 			this.Controls.Add(this.richTextBoxSerialPortTexts);
-			this.Controls.Add(this.checkBoxSerialHeaderSending);
 			this.Controls.Add(this.buttonSerialPortSend);
 			this.Controls.Add(this.buttonClearSerialTexts);
 			this.Controls.Add(this.labelConstTextSearching);
@@ -691,15 +654,12 @@
 		private System.Windows.Forms.Button buttonClearSerialTexts;
 		private System.Windows.Forms.Label labelConstTextSearching;
 		private System.Windows.Forms.TextBox textBoxSerialTextFind;
-		private System.Windows.Forms.ComboBox comboBoxSerialHeaderType;
 		private System.Windows.Forms.TabControl tabControlSerialFunctions;
 		private System.Windows.Forms.TabPage tabPageSerialCommands;
 		private System.Windows.Forms.Button buttonCommand5;
 		private System.Windows.Forms.Button buttonCommand4;
 		private System.Windows.Forms.Button buttonCommand3;
 		private System.Windows.Forms.Label labelFavouriteCommands;
-		private System.Windows.Forms.ComboBox comboBoxSerialPortLastCommands;
-		private System.Windows.Forms.Label labelLastCommands;
 		private System.Windows.Forms.Button buttonCommand1;
 		private System.Windows.Forms.Button buttonCommand2;
 		private System.Windows.Forms.TabPage tabPageSerialPeriodSending;
@@ -724,9 +684,7 @@
 		private System.Windows.Forms.TabPage tabPageSerialCommandSettings;
 		private System.Windows.Forms.Label labelConstSettingsFavCommandsText;
 		private System.Windows.Forms.DataGridView dataGridViewSettingsFavCommands;
-		private System.Windows.Forms.TextBox textBoxSerialSendMessage;
 		private System.Windows.Forms.RichTextBox richTextBoxSerialPortTexts;
-		private System.Windows.Forms.CheckBox checkBoxSerialHeaderSending;
 		private System.Windows.Forms.Button buttonSerialPortSend;
 		private System.Windows.Forms.Button buttonSerialPeriodSendingStart;
 		private System.Windows.Forms.Label labelSerialPeriodSendingConstText;
@@ -735,6 +693,8 @@
 		private System.Windows.Forms.Label labelSerialPeriodSendingConstTextMessage;
 		private System.Windows.Forms.CheckBox checkBoxLogWithDateTime;
 		private System.Windows.Forms.CheckBox checkBoxSerialAppendPerRPerN;
-    }
+		private System.Windows.Forms.ComboBox comboBoxSerialSendingText;
+		private System.Windows.Forms.CheckBox checkBoxSerialConfigClearSendMessageTextAfterSend;
+	}
 }
 
