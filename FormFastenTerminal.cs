@@ -28,13 +28,11 @@ namespace FastenTerminal
 
 		public Serial serial;
 
-		public CommandHandler command;
-
-		List<Button> commandListOnButtons;
+		public FavouriteCommandHandler favouriteCommands;
 
 		//public BindingSource commandList;
 		public List<Command> commandList;
-
+		public BindingList<Command> commandBindingList;
 
 		public bool FwUpdateWaitMessage;
 
@@ -74,10 +72,9 @@ namespace FastenTerminal
 			SerialRefresh();
 
 			// Load commands
-			command = new CommandHandler(this);
-			LoadCommandsToButtons();
+			favouriteCommands = new FavouriteCommandHandler(this);
 
-			LoadCommandsToSetting();
+			LoadFavouriteCommands();
 
 
 			// Notify
@@ -446,7 +443,7 @@ namespace FastenTerminal
 
 				// Successful or not successful
 				String messageResult = serial.SendMessage(message, true);
-				Log.SendEventLog(messageResult);
+				Log.SendEventLog(messageResult);	// TODO: Biztos kell ez?
 				//AppendTextSerialData(messageResult);
 
 				// The message
@@ -461,10 +458,16 @@ namespace FastenTerminal
 
 
 
-
 		private void checkBoxSerialPortLog_CheckedChanged(object sender, EventArgs e)
 		{
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
+		}
+
+
+
+		private void checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
+		{
+			// Do nothing
 		}
 
 
@@ -656,71 +659,26 @@ namespace FastenTerminal
 		//////////////////////////////
 
 
-		public void LoadCommandsToButtons()
-		{
-			List<Command> commandList = command.GetCommands();
-
-			commandListOnButtons = new List<Button>();
-
-			// Add buttons to Command buttons list
-			commandListOnButtons.Add(buttonCommand1);
-			commandListOnButtons.Add(buttonCommand2);
-			commandListOnButtons.Add(buttonCommand3);
-			commandListOnButtons.Add(buttonCommand4);
-			commandListOnButtons.Add(buttonCommand5);
-
-			int i = 0;
-			foreach (var item in commandList)
-			{
-				// Step on buttons
-				commandListOnButtons[i].Text = item.CommandName;
-				i++;
-				if (i >= commandListOnButtons.Count)
-				{
-					break;
-				}
-			}
-			
-		}
-
-
-
-		public void LoadCommandsToSetting()
+		public void LoadFavouriteCommands()
 		{
 			// Load favourite commands to Settings -> FavCommands dataGridView
 
 			// Mode 1
-			dataGridViewSettingsFavCommands.AutoGenerateColumns = true;
-			commandList = command.GetCommands();
-			dataGridViewSettingsFavCommands.DataSource = commandList;
-			dataGridViewSettingsFavCommands.Refresh();
+			dataGridViewFavCommands.AutoGenerateColumns = true;
+			commandList = favouriteCommands.GetCommands();
+
+			commandBindingList = new BindingList<Command>(commandList);
+			var source = new BindingSource(commandBindingList, null);
+			dataGridViewFavCommands.DataSource = source;
+			dataGridViewFavCommands.Refresh();
 		}
 
 
 
-		private void buttonCommand1_Click(object sender, EventArgs e)
+		private void buttonSerialFavouriteCommandSending_Click(object sender, EventArgs e)
 		{
-			command.SendCommand(((Button)sender).Text);
-		}
-
-		private void buttonCommand2_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text);
-		}
-
-		private void buttonCommand3_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text);
-		}
-
-		private void buttonCommand4_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text);
-		}
-
-		private void buttonCommand5_Click(object sender, EventArgs e)
-		{
-			command.SendCommand(((Button)sender).Text);
+			String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
+			serial.SendMessage(message, true);
 		}
 
 
@@ -742,6 +700,25 @@ namespace FastenTerminal
 				comboBoxSerialSendingText.Items.Add(command);
 			}
 			
+		}
+
+
+		private void buttonSerialFavouriteCommandsSave_Click(object sender, EventArgs e)
+		{
+			// Save favourite commands
+			favouriteCommands.SaveCommandConfig();
+		}
+
+		private void buttonSerialFavouriteCommandsAdd_Click(object sender, EventArgs e)
+		{
+			favouriteCommands.AddNewCommand("", "");
+
+			commandList = favouriteCommands.GetCommands();
+
+			commandBindingList = new BindingList<Command>(commandList);
+			var source = new BindingSource(commandBindingList, null);
+			dataGridViewFavCommands.DataSource = source;
+			dataGridViewFavCommands.Refresh();
 		}
 
 
@@ -800,13 +777,6 @@ namespace FastenTerminal
 				textBoxCalculatorBin.Text = binaryString;
 			}
 		}
-
-		private void checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
-		{
-			// Do nothing
-
-		}
-
 
 		////////////////////////////////////////////////////////////////////////////
 

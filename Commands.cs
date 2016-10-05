@@ -9,8 +9,8 @@ namespace FastenTerminal
 {
 	public class Command
 	{
-		public String CommandString { set; get; }
 		public String CommandName { set; get; }
+		public String CommandSendingString { set; get; }
 	}
 
 
@@ -28,7 +28,7 @@ namespace FastenTerminal
 		public void AddCommand(String command, String name)
 		{
 			Command addCommand = new Command{
-				CommandString = command,
+				CommandSendingString = command,
 				CommandName = name
 			};
 
@@ -40,7 +40,7 @@ namespace FastenTerminal
 
 
 
-	public class CommandHandler
+	public class FavouriteCommandHandler
 	{
 		public CommandConfigs CommandConfig;
 
@@ -52,7 +52,7 @@ namespace FastenTerminal
 
 
 		// TODO: szebb megoldás a formra átadás helyett?
-		public CommandHandler(FormFastenTerminal form)
+		public FavouriteCommandHandler(FormFastenTerminal form)
 		{
 			this.form = form;
 
@@ -99,6 +99,13 @@ namespace FastenTerminal
 
 			Log.SendEventLog(messageResult);
 			
+		}
+
+
+
+		public void SaveCommandConfig()
+		{
+			SaveCommandConfigToXml(CommandConfigFile, CommandConfig);
 		}
 
 

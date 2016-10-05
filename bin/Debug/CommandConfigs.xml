@@ -2,12 +2,64 @@
 <CommandConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CommandList>
     <Command>
-      <CommandString>FirstCommand</CommandString>
       <CommandName>FirstCommand</CommandName>
+      <CommandSendingString>asdasdas</CommandSendingString>
     </Command>
-	<Command>
-      <CommandString>SecondCommand</CommandString>
+    <Command>
       <CommandName>SecondCommand</CommandName>
+      <CommandSendingString>asdasd</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
     </Command>
   </CommandList>
 </CommandConfigs>
