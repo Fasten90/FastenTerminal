@@ -9,57 +9,5 @@
       <CommandName>SecondCommand</CommandName>
       <CommandSendingString>asdasd</CommandSendingString>
     </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
-    <Command>
-      <CommandName />
-      <CommandSendingString />
-    </Command>
   </CommandList>
 </CommandConfigs>

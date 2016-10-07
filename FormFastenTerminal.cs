@@ -41,6 +41,8 @@ namespace FastenTerminal
 		int SerialMessageActualCaret = 0;
 		int SerialMessageActualSelectionLength = 0;
 
+		String tempStringBuffer = "";
+
 
 		// For Calculator
 		String decimalString;
@@ -238,7 +240,7 @@ namespace FastenTerminal
 
 
 
-		public void AppendTextSerialLogData( string value)
+		public void AppendTextSerialLogData(string value)
 		{
 			if (InvokeRequired)
 			{
@@ -264,17 +266,17 @@ namespace FastenTerminal
 				if (value.StartsWith(((char)27).ToString()))
 				{
 
-				
+
 					// Checked coloring
 					textColor = GetColor(value);
-			
+
 					// Substring after ESC
-					String textWithoutEscape = value.Substring(10);			// TODO: Elegánsabban kéne kivenni az ESC[... részt
+					String textWithoutEscape = value.Substring(10);         // TODO: Elegánsabban kéne kivenni az ESC[... részt
 					value = textWithoutEscape;
-				
-					//richTextBoxSerialPortTexts.SelectionColor = textColor;
+
+					richTextBoxSerialPortTexts.SelectionColor = textColor;
 					//richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
-				
+
 					/*
 					int startCount = richTextBoxSerialPortTexts.TextLength;
 					richTextBoxSerialPortTexts.Text += value;
@@ -299,14 +301,26 @@ namespace FastenTerminal
 			}
 
 			// Append texts
-			richTextBoxSerialPortTexts.Text += value;
+			//richTextBoxSerialPortTexts.Text += value;
+			//richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
 
 			/*
 			richTextBoxSerialPortTexts.SelectionColor = textColor;
 			richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
 			*/
-		}
 
+			if (checkBoxSerialPortScrollBottom.Checked)
+			{
+				// Append text to box
+				richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
+				richTextBoxSerialPortTexts.ScrollToCaret();	// scroll top/bot without selection start setting
+			}
+			else
+			{
+				// Append text to buffer
+				tempStringBuffer += value;
+			}
+		}
 
 
 		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
@@ -325,7 +339,7 @@ namespace FastenTerminal
 
 		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
 		{
-
+			/*
 			if (checkBoxSerialPortScrollBottom.Checked)
 			{
 				// set the current caret position to the end
@@ -335,14 +349,28 @@ namespace FastenTerminal
 			}
 			else
 			{
-				/*
+
 				// Selection start is equal then last cliked position
-				richTextBoxSerialPortTexts.SelectionStart = SerialMessageActualCaret;
+				//richTextBoxSerialPortTexts.SelectionStart = SerialMessageActualCaret;
 				// scroll it automatically
-				richTextBoxSerialPortTexts.ScrollToCaret();	// scroll top/bot without selection start setting
-				*/
-				richTextBoxSerialPortTexts.Select(SerialMessageActualCaret, SerialMessageActualSelectionLength);
-				
+				//richTextBoxSerialPortTexts.ScrollToCaret();	// scroll top/bot without selection start setting
+
+				richTextBoxSerialPortTexts.Select(SerialMessageActualCaret, SerialMessageActualSelectionLength);			
+			}
+			*/
+
+		}
+
+
+
+		private void checkBoxSerialPortScrollBottom_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBoxSerialPortScrollBottom.Checked)
+			{
+				richTextBoxSerialPortTexts.Text += tempStringBuffer;
+				tempStringBuffer = "";
+
+				richTextBoxSerialPortTexts.ScrollToCaret();
 			}
 
 		}
@@ -352,7 +380,14 @@ namespace FastenTerminal
 		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
 		{
 
-			// Selected a text
+			// Selected a text, do not scroll!
+			if (richTextBoxSerialPortTexts.SelectionStart != richTextBoxSerialPortTexts.TextLength)
+			{
+				checkBoxSerialPortScrollBottom.Checked = false;
+			}
+
+			/*
+			// Not good enough
 			if (richTextBoxSerialPortTexts.SelectionStart != 0)
 			{
 				SerialMessageActualCaret = richTextBoxSerialPortTexts.SelectionStart;
@@ -361,6 +396,7 @@ namespace FastenTerminal
 			{
 				SerialMessageActualSelectionLength = richTextBoxSerialPortTexts.SelectionLength;
 			}
+			*/
 
 			// Copy is enabled
 			if (checkBoxSerialCopySelected.Checked)

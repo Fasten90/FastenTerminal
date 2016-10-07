@@ -50,6 +50,7 @@
 			this.checkBoxSerialPortScrollBottom = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
 			this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
+			this.buttonSerialFavouriteCommandsAdd = new System.Windows.Forms.Button();
 			this.buttonSerialFavouriteCommandsSave = new System.Windows.Forms.Button();
 			this.dataGridViewFavCommands = new System.Windows.Forms.DataGridView();
 			this.buttonSerialFavouriteCommandSending = new System.Windows.Forms.Button();
@@ -70,7 +71,6 @@
 			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
 			this.buttonSerialPortSend = new System.Windows.Forms.Button();
 			this.comboBoxSerialSendingText = new System.Windows.Forms.ComboBox();
-			this.buttonSerialFavouriteCommandsAdd = new System.Windows.Forms.Button();
 			this.tabControlSerialFunctions.SuspendLayout();
 			this.tabPageSerialCommunicationSettings.SuspendLayout();
 			this.tabPageSerialCommands.SuspendLayout();
@@ -244,9 +244,12 @@
 			this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
 			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
             "115200",
+            "1200",
             "2400",
             "9600",
-            "57600"});
+            "19800",
+            "57600",
+            "115200"});
 			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(6, 35);
 			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
 			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
@@ -285,6 +288,7 @@
 			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
 			this.checkBoxSerialPortScrollBottom.Text = "Scrolling";
 			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
+			this.checkBoxSerialPortScrollBottom.CheckedChanged += new System.EventHandler(this.checkBoxSerialPortScrollBottom_CheckedChanged);
 			// 
 			// checkBoxSerialCopySelected
 			// 
@@ -311,6 +315,16 @@
 			this.tabPageSerialCommands.TabIndex = 0;
 			this.tabPageSerialCommands.Text = "Commands";
 			this.tabPageSerialCommands.UseVisualStyleBackColor = true;
+			// 
+			// buttonSerialFavouriteCommandsAdd
+			// 
+			this.buttonSerialFavouriteCommandsAdd.Location = new System.Drawing.Point(130, 307);
+			this.buttonSerialFavouriteCommandsAdd.Name = "buttonSerialFavouriteCommandsAdd";
+			this.buttonSerialFavouriteCommandsAdd.Size = new System.Drawing.Size(62, 23);
+			this.buttonSerialFavouriteCommandsAdd.TabIndex = 24;
+			this.buttonSerialFavouriteCommandsAdd.Text = "Add";
+			this.buttonSerialFavouriteCommandsAdd.UseVisualStyleBackColor = true;
+			this.buttonSerialFavouriteCommandsAdd.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsAdd_Click);
 			// 
 			// buttonSerialFavouriteCommandsSave
 			// 
@@ -501,6 +515,7 @@
 			this.richTextBoxSerialPortTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.richTextBoxSerialPortTexts.AutoWordSelection = true;
 			this.richTextBoxSerialPortTexts.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.richTextBoxSerialPortTexts.Location = new System.Drawing.Point(3, 4);
 			this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
@@ -510,7 +525,6 @@
 			this.richTextBoxSerialPortTexts.TabIndex = 37;
 			this.richTextBoxSerialPortTexts.Text = "";
 			this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
-			this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
 			// 
 			// buttonSerialPortSend
 			// 
@@ -535,16 +549,6 @@
 			this.comboBoxSerialSendingText.Text = "<Sending message with \\r\\n>";
 			this.comboBoxSerialSendingText.Enter += new System.EventHandler(this.comboBoxSerialSendMessage_Enter);
 			this.comboBoxSerialSendingText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSerialSendMessage_KeyPress);
-			// 
-			// buttonSerialFavouriteCommandsAdd
-			// 
-			this.buttonSerialFavouriteCommandsAdd.Location = new System.Drawing.Point(130, 307);
-			this.buttonSerialFavouriteCommandsAdd.Name = "buttonSerialFavouriteCommandsAdd";
-			this.buttonSerialFavouriteCommandsAdd.Size = new System.Drawing.Size(62, 23);
-			this.buttonSerialFavouriteCommandsAdd.TabIndex = 24;
-			this.buttonSerialFavouriteCommandsAdd.Text = "Add";
-			this.buttonSerialFavouriteCommandsAdd.UseVisualStyleBackColor = true;
-			this.buttonSerialFavouriteCommandsAdd.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsAdd_Click);
 			// 
 			// FormFastenTerminal
 			// 
