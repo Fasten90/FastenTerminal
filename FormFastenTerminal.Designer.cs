@@ -318,6 +318,7 @@
 			// 
 			// buttonSerialFavouriteCommandsAdd
 			// 
+			this.buttonSerialFavouriteCommandsAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonSerialFavouriteCommandsAdd.Location = new System.Drawing.Point(130, 307);
 			this.buttonSerialFavouriteCommandsAdd.Name = "buttonSerialFavouriteCommandsAdd";
 			this.buttonSerialFavouriteCommandsAdd.Size = new System.Drawing.Size(62, 23);
@@ -328,6 +329,7 @@
 			// 
 			// buttonSerialFavouriteCommandsSave
 			// 
+			this.buttonSerialFavouriteCommandsSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonSerialFavouriteCommandsSave.Location = new System.Drawing.Point(73, 307);
 			this.buttonSerialFavouriteCommandsSave.Name = "buttonSerialFavouriteCommandsSave";
 			this.buttonSerialFavouriteCommandsSave.Size = new System.Drawing.Size(51, 23);
@@ -338,8 +340,9 @@
 			// 
 			// dataGridViewFavCommands
 			// 
-			this.dataGridViewFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+			this.dataGridViewFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridViewFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewFavCommands.Location = new System.Drawing.Point(0, 3);
 			this.dataGridViewFavCommands.MultiSelect = false;
@@ -350,6 +353,7 @@
 			// 
 			// buttonSerialFavouriteCommandSending
 			// 
+			this.buttonSerialFavouriteCommandSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonSerialFavouriteCommandSending.Location = new System.Drawing.Point(6, 307);
 			this.buttonSerialFavouriteCommandSending.Name = "buttonSerialFavouriteCommandSending";
 			this.buttonSerialFavouriteCommandSending.Size = new System.Drawing.Size(61, 23);
@@ -539,7 +543,7 @@
 			// 
 			// comboBoxSerialSendingText
 			// 
-			this.comboBoxSerialSendingText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.comboBoxSerialSendingText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxSerialSendingText.FormattingEnabled = true;
 			this.comboBoxSerialSendingText.Location = new System.Drawing.Point(3, 418);

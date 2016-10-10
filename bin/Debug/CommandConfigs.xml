@@ -2,12 +2,12 @@
 <CommandConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CommandList>
     <Command>
-      <CommandName>FirstCommand</CommandName>
-      <CommandSendingString>asdasdas</CommandSendingString>
+      <CommandName>Segítség</CommandName>
+      <CommandSendingString>help</CommandSendingString>
     </Command>
     <Command>
-      <CommandName>SecondCommand</CommandName>
-      <CommandSendingString>asdasd</CommandSendingString>
+      <CommandName>Verzió</CommandName>
+      <CommandSendingString>version</CommandSendingString>
     </Command>
   </CommandList>
 </CommandConfigs>

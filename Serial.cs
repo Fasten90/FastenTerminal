@@ -89,7 +89,7 @@ namespace FastenTerminal
 				// Wrong COM
 				String errorMessage = "[Application] Error: Empty portname\n";
 				Log.SendErrorLog(errorMessage);
-				form.AppendTextSerialLogData(errorMessage);
+				form.AppendTextSerialLogEvent(errorMessage);
 				return false;
 			}
 			else
@@ -112,7 +112,7 @@ namespace FastenTerminal
 					String message = "[Application] Successful open serial port. " +
 									serial.PortName + " " + serial.BaudRate + "\n";
 					Log.SendEventLog(message);
-					form.AppendTextSerialLogData(message);
+					form.AppendTextSerialLogEvent(message);
 					isOpenedPort = true;
 					return true;
 				}
@@ -120,7 +120,7 @@ namespace FastenTerminal
 				{
 					String errorMessage = "[Application] Error with port opening.\n";
 					Log.SendErrorLog(errorMessage + e.Message);
-					form.AppendTextSerialLogData(errorMessage);
+					form.AppendTextSerialLogEvent(errorMessage);
 					return false;
 				}
 
@@ -153,7 +153,7 @@ namespace FastenTerminal
 			String message = "[Application] Closed Serial port";
 			if(needPrint)
 			{
-				form.AppendTextSerialLogData(message);
+				form.AppendTextSerialLogEvent(message);
 			}
 			Log.SendEventLog(message);
 
@@ -243,7 +243,7 @@ namespace FastenTerminal
 			}
 
 			//////////////////////////////////
-			//  Append text on serial log
+			//  Append received text on serial log
 			//////////////////////////////////
 			form.AppendTextSerialLogData(printString);
 
@@ -512,7 +512,7 @@ namespace FastenTerminal
 
 			if (printOutput)
 			{
-				form.AppendTextSerialLogData(logMessage);
+				form.AppendTextSerialLogEvent(logMessage);
 			}
 
 			return logMessage;
@@ -537,7 +537,7 @@ namespace FastenTerminal
 			string logMessage = "[Application] Periodical message sending started...\n" +
 				"  Time: " + PeriodSendingTime.ToString() + "  Message: " + PeriodSendingMessage + "\n";
 
-			form.AppendTextSerialLogData(logMessage);
+			form.AppendTextSerialLogEvent(logMessage);
 			Log.SendEventLog(logMessage);
 
 		}
@@ -554,7 +554,7 @@ namespace FastenTerminal
 			// Log
 			string logMessage = "[Application] Periodical message sending stopped\n";
 
-			form.AppendTextSerialLogData(logMessage);
+			form.AppendTextSerialLogEvent(logMessage);
 			Log.SendEventLog(logMessage);
 
 		}
@@ -568,7 +568,7 @@ namespace FastenTerminal
 			SendMessage(PeriodSendingMessage, true);
 
 			// Log
-			//form.AppendTextSerialLogData("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");
+			//form.AppendTextSerialLogEvent("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");
 		}
 
 

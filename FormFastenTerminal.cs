@@ -41,8 +41,11 @@ namespace FastenTerminal
 		int SerialMessageActualCaret = 0;
 		int SerialMessageActualSelectionLength = 0;
 
-		String tempStringBuffer = "";
+		private Color GlobalTextColor = Color.Black;
+		private Color GlobalBackgroundColor = Form.DefaultBackColor;
 
+		String tempStringBuffer = "";
+		String tempStringEscapeBuffer = "";	// For not ended escape string
 
 		// For Calculator
 		String decimalString;
@@ -240,85 +243,115 @@ namespace FastenTerminal
 
 
 
-		public void AppendTextSerialLogData(string value)
+		public void AppendTextSerialLogEvent(string message)
 		{
 			if (InvokeRequired)
 			{
-				this.Invoke(new Action<string>(AppendTextSerialLogData), new object[] { value });
+				this.Invoke(new Action<string>(AppendTextSerialLogEvent), new object[] { message });
+				return;
+			}
+
+			// Note log (not received log!)
+			AppendTextLog(message, Color.Blue, Color.Yellow);
+
+		}
+
+
+
+		public void AppendTextSerialLogData(string message)
+		{
+			if (InvokeRequired)
+			{
+				this.Invoke(new Action<string>(AppendTextSerialLogData), new object[] { message });
 				return;
 			}
 
 			// Original text appending, It Work!!
 			//richTextBoxSerialPortTexts.Text += value;
 
-			Color textColor = Color.Black;
+			Color color = Color.Black;
+			EscapeType actualEscapeType = EscapeType.Escape_Nothing;
+			int startIndex = 0;
 
-			if (checkBoxSerialTextColouring.Checked)
+			if (tempStringEscapeBuffer.Length > 0)
 			{
-
-				// Coloring:
-				// ESC[39mESC[31m
-				//0x1B
-				//const char ESC = '\x1B';
-				//(char)27).ToString());
-
-				// Contain escape
-				if (value.StartsWith(((char)27).ToString()))
-				{
-
-
-					// Checked coloring
-					textColor = GetColor(value);
-
-					// Substring after ESC
-					String textWithoutEscape = value.Substring(10);         // TODO: Elegánsabban kéne kivenni az ESC[... részt
-					value = textWithoutEscape;
-
-					richTextBoxSerialPortTexts.SelectionColor = textColor;
-					//richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
-
-					/*
-					int startCount = richTextBoxSerialPortTexts.TextLength;
-					richTextBoxSerialPortTexts.Text += value;
-					richTextBoxSerialPortTexts.Select(startCount, value.Length);
-					richTextBoxSerialPortTexts.SelectionColor = textColor;
-					*/
-				}
-				else
-				{
-					// If not started with Escape
-
-					//richTextBoxSerialPortTexts.SelectionColor = Color.Black;
-					//richTextBoxSerialPortTexts.AppendText(value);
-
-					/*
-					int startCount = richTextBoxSerialPortTexts.TextLength;
-					richTextBoxSerialPortTexts.Text += value;
-					richTextBoxSerialPortTexts.Select(startCount, value.Length);
-					richTextBoxSerialPortTexts.SelectionColor = Color.Black;
-					*/
-				}
+				message = tempStringEscapeBuffer + message;
+				tempStringEscapeBuffer = "";
 			}
 
-			// Append texts
-			//richTextBoxSerialPortTexts.Text += value;
-			//richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
+			// Check, has Escape sequence?
+			while (message.Length > 0 )
+			{
+				actualEscapeType = EscapeSequence.ProcessEscapeMessage(message, out color, out startIndex);
 
-			/*
+				switch (actualEscapeType)
+				{
+					case EscapeType.Escape_Nothing:
+						// Append entire string
+						AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
+						message = "";
+						break;
+					case EscapeType.Escape_StringWithoutEscape:
+						// Append first some character (string)
+						AppendTextLog(message.Substring(0, startIndex), GlobalTextColor, GlobalBackgroundColor);
+						break;
+					case EscapeType.Escape_CLS:
+						DeleteSerialTexts();
+						break;
+					case EscapeType.Escape_TextColor:
+						GlobalTextColor = color;
+						break;
+					case EscapeType.Escape_BackgroundColor:
+						if (color == Color.White)
+						{
+							GlobalBackgroundColor = Form.DefaultBackColor;
+						}
+						else
+						{
+							GlobalBackgroundColor = color;
+						}
+						break;
+					case EscapeType.Escape_CursorMoving:
+						throw new NotImplementedException();
+						break;
+					case EscapeType.Escape_Short_NeedAppend:
+						tempStringEscapeBuffer = message;
+						break;
+					default:
+						break;
+				}
+				
+				// Cut message string
+				message = message.Substring(startIndex);
+			}
+
+			// Append received log
+			//AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
+		}
+
+
+
+		/// <summary>
+		/// DO NOT USE FROM OTHER THREAD
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="textColor"></param>
+		/// <param name="backgroundColor"></param>
+		private void AppendTextLog(String message, Color textColor, Color backgroundColor)
+		{
 			richTextBoxSerialPortTexts.SelectionColor = textColor;
-			richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
-			*/
+			richTextBoxSerialPortTexts.SelectionBackColor = backgroundColor;
 
 			if (checkBoxSerialPortScrollBottom.Checked)
 			{
 				// Append text to box
-				richTextBoxSerialPortTexts.AppendText(value); // If you use it, it automatic scroll bottom
-				richTextBoxSerialPortTexts.ScrollToCaret();	// scroll top/bot without selection start setting
+				richTextBoxSerialPortTexts.AppendText(message);		// If you use it, it automatic scroll bottom
+				richTextBoxSerialPortTexts.ScrollToCaret();			// scroll top/bot without selection start setting
 			}
 			else
 			{
 				// Append text to buffer
-				tempStringBuffer += value;
+				tempStringBuffer += message;
 			}
 		}
 
@@ -365,11 +398,12 @@ namespace FastenTerminal
 
 		private void checkBoxSerialPortScrollBottom_CheckedChanged(object sender, EventArgs e)
 		{
+			// Added buffered string, and scroll bottom
 			if (checkBoxSerialPortScrollBottom.Checked)
 			{
 				richTextBoxSerialPortTexts.Text += tempStringBuffer;
+				richTextBoxSerialPortTexts.ScrollToCaret();
 				tempStringBuffer = "";
-
 				richTextBoxSerialPortTexts.ScrollToCaret();
 			}
 
@@ -504,55 +538,6 @@ namespace FastenTerminal
 		private void checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
 		{
 			// Do nothing
-		}
-
-
-
-		/// <summary>
-		/// Get color from string (within escape sequences ... ESC[31m...
-		/// </summary>
-		/// <param name="escapeMessage"></param>
-		/// <returns></returns>
-		private Color GetColor(String escapeMessage)
-		{
-			Color textColor = Color.Black;
-			if (escapeMessage.Contains("[3"))
-			{
-				char colorChar = escapeMessage[8];
-				switch (colorChar)
-				{
-					case '0':
-						textColor = Color.Black;
-						break;
-					case '1':
-						textColor = Color.Red;
-						break;
-					case '2':
-						textColor = Color.Green;
-						break;
-					case '3':
-						textColor = Color.Yellow;
-						break;
-					case '4':
-						textColor = Color.Blue;
-						break;
-					case '5':
-						textColor = Color.Magenta;
-						break;
-					case '6':
-						textColor = Color.Cyan;
-						break;
-					case '7':
-						textColor = Color.White;
-						break;
-					default:
-						break;
-
-				}
-			}
-
-			return textColor;
-
 		}
 
 
