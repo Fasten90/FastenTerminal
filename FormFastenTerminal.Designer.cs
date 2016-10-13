@@ -71,6 +71,11 @@
 			this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
 			this.buttonSerialPortSend = new System.Windows.Forms.Button();
 			this.comboBoxSerialSendingText = new System.Windows.Forms.ComboBox();
+			this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
+			this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
+			this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
+			this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
+			this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
 			this.tabControlSerialFunctions.SuspendLayout();
 			this.tabPageSerialCommunicationSettings.SuspendLayout();
 			this.tabPageSerialCommands.SuspendLayout();
@@ -79,6 +84,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).BeginInit();
 			this.tabPageCalculator.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// serialPortDevice
@@ -138,6 +144,8 @@
 			// 
 			// tabPageSerialCommunicationSettings
 			// 
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialSaveConfig);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialConfigClearSendMessageTextAfterSend);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialAppendPerRPerN);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogWithDateTime);
@@ -161,7 +169,7 @@
 			// checkBoxSerialConfigClearSendMessageTextAfterSend
 			// 
 			this.checkBoxSerialConfigClearSendMessageTextAfterSend.AutoSize = true;
-			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(4, 225);
+			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(4, 248);
 			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Name = "checkBoxSerialConfigClearSendMessageTextAfterSend";
 			this.checkBoxSerialConfigClearSendMessageTextAfterSend.Size = new System.Drawing.Size(100, 17);
 			this.checkBoxSerialConfigClearSendMessageTextAfterSend.TabIndex = 40;
@@ -174,7 +182,7 @@
 			this.checkBoxSerialAppendPerRPerN.AutoSize = true;
 			this.checkBoxSerialAppendPerRPerN.Checked = true;
 			this.checkBoxSerialAppendPerRPerN.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialAppendPerRPerN.Location = new System.Drawing.Point(6, 201);
+			this.checkBoxSerialAppendPerRPerN.Location = new System.Drawing.Point(6, 224);
 			this.checkBoxSerialAppendPerRPerN.Name = "checkBoxSerialAppendPerRPerN";
 			this.checkBoxSerialAppendPerRPerN.Size = new System.Drawing.Size(45, 17);
 			this.checkBoxSerialAppendPerRPerN.TabIndex = 39;
@@ -198,13 +206,13 @@
 			// checkBoxSerialHex
 			// 
 			this.checkBoxSerialHex.AutoSize = true;
-			this.checkBoxSerialHex.Location = new System.Drawing.Point(6, 177);
+			this.checkBoxSerialHex.Location = new System.Drawing.Point(6, 200);
 			this.checkBoxSerialHex.Name = "checkBoxSerialHex";
 			this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
 			this.checkBoxSerialHex.TabIndex = 37;
 			this.checkBoxSerialHex.Text = "Hex";
 			this.checkBoxSerialHex.UseVisualStyleBackColor = true;
-			this.checkBoxSerialHex.CheckStateChanged += new System.EventHandler(this.checkBoxSerialHex_CheckStateChanged);
+			this.checkBoxSerialHex.CheckedChanged += new System.EventHandler(this.checkBoxSerialHex_CheckedChanged);
 			// 
 			// comboBoxSerialPortCOM
 			// 
@@ -554,11 +562,56 @@
 			this.comboBoxSerialSendingText.Enter += new System.EventHandler(this.comboBoxSerialSendMessage_Enter);
 			this.comboBoxSerialSendingText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSerialSendMessage_KeyPress);
 			// 
+			// pictureBoxSerialReceiving
+			// 
+			this.pictureBoxSerialReceiving.Location = new System.Drawing.Point(543, 30);
+			this.pictureBoxSerialReceiving.Name = "pictureBoxSerialReceiving";
+			this.pictureBoxSerialReceiving.Size = new System.Drawing.Size(20, 20);
+			this.pictureBoxSerialReceiving.TabIndex = 43;
+			this.pictureBoxSerialReceiving.TabStop = false;
+			// 
+			// timerReceiveIcon
+			// 
+			this.timerReceiveIcon.Tick += new System.EventHandler(this.timerReceiveIcon_Tick);
+			// 
+			// checkBoxSerialReceiveBinaryMode
+			// 
+			this.checkBoxSerialReceiveBinaryMode.AutoSize = true;
+			this.checkBoxSerialReceiveBinaryMode.Location = new System.Drawing.Point(6, 177);
+			this.checkBoxSerialReceiveBinaryMode.Name = "checkBoxSerialReceiveBinaryMode";
+			this.checkBoxSerialReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
+			this.checkBoxSerialReceiveBinaryMode.TabIndex = 41;
+			this.checkBoxSerialReceiveBinaryMode.Text = "Receive Binary";
+			this.checkBoxSerialReceiveBinaryMode.UseVisualStyleBackColor = true;
+			this.checkBoxSerialReceiveBinaryMode.CheckedChanged += new System.EventHandler(this.checkBoxSerialReceiveBinaryMode_CheckedChanged);
+			// 
+			// buttonSerialOpenLogFile
+			// 
+			this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(575, 30);
+			this.buttonSerialOpenLogFile.Name = "buttonSerialOpenLogFile";
+			this.buttonSerialOpenLogFile.Size = new System.Drawing.Size(75, 23);
+			this.buttonSerialOpenLogFile.TabIndex = 44;
+			this.buttonSerialOpenLogFile.Text = "Open log";
+			this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
+			this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
+			// 
+			// buttonSerialSaveConfig
+			// 
+			this.buttonSerialSaveConfig.Location = new System.Drawing.Point(6, 287);
+			this.buttonSerialSaveConfig.Name = "buttonSerialSaveConfig";
+			this.buttonSerialSaveConfig.Size = new System.Drawing.Size(75, 23);
+			this.buttonSerialSaveConfig.TabIndex = 42;
+			this.buttonSerialSaveConfig.Text = "Save config";
+			this.buttonSerialSaveConfig.UseVisualStyleBackColor = true;
+			this.buttonSerialSaveConfig.Click += new System.EventHandler(this.buttonSerialSaveConfig_Click);
+			// 
 			// FormFastenTerminal
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(758, 447);
+			this.Controls.Add(this.buttonSerialOpenLogFile);
+			this.Controls.Add(this.pictureBoxSerialReceiving);
 			this.Controls.Add(this.comboBoxSerialSendingText);
 			this.Controls.Add(this.tabControlSerialFunctions);
 			this.Controls.Add(this.richTextBoxSerialPortTexts);
@@ -584,6 +637,7 @@
 			this.tabPageCalculator.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -632,6 +686,11 @@
 		private System.Windows.Forms.DataGridView dataGridViewFavCommands;
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandsSave;
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandsAdd;
+		private System.Windows.Forms.PictureBox pictureBoxSerialReceiving;
+		private System.Windows.Forms.Timer timerReceiveIcon;
+		private System.Windows.Forms.CheckBox checkBoxSerialReceiveBinaryMode;
+		private System.Windows.Forms.Button buttonSerialOpenLogFile;
+		private System.Windows.Forms.Button buttonSerialSaveConfig;
 	}
 }
 

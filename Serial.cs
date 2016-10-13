@@ -32,7 +32,8 @@ namespace FastenTerminal
 		public string stateInfo = "";
 
 		public bool receiverModeBinary = false; // TODO:
-		public bool needToConvertHex = false;   // TODO: 
+		public bool needToConvertHex = false;   // TODO:
+
 		public bool needAppendPerRPerN { get; set; }
 
 		public bool PeriodSendingEnable = false;
@@ -150,7 +151,7 @@ namespace FastenTerminal
 				Log.SendErrorLog(e.Message);
 			}
 
-			String message = "[Application] Closed Serial port";
+			String message = "[Application] Closed Serial port\n";
 			if(needPrint)
 			{
 				form.AppendTextSerialLogEvent(message);
@@ -180,7 +181,17 @@ namespace FastenTerminal
 					{
 						// TODO:
 						//BytesToRead
-						//receivedSerialMessage + serial.Read
+
+						int dataLength = serial.BytesToRead;
+						byte[] data = new byte[dataLength];
+						int nbrDataRead = serial.Read(data, 0, dataLength);
+
+						// Append to buffer
+						actualReceivedSerialMessage = Common.ByteArrayToString(data);
+						receivedSerialMessage += actualReceivedSerialMessage;
+
+						// Append to GUI
+						AppendReceivedTextToGui(actualReceivedSerialMessage);
 					}
 					else
 					{
@@ -217,8 +228,9 @@ namespace FastenTerminal
 		private void AppendReceivedTextToGui(string message)
 		{
 
-			if (needToConvertHex)
+			if (needToConvertHex && !receiverModeBinary)
 			{
+				// If need convert to hex and not binary mode
 				// Convert hex
 				message = Common.ToHexString(message);
 			}
@@ -486,7 +498,7 @@ namespace FastenTerminal
 					//serial.WriteLine(message);	// Be careful, sending with newline '\n' character
 					serial.Write(message);          // Send without newline
 													// Successful
-					logMessage = "[Application] Successful sent message\t" + message + "\n";
+					logMessage = "\n[Application] Successful sent message:\t" + message + "\n";
 				}
 				catch (Exception e)
 				{

@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace FastenTerminal
 {
-	static class SerialLog
+	static public class SerialLog
 	{
 		// Copy form "Log.cs"
 
 		static TextWriterTraceListener Logger;
-
+		static public String logFileName = "";
 
 		static SerialLog()
 		{
-			Logger = new TextWriterTraceListener("Serial.log", "SerialLog");
+			// Old version:
+			//Logger = new TextWriterTraceListener("Serial.log", "SerialLog");
+
+			logFileName = "Serial_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
+			Logger = new TextWriterTraceListener(logFileName, "SerialLog");
 
 			SendLog("Serial LOG has been started.", true);
 

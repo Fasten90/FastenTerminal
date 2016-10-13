@@ -44,13 +44,21 @@ namespace FastenTerminal
 		private Color GlobalTextColor = Color.Black;
 		private Color GlobalBackgroundColor = Form.DefaultBackColor;
 
+		private FastenTerminalConfigs Config;
+
 		String tempStringBuffer = "";
-		String tempStringEscapeBuffer = "";	// For not ended escape string
+		String tempStringEscapeBuffer = ""; // For not ended escape string
+
+		private bool IsreceivedIconIsGreen = false;
 
 		// For Calculator
 		String decimalString;
 		String hexadecimalString;
 		String binaryString;
+
+		// Const images
+		const String imgLocReceiveGreen = @"Images\img_receive_green.png";
+		const String imgLocReceiveEmpty = @"Images\img_receive_empty.png";
 
 
 		public FormFastenTerminal()
@@ -61,7 +69,7 @@ namespace FastenTerminal
 
         private void FormFastenTerminalMain_Load(object sender, EventArgs e)
         {
-
+			Config = new FastenTerminalConfigs();
 
 			// Load Serial
 			serial = new Serial(serialPortDevice, this);
@@ -73,14 +81,14 @@ namespace FastenTerminal
 			
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
-
 			SerialRefresh();
+
+			// Load config
+			LoadConfigToForm();
 
 			// Load commands
 			favouriteCommands = new FavouriteCommandHandler(this);
-
 			LoadFavouriteCommands();
-
 
 			// Notify
 			if (NotifyIsEnabled)
@@ -89,6 +97,32 @@ namespace FastenTerminal
 			}
         }
 
+		private void LoadConfigToForm()
+		{
+
+			comboBoxSerialPortCOM.Text = Config.config.portName;
+			comboBoxSerialPortBaudrate.Text = Config.config.baudrate;
+
+			checkBoxSerialPortLog.Checked = Config.config.needLog;
+			checkBoxLogWithDateTime.Checked = Config.config.dateLog;
+
+			checkBoxSerialReceiveBinaryMode.Checked = Config.config.isBinaryMode;
+			checkBoxSerialHex.Checked = Config.config.isHex;
+		}
+
+		private void SaveConfig()
+		{
+			Config.config.portName = comboBoxSerialPortCOM.Text;
+			Config.config.baudrate = comboBoxSerialPortBaudrate.Text;
+
+			Config.config.needLog = checkBoxSerialPortLog.Checked;
+			Config.config.dateLog = checkBoxLogWithDateTime.Checked;
+
+			Config.config.isBinaryMode = checkBoxSerialReceiveBinaryMode.Checked;
+			Config.config.isHex = checkBoxSerialHex.Checked;
+
+			Config.SaveConfigToXml();
+		}
 
 
 		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
@@ -239,6 +273,8 @@ namespace FastenTerminal
 			}
 
 			serial.Receive();
+
+			ReceivedACharacterEvent();
 		}
 
 
@@ -356,9 +392,23 @@ namespace FastenTerminal
 		}
 
 
+		public void ReceivedACharacterEvent ()
+		{
+			if (InvokeRequired)
+			{
+				this.BeginInvoke(new Action(ReceivedACharacterEvent), new object[] { });
+				return;
+			}
+
+			SerialReceiveEvent(true);
+		}
+
+
+
 		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
 		{
 			DeleteSerialTexts();
+			ScrollBottomAndAppendBuffer();
 		}
 
 
@@ -401,15 +451,22 @@ namespace FastenTerminal
 			// Added buffered string, and scroll bottom
 			if (checkBoxSerialPortScrollBottom.Checked)
 			{
-				richTextBoxSerialPortTexts.Text += tempStringBuffer;
-				richTextBoxSerialPortTexts.ScrollToCaret();
-				tempStringBuffer = "";
-				richTextBoxSerialPortTexts.ScrollToCaret();
+				ScrollBottomAndAppendBuffer();
 			}
 
 		}
 
+		private void ScrollBottomAndAppendBuffer()
+		{
+			//richTextBoxSerialPortTexts.Text += tempStringBuffer;
+			AppendTextLog(tempStringBuffer,GlobalTextColor, GlobalBackgroundColor);
 
+			tempStringBuffer = "";
+			//richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.TextLength;		// WRONG: Make stack overflow
+			//richTextBoxSerialPortTexts.ScrollToCaret();	// windows is jumping
+
+			
+		}
 
 		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
 		{
@@ -420,6 +477,14 @@ namespace FastenTerminal
 				checkBoxSerialPortScrollBottom.Checked = false;
 			}
 
+			if (!checkBoxSerialPortScrollBottom.Checked
+				&& (richTextBoxSerialPortTexts.SelectionStart == richTextBoxSerialPortTexts.TextLength) )
+			{
+				// Not scrolling, but click at end
+				checkBoxSerialPortScrollBottom.Checked = true;
+				ScrollBottomAndAppendBuffer();
+				return;
+			}
 			/*
 			// Not good enough
 			if (richTextBoxSerialPortTexts.SelectionStart != 0)
@@ -531,6 +596,14 @@ namespace FastenTerminal
 		private void checkBoxSerialPortLog_CheckedChanged(object sender, EventArgs e)
 		{
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
+
+			if (!serial.NeedLog)
+			{
+				// If not log
+				checkBoxLogWithDateTime.Checked = false;
+			}
+
+			SaveConfig();
 		}
 
 
@@ -600,12 +673,6 @@ namespace FastenTerminal
 
 
 
-		private void checkBoxSerialHex_CheckStateChanged(object sender, EventArgs e)
-		{
-			// Serial print in hex (look at serial class)
-			serial.needToConvertHex = checkBoxSerialHex.Checked;
-		}
-
 
 
 		private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
@@ -656,6 +723,8 @@ namespace FastenTerminal
 		{
 			// Need to log with DateTime?
 			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
+
+			SaveConfig();
 		}
 
 
@@ -802,8 +871,92 @@ namespace FastenTerminal
 		////////////////////////////////////////////////////////////////////////////
 
 
+		void SerialReceiveEvent (bool isReceived)
+		{
+			if (isReceived)
+			{
+				// Received
+				timerReceiveIcon.Interval = 1000;	// 1 sec
+				timerReceiveIcon.Start();
+				SerialReceivePictureChange(true);
+			}
+			else
+			{
+				// Not received
+				timerReceiveIcon.Stop();
+				SerialReceivePictureChange(false);
+			}
+		}
 
 
 
+		void SerialReceivePictureChange (bool isReceived)
+		{
+			if (isReceived)
+			{
+				if (IsreceivedIconIsGreen != isReceived)
+				{
+					pictureBoxSerialReceiving.ImageLocation = imgLocReceiveGreen;
+				}		
+			}
+			else
+			{
+				if (IsreceivedIconIsGreen != isReceived)
+				{
+					pictureBoxSerialReceiving.ImageLocation = imgLocReceiveEmpty;
+				}
+			}
+
+			IsreceivedIconIsGreen = isReceived;
+		}
+
+
+
+		private void timerReceiveIcon_Tick(object sender, EventArgs e)
+		{
+			SerialReceiveEvent(false);
+		}
+
+
+
+		private void checkBoxSerialReceiveBinaryMode_CheckedChanged(object sender, EventArgs e)
+		{
+			serial.receiverModeBinary = checkBoxSerialReceiveBinaryMode.Checked;
+
+			// If checked receive mode binary, check the Hex is too!
+			if (serial.receiverModeBinary)
+			{
+				// If binary, is hex!
+				checkBoxSerialHex.Checked = true;
+			}
+
+			SaveConfig();
+		}
+
+		private void buttonSerialOpenLogFile_Click(object sender, EventArgs e)
+		{
+			// Open log file
+			OpenLogFile();
+		}
+
+
+		private void OpenLogFile()
+		{
+			// Open log file
+			Common.OpenTextFile(SerialLog.logFileName);
+		}
+
+		private void checkBoxSerialHex_CheckedChanged(object sender, EventArgs e)
+		{
+			// Serial print in hex (look at serial class)
+			serial.needToConvertHex = checkBoxSerialHex.Checked;
+
+			SaveConfig();
+		}
+
+		private void buttonSerialSaveConfig_Click(object sender, EventArgs e)
+		{
+			SaveConfig();
+		}
 	}   // End of class
 }	// End of namespace

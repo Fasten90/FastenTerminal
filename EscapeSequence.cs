@@ -83,8 +83,7 @@ namespace FastenTerminal
 				return EscapeType.Escape_StringWithoutEscape;
 			}
 
-			return EscapeType.Escape_Nothing;
-
+			//return EscapeType.Escape_Nothing;
 		}
 
 		private static bool GetItIsClearScreen(string escapeMessage, out EscapeType escapeType, out int length)

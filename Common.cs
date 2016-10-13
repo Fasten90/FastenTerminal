@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,32 @@ namespace FastenTerminal
 			return sb.ToString(); // returns: "48656C6C6F20776F726C64" for "Hello world"
 		}
 
+
+		// Source: http://stackoverflow.com/questions/311165/how-do-you-convert-byte-array-to-hexadecimal-string-and-vice-versa
+		public static string ByteArrayToString(byte[] ba)
+		{
+			StringBuilder hex = new StringBuilder(ba.Length * 2);
+			foreach (byte b in ba)
+				hex.AppendFormat("{0:x2}", b);
+			return hex.ToString();
+		}
+
+
+		/*
+		You need System.Diagnostics.Process.Start().
+
+		The simplest example:
+
+		Process.Start("notepad.exe", fileName);
+
+		More Generic Approach:
+
+		Process.Start(fileName);
+		 */
+		public static void OpenTextFile(String fileName)
+		{
+			Process.Start(fileName);
+		}
 
 	}
 }

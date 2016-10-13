@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TerminalConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <portName>COM8</portName>
+  <baudrate>9600</baudrate>
+  <needLog>true</needLog>
+  <dateLog>true</dateLog>
+  <isHex>true</isHex>
+  <isBinaryMode>true</isBinaryMode>
+</TerminalConfig>
