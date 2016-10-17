@@ -4,6 +4,6 @@
   <baudrate>9600</baudrate>
   <needLog>true</needLog>
   <dateLog>true</dateLog>
-  <isHex>true</isHex>
-  <isBinaryMode>true</isBinaryMode>
+  <isHex>false</isHex>
+  <isBinaryMode>false</isBinaryMode>
 </TerminalConfig>

@@ -9,5 +9,13 @@
       <CommandName>Verzió</CommandName>
       <CommandSendingString>version</CommandSendingString>
     </Command>
+    <Command>
+      <CommandName>Led on</CommandName>
+      <CommandSendingString>#raspi setout 1</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Led off</CommandName>
+      <CommandSendingString>#raspi setout 0</CommandSendingString>
+    </Command>
   </CommandList>
 </CommandConfigs>

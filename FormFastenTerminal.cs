@@ -378,7 +378,7 @@ namespace FastenTerminal
 			richTextBoxSerialPortTexts.SelectionColor = textColor;
 			richTextBoxSerialPortTexts.SelectionBackColor = backgroundColor;
 
-			if (checkBoxSerialPortScrollBottom.Checked)
+			if (checkBoxSerialLogScrollBottom.Checked)
 			{
 				// Append text to box
 				richTextBoxSerialPortTexts.AppendText(message);		// If you use it, it automatic scroll bottom
@@ -408,7 +408,8 @@ namespace FastenTerminal
 		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
 		{
 			DeleteSerialTexts();
-			ScrollBottomAndAppendBuffer();
+			checkBoxSerialLogScrollBottom.Checked = true;
+			// checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
 		}
 
 
@@ -446,10 +447,10 @@ namespace FastenTerminal
 
 
 
-		private void checkBoxSerialPortScrollBottom_CheckedChanged(object sender, EventArgs e)
+		private void checkBoxSerialLogScrollBottom_CheckedChanged(object sender, EventArgs e)
 		{
 			// Added buffered string, and scroll bottom
-			if (checkBoxSerialPortScrollBottom.Checked)
+			if (checkBoxSerialLogScrollBottom.Checked)
 			{
 				ScrollBottomAndAppendBuffer();
 			}
@@ -474,14 +475,14 @@ namespace FastenTerminal
 			// Selected a text, do not scroll!
 			if (richTextBoxSerialPortTexts.SelectionStart != richTextBoxSerialPortTexts.TextLength)
 			{
-				checkBoxSerialPortScrollBottom.Checked = false;
+				checkBoxSerialLogScrollBottom.Checked = false;
 			}
 
-			if (!checkBoxSerialPortScrollBottom.Checked
+			if (!checkBoxSerialLogScrollBottom.Checked
 				&& (richTextBoxSerialPortTexts.SelectionStart == richTextBoxSerialPortTexts.TextLength) )
 			{
 				// Not scrolling, but click at end
-				checkBoxSerialPortScrollBottom.Checked = true;
+				checkBoxSerialLogScrollBottom.Checked = true;
 				ScrollBottomAndAppendBuffer();
 				return;
 			}

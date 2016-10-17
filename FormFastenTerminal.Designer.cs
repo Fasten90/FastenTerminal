@@ -37,6 +37,8 @@
 			this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
 			this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
 			this.tabPageSerialCommunicationSettings = new System.Windows.Forms.TabPage();
+			this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
+			this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialConfigClearSendMessageTextAfterSend = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialAppendPerRPerN = new System.Windows.Forms.CheckBox();
 			this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
@@ -47,7 +49,7 @@
 			this.comboBoxSerialPortBaudrate = new System.Windows.Forms.ComboBox();
 			this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
 			this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
-			this.checkBoxSerialPortScrollBottom = new System.Windows.Forms.CheckBox();
+			this.checkBoxSerialLogScrollBottom = new System.Windows.Forms.CheckBox();
 			this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
 			this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
 			this.buttonSerialFavouriteCommandsAdd = new System.Windows.Forms.Button();
@@ -73,9 +75,7 @@
 			this.comboBoxSerialSendingText = new System.Windows.Forms.ComboBox();
 			this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
 			this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
-			this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
 			this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
-			this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
 			this.tabControlSerialFunctions.SuspendLayout();
 			this.tabPageSerialCommunicationSettings.SuspendLayout();
 			this.tabPageSerialCommands.SuspendLayout();
@@ -139,7 +139,7 @@
 			this.tabControlSerialFunctions.Multiline = true;
 			this.tabControlSerialFunctions.Name = "tabControlSerialFunctions";
 			this.tabControlSerialFunctions.SelectedIndex = 0;
-			this.tabControlSerialFunctions.Size = new System.Drawing.Size(206, 380);
+			this.tabControlSerialFunctions.Size = new System.Drawing.Size(219, 392);
 			this.tabControlSerialFunctions.TabIndex = 41;
 			// 
 			// tabPageSerialCommunicationSettings
@@ -156,15 +156,36 @@
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortBaudrate);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortRefresh);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialTextColouring);
-			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialPortScrollBottom);
+			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialLogScrollBottom);
 			this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialCopySelected);
 			this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 40);
 			this.tabPageSerialCommunicationSettings.Name = "tabPageSerialCommunicationSettings";
 			this.tabPageSerialCommunicationSettings.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(198, 336);
+			this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(211, 348);
 			this.tabPageSerialCommunicationSettings.TabIndex = 3;
 			this.tabPageSerialCommunicationSettings.Text = "Configuration";
 			this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
+			// 
+			// buttonSerialSaveConfig
+			// 
+			this.buttonSerialSaveConfig.Location = new System.Drawing.Point(127, 313);
+			this.buttonSerialSaveConfig.Name = "buttonSerialSaveConfig";
+			this.buttonSerialSaveConfig.Size = new System.Drawing.Size(75, 23);
+			this.buttonSerialSaveConfig.TabIndex = 42;
+			this.buttonSerialSaveConfig.Text = "Save config";
+			this.buttonSerialSaveConfig.UseVisualStyleBackColor = true;
+			this.buttonSerialSaveConfig.Click += new System.EventHandler(this.buttonSerialSaveConfig_Click);
+			// 
+			// checkBoxSerialReceiveBinaryMode
+			// 
+			this.checkBoxSerialReceiveBinaryMode.AutoSize = true;
+			this.checkBoxSerialReceiveBinaryMode.Location = new System.Drawing.Point(6, 177);
+			this.checkBoxSerialReceiveBinaryMode.Name = "checkBoxSerialReceiveBinaryMode";
+			this.checkBoxSerialReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
+			this.checkBoxSerialReceiveBinaryMode.TabIndex = 41;
+			this.checkBoxSerialReceiveBinaryMode.Text = "Receive Binary";
+			this.checkBoxSerialReceiveBinaryMode.UseVisualStyleBackColor = true;
+			this.checkBoxSerialReceiveBinaryMode.CheckedChanged += new System.EventHandler(this.checkBoxSerialReceiveBinaryMode_CheckedChanged);
 			// 
 			// checkBoxSerialConfigClearSendMessageTextAfterSend
 			// 
@@ -251,13 +272,19 @@
 			// 
 			this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
 			this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
-            "115200",
+            "300",
+            "600",
             "1200",
             "2400",
+            "4800",
             "9600",
-            "19800",
+            "19200",
+            "38400",
             "57600",
-            "115200"});
+            "115200",
+            "230400",
+            "460800",
+            "921600"});
 			this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(6, 35);
 			this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
 			this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
@@ -285,18 +312,18 @@
 			this.checkBoxSerialTextColouring.Text = "Text colouring (Escape seq.)";
 			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
 			// 
-			// checkBoxSerialPortScrollBottom
+			// checkBoxSerialLogScrollBottom
 			// 
-			this.checkBoxSerialPortScrollBottom.AutoSize = true;
-			this.checkBoxSerialPortScrollBottom.Checked = true;
-			this.checkBoxSerialPortScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkBoxSerialPortScrollBottom.Location = new System.Drawing.Point(6, 108);
-			this.checkBoxSerialPortScrollBottom.Name = "checkBoxSerialPortScrollBottom";
-			this.checkBoxSerialPortScrollBottom.Size = new System.Drawing.Size(66, 17);
-			this.checkBoxSerialPortScrollBottom.TabIndex = 12;
-			this.checkBoxSerialPortScrollBottom.Text = "Scrolling";
-			this.checkBoxSerialPortScrollBottom.UseVisualStyleBackColor = true;
-			this.checkBoxSerialPortScrollBottom.CheckedChanged += new System.EventHandler(this.checkBoxSerialPortScrollBottom_CheckedChanged);
+			this.checkBoxSerialLogScrollBottom.AutoSize = true;
+			this.checkBoxSerialLogScrollBottom.Checked = true;
+			this.checkBoxSerialLogScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxSerialLogScrollBottom.Location = new System.Drawing.Point(6, 108);
+			this.checkBoxSerialLogScrollBottom.Name = "checkBoxSerialLogScrollBottom";
+			this.checkBoxSerialLogScrollBottom.Size = new System.Drawing.Size(66, 17);
+			this.checkBoxSerialLogScrollBottom.TabIndex = 12;
+			this.checkBoxSerialLogScrollBottom.Text = "Scrolling";
+			this.checkBoxSerialLogScrollBottom.UseVisualStyleBackColor = true;
+			this.checkBoxSerialLogScrollBottom.CheckedChanged += new System.EventHandler(this.checkBoxSerialLogScrollBottom_CheckedChanged);
 			// 
 			// checkBoxSerialCopySelected
 			// 
@@ -564,6 +591,7 @@
 			// 
 			// pictureBoxSerialReceiving
 			// 
+			this.pictureBoxSerialReceiving.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxSerialReceiving.Location = new System.Drawing.Point(543, 30);
 			this.pictureBoxSerialReceiving.Name = "pictureBoxSerialReceiving";
 			this.pictureBoxSerialReceiving.Size = new System.Drawing.Size(20, 20);
@@ -574,19 +602,9 @@
 			// 
 			this.timerReceiveIcon.Tick += new System.EventHandler(this.timerReceiveIcon_Tick);
 			// 
-			// checkBoxSerialReceiveBinaryMode
-			// 
-			this.checkBoxSerialReceiveBinaryMode.AutoSize = true;
-			this.checkBoxSerialReceiveBinaryMode.Location = new System.Drawing.Point(6, 177);
-			this.checkBoxSerialReceiveBinaryMode.Name = "checkBoxSerialReceiveBinaryMode";
-			this.checkBoxSerialReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
-			this.checkBoxSerialReceiveBinaryMode.TabIndex = 41;
-			this.checkBoxSerialReceiveBinaryMode.Text = "Receive Binary";
-			this.checkBoxSerialReceiveBinaryMode.UseVisualStyleBackColor = true;
-			this.checkBoxSerialReceiveBinaryMode.CheckedChanged += new System.EventHandler(this.checkBoxSerialReceiveBinaryMode_CheckedChanged);
-			// 
 			// buttonSerialOpenLogFile
 			// 
+			this.buttonSerialOpenLogFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(575, 30);
 			this.buttonSerialOpenLogFile.Name = "buttonSerialOpenLogFile";
 			this.buttonSerialOpenLogFile.Size = new System.Drawing.Size(75, 23);
@@ -594,16 +612,6 @@
 			this.buttonSerialOpenLogFile.Text = "Open log";
 			this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
 			this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
-			// 
-			// buttonSerialSaveConfig
-			// 
-			this.buttonSerialSaveConfig.Location = new System.Drawing.Point(6, 287);
-			this.buttonSerialSaveConfig.Name = "buttonSerialSaveConfig";
-			this.buttonSerialSaveConfig.Size = new System.Drawing.Size(75, 23);
-			this.buttonSerialSaveConfig.TabIndex = 42;
-			this.buttonSerialSaveConfig.Text = "Save config";
-			this.buttonSerialSaveConfig.UseVisualStyleBackColor = true;
-			this.buttonSerialSaveConfig.Click += new System.EventHandler(this.buttonSerialSaveConfig_Click);
 			// 
 			// FormFastenTerminal
 			// 
@@ -662,7 +670,7 @@
 		private System.Windows.Forms.ComboBox comboBoxSerialPortBaudrate;
 		private System.Windows.Forms.Button buttonSerialPortRefresh;
 		private System.Windows.Forms.CheckBox checkBoxSerialTextColouring;
-		private System.Windows.Forms.CheckBox checkBoxSerialPortScrollBottom;
+		private System.Windows.Forms.CheckBox checkBoxSerialLogScrollBottom;
 		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
 		private System.Windows.Forms.TabPage tabPageCalculator;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
