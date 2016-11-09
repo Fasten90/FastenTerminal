@@ -877,8 +877,9 @@ namespace FastenTerminal
 			if (isReceived)
 			{
 				// Received
-				timerReceiveIcon.Interval = 1000;	// 1 sec
-				timerReceiveIcon.Start();
+				timerReceiveIcon.Interval = 1000;   // 1 sec
+				timerReceiveIcon.Stop();
+				timerReceiveIcon.Start();			// Restart
 				SerialReceivePictureChange(true);
 			}
 			else
