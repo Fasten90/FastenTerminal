@@ -674,13 +674,9 @@ namespace FastenTerminal
 
 
 
-
-
 		private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
 		{
-
-			Log.SendErrorLog("Serial: Error received");
-
+			Log.SendErrorLog("Serial: Error received:" + e.ToString());
 		}
 
 

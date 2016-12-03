@@ -17,5 +17,9 @@
       <CommandName>Led off</CommandName>
       <CommandSendingString>#raspi setout 0</CommandSendingString>
     </Command>
+    <Command>
+      <CommandName>Delflash</CommandName>
+      <CommandSendingString>!DELFLASH</CommandSendingString>
+    </Command>
   </CommandList>
 </CommandConfigs>

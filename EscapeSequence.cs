@@ -15,7 +15,8 @@ namespace FastenTerminal
 		Escape_TextColor,
 		Escape_BackgroundColor,
 		Escape_CursorMoving,
-		Escape_Short_NeedAppend
+		Escape_Short_NeedAppend,
+		Escape_Skip
 	}
 
 	public static class EscapeSequence
@@ -56,6 +57,12 @@ namespace FastenTerminal
 					// It is CLS (Clear screen)
 					stringLength = length;
 				}
+				// Jump top left			
+				else if (GetItIsStepStopLeft(message.Substring(startIndex), out escapeType, out length))
+				{
+					// It is CLS (Clear screen)
+					stringLength = length;
+				}
 				else
 				{
 					// Wrong escape character, skip first escape char
@@ -86,6 +93,8 @@ namespace FastenTerminal
 			//return EscapeType.Escape_Nothing;
 		}
 
+
+
 		private static bool GetItIsClearScreen(string escapeMessage, out EscapeType escapeType, out int length)
 		{
 			// CSI n J
@@ -102,6 +111,27 @@ namespace FastenTerminal
 
 			return false;
 		}
+
+
+
+		private static bool GetItIsStepStopLeft(string escapeMessage, out EscapeType escapeType, out int length)
+		{
+			// CSI ;1H
+			// ESC[1;1H
+			// Jump cursor to step top left
+			length = 0;
+			escapeType = EscapeType.Escape_Nothing;
+
+			if (escapeMessage.StartsWith(((char)27).ToString() + "[1;1H"))
+			{
+				length = 6;
+				escapeType = EscapeType.Escape_Skip;
+				return true;
+			}
+
+			return false;
+		}
+
 
 
 		/// <summary>
