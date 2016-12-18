@@ -313,7 +313,7 @@
 			this.checkBoxSerialTextColouring.TabIndex = 31;
 			this.checkBoxSerialTextColouring.Text = "Escape sequences";
 			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
-			this.checkBoxSerialTextColouring.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextColouring_CheckedChanged);
+			this.checkBoxSerialTextColouring.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextEscapeSequenceCheckingCheckedChanged);
 			// 
 			// checkBoxSerialLogScrollBottom
 			// 

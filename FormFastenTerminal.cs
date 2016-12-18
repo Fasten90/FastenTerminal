@@ -1013,6 +1013,12 @@ namespace FastenTerminal
 			// Serial print in hex (look at serial class)
 			serial.needToConvertHex = checkBoxSerialHex.Checked;
 
+			if (serial.needToConvertHex)
+			{
+				// Turn off Escape
+				checkBoxSerialTextColouring.Checked = false;
+			}
+
 			SaveConfig();
 		}
 
@@ -1025,9 +1031,14 @@ namespace FastenTerminal
 
 
 
-		private void checkBoxSerialTextColouring_CheckedChanged(object sender, EventArgs e)
+		private void checkBoxSerialTextEscapeSequenceCheckingCheckedChanged(object sender, EventArgs e)
 		{
 			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
+
+			if (GlobalEscapeEnabled)
+			{
+				checkBoxSerialHex.Checked = false;
+			}
 		}
 
 
