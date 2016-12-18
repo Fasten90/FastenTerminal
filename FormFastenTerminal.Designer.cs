@@ -305,12 +305,15 @@
 			// checkBoxSerialTextColouring
 			// 
 			this.checkBoxSerialTextColouring.AutoSize = true;
+			this.checkBoxSerialTextColouring.Checked = true;
+			this.checkBoxSerialTextColouring.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(6, 154);
 			this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
-			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(161, 17);
+			this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(117, 17);
 			this.checkBoxSerialTextColouring.TabIndex = 31;
-			this.checkBoxSerialTextColouring.Text = "Text colouring (Escape seq.)";
+			this.checkBoxSerialTextColouring.Text = "Escape sequences";
 			this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
+			this.checkBoxSerialTextColouring.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextColouring_CheckedChanged);
 			// 
 			// checkBoxSerialLogScrollBottom
 			// 
@@ -346,7 +349,7 @@
 			this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 40);
 			this.tabPageSerialCommands.Name = "tabPageSerialCommands";
 			this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialCommands.Size = new System.Drawing.Size(198, 336);
+			this.tabPageSerialCommands.Size = new System.Drawing.Size(211, 348);
 			this.tabPageSerialCommands.TabIndex = 0;
 			this.tabPageSerialCommands.Text = "Commands";
 			this.tabPageSerialCommands.UseVisualStyleBackColor = true;
@@ -407,7 +410,7 @@
 			this.tabPageSerialPeriodSending.Location = new System.Drawing.Point(4, 40);
 			this.tabPageSerialPeriodSending.Name = "tabPageSerialPeriodSending";
 			this.tabPageSerialPeriodSending.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(198, 336);
+			this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(211, 348);
 			this.tabPageSerialPeriodSending.TabIndex = 2;
 			this.tabPageSerialPeriodSending.Text = "Periodical sending";
 			this.tabPageSerialPeriodSending.UseVisualStyleBackColor = true;
@@ -471,7 +474,7 @@
 			this.tabPageCalculator.Location = new System.Drawing.Point(4, 40);
 			this.tabPageCalculator.Name = "tabPageCalculator";
 			this.tabPageCalculator.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageCalculator.Size = new System.Drawing.Size(198, 336);
+			this.tabPageCalculator.Size = new System.Drawing.Size(211, 348);
 			this.tabPageCalculator.TabIndex = 4;
 			this.tabPageCalculator.Text = "Calculator";
 			this.tabPageCalculator.UseVisualStyleBackColor = true;

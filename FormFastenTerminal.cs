@@ -38,11 +38,9 @@ namespace FastenTerminal
 
 		bool SerialMessageTextBoxEntered = false;
 
-		int SerialMessageActualCaret = 0;
-		int SerialMessageActualSelectionLength = 0;
-
 		private Color GlobalTextColor = Color.Black;
 		private Color GlobalBackgroundColor = Form.DefaultBackColor;
+		private bool GlobalEscapeEnabled;
 
 		private FastenTerminalConfigs Config;
 
@@ -60,11 +58,14 @@ namespace FastenTerminal
 		const String imgLocReceiveGreen = @"Images\img_receive_green.png";
 		const String imgLocReceiveEmpty = @"Images\img_receive_empty.png";
 
+		// Const sounds
+		const String soundBellPath = @"Sounds\sound_bell.wav";
 
 		public FormFastenTerminal()
         {
             InitializeComponent();
         }
+
 
 
         private void FormFastenTerminalMain_Load(object sender, EventArgs e)
@@ -95,7 +96,12 @@ namespace FastenTerminal
 			{ 
 				notifyIconApplication.Visible = true;  
 			}
-        }
+
+			// Form configs
+			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
+	}
+
+
 
 		private void LoadConfigToForm()
 		{
@@ -110,6 +116,8 @@ namespace FastenTerminal
 			checkBoxSerialHex.Checked = Config.config.isHex;
 		}
 
+
+
 		private void SaveConfig()
 		{
 			Config.config.portName = comboBoxSerialPortCOM.Text;
@@ -123,6 +131,7 @@ namespace FastenTerminal
 
 			Config.SaveConfigToXml();
 		}
+
 
 
 		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
@@ -169,6 +178,7 @@ namespace FastenTerminal
 				notifyIconApplication.ShowBalloonTip(1000);
 			}
 		}
+
 
 
 		////////////////////////////////////////////////
@@ -304,61 +314,105 @@ namespace FastenTerminal
 
 			// Original text appending, It Work!!
 			//richTextBoxSerialPortTexts.Text += value;
-
-			Color color = Color.Black;
-			EscapeType actualEscapeType = EscapeType.Escape_Nothing;
-			int startIndex = 0;
-
-			if (tempStringEscapeBuffer.Length > 0)
+			if (message == "")
 			{
-				message = tempStringEscapeBuffer + message;
-				tempStringEscapeBuffer = "";
+				return;
 			}
 
-			// Check, has Escape sequence?
-			while (message.Length > 0 )
+			if (GlobalEscapeEnabled)
 			{
-				actualEscapeType = EscapeSequence.ProcessEscapeMessage(message, out color, out startIndex);
+				// Enabled escape sequences, Check that
 
-				switch (actualEscapeType)
+				if (tempStringEscapeBuffer.Length > 0)
 				{
-					case EscapeType.Escape_Nothing:
-						// Append entire string
-						AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
-						message = "";
-						break;
-					case EscapeType.Escape_StringWithoutEscape:
-						// Append first some character (string)
-						AppendTextLog(message.Substring(0, startIndex), GlobalTextColor, GlobalBackgroundColor);
-						break;
-					case EscapeType.Escape_CLS:
-						DeleteSerialTexts();
-						break;
-					case EscapeType.Escape_TextColor:
-						GlobalTextColor = color;
-						break;
-					case EscapeType.Escape_BackgroundColor:
-						if (color == Color.White)
-						{
-							GlobalBackgroundColor = Form.DefaultBackColor;
-						}
-						else
-						{
-							GlobalBackgroundColor = color;
-						}
-						break;
-					case EscapeType.Escape_CursorMoving:
-						throw new NotImplementedException();
-						break;
-					case EscapeType.Escape_Short_NeedAppend:
-						tempStringEscapeBuffer = message;
-						break;
-					default:
-						break;
+					message = tempStringEscapeBuffer + message;
+					tempStringEscapeBuffer = "";
 				}
-				
-				// Cut message string
-				message = message.Substring(startIndex);
+
+				Color color = Color.Black;
+				EscapeType actualEscapeType = EscapeType.Escape_Nothing;
+				int startIndex = 0;
+
+
+				// Check Bell character
+				if (message.Contains("\a"))
+				{
+					// Contain Bell, remove it
+					message = message.Replace("\a", "");
+					Common.PlaySound(soundBellPath);
+				}
+
+
+				// Check, has Escape sequence?
+				while (message.Length > 0)
+				{
+					actualEscapeType = EscapeSequence.ProcessEscapeMessage(message, out color, out startIndex);
+
+					switch (actualEscapeType)
+					{
+						case EscapeType.Escape_Nothing:
+							// Append entire string
+							AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
+							message = "";
+							break;
+
+						case EscapeType.Escape_StringWithoutEscape:
+							// Append first some character (string)
+							AppendTextLog(message.Substring(0, startIndex), GlobalTextColor, GlobalBackgroundColor);
+							break;
+
+						case EscapeType.Escape_CLS:
+							DeleteSerialTexts();
+							break;
+
+						case EscapeType.Escape_TextColor:
+							GlobalTextColor = color;
+							break;
+
+						case EscapeType.Escape_BackgroundColor:
+							if (color == Color.White)
+							{
+								GlobalBackgroundColor = Form.DefaultBackColor;
+							}
+							else
+							{
+								GlobalBackgroundColor = color;
+							}
+							break;
+
+						case EscapeType.Escape_CursorMoving:
+							// TODO: Not implemented
+							break;
+
+						case EscapeType.Escape_Short_NeedAppend:
+							// Save to buffer and wait for continue
+							tempStringEscapeBuffer = message;
+							break;
+
+						case EscapeType.Escape_Skip_NotImplemented:
+							AppendTextLog(message.Substring(startIndex), GlobalTextColor, GlobalBackgroundColor);
+							break;
+
+						default:
+							break;
+					}
+
+					// Cut message string
+					try
+					{
+						message = message.Substring(startIndex);
+					}
+					catch(Exception e)
+					{
+						Log.SendErrorLog("ERROR: Out of range in array: " + message + startIndex.ToString() + e.Message);
+					}
+				}
+				// End of check escape
+			}
+			else
+			{
+				// Not enabled escape sequences
+				AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
 			}
 
 			// Append received log
@@ -407,12 +461,17 @@ namespace FastenTerminal
 
 		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
 		{
-			DeleteSerialTexts();
-			checkBoxSerialLogScrollBottom.Checked = true;
-			// checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
+			ClearScreen();
 		}
 
-
+		private void ClearScreen()
+		{
+			DeleteSerialTexts();
+			checkBoxSerialLogScrollBottom.Checked = true;
+			GlobalBackgroundColor = Color.Transparent;
+			GlobalTextColor = Color.Black;
+			// checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
+		}
 
 		private void DeleteSerialTexts()
 		{
@@ -931,6 +990,8 @@ namespace FastenTerminal
 			SaveConfig();
 		}
 
+
+
 		private void buttonSerialOpenLogFile_Click(object sender, EventArgs e)
 		{
 			// Open log file
@@ -938,11 +999,14 @@ namespace FastenTerminal
 		}
 
 
+
 		private void OpenLogFile()
 		{
 			// Open log file
 			Common.OpenTextFile(SerialLog.logFileName);
 		}
+
+
 
 		private void checkBoxSerialHex_CheckedChanged(object sender, EventArgs e)
 		{
@@ -952,9 +1016,20 @@ namespace FastenTerminal
 			SaveConfig();
 		}
 
+
+
 		private void buttonSerialSaveConfig_Click(object sender, EventArgs e)
 		{
 			SaveConfig();
 		}
+
+
+
+		private void checkBoxSerialTextColouring_CheckedChanged(object sender, EventArgs e)
+		{
+			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
+		}
+
+
 	}   // End of class
 }	// End of namespace

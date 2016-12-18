@@ -16,7 +16,8 @@ namespace FastenTerminal
 		Escape_BackgroundColor,
 		Escape_CursorMoving,
 		Escape_Short_NeedAppend,
-		Escape_Skip
+		Escape_Skip_NotImplemented,
+		Escape_Wrong
 	}
 
 	public static class EscapeSequence
@@ -40,16 +41,9 @@ namespace FastenTerminal
 				// Has escape character
 				if (startIndex != 0 )
 				{
-					// Should print string
+					// The first character is not the ESC, first should print string
 					stringLength = startIndex;
 					escapeType = EscapeType.Escape_StringWithoutEscape;
-				}
-				// Check it is  color escape?
-				else if (GetColor(message.Substring(startIndex), out color, out escapeType, out length))
-				{
-					// It is color escape
-					// Check next string (which can sending)
-					stringLength = length;
 				}
 				// Check it is CLS?
 				else if (GetItIsClearScreen(message.Substring(startIndex), out escapeType, out length))
@@ -63,19 +57,21 @@ namespace FastenTerminal
 					// It is CLS (Clear screen)
 					stringLength = length;
 				}
+				// Check it is  color escape?
+				else if (GetColor(message.Substring(startIndex), out color, out escapeType, out length))
+				{
+					// It is color escape
+					// Check next string (which can sending)
+					stringLength = length;
+				}
 				else
 				{
 					// Wrong escape character, skip first escape char
-					if (message.Length < 5)
+					if (escapeType == EscapeType.Escape_Short_NeedAppend)
 					{
+						// Need append the next string
 						stringLength = message.Length;
 						return EscapeType.Escape_Short_NeedAppend;
-					}
-					else
-					{
-						// Wrong escape sequence, can write it
-						stringLength = 1;
-						return EscapeType.Escape_StringWithoutEscape;
 					}
 				}
 
@@ -102,14 +98,27 @@ namespace FastenTerminal
 			length = 0;
 			escapeType = EscapeType.Escape_Nothing;
 
-			if (escapeMessage.StartsWith(((char)27).ToString() + "[2J"))
+			if (escapeMessage.Length >= 4)
 			{
-				length = 4;
-				escapeType = EscapeType.Escape_CLS;
-				return true;
+				// Good length
+				if (escapeMessage.StartsWith(((char)27).ToString() + "[2J"))
+				{
+					// Good
+					length = 4;
+					escapeType = EscapeType.Escape_CLS;
+					return true;
+				}
+				else
+				{
+					escapeType = EscapeType.Escape_Wrong;
+					return false;
+				}
 			}
-
-			return false;
+			else
+			{
+				escapeType = EscapeType.Escape_Short_NeedAppend;
+				return false;
+			}
 		}
 
 
@@ -122,14 +131,29 @@ namespace FastenTerminal
 			length = 0;
 			escapeType = EscapeType.Escape_Nothing;
 
-			if (escapeMessage.StartsWith(((char)27).ToString() + "[1;1H"))
+			if (escapeMessage.Length >= 6)
 			{
-				length = 6;
-				escapeType = EscapeType.Escape_Skip;
-				return true;
+				// Good length
+				if (escapeMessage.StartsWith(((char)27).ToString() + "[1;1H"))
+				{
+					// Good
+					length = 6;
+					escapeType = EscapeType.Escape_Skip_NotImplemented;
+					return true;
+				}
+				else
+				{
+					// Wrong
+					escapeType = EscapeType.Escape_Wrong;
+					return false;
+				}
 			}
-
-			return false;
+			else
+			{
+				// Short
+				escapeType = EscapeType.Escape_Short_NeedAppend;
+				return false;
+			}
 		}
 
 
@@ -156,73 +180,130 @@ namespace FastenTerminal
 			escapeType = EscapeType.Escape_Nothing;
 			length = 0;
 
-			if (escapeMessage.StartsWith(((char)27).ToString() + "["))
+			if (escapeMessage.StartsWith(((char)27).ToString()))
 			{
-				if (escapeMessage[2] == '3')
+				if (escapeMessage.Length >= 2)
 				{
-					escapeType = EscapeType.Escape_TextColor;
-				}
-				else if (escapeMessage[2] == '4')
-				{
-					escapeType = EscapeType.Escape_BackgroundColor;
+					if (escapeMessage[1] == '[')
+					{
+						isOk = true;
+					}
+					else
+					{
+						isOk = false;
+						escapeType = EscapeType.Escape_Wrong;
+					}
 				}
 				else
 				{
-					//escapeType = EscapeType.Escape_Nothing;
-					return false;
+					isOk = false;
+					escapeType = EscapeType.Escape_Short_NeedAppend;
+				}
+					
+				if (escapeMessage.Length >= 3)
+				{
+					if (escapeMessage[2] == '3')
+					{
+						escapeType = EscapeType.Escape_TextColor;
+					}
+					else if (escapeMessage[2] == '4')
+					{
+						escapeType = EscapeType.Escape_BackgroundColor;
+					}
+					else
+					{
+						isOk = false;
+						escapeType = EscapeType.Escape_Wrong;
+					}
+				}
+				else
+				{
+					escapeType = EscapeType.Escape_Short_NeedAppend;
+				}
+
+				if (escapeMessage.Length >= 4)
+				{
+					// Check color
+					switch (escapeMessage[3])
+					{
+						case '0':
+							color = Color.Black;
+							isOk = true;
+							break;
+						case '1':
+							color = Color.Red;
+							isOk = true;
+							break;
+						case '2':
+							color = Color.Green;
+							isOk = true;
+							break;
+						case '3':
+							color = Color.Yellow;
+							isOk = true;
+							break;
+						case '4':
+							color = Color.Blue;
+							isOk = true;
+							break;
+						case '5':
+							color = Color.Magenta;
+							isOk = true;
+							break;
+						case '6':
+							color = Color.Cyan;
+							isOk = true;
+							break;
+						case '7':
+							color = Color.White;
+							isOk = true;
+							break;
+						default:
+							isOk = false;
+							escapeType = EscapeType.Escape_Wrong;
+							break;
+					}
+				}
+				else
+				{
+					isOk = false;
+					escapeType = EscapeType.Escape_Short_NeedAppend;
 				}
 
 				// Check 'm' character at end
-				if (escapeMessage[4] != 'm' )
+				// TODO: Last check, it is not good for us
+				if (escapeMessage.Length >= 5)
 				{
-					return false;
+					if (escapeMessage[4] == 'm')
+					{
+						isOk = true;
+						//escapeType has good value
+					}
+					else
+					{
+						isOk = false;
+						escapeType = EscapeType.Escape_Wrong;
+					}
 				}
-
-				// Check color
-				char colorChar = escapeMessage[3];
-				switch (colorChar)
+				else
 				{
-					case '0':
-						color = Color.Black;
-						isOk = true;
-						break;
-					case '1':
-						color = Color.Red;
-						isOk = true;
-						break;
-					case '2':
-						color = Color.Green;
-						isOk = true;
-						break;
-					case '3':
-						color = Color.Yellow;
-						isOk = true;
-						break;
-					case '4':
-						color = Color.Blue;
-						isOk = true;
-						break;
-					case '5':
-						color = Color.Magenta;
-						isOk = true;
-						break;
-					case '6':
-						color = Color.Cyan;
-						isOk = true;
-						break;
-					case '7':
-						color = Color.White;
-						isOk = true;
-						break;
-					default:
-						break;
-
+					isOk = false;
+					escapeType = EscapeType.Escape_Short_NeedAppend;
 				}
 			}
+			else
+			{
+				isOk = false;
+			}
 
-			length = 5;
+			if (isOk)
+			{
+				length = 5;
+			}
+
 			return isOk;
-
 		}
 	}
 }
+
+
