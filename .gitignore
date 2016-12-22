@@ -1,10 +1,15 @@
-bin/Debug/Serial.log
-bin/Debug/Errors.log
-bin/Debug/Events.log
-
 *.exe
 *.pdb
 *.log
+*.ini
+*.cache
+
+obj/*
+obj\*
+
+bin/Debug/Serial.log
+bin/Debug/Errors.log
+bin/Debug/Events.log
 
 bin/Debug/FastenTerminal.exe
 bin/Debug/FastenTerminal.pdb
@@ -12,12 +17,6 @@ obj/Debug/FastenTerminal.exe
 obj/Debug/FastenTerminal.pdb
 
 bin/Debug/app.publish/Application Files/*
-
-
-*.cache
-
-obj/*
-obj\*
 
 obj/Debug/*
 bin/Debug/FastenTerminal.application
