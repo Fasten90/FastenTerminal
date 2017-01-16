@@ -99,7 +99,7 @@ namespace FastenTerminal
 
 			// Form configs
 			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
-	}
+		}
 
 
 
@@ -468,7 +468,7 @@ namespace FastenTerminal
 		{
 			DeleteSerialTexts();
 			checkBoxSerialLogScrollBottom.Checked = true;
-			GlobalBackgroundColor = Color.Transparent;
+			GlobalBackgroundColor = Form.DefaultBackColor;
 			GlobalTextColor = Color.Black;
 			// checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
 		}
