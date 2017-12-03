@@ -235,29 +235,46 @@ namespace FastenTerminal
 
 
 
+        public void SerialSetStateOpenedOrClosed(bool isOpened)
+        {
+            if (isOpened)
+            {
+                buttonSerialPortOpen.Text = "Port close";
+            }
+            else
+            {
+                buttonSerialPortOpen.Text = "Port open";
+            }
+        }
+
+
 		private void SerialOpenClose()
 		{
 			// Is opened?
 			if (serial.isOpenedPort == false)
 			{
-				// If not opened, open
+				// If there is not opened port, open
 				if (serial.SerialPortComOpen())
 				{
-					// Successful port opening
-					buttonSerialPortOpen.Text = "Port close";
-				}
-
-			}
+                    // Successful port opening
+                    SerialSetStateOpenedOrClosed(true);
+                }
+                else
+                {
+                    // Failed open
+                    // "Notify" message is printed from SerialPortComOpen() 
+                }
+            }
 			else
 			{
 				// If opened, close
 				serial.SerialPortComClose();
-				buttonSerialPortOpen.Text = "Port open";
-			}
+                SerialSetStateOpenedOrClosed(false);
+            }
 
 			// Refresh application name
-			RefreshTitle();		
-		}
+			RefreshTitle();
+        }
 
 
 

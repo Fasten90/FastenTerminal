@@ -150,15 +150,14 @@ namespace FastenTerminal
 			}
 
 			String message = "[Application] Closed Serial port\n";
-			if(needPrint)
+			if (needPrint)
 			{
 				form.AppendTextSerialLogEvent(message);
 			}
 			Log.SendEventLog(message);
 
-			stateInfo = "Closed";
-			isOpenedPort = false;
-		}
+            SerialRegistrateClose();
+        }
 
 
 
@@ -208,8 +207,6 @@ namespace FastenTerminal
 					// Received "process character"
 					ThreadPool.QueueUserWorkItem(DataReceived);
 				}
-
-
 			}
 			catch (Exception ex)
 			{
@@ -477,6 +474,7 @@ namespace FastenTerminal
 
 			if (needAppendPerRPerN)
 			{
+                // TODO ...
 				message += "\r\n";
 			}
 
@@ -529,6 +527,7 @@ namespace FastenTerminal
 		}
 
 
+
 		public void PeriodSendingStart(float sec, string message)
 		{
 			// Start periodical sending
@@ -551,6 +550,8 @@ namespace FastenTerminal
 			Log.SendEventLog(logMessage);
 		}
 
+
+
 		public void PeriodSendingStop()
 		{
 			// Stop periodical sending
@@ -569,6 +570,7 @@ namespace FastenTerminal
             // Not running state
             form.SerialPeriodSend_SetState(false);
         }
+
 
 
 		private void timerPeriodTimerSending_Tick(object sender, EventArgs e)
@@ -591,10 +593,21 @@ namespace FastenTerminal
             {
                 SerialPortCloseInOtherThread();
             }
-
-            isOpenedPort = false;
+            else
+            {
+                SerialRegistrateClose();
+            }
         }
-	}
+
+
+
+        private void SerialRegistrateClose()
+        {
+            stateInfo = "Closed";
+            isOpenedPort = false;
+            form.SerialSetStateOpenedOrClosed(false);
+        }
+    }
 }
 
 
