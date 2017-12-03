@@ -495,12 +495,15 @@ namespace FastenTerminal
 					Log.SendErrorLog(e.Message);
 					logMessage = "[Application] Port error\n";
 
+                    // Stop periodical sending
                     if (PeriodSendingEnable)
                     {
                         PeriodSendingStop();
                     }
-                }
 
+                    // Serial error, close the port
+                    SerialError();
+                }
 			}
 			else
 			{
@@ -546,7 +549,6 @@ namespace FastenTerminal
 
 			form.AppendTextSerialLogEvent(logMessage);
 			Log.SendEventLog(logMessage);
-
 		}
 
 		public void PeriodSendingStop()
@@ -581,6 +583,17 @@ namespace FastenTerminal
 		}
 
 
+
+        public void SerialError()
+        {
+            // Close serial port, because has error
+            if (serial.IsOpen)
+            {
+                SerialPortCloseInOtherThread();
+            }
+
+            isOpenedPort = false;
+        }
 	}
 }
 

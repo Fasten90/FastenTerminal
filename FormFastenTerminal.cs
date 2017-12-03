@@ -36,6 +36,8 @@ namespace FastenTerminal
 
 		private bool SerialMessageTextBoxEntered = false;
         private bool EnteredToPeriodMessageTextBox = false;
+        private bool SerialSendMessage_ClearAfterSend = false;
+
 
         private Color GlobalTextColor = Color.Black;
 		private Color GlobalBackgroundColor = Form.DefaultBackColor;
@@ -608,10 +610,10 @@ namespace FastenTerminal
 
 
 
-		private void SerialMessageTextClearAndSave()
+		private void SerialMessageText_Clear()
 		{
 			// Need clear text?
-			if (checkBoxSerialConfigClearSendMessageTextAfterSend.Checked)
+			if (SerialSendMessage_ClearAfterSend)
 			{
 				// Clear text
 				comboBoxSerialSendingText.Text = "";
@@ -637,13 +639,12 @@ namespace FastenTerminal
 		{
 			if (comboBoxSerialSendingText.Text != null)
 			{
-				String message = "";
-
-				// Append command text
-				message += comboBoxSerialSendingText.Text;
+                // Message text
+				String message = comboBoxSerialSendingText.Text;
 
 				// Successful or not successful
 				String messageResult = serial.SendMessage(message, true);
+
 				Log.SendEventLog(messageResult);	// TODO: Biztos kell ez?
 				//AppendTextSerialData(messageResult);
 
@@ -653,7 +654,7 @@ namespace FastenTerminal
 
 				SerialAddLastCommand(message);
 
-				SerialMessageTextClearAndSave();
+				SerialMessageText_Clear();
 			}
 		}
 
@@ -676,8 +677,9 @@ namespace FastenTerminal
 
 		private void checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
 		{
-			// Do nothing
-		}
+            // Do nothing
+            SerialSendMessage_ClearAfterSend = checkBoxSerialConfigClearSendMessageTextAfterSend.Checked;
+        }
 
 
 
@@ -875,7 +877,6 @@ namespace FastenTerminal
 			{
 				comboBoxSerialSendingText.Items.Add(command);
 			}
-			
 		}
 
 
