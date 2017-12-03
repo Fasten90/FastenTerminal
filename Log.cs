@@ -9,7 +9,6 @@ namespace FastenTerminal
 {
 	static class Log
 	{
-
 		static TextWriterTraceListener EventLogger;
 		static TextWriterTraceListener ErrorLogger;
 
@@ -31,7 +30,7 @@ namespace FastenTerminal
 
 		static Log()
 		{
-			EventLogger = new TextWriterTraceListener( "Events.log", "EventLog");
+			EventLogger = new TextWriterTraceListener("Events.log", "EventLog");
 			ErrorLogger = new TextWriterTraceListener("Errors.log", "ErrorLog");
 
 			SendEventLog("EventLog has been started.");
@@ -63,7 +62,5 @@ namespace FastenTerminal
 			Console.WriteLine(text);
 		}
 		*/
-
-
 	}
 }

@@ -34,11 +34,10 @@ namespace FastenTerminal
 		public List<Command> commandList;
 		public BindingList<Command> commandBindingList;
 
-		public bool FwUpdateWaitMessage;
+		private bool SerialMessageTextBoxEntered = false;
+        private bool EnteredToPeriodMessageTextBox = false;
 
-		bool SerialMessageTextBoxEntered = false;
-
-		private Color GlobalTextColor = Color.Black;
+        private Color GlobalTextColor = Color.Black;
 		private Color GlobalBackgroundColor = Form.DefaultBackColor;
 		private bool GlobalEscapeEnabled;
 
@@ -1042,5 +1041,16 @@ namespace FastenTerminal
 		}
 
 
-	}   // End of class
+
+        private void textBoxPeriodSendingMessage_Enter(object sender, EventArgs e)
+        {
+            // Entered to PeriodMessageText textbox
+            if (EnteredToPeriodMessageTextBox == false)
+            {
+                // Clear textbox at first time
+                textBoxPeriodSendingMessage.Text = "";
+                EnteredToPeriodMessageTextBox = true;
+            }
+        }
+    }   // End of class
 }	// End of namespace
