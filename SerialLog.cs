@@ -9,7 +9,7 @@ namespace FastenTerminal
 {
 	static public class SerialLog
 	{
-		// Copy form "Log.cs"
+		// Copied form "Log.cs"
 
 		static TextWriterTraceListener Logger;
 		static public String logFileName = "";
@@ -23,7 +23,6 @@ namespace FastenTerminal
 			Logger = new TextWriterTraceListener(logFileName, "SerialLog");
 
 			SendLog("Serial LOG has been started.", true);
-
 		}
 
 		static public void SendLog(String text, bool putDatetime = false)
@@ -39,6 +38,5 @@ namespace FastenTerminal
 			Logger.Flush();
 			Console.WriteLine(text);
 		}
-
 	}
 }

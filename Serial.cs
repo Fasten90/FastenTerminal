@@ -37,7 +37,7 @@ namespace FastenTerminal
 		public bool needAppendPerRPerN { get; set; }
 
 		public bool PeriodSendingEnable = false;
-		public decimal PeriodSendingTime = 5;
+		public float PeriodSendingTime = 5.0f;
 		private System.Windows.Forms.Timer PeriodSendingTimer;
 		private string PeriodSendingMessage = "";
 
@@ -124,9 +124,7 @@ namespace FastenTerminal
 					form.AppendTextSerialLogEvent(errorMessage);
 					return false;
 				}
-
 			}
-
 		}
 
 
@@ -173,14 +171,11 @@ namespace FastenTerminal
 
 			try
 			{
-
-
 				lock (SerialReceiveLocker)
 				{
 					if (receiverModeBinary)
 					{
-						// TODO:
-						//BytesToRead
+						// Binary mode
 
 						int dataLength = serial.BytesToRead;
 						byte[] data = new byte[dataLength];
@@ -195,6 +190,8 @@ namespace FastenTerminal
 					}
 					else
 					{
+                        // String mode
+
 						// Append to buffer
 						actualReceivedSerialMessage = serial.ReadExisting();
 						receivedSerialMessage += actualReceivedSerialMessage;
@@ -220,14 +217,12 @@ namespace FastenTerminal
 				Log.SendErrorLog(ex.Message);
 				//put other, more interesting error handling here.
 			}
-
 		}
 
 
 
 		private void AppendReceivedTextToGui(string message)
 		{
-
 			if (needToConvertHex && !receiverModeBinary)
 			{
 				// If need convert to hex and not binary mode
@@ -254,14 +249,18 @@ namespace FastenTerminal
 				printString = message;
 			}
 
-			//////////////////////////////////
-			//  Append received text on serial log
-			//////////////////////////////////
-			form.AppendTextSerialLogData(printString);
+            // Replace '\r' to '\r\n'
+            String needReplaceCharacter = "\r";
+            printString = message.Replace(needReplaceCharacter, Environment.NewLine);
 
+
+            //////////////////////////////////
+            //  Append received text on serial log
+            //////////////////////////////////
+            form.AppendTextSerialLogData(printString);
 		}
 
-
+    
 
 		public void DataReceived(object state)
 		{
@@ -291,10 +290,8 @@ namespace FastenTerminal
 
 
 			// Save received message
-
 			lock (serialMessageLock)
 			{
-
 				if (logMessage == "")
 				{
 					// Drop first newline characters
@@ -306,7 +303,6 @@ namespace FastenTerminal
 					// Append
 					logMessage += receivedMessage;
 				}
-
 
 
 				// Has end character?
@@ -341,7 +337,6 @@ namespace FastenTerminal
 			// Process
 			if (processMessage != "")
 			{
-
 				// Need log?
 				if (NeedLog)
 				{
@@ -356,7 +351,6 @@ namespace FastenTerminal
 						SerialLog.SendLog(processMessage);
 					}
 				}
-
 			}
 
 			return;
@@ -531,7 +525,7 @@ namespace FastenTerminal
 		}
 
 
-		public void PeriodSendingStart(decimal sec, string message)
+		public void PeriodSendingStart(float sec, string message)
 		{
 			// Start periodical sending
 			PeriodSendingEnable = true;
@@ -540,7 +534,7 @@ namespace FastenTerminal
 
 			// Start timer
 			PeriodSendingTimer = new System.Windows.Forms.Timer();
-			PeriodSendingTimer.Interval = (int)PeriodSendingTime * 1000;    // =millisec
+			PeriodSendingTimer.Interval = (int)(PeriodSendingTime * 1000);    // =millisec
 			PeriodSendingTimer.Enabled = true;
 			PeriodSendingTimer.Start();
 			PeriodSendingTimer.Tick += new System.EventHandler(this.timerPeriodTimerSending_Tick);

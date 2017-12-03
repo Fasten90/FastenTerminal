@@ -759,7 +759,7 @@ namespace FastenTerminal
 				if (serial.isOpenedPort)
 				{
 					// Has opened port
-					serial.PeriodSendingStart(numericUpDownSerialPeriodSendingTime.Value,
+					serial.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
 						textBoxPeriodSendingMessage.Text);
 
 					buttonSerialPeriodSendingStart.Text = "Stop";
