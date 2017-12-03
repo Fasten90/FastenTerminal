@@ -272,6 +272,7 @@
             // 
             // comboBoxSerialPortBaudrate
             // 
+            this.comboBoxSerialPortBaudrate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSerialPortBaudrate.FormattingEnabled = true;
             this.comboBoxSerialPortBaudrate.Items.AddRange(new object[] {
             "300",
@@ -291,7 +292,6 @@
             this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
             this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
             this.comboBoxSerialPortBaudrate.TabIndex = 4;
-            this.comboBoxSerialPortBaudrate.Text = "<baudrate>";
             this.comboBoxSerialPortBaudrate.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortBaudrate_SelectedIndexChanged);
             // 
             // buttonSerialPortRefresh
