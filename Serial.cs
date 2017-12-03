@@ -229,35 +229,31 @@ namespace FastenTerminal
 				// Convert hex
 				message = Common.ToHexString(message);
 			}
-			else
+			else if (receiverModeBinary)
 			{
-				// Not need to convert hex
-			}
+                // Print on output text
+                // For richText, where \r\n is two new line, we need only one newline
+                // Drop '\n', and hold '\r'
+                String dropCharacter = "\n";
+                if (message.Contains(dropCharacter))
+                {
+                    message = message.Replace(dropCharacter, String.Empty);
+                }
 
-
-			// Print on output text
-			// For richText, where \r\n is two new line, we need only one newline
-			// Drop '\n', and hold '\r'
-			String dropCharacter = "\n";
-			String printString = "";
-			if (message.Contains(dropCharacter))
-			{
-				printString = message.Replace(dropCharacter, String.Empty);
-			}
-			else
-			{
-				printString = message;
-			}
-
-            // Replace '\r' to '\r\n'
-            String needReplaceCharacter = "\r";
-            printString = message.Replace(needReplaceCharacter, Environment.NewLine);
+                // Replace '\r' to '\r\n'
+                String needReplaceCharacter = "\r";
+                message = message.Replace(needReplaceCharacter, Environment.NewLine);
+            }
+            else
+            {
+                // Not need to convert hex
+            }
 
 
             //////////////////////////////////
             //  Append received text on serial log
             //////////////////////////////////
-            form.AppendTextSerialLogData(printString);
+            form.AppendTextSerialLogData(message);
 		}
 
     

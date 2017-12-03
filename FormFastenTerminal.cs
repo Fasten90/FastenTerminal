@@ -59,6 +59,7 @@ namespace FastenTerminal
 
 		// Const sounds
 		const String soundBellPath = @"Sounds\sound_bell.wav";
+        bool soundIsDisabled = false;
 
 		public FormFastenTerminal()
         {
@@ -334,7 +335,7 @@ namespace FastenTerminal
 
 
 				// Check Bell character
-				if (message.Contains("\a"))
+				if (!soundIsDisabled && message.Contains("\a"))
 				{
 					// Contain Bell, remove it
 					message = message.Replace("\a", "");
@@ -738,39 +739,43 @@ namespace FastenTerminal
 		}
 
 
+        private void SerialPeriodSending_Start()
+        {
+            if (serial.PeriodSendingEnable)
+            {
+                // Now, enabled, so need to stop
+                serial.PeriodSendingStop();
+
+                buttonSerialPeriodSendingStart.Text = "Start";
+            }
+            else
+            {
+                // Now disabled, need to be enabling & starting
+
+                // Has opened port?
+                if (serial.isOpenedPort)
+                {
+                    // Has opened port
+                    serial.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
+                        textBoxPeriodSendingMessage.Text);
+
+                    buttonSerialPeriodSendingStart.Text = "Stop";
+                }
+                else
+                {
+                    string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
+                    AppendTextSerialLogData(logMessage);
+                    Log.SendEventLog(logMessage);
+                }
+            }
+        }
+
 
 		private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
 		{
-			// Clicked Serial - Period sending start-stop button
-
-			if (serial.PeriodSendingEnable)
-			{
-				// Now, enabled, so need to stop
-				serial.PeriodSendingStop();
-
-				buttonSerialPeriodSendingStart.Text = "Start";
-			}
-			else
-			{
-				// Now disabled, need to be enabling & starting
-
-				// Has opened port?
-				if (serial.isOpenedPort)
-				{
-					// Has opened port
-					serial.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
-						textBoxPeriodSendingMessage.Text);
-
-					buttonSerialPeriodSendingStart.Text = "Stop";
-				}
-				else
-				{
-					string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
-					AppendTextSerialLogData(logMessage);
-					Log.SendEventLog(logMessage);
-				}
-			}
-		}
+            // Clicked Serial - Period sending start-stop button
+            SerialPeriodSending_Start();
+        }
 
 
 
@@ -1052,5 +1057,26 @@ namespace FastenTerminal
                 EnteredToPeriodMessageTextBox = true;
             }
         }
+
+
+
+        private void checkBoxMute_CheckedChanged(object sender, EventArgs e)
+        {
+            soundIsDisabled = checkBoxMute.Checked;
+        }
+
+
+
+        private void textBoxPeriodSendingMessage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // If pressed in "PeriodMessage textbox" enter --> Send the message
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                // If pressed enter
+                SerialPeriodSending_Start();
+            }
+        }
+
+
     }   // End of class
 }	// End of namespace

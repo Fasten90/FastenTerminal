@@ -76,6 +76,7 @@
             this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
             this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
             this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
+            this.checkBoxMute = new System.Windows.Forms.CheckBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageSerialCommunicationSettings.SuspendLayout();
             this.tabPageSerialCommands.SuspendLayout();
@@ -144,6 +145,7 @@
             // 
             // tabPageSerialCommunicationSettings
             // 
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxMute);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialSaveConfig);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialConfigClearSendMessageTextAfterSend);
@@ -434,6 +436,7 @@
             this.textBoxPeriodSendingMessage.TabIndex = 3;
             this.textBoxPeriodSendingMessage.Text = "<Periodical sending message>";
             this.textBoxPeriodSendingMessage.Enter += new System.EventHandler(this.textBoxPeriodSendingMessage_Enter);
+            this.textBoxPeriodSendingMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPeriodSendingMessage_KeyPress);
             // 
             // buttonSerialPeriodSendingStart
             // 
@@ -591,7 +594,7 @@
             this.comboBoxSerialSendingText.TabIndex = 42;
             this.comboBoxSerialSendingText.Text = "<Sending message with \\r\\n>";
             this.comboBoxSerialSendingText.Enter += new System.EventHandler(this.comboBoxSerialSendMessage_Enter);
-            this.comboBoxSerialSendingText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorBin_KeyPress);
+            this.comboBoxSerialSendingText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSerialSendMessage_KeyPress);
             // 
             // pictureBoxSerialReceiving
             // 
@@ -616,6 +619,17 @@
             this.buttonSerialOpenLogFile.Text = "Open log";
             this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
             this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
+            // 
+            // checkBoxMute
+            // 
+            this.checkBoxMute.AutoSize = true;
+            this.checkBoxMute.Location = new System.Drawing.Point(4, 272);
+            this.checkBoxMute.Name = "checkBoxMute";
+            this.checkBoxMute.Size = new System.Drawing.Size(50, 17);
+            this.checkBoxMute.TabIndex = 43;
+            this.checkBoxMute.Text = "Mute";
+            this.checkBoxMute.UseVisualStyleBackColor = true;
+            this.checkBoxMute.CheckedChanged += new System.EventHandler(this.checkBoxMute_CheckedChanged);
             // 
             // FormFastenTerminal
             // 
@@ -703,6 +717,7 @@
 		private System.Windows.Forms.CheckBox checkBoxSerialReceiveBinaryMode;
 		private System.Windows.Forms.Button buttonSerialOpenLogFile;
 		private System.Windows.Forms.Button buttonSerialSaveConfig;
-	}
+        private System.Windows.Forms.CheckBox checkBoxMute;
+    }
 }
 
