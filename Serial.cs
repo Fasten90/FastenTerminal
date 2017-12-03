@@ -215,7 +215,7 @@ namespace FastenTerminal
 			{
 				System.Diagnostics.Debug.WriteLine(ex.ToString());
 				Log.SendErrorLog(ex.Message);
-				//put other, more interesting error handling here.
+				// TODO: Put other, more interesting error handling here.
 			}
 		}
 
@@ -494,7 +494,12 @@ namespace FastenTerminal
 				{
 					Log.SendErrorLog(e.Message);
 					logMessage = "[Application] Port error\n";
-				}
+
+                    if (PeriodSendingEnable)
+                    {
+                        PeriodSendingStop();
+                    }
+                }
 
 			}
 			else
@@ -559,7 +564,9 @@ namespace FastenTerminal
 			form.AppendTextSerialLogEvent(logMessage);
 			Log.SendEventLog(logMessage);
 
-		}
+            // Not running state
+            form.SerialPeriodSend_SetState(false);
+        }
 
 
 		private void timerPeriodTimerSending_Tick(object sender, EventArgs e)

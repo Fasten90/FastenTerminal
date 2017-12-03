@@ -745,14 +745,34 @@ namespace FastenTerminal
 		}
 
 
+
+        public void SerialPeriodSend_SetState(bool state)
+        {
+            // Enable, now it is running --> Write "Stop"
+            // Disabled, not it is not running --> Write "Start"
+            if  (state)
+            {
+                buttonSerialPeriodSendingStart.Text = "Stop";
+            }
+            else
+            {
+                buttonSerialPeriodSendingStart.Text = "Start";
+            }
+        }
+
+
+
         private void SerialPeriodSending_Start()
         {
+            // TODO: Has we opened serial port? Checked in below, but if isOpenedPort state is wrong?
+
+
             if (serial.PeriodSendingEnable)
             {
                 // Now, enabled, so need to stop
                 serial.PeriodSendingStop();
 
-                buttonSerialPeriodSendingStart.Text = "Start";
+                SerialPeriodSend_SetState(false);
             }
             else
             {
@@ -765,7 +785,7 @@ namespace FastenTerminal
                     serial.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
                         textBoxPeriodSendingMessage.Text);
 
-                    buttonSerialPeriodSendingStart.Text = "Stop";
+                    SerialPeriodSend_SetState(true);
                 }
                 else
                 {

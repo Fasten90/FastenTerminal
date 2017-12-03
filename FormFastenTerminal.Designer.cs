@@ -423,9 +423,9 @@
             this.labelSerialPeriodSendingConstTextMessage.AutoSize = true;
             this.labelSerialPeriodSendingConstTextMessage.Location = new System.Drawing.Point(4, 47);
             this.labelSerialPeriodSendingConstTextMessage.Name = "labelSerialPeriodSendingConstTextMessage";
-            this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(97, 13);
+            this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(94, 13);
             this.labelSerialPeriodSendingConstTextMessage.TabIndex = 4;
-            this.labelSerialPeriodSendingConstTextMessage.Text = "Sending message::";
+            this.labelSerialPeriodSendingConstTextMessage.Text = "Sending message:";
             // 
             // textBoxPeriodSendingMessage
             // 
