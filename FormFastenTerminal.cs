@@ -237,13 +237,21 @@ namespace FastenTerminal
 
         public void SerialSetStateOpenedOrClosed(bool isOpened)
         {
-            if (isOpened)
+            try
             {
-                buttonSerialPortOpen.Text = "Port close";
+                if (isOpened)
+                {
+                    buttonSerialPortOpen.Text = "Port close";
+                }
+                else
+                {
+                    buttonSerialPortOpen.Text = "Port open";
+                }
             }
-            else
+            catch (Exception e)
             {
-                buttonSerialPortOpen.Text = "Port open";
+                // TODO: Error, if this function called from other thread
+                Log.SendErrorLog("Serial set state error: " + e.Message);
             }
         }
 
