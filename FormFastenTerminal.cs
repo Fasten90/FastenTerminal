@@ -210,8 +210,14 @@ namespace FastenTerminal
 				}
 
 				comboBoxSerialPortCOM.SelectedIndex = 0;
-
 			}
+            else
+            {
+                // Empty list
+
+                // Clear
+                comboBoxSerialPortCOM.Items.Clear();
+            }
 
 
 			// Wrong
