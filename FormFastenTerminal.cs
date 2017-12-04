@@ -345,7 +345,7 @@ namespace FastenTerminal
 				return;
 			}
 
-			// Original text appending, It Work!!
+			// Original text appending, It is Work!!
 			//richTextBoxSerialPortTexts.Text += value;
 			if (message == "")
 			{
@@ -390,12 +390,13 @@ namespace FastenTerminal
 							break;
 
 						case EscapeType.Escape_StringWithoutEscape:
-							// Append first some character (string)
+							// Append first some character (string), which is not contain the Escape sequence!
 							AppendTextLog(message.Substring(0, startIndex), GlobalTextColor, GlobalBackgroundColor);
 							break;
 
 						case EscapeType.Escape_CLS:
 							DeleteSerialTexts();
+                            // TODO: It is not very good...
 							break;
 
 						case EscapeType.Escape_TextColor:
@@ -426,19 +427,26 @@ namespace FastenTerminal
 							AppendTextLog(message.Substring(startIndex), GlobalTextColor, GlobalBackgroundColor);
 							break;
 
+                        case EscapeType.Escape_Wrong:
 						default:
+                            // TODO: Drop this char
+                            Log.SendErrorLog("ERROR: Wrong escape sequence: " + message + "\", start index: "+ startIndex.ToString());
 							break;
 					}
 
-					// Cut message string
-					try
-					{
-						message = message.Substring(startIndex);
-					}
-					catch(Exception e)
-					{
-						Log.SendErrorLog("ERROR: Out of range in array: " + message + startIndex.ToString() + e.Message);
-					}
+                    // Cut escape message string
+                    if (startIndex != 0)    // && startIndex != message.Length
+                    {
+                        try
+                        {
+                            // Save message after processed Escape characters
+                            message = message.Substring(startIndex);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.SendErrorLog("ERROR: Out of range in array: " + message + startIndex.ToString() + e.Message);
+                        }
+                    }
 				}
 				// End of check escape
 			}

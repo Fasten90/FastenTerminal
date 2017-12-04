@@ -77,7 +77,6 @@ namespace FastenTerminal
 
 				// Setted escape
 				return escapeType;
-
 			}
 			else
 			{

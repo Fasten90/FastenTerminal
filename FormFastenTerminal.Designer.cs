@@ -586,6 +586,7 @@
             this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(531, 406);
             this.richTextBoxSerialPortTexts.TabIndex = 37;
             this.richTextBoxSerialPortTexts.Text = "";
+            this.richTextBoxSerialPortTexts.WordWrap = false;
             this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
             // 
             // buttonSerialPortSend
