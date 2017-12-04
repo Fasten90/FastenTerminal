@@ -18,8 +18,104 @@
       <CommandSendingString>#raspi setout 0</CommandSendingString>
     </Command>
     <Command>
-      <CommandName>Delflash</CommandName>
+      <CommandName>!! Delflash</CommandName>
       <CommandSendingString>!DELFLASH</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>EDUMP</CommandName>
+      <CommandSendingString>EDUMP</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Sleep mód (azonnal)</CommandName>
+      <CommandSendingString>!SLEEP</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Lekérdezés</CommandName>
+      <CommandSendingString>PARAM4</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Index</CommandName>
+      <CommandSendingString>SET_BLINK_STATE_OFF</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service - Dátum mód</CommandName>
+      <CommandSendingString>SET_SERVICE_KM_0</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service - KM</CommandName>
+      <CommandSendingString>SET_SERVICE_KM_150</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service - Date1</CommandName>
+      <CommandSendingString>SET_SERVICE_DATE1_17_05</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Serive - Date1?</CommandName>
+      <CommandSendingString>GET_SERVICE_DATE1</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service - Date2</CommandName>
+      <CommandSendingString>SET_SERVICE_DATE2_26_22</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service - Date2?</CommandName>
+      <CommandSendingString>GET_SERVICE_DATE2</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service mód?</CommandName>
+      <CommandSendingString>GET_SERVICE_KM</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service állapot?</CommandName>
+      <CommandSendingString>GET_SERVICE_STATE</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service - be</CommandName>
+      <CommandSendingString>SET_SERVICE_STATE_ON</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Service - ki</CommandName>
+      <CommandSendingString>SET_SERVICE_STATE_OFF</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>motor</CommandName>
+      <CommandSendingString>motor slide on</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>reset</CommandName>
+      <CommandSendingString>reset</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Reset</CommandName>
+      <CommandSendingString>!RESET_HW</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>PNA - ok</CommandName>
+      <CommandSendingString>#PNAOK</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>PNA - no code</CommandName>
+      <CommandSendingString>#CODE0010STOPASKING</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>PNA - ok 2</CommandName>
+      <CommandSendingString>#STATOK</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>PNA kód</CommandName>
+      <CommandSendingString>#CODE000512345</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>PNA rossz kód</CommandName>
+      <CommandSendingString>#CODE0005123456</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Illetéktelen PNA</CommandName>
+      <CommandSendingString>SET_ALARM_AUTH_MODE_PNA</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName>Rablás PNA</CommandName>
+      <CommandSendingString>SET_ALARM_DARM_MODE_PNA</CommandSendingString>
     </Command>
   </CommandList>
 </CommandConfigs>

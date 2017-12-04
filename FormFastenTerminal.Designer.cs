@@ -66,14 +66,6 @@
             this.buttonSerialPeriodSendingStart = new System.Windows.Forms.Button();
             this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
             this.numericUpDownSerialPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
-            this.tabPageCalculator = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelConstCalculatorDec = new System.Windows.Forms.Label();
-            this.labelConstCalculatorBinary = new System.Windows.Forms.Label();
-            this.textBoxCalculatorDec = new System.Windows.Forms.TextBox();
-            this.textBoxCalculatorHex = new System.Windows.Forms.TextBox();
-            this.textBoxCalculatorBin = new System.Windows.Forms.TextBox();
-            this.labelConstCalculatorHex = new System.Windows.Forms.Label();
             this.buttonSerialPortSend = new System.Windows.Forms.Button();
             this.comboBoxSerialSendingText = new System.Windows.Forms.ComboBox();
             this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
@@ -84,19 +76,17 @@
             this.buttonBackGroundColorChange = new System.Windows.Forms.Button();
             this.buttonForeGroundColorChange = new System.Windows.Forms.Button();
             this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
-            this.panelTextsLogs = new System.Windows.Forms.Panel();
-            this.panelConfigs = new System.Windows.Forms.Panel();
+            this.panelSettings = new System.Windows.Forms.Panel();
+            this.panelLog = new System.Windows.Forms.Panel();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageSerialCommunicationSettings.SuspendLayout();
             this.tabPageSerialCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).BeginInit();
             this.tabPageSerialPeriodSending.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).BeginInit();
-            this.tabPageCalculator.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
-            this.panelTextsLogs.SuspendLayout();
-            this.panelConfigs.SuspendLayout();
+            this.panelSettings.SuspendLayout();
+            this.panelLog.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -114,7 +104,7 @@
             // buttonClearSerialTexts
             // 
             this.buttonClearSerialTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearSerialTexts.Location = new System.Drawing.Point(117, 30);
+            this.buttonClearSerialTexts.Location = new System.Drawing.Point(133, 30);
             this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
             this.buttonClearSerialTexts.Size = new System.Drawing.Size(90, 23);
             this.buttonClearSerialTexts.TabIndex = 36;
@@ -126,7 +116,7 @@
             // 
             this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelConstTextSearching.AutoSize = true;
-            this.labelConstTextSearching.Location = new System.Drawing.Point(1, 7);
+            this.labelConstTextSearching.Location = new System.Drawing.Point(17, 7);
             this.labelConstTextSearching.Name = "labelConstTextSearching";
             this.labelConstTextSearching.Size = new System.Drawing.Size(44, 13);
             this.labelConstTextSearching.TabIndex = 33;
@@ -135,7 +125,7 @@
             // textBoxSerialTextFind
             // 
             this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSerialTextFind.Location = new System.Drawing.Point(55, 4);
+            this.textBoxSerialTextFind.Location = new System.Drawing.Point(71, 4);
             this.textBoxSerialTextFind.Name = "textBoxSerialTextFind";
             this.textBoxSerialTextFind.Size = new System.Drawing.Size(152, 20);
             this.textBoxSerialTextFind.TabIndex = 32;
@@ -147,15 +137,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommands);
             this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialPeriodSending);
-            this.tabControlSerialFunctions.Controls.Add(this.tabPageCalculator);
             this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommunicationSettings);
-            this.tabControlSerialFunctions.Location = new System.Drawing.Point(1, 60);
+            this.tabControlSerialFunctions.Location = new System.Drawing.Point(0, 60);
             this.tabControlSerialFunctions.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlSerialFunctions.Multiline = true;
             this.tabControlSerialFunctions.Name = "tabControlSerialFunctions";
             this.tabControlSerialFunctions.Padding = new System.Drawing.Point(0, 0);
             this.tabControlSerialFunctions.SelectedIndex = 0;
-            this.tabControlSerialFunctions.Size = new System.Drawing.Size(228, 391);
+            this.tabControlSerialFunctions.Size = new System.Drawing.Size(245, 398);
             this.tabControlSerialFunctions.TabIndex = 41;
             // 
             // tabPageSerialCommunicationSettings
@@ -180,10 +169,10 @@
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialTextColouring);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialLogScrollBottom);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialCopySelected);
-            this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageSerialCommunicationSettings.Name = "tabPageSerialCommunicationSettings";
             this.tabPageSerialCommunicationSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(220, 347);
+            this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(237, 372);
             this.tabPageSerialCommunicationSettings.TabIndex = 3;
             this.tabPageSerialCommunicationSettings.Text = "Configuration";
             this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
@@ -416,7 +405,7 @@
             this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 22);
             this.tabPageSerialCommands.Name = "tabPageSerialCommands";
             this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSerialCommands.Size = new System.Drawing.Size(211, 365);
+            this.tabPageSerialCommands.Size = new System.Drawing.Size(237, 372);
             this.tabPageSerialCommands.TabIndex = 0;
             this.tabPageSerialCommands.Text = "Commands";
             this.tabPageSerialCommands.UseVisualStyleBackColor = true;
@@ -424,7 +413,7 @@
             // buttonSerialFavouriteCommandsAdd
             // 
             this.buttonSerialFavouriteCommandsAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSerialFavouriteCommandsAdd.Location = new System.Drawing.Point(130, 324);
+            this.buttonSerialFavouriteCommandsAdd.Location = new System.Drawing.Point(130, 331);
             this.buttonSerialFavouriteCommandsAdd.Name = "buttonSerialFavouriteCommandsAdd";
             this.buttonSerialFavouriteCommandsAdd.Size = new System.Drawing.Size(62, 23);
             this.buttonSerialFavouriteCommandsAdd.TabIndex = 24;
@@ -435,7 +424,7 @@
             // buttonSerialFavouriteCommandsSave
             // 
             this.buttonSerialFavouriteCommandsSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSerialFavouriteCommandsSave.Location = new System.Drawing.Point(73, 324);
+            this.buttonSerialFavouriteCommandsSave.Location = new System.Drawing.Point(73, 331);
             this.buttonSerialFavouriteCommandsSave.Name = "buttonSerialFavouriteCommandsSave";
             this.buttonSerialFavouriteCommandsSave.Size = new System.Drawing.Size(51, 23);
             this.buttonSerialFavouriteCommandsSave.TabIndex = 23;
@@ -453,13 +442,13 @@
             this.dataGridViewFavCommands.MultiSelect = false;
             this.dataGridViewFavCommands.Name = "dataGridViewFavCommands";
             this.dataGridViewFavCommands.RowHeadersVisible = false;
-            this.dataGridViewFavCommands.Size = new System.Drawing.Size(192, 315);
+            this.dataGridViewFavCommands.Size = new System.Drawing.Size(234, 322);
             this.dataGridViewFavCommands.TabIndex = 22;
             // 
             // buttonSerialFavouriteCommandSending
             // 
             this.buttonSerialFavouriteCommandSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSerialFavouriteCommandSending.Location = new System.Drawing.Point(6, 324);
+            this.buttonSerialFavouriteCommandSending.Location = new System.Drawing.Point(6, 331);
             this.buttonSerialFavouriteCommandSending.Name = "buttonSerialFavouriteCommandSending";
             this.buttonSerialFavouriteCommandSending.Size = new System.Drawing.Size(61, 23);
             this.buttonSerialFavouriteCommandSending.TabIndex = 14;
@@ -474,10 +463,10 @@
             this.tabPageSerialPeriodSending.Controls.Add(this.buttonSerialPeriodSendingStart);
             this.tabPageSerialPeriodSending.Controls.Add(this.labelSerialPeriodSendingConstText);
             this.tabPageSerialPeriodSending.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
-            this.tabPageSerialPeriodSending.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSerialPeriodSending.Location = new System.Drawing.Point(4, 22);
             this.tabPageSerialPeriodSending.Name = "tabPageSerialPeriodSending";
             this.tabPageSerialPeriodSending.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(211, 347);
+            this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(237, 372);
             this.tabPageSerialPeriodSending.TabIndex = 2;
             this.tabPageSerialPeriodSending.Text = "Periodical sending";
             this.tabPageSerialPeriodSending.UseVisualStyleBackColor = true;
@@ -486,7 +475,7 @@
             // 
             this.labelSerialPeriodSendingConstTextMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSerialPeriodSendingConstTextMessage.AutoSize = true;
-            this.labelSerialPeriodSendingConstTextMessage.Location = new System.Drawing.Point(4, 47);
+            this.labelSerialPeriodSendingConstTextMessage.Location = new System.Drawing.Point(30, 47);
             this.labelSerialPeriodSendingConstTextMessage.Name = "labelSerialPeriodSendingConstTextMessage";
             this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(94, 13);
             this.labelSerialPeriodSendingConstTextMessage.TabIndex = 4;
@@ -495,7 +484,7 @@
             // textBoxPeriodSendingMessage
             // 
             this.textBoxPeriodSendingMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPeriodSendingMessage.Location = new System.Drawing.Point(6, 63);
+            this.textBoxPeriodSendingMessage.Location = new System.Drawing.Point(32, 63);
             this.textBoxPeriodSendingMessage.Name = "textBoxPeriodSendingMessage";
             this.textBoxPeriodSendingMessage.Size = new System.Drawing.Size(186, 20);
             this.textBoxPeriodSendingMessage.TabIndex = 3;
@@ -506,7 +495,7 @@
             // buttonSerialPeriodSendingStart
             // 
             this.buttonSerialPeriodSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSerialPeriodSendingStart.Location = new System.Drawing.Point(142, 8);
+            this.buttonSerialPeriodSendingStart.Location = new System.Drawing.Point(168, 8);
             this.buttonSerialPeriodSendingStart.Name = "buttonSerialPeriodSendingStart";
             this.buttonSerialPeriodSendingStart.Size = new System.Drawing.Size(50, 23);
             this.buttonSerialPeriodSendingStart.TabIndex = 2;
@@ -518,7 +507,7 @@
             // 
             this.labelSerialPeriodSendingConstText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSerialPeriodSendingConstText.AutoSize = true;
-            this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(3, 13);
+            this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(29, 13);
             this.labelSerialPeriodSendingConstText.Name = "labelSerialPeriodSendingConstText";
             this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(47, 13);
             this.labelSerialPeriodSendingConstText.TabIndex = 1;
@@ -527,7 +516,7 @@
             // numericUpDownSerialPeriodSendingTime
             // 
             this.numericUpDownSerialPeriodSendingTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(72, 11);
+            this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(98, 11);
             this.numericUpDownSerialPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
             this.numericUpDownSerialPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
             this.numericUpDownSerialPeriodSendingTime.TabIndex = 0;
@@ -537,94 +526,10 @@
             0,
             0});
             // 
-            // tabPageCalculator
-            // 
-            this.tabPageCalculator.Controls.Add(this.tableLayoutPanel1);
-            this.tabPageCalculator.Location = new System.Drawing.Point(4, 40);
-            this.tabPageCalculator.Name = "tabPageCalculator";
-            this.tabPageCalculator.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCalculator.Size = new System.Drawing.Size(211, 347);
-            this.tabPageCalculator.TabIndex = 4;
-            this.tabPageCalculator.Text = "Calculator";
-            this.tabPageCalculator.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.36123F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.63876F));
-            this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorDec, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorBinary, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorDec, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorHex, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxCalculatorBin, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelConstCalculatorHex, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 88);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // labelConstCalculatorDec
-            // 
-            this.labelConstCalculatorDec.AutoSize = true;
-            this.labelConstCalculatorDec.Location = new System.Drawing.Point(3, 0);
-            this.labelConstCalculatorDec.Name = "labelConstCalculatorDec";
-            this.labelConstCalculatorDec.Size = new System.Drawing.Size(45, 13);
-            this.labelConstCalculatorDec.TabIndex = 0;
-            this.labelConstCalculatorDec.Text = "Decimal";
-            this.labelConstCalculatorDec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelConstCalculatorBinary
-            // 
-            this.labelConstCalculatorBinary.AutoSize = true;
-            this.labelConstCalculatorBinary.Location = new System.Drawing.Point(3, 56);
-            this.labelConstCalculatorBinary.Name = "labelConstCalculatorBinary";
-            this.labelConstCalculatorBinary.Size = new System.Drawing.Size(36, 13);
-            this.labelConstCalculatorBinary.TabIndex = 2;
-            this.labelConstCalculatorBinary.Text = "Binary";
-            // 
-            // textBoxCalculatorDec
-            // 
-            this.textBoxCalculatorDec.Location = new System.Drawing.Point(84, 3);
-            this.textBoxCalculatorDec.Name = "textBoxCalculatorDec";
-            this.textBoxCalculatorDec.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCalculatorDec.TabIndex = 3;
-            this.textBoxCalculatorDec.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorDec_KeyPress);
-            // 
-            // textBoxCalculatorHex
-            // 
-            this.textBoxCalculatorHex.Location = new System.Drawing.Point(84, 31);
-            this.textBoxCalculatorHex.Name = "textBoxCalculatorHex";
-            this.textBoxCalculatorHex.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCalculatorHex.TabIndex = 4;
-            this.textBoxCalculatorHex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorHex_KeyPress);
-            // 
-            // textBoxCalculatorBin
-            // 
-            this.textBoxCalculatorBin.Location = new System.Drawing.Point(84, 59);
-            this.textBoxCalculatorBin.Name = "textBoxCalculatorBin";
-            this.textBoxCalculatorBin.Size = new System.Drawing.Size(100, 20);
-            this.textBoxCalculatorBin.TabIndex = 5;
-            this.textBoxCalculatorBin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCalculatorBin_KeyPress);
-            // 
-            // labelConstCalculatorHex
-            // 
-            this.labelConstCalculatorHex.AutoSize = true;
-            this.labelConstCalculatorHex.Location = new System.Drawing.Point(3, 28);
-            this.labelConstCalculatorHex.Name = "labelConstCalculatorHex";
-            this.labelConstCalculatorHex.Size = new System.Drawing.Size(68, 13);
-            this.labelConstCalculatorHex.TabIndex = 1;
-            this.labelConstCalculatorHex.Text = "Hexadecimal";
-            // 
             // buttonSerialPortSend
             // 
             this.buttonSerialPortSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSerialPortSend.Location = new System.Drawing.Point(503, 419);
+            this.buttonSerialPortSend.Location = new System.Drawing.Point(490, 426);
             this.buttonSerialPortSend.Name = "buttonSerialPortSend";
             this.buttonSerialPortSend.Size = new System.Drawing.Size(75, 23);
             this.buttonSerialPortSend.TabIndex = 39;
@@ -639,9 +544,9 @@
             this.comboBoxSerialSendingText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBoxSerialSendingText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxSerialSendingText.FormattingEnabled = true;
-            this.comboBoxSerialSendingText.Location = new System.Drawing.Point(3, 421);
+            this.comboBoxSerialSendingText.Location = new System.Drawing.Point(3, 428);
             this.comboBoxSerialSendingText.Name = "comboBoxSerialSendingText";
-            this.comboBoxSerialSendingText.Size = new System.Drawing.Size(494, 21);
+            this.comboBoxSerialSendingText.Size = new System.Drawing.Size(481, 21);
             this.comboBoxSerialSendingText.TabIndex = 42;
             this.comboBoxSerialSendingText.Text = "<Sending message with \\r\\n>";
             this.comboBoxSerialSendingText.Enter += new System.EventHandler(this.comboBoxSerialSendMessage_Enter);
@@ -650,7 +555,7 @@
             // pictureBoxSerialReceiving
             // 
             this.pictureBoxSerialReceiving.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxSerialReceiving.Location = new System.Drawing.Point(4, 30);
+            this.pictureBoxSerialReceiving.Location = new System.Drawing.Point(20, 30);
             this.pictureBoxSerialReceiving.Name = "pictureBoxSerialReceiving";
             this.pictureBoxSerialReceiving.Size = new System.Drawing.Size(20, 20);
             this.pictureBoxSerialReceiving.TabIndex = 43;
@@ -663,7 +568,7 @@
             // buttonSerialOpenLogFile
             // 
             this.buttonSerialOpenLogFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(36, 30);
+            this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(52, 30);
             this.buttonSerialOpenLogFile.Name = "buttonSerialOpenLogFile";
             this.buttonSerialOpenLogFile.Size = new System.Drawing.Size(75, 23);
             this.buttonSerialOpenLogFile.TabIndex = 44;
@@ -708,48 +613,48 @@
             this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
             this.richTextBoxSerialPortTexts.ReadOnly = true;
             this.richTextBoxSerialPortTexts.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(575, 412);
+            this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(562, 419);
             this.richTextBoxSerialPortTexts.TabIndex = 37;
             this.richTextBoxSerialPortTexts.Text = "";
             this.richTextBoxSerialPortTexts.WordWrap = false;
             this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
             // 
-            // panelTextsLogs
+            // panelSettings
             // 
-            this.panelTextsLogs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTextsLogs.Controls.Add(this.textBoxSerialTextFind);
-            this.panelTextsLogs.Controls.Add(this.labelConstTextSearching);
-            this.panelTextsLogs.Controls.Add(this.buttonSerialOpenLogFile);
-            this.panelTextsLogs.Controls.Add(this.buttonClearSerialTexts);
-            this.panelTextsLogs.Controls.Add(this.pictureBoxSerialReceiving);
-            this.panelTextsLogs.Controls.Add(this.tabControlSerialFunctions);
-            this.panelTextsLogs.Location = new System.Drawing.Point(590, 3);
-            this.panelTextsLogs.Name = "panelTextsLogs";
-            this.panelTextsLogs.Size = new System.Drawing.Size(229, 451);
-            this.panelTextsLogs.TabIndex = 45;
+            this.panelSettings.Controls.Add(this.textBoxSerialTextFind);
+            this.panelSettings.Controls.Add(this.labelConstTextSearching);
+            this.panelSettings.Controls.Add(this.buttonSerialOpenLogFile);
+            this.panelSettings.Controls.Add(this.buttonClearSerialTexts);
+            this.panelSettings.Controls.Add(this.pictureBoxSerialReceiving);
+            this.panelSettings.Controls.Add(this.tabControlSerialFunctions);
+            this.panelSettings.Location = new System.Drawing.Point(574, 3);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(245, 458);
+            this.panelSettings.TabIndex = 45;
             // 
-            // panelConfigs
+            // panelLog
             // 
-            this.panelConfigs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelConfigs.Controls.Add(this.comboBoxSerialSendingText);
-            this.panelConfigs.Controls.Add(this.buttonSerialPortSend);
-            this.panelConfigs.Controls.Add(this.richTextBoxSerialPortTexts);
-            this.panelConfigs.Location = new System.Drawing.Point(3, 3);
-            this.panelConfigs.Margin = new System.Windows.Forms.Padding(0);
-            this.panelConfigs.Name = "panelConfigs";
-            this.panelConfigs.Size = new System.Drawing.Size(581, 451);
-            this.panelConfigs.TabIndex = 46;
+            this.panelLog.Controls.Add(this.comboBoxSerialSendingText);
+            this.panelLog.Controls.Add(this.buttonSerialPortSend);
+            this.panelLog.Controls.Add(this.richTextBoxSerialPortTexts);
+            this.panelLog.Location = new System.Drawing.Point(3, 3);
+            this.panelLog.Margin = new System.Windows.Forms.Padding(0);
+            this.panelLog.Name = "panelLog";
+            this.panelLog.Size = new System.Drawing.Size(568, 458);
+            this.panelLog.TabIndex = 46;
             // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 462);
-            this.Controls.Add(this.panelConfigs);
-            this.Controls.Add(this.panelTextsLogs);
+            this.Controls.Add(this.panelLog);
+            this.Controls.Add(this.panelSettings);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "FormFastenTerminal";
@@ -764,14 +669,10 @@
             this.tabPageSerialPeriodSending.ResumeLayout(false);
             this.tabPageSerialPeriodSending.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).EndInit();
-            this.tabPageCalculator.ResumeLayout(false);
-            this.tabPageCalculator.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
-            this.panelTextsLogs.ResumeLayout(false);
-            this.panelTextsLogs.PerformLayout();
-            this.panelConfigs.ResumeLayout(false);
+            this.panelSettings.ResumeLayout(false);
+            this.panelSettings.PerformLayout();
+            this.panelLog.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -797,14 +698,6 @@
 		private System.Windows.Forms.CheckBox checkBoxSerialTextColouring;
 		private System.Windows.Forms.CheckBox checkBoxSerialLogScrollBottom;
 		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
-		private System.Windows.Forms.TabPage tabPageCalculator;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.Label labelConstCalculatorDec;
-		private System.Windows.Forms.Label labelConstCalculatorBinary;
-		private System.Windows.Forms.TextBox textBoxCalculatorDec;
-		private System.Windows.Forms.TextBox textBoxCalculatorHex;
-		private System.Windows.Forms.TextBox textBoxCalculatorBin;
-		private System.Windows.Forms.Label labelConstCalculatorHex;
 		private System.Windows.Forms.Button buttonSerialPortSend;
 		private System.Windows.Forms.Button buttonSerialPeriodSendingStart;
 		private System.Windows.Forms.Label labelSerialPeriodSendingConstText;
@@ -832,8 +725,8 @@
         private System.Windows.Forms.Button buttonBackGroundColorChange;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.RichTextBox richTextBoxSerialPortTexts;
-        private System.Windows.Forms.Panel panelTextsLogs;
-        private System.Windows.Forms.Panel panelConfigs;
+        private System.Windows.Forms.Panel panelSettings;
+        private System.Windows.Forms.Panel panelLog;
     }
 }
 

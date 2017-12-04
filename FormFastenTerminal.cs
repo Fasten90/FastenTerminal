@@ -942,66 +942,6 @@ namespace FastenTerminal
 			dataGridViewFavCommands.Refresh();
 		}
 
-
-
-		////////////////////////////////
-		//		Calculator
-		////////////////////////////////
-
-
-
-		private void textBoxCalculatorDec_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			// If pressed in enter
-			if (e.KeyChar == (char)Keys.Return)
-			{
-				// If pressed enter
-				Calculator.Calculate(CalculateType.Decimal, textBoxCalculatorDec.Text,
-							ref decimalString, ref hexadecimalString, ref binaryString);
-
-				textBoxCalculatorDec.Text = decimalString;
-				textBoxCalculatorHex.Text = hexadecimalString;
-				textBoxCalculatorBin.Text = binaryString;
-			}
-		}
-
-
-
-		private void textBoxCalculatorHex_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			// If pressed in enter
-			if (e.KeyChar == (char)Keys.Return)
-			{
-				// If pressed enter
-				Calculator.Calculate(CalculateType.Hexadecimal, textBoxCalculatorHex.Text,
-							ref decimalString, ref hexadecimalString, ref binaryString);
-
-				textBoxCalculatorDec.Text = decimalString;
-				textBoxCalculatorHex.Text = hexadecimalString;
-				textBoxCalculatorBin.Text = binaryString;
-			}
-		}
-
-
-
-		private void textBoxCalculatorBin_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			// If pressed in enter
-			if (e.KeyChar == (char)Keys.Return)
-			{
-				// If pressed enter
-				Calculator.Calculate(CalculateType.Binary, textBoxCalculatorBin.Text,
-							ref decimalString, ref hexadecimalString, ref binaryString);
-
-				textBoxCalculatorDec.Text = decimalString;
-				textBoxCalculatorHex.Text = hexadecimalString;
-				textBoxCalculatorBin.Text = binaryString;
-			}
-		}
-
-		////////////////////////////////////////////////////////////////////////////
-
-
 		void SerialReceiveEvent(bool isReceived)
 		{
 			if (isReceived)
