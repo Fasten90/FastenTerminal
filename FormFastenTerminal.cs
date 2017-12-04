@@ -131,6 +131,8 @@ namespace FastenTerminal
 
             // TODO: Add Print sending msg
 
+            // TODO: Add background - foregroundcolor
+
         }
 
 
