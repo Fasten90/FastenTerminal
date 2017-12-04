@@ -41,8 +41,10 @@ namespace FastenTerminal
 		private System.Windows.Forms.Timer PeriodSendingTimer;
 		private string PeriodSendingMessage = "";
 
-		// LOG - settings
-		public bool NeedLog = true;
+        public bool printSentEvent = true;
+
+        // LOG - settings
+        public bool NeedLog = true;
 		public bool LogWithDateTime = true;
 
 		// LOG - aux variables
@@ -193,7 +195,9 @@ namespace FastenTerminal
 
 						// Append to buffer
 						actualReceivedSerialMessage = serial.ReadExisting();
-						receivedSerialMessage += actualReceivedSerialMessage;
+                        // TODO: If we have a large message, this operation is slow (~5ms)
+                        receivedSerialMessage += actualReceivedSerialMessage;
+
 
 						// Append to GUI
 						AppendReceivedTextToGui(actualReceivedSerialMessage);
@@ -518,7 +522,7 @@ namespace FastenTerminal
 				SerialLog.SendLog(logMessage, true);
 			}
 
-			if (printOutput)
+			if (printOutput && printSentEvent)
 			{
 				form.AppendTextSerialLogEvent(logMessage);
 			}

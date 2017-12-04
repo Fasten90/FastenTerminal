@@ -101,13 +101,14 @@ namespace FastenTerminal
 
 			// Form configs
 			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
-		}
+
+            checkBoxPrintSend.Checked = serial.printSentEvent;
+        }
 
 
 
 		private void LoadConfigToForm()
 		{
-
 			comboBoxSerialPortCOM.Text = Config.config.portName;
 			comboBoxSerialPortBaudrate.Text = Config.config.baudrate;
 
@@ -116,7 +117,7 @@ namespace FastenTerminal
 
 			checkBoxSerialReceiveBinaryMode.Checked = Config.config.isBinaryMode;
 			checkBoxSerialHex.Checked = Config.config.isHex;
-		}
+        }
 
 
 
@@ -332,7 +333,6 @@ namespace FastenTerminal
 
 			// Note log (not received log!)
 			AppendTextLog(message, Color.Blue, Color.Yellow);
-
 		}
 
 
@@ -468,9 +468,16 @@ namespace FastenTerminal
 			if (checkBoxSerialLogScrollBottom.Checked)
 			{
 				// Append text to box
-				richTextBoxSerialPortTexts.AppendText(message);		// If you use it, it automatic scroll bottom
-				richTextBoxSerialPortTexts.ScrollToCaret();			// scroll top/bot without selection start setting
-			}
+				richTextBoxSerialPortTexts.AppendText(message);     // If you use it, it automatic scroll bottom
+                
+                // TODO: This operation is very slow! 49ms
+                richTextBoxSerialPortTexts.ScrollToCaret();			// scroll top/bot without selection start setting
+               
+                // set the current caret position to the end
+                //richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.Text.Length;
+                // scroll it automatically
+                //richTextBoxSerialPortTexts.ScrollToCaret();
+            }
 			else
 			{
 				// Append text to buffer
@@ -490,8 +497,6 @@ namespace FastenTerminal
 			SerialReceiveEvent(true);
 		}
 
-
-
 		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
 		{
 			ClearScreen();
@@ -499,7 +504,8 @@ namespace FastenTerminal
 
 		private void ClearScreen()
 		{
-			DeleteSerialTexts();
+            tempStringBuffer = "";
+            DeleteSerialTexts();
 			checkBoxSerialLogScrollBottom.Checked = true;
 			GlobalBackgroundColor = Form.DefaultBackColor;
 			GlobalTextColor = Color.Black;
@@ -511,34 +517,6 @@ namespace FastenTerminal
 			richTextBoxSerialPortTexts.Clear();
 		}
 
-
-
-		private void richTextBoxSerialPortTexts_TextChanged(object sender, EventArgs e)
-		{
-			/*
-			if (checkBoxSerialPortScrollBottom.Checked)
-			{
-				// set the current caret position to the end
-				richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.Text.Length;
-				// scroll it automatically
-				richTextBoxSerialPortTexts.ScrollToCaret();
-			}
-			else
-			{
-
-				// Selection start is equal then last cliked position
-				//richTextBoxSerialPortTexts.SelectionStart = SerialMessageActualCaret;
-				// scroll it automatically
-				//richTextBoxSerialPortTexts.ScrollToCaret();	// scroll top/bot without selection start setting
-
-				richTextBoxSerialPortTexts.Select(SerialMessageActualCaret, SerialMessageActualSelectionLength);			
-			}
-			*/
-
-		}
-
-
-
 		private void checkBoxSerialLogScrollBottom_CheckedChanged(object sender, EventArgs e)
 		{
 			// Added buffered string, and scroll bottom
@@ -546,13 +524,12 @@ namespace FastenTerminal
 			{
 				ScrollBottomAndAppendBuffer();
 			}
-
 		}
 
 		private void ScrollBottomAndAppendBuffer()
 		{
 			//richTextBoxSerialPortTexts.Text += tempStringBuffer;
-			AppendTextLog(tempStringBuffer,GlobalTextColor, GlobalBackgroundColor);
+			AppendTextLog(tempStringBuffer, GlobalTextColor, GlobalBackgroundColor);
 
 			tempStringBuffer = "";
 			//richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.TextLength;		// WRONG: Make stack overflow
@@ -563,7 +540,6 @@ namespace FastenTerminal
         {
             checkBoxSerialLogScrollBottom.Checked = isEnabled;
         }
-            
 
         private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
 		{
@@ -743,7 +719,6 @@ namespace FastenTerminal
 				// Search started flag: for TextChange event skipping
 				//isSearching = true;
 				this.richTextBoxSerialPortTexts.SelectionChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
-				this.richTextBoxSerialPortTexts.TextChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
 
 				// Find
 				// TODO: This is the First searched item...
@@ -768,7 +743,6 @@ namespace FastenTerminal
 				// Search started flag: for TextChange event skipping
 				//isSearching = false;
 				this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
-				this.richTextBoxSerialPortTexts.TextChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_TextChanged);
 			}
 		}
 
@@ -1013,6 +987,7 @@ namespace FastenTerminal
 
 		void SerialReceivePictureChange (bool isReceived)
 		{
+            // Show "Receive picture", if changed
 			if (isReceived)
 			{
 				if (IsreceivedIconIsGreen != isReceived)
@@ -1137,6 +1112,15 @@ namespace FastenTerminal
             }
         }
 
+        private void checkBoxWordWrap_CheckedChanged(object sender, EventArgs e)
+        {
+            richTextBoxSerialPortTexts.WordWrap = checkBoxWordWrap.Checked;
+        }
+
+        private void checkBoxPrintSend_CheckedChanged(object sender, EventArgs e)
+        {
+            serial.printSentEvent = checkBoxPrintSend.Checked;
+        }
 
     }   // End of class
 }	// End of namespace

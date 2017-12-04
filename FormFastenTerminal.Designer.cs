@@ -37,6 +37,7 @@
             this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
             this.tabPageSerialCommunicationSettings = new System.Windows.Forms.TabPage();
+            this.checkBoxMute = new System.Windows.Forms.CheckBox();
             this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
             this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialConfigClearSendMessageTextAfterSend = new System.Windows.Forms.CheckBox();
@@ -76,7 +77,8 @@
             this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
             this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
             this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
-            this.checkBoxMute = new System.Windows.Forms.CheckBox();
+            this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
+            this.checkBoxPrintSend = new System.Windows.Forms.CheckBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageSerialCommunicationSettings.SuspendLayout();
             this.tabPageSerialCommands.SuspendLayout();
@@ -145,6 +147,8 @@
             // 
             // tabPageSerialCommunicationSettings
             // 
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxPrintSend);
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxWordWrap);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxMute);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialSaveConfig);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
@@ -167,6 +171,17 @@
             this.tabPageSerialCommunicationSettings.TabIndex = 3;
             this.tabPageSerialCommunicationSettings.Text = "Configuration";
             this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMute
+            // 
+            this.checkBoxMute.AutoSize = true;
+            this.checkBoxMute.Location = new System.Drawing.Point(4, 272);
+            this.checkBoxMute.Name = "checkBoxMute";
+            this.checkBoxMute.Size = new System.Drawing.Size(50, 17);
+            this.checkBoxMute.TabIndex = 43;
+            this.checkBoxMute.Text = "Mute";
+            this.checkBoxMute.UseVisualStyleBackColor = true;
+            this.checkBoxMute.CheckedChanged += new System.EventHandler(this.checkBoxMute_CheckedChanged);
             // 
             // buttonSerialSaveConfig
             // 
@@ -562,6 +577,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxSerialPortTexts.AutoWordSelection = true;
+            this.richTextBoxSerialPortTexts.DetectUrls = false;
             this.richTextBoxSerialPortTexts.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.richTextBoxSerialPortTexts.Location = new System.Drawing.Point(3, 4);
             this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
@@ -620,16 +636,27 @@
             this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
             this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
             // 
-            // checkBoxMute
+            // checkBoxWordWrap
             // 
-            this.checkBoxMute.AutoSize = true;
-            this.checkBoxMute.Location = new System.Drawing.Point(4, 272);
-            this.checkBoxMute.Name = "checkBoxMute";
-            this.checkBoxMute.Size = new System.Drawing.Size(50, 17);
-            this.checkBoxMute.TabIndex = 43;
-            this.checkBoxMute.Text = "Mute";
-            this.checkBoxMute.UseVisualStyleBackColor = true;
-            this.checkBoxMute.CheckedChanged += new System.EventHandler(this.checkBoxMute_CheckedChanged);
+            this.checkBoxWordWrap.AutoSize = true;
+            this.checkBoxWordWrap.Location = new System.Drawing.Point(4, 296);
+            this.checkBoxWordWrap.Name = "checkBoxWordWrap";
+            this.checkBoxWordWrap.Size = new System.Drawing.Size(78, 17);
+            this.checkBoxWordWrap.TabIndex = 44;
+            this.checkBoxWordWrap.Text = "Word wrap";
+            this.checkBoxWordWrap.UseVisualStyleBackColor = true;
+            this.checkBoxWordWrap.CheckedChanged += new System.EventHandler(this.checkBoxWordWrap_CheckedChanged);
+            // 
+            // checkBoxPrintSend
+            // 
+            this.checkBoxPrintSend.AutoSize = true;
+            this.checkBoxPrintSend.Location = new System.Drawing.Point(4, 319);
+            this.checkBoxPrintSend.Name = "checkBoxPrintSend";
+            this.checkBoxPrintSend.Size = new System.Drawing.Size(103, 17);
+            this.checkBoxPrintSend.TabIndex = 45;
+            this.checkBoxPrintSend.Text = "Print send event";
+            this.checkBoxPrintSend.UseVisualStyleBackColor = true;
+            this.checkBoxPrintSend.CheckedChanged += new System.EventHandler(this.checkBoxPrintSend_CheckedChanged);
             // 
             // FormFastenTerminal
             // 
@@ -718,6 +745,8 @@
 		private System.Windows.Forms.Button buttonSerialOpenLogFile;
 		private System.Windows.Forms.Button buttonSerialSaveConfig;
         private System.Windows.Forms.CheckBox checkBoxMute;
+        private System.Windows.Forms.CheckBox checkBoxWordWrap;
+        private System.Windows.Forms.CheckBox checkBoxPrintSend;
     }
 }
 
