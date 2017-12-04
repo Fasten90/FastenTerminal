@@ -596,6 +596,8 @@
             // 
             this.comboBoxSerialSendingText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSerialSendingText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxSerialSendingText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxSerialSendingText.FormattingEnabled = true;
             this.comboBoxSerialSendingText.Location = new System.Drawing.Point(3, 418);
             this.comboBoxSerialSendingText.Name = "comboBoxSerialSendingText";
