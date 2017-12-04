@@ -421,6 +421,11 @@ namespace FastenTerminal
 						case EscapeType.Escape_Short_NeedAppend:
 							// Save to buffer and wait for continue
 							tempStringEscapeBuffer = message;
+                            if (message.Length > 50)
+                            {
+                                Log.SendErrorLog("ERROR: Escape_Short_NeedAppend error (too large message): " + message + "\"");
+                                startIndex = 1;
+                            }
 							break;
 
 						case EscapeType.Escape_Skip_NotImplemented:
