@@ -80,7 +80,7 @@ namespace FastenTerminal
 			// Serial config
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
 			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
-			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
+			//serial.newLineString = checkBoxSerialAppendPerRPerN.Checked;
 			
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
@@ -103,6 +103,11 @@ namespace FastenTerminal
 			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
 
             checkBoxPrintSend.Checked = serial.printSentEvent;
+
+            comboBoxNewLineType.Text = "\\r\\n";
+
+            // Serial list refresh
+            SerialPeriodicalRefreshStart();
         }
 
 
@@ -117,11 +122,14 @@ namespace FastenTerminal
 
 			checkBoxSerialReceiveBinaryMode.Checked = Config.config.isBinaryMode;
 			checkBoxSerialHex.Checked = Config.config.isHex;
+
+            // TODO: Add newLineString
+
         }
 
 
 
-		private void SaveConfig()
+        private void SaveConfig()
 		{
 			Config.config.portName = comboBoxSerialPortCOM.Text;
 			Config.config.baudrate = comboBoxSerialPortBaudrate.Text;
@@ -157,20 +165,12 @@ namespace FastenTerminal
 			}
 		}
 
-
-
 		private void RefreshTitle()
 		{
 			// For example: "FastenTerminal - COM9 - 9600"
 			this.Text = ApplicationName + " - " + serial.stateInfo;
 		}
 
-
-
-		/// <summary>
-		/// Notify on taskbar
-		/// </summary>
-		/// <param name="message"></param>
 		private void MessageForUser(String message)
 		{
 			if (NotifyIsEnabled)
@@ -187,7 +187,6 @@ namespace FastenTerminal
 		}
 
 
-
 		////////////////////////////////////////////////
 		//			 SERIAL
 		////////////////////////////////////////////////
@@ -199,6 +198,13 @@ namespace FastenTerminal
 			SerialRefresh();
 		}
 
+        private void SerialPeriodicalRefreshStart()
+        {
+            // Received
+            timerCheckSerialPorts.Interval = 500;   // 0.5 sec
+            timerCheckSerialPorts.Stop();
+            timerCheckSerialPorts.Start();           // Restart
+        }
 
 		private void SerialRefresh()
 		{
@@ -428,6 +434,7 @@ namespace FastenTerminal
                             if (message.Length > 50)
                             {
                                 Log.SendErrorLog("ERROR: Escape_Short_NeedAppend error (too large message): " + message + "\"");
+                                MessageForUser("Fatal error! Tell this problem the developer!");
                                 startIndex = 1;
                             }
 							break;
@@ -440,7 +447,8 @@ namespace FastenTerminal
 						default:
                             // TODO: Drop this char
                             Log.SendErrorLog("ERROR: Wrong escape sequence: " + message + "\", start index: "+ startIndex.ToString());
-							break;
+                            MessageForUser("Fatal error! Tell this problem the developer!");
+                            break;
 					}
 
                     // Cut escape message string
@@ -454,6 +462,7 @@ namespace FastenTerminal
                         catch (Exception e)
                         {
                             Log.SendErrorLog("ERROR: Out of range in array: " + message + startIndex.ToString() + e.Message);
+                            MessageForUser("Fatal error! Tell this problem the developer!");
                         }
                     }
 				}
@@ -564,7 +573,6 @@ namespace FastenTerminal
 
         private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
 		{
-
 			// Selected a text, do not scroll!
 			if (richTextBoxSerialPortTexts.SelectionStart != richTextBoxSerialPortTexts.TextLength)
 			{
@@ -847,7 +855,7 @@ namespace FastenTerminal
 
 		private void checkSerialAppendPerRPerN_CheckedChanged(object sender, EventArgs e)
 		{
-			serial.needAppendPerRPerN = checkBoxSerialAppendPerRPerN.Checked;
+
 		}
 
 
@@ -986,7 +994,7 @@ namespace FastenTerminal
 		////////////////////////////////////////////////////////////////////////////
 
 
-		void SerialReceiveEvent (bool isReceived)
+		void SerialReceiveEvent(bool isReceived)
 		{
 			if (isReceived)
 			{
@@ -1006,7 +1014,7 @@ namespace FastenTerminal
 
 
 
-		void SerialReceivePictureChange (bool isReceived)
+        void SerialReceivePictureChange(bool isReceived)
 		{
             // Show "Receive picture", if changed
 			if (isReceived)
@@ -1142,6 +1150,47 @@ namespace FastenTerminal
         {
             serial.printSentEvent = checkBoxPrintSend.Checked;
         }
+
+        private void timerCheckSerialPorts_Tick(object sender, EventArgs e)
+        {
+            // Check serial ports
+            SerialRefresh();
+
+            // If has COM port, stop
+            if (comboBoxSerialPortCOM.Items.Count > 0)
+            {
+                timerCheckSerialPorts.Stop();
+            }
+        }
+
+        private String ConvertNewLineToReal(String newLineTypeName)
+        {
+            String newLineString = "";
+
+            if (newLineTypeName != null)
+            {
+                if (newLineTypeName == "\\r\\n")
+                {
+                    newLineString = "\r\n";
+                }
+                else if (newLineTypeName == "\\r")
+                {
+                    newLineString = "\r";
+                }
+                else if (newLineTypeName == "\\n")
+                {
+                    newLineString = "\n";
+                }
+            }
+
+            return newLineString;
+        }
+
+        private void comboBoxNewLineType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            serial.newLineString = ConvertNewLineToReal(comboBoxNewLineType.Text);
+        }
+
 
     }   // End of class
 }	// End of namespace

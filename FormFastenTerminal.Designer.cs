@@ -41,7 +41,6 @@
             this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
             this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialConfigClearSendMessageTextAfterSend = new System.Windows.Forms.CheckBox();
-            this.checkBoxSerialAppendPerRPerN = new System.Windows.Forms.CheckBox();
             this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
             this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
@@ -79,6 +78,9 @@
             this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
             this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
             this.checkBoxPrintSend = new System.Windows.Forms.CheckBox();
+            this.timerCheckSerialPorts = new System.Windows.Forms.Timer(this.components);
+            this.comboBoxNewLineType = new System.Windows.Forms.ComboBox();
+            this.labelConstNewLineTypeName = new System.Windows.Forms.Label();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageSerialCommunicationSettings.SuspendLayout();
             this.tabPageSerialCommands.SuspendLayout();
@@ -149,13 +151,14 @@
             // 
             // tabPageSerialCommunicationSettings
             // 
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.labelConstNewLineTypeName);
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxNewLineType);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxPrintSend);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxWordWrap);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxMute);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialSaveConfig);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialConfigClearSendMessageTextAfterSend);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialAppendPerRPerN);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogWithDateTime);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialHex);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortCOM);
@@ -216,19 +219,6 @@
             this.checkBoxSerialConfigClearSendMessageTextAfterSend.Text = "Clear after send";
             this.checkBoxSerialConfigClearSendMessageTextAfterSend.UseVisualStyleBackColor = true;
             this.checkBoxSerialConfigClearSendMessageTextAfterSend.CheckedChanged += new System.EventHandler(this.checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged);
-            // 
-            // checkBoxSerialAppendPerRPerN
-            // 
-            this.checkBoxSerialAppendPerRPerN.AutoSize = true;
-            this.checkBoxSerialAppendPerRPerN.Checked = true;
-            this.checkBoxSerialAppendPerRPerN.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSerialAppendPerRPerN.Location = new System.Drawing.Point(6, 224);
-            this.checkBoxSerialAppendPerRPerN.Name = "checkBoxSerialAppendPerRPerN";
-            this.checkBoxSerialAppendPerRPerN.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxSerialAppendPerRPerN.TabIndex = 39;
-            this.checkBoxSerialAppendPerRPerN.Text = "\\r\\n";
-            this.checkBoxSerialAppendPerRPerN.UseVisualStyleBackColor = true;
-            this.checkBoxSerialAppendPerRPerN.CheckedChanged += new System.EventHandler(this.checkSerialAppendPerRPerN_CheckedChanged);
             // 
             // checkBoxLogWithDateTime
             // 
@@ -661,6 +651,36 @@
             this.checkBoxPrintSend.UseVisualStyleBackColor = true;
             this.checkBoxPrintSend.CheckedChanged += new System.EventHandler(this.checkBoxPrintSend_CheckedChanged);
             // 
+            // timerCheckSerialPorts
+            // 
+            this.timerCheckSerialPorts.Interval = 500;
+            this.timerCheckSerialPorts.Tick += new System.EventHandler(this.timerCheckSerialPorts_Tick);
+            // 
+            // comboBoxNewLineType
+            // 
+            this.comboBoxNewLineType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNewLineType.FormattingEnabled = true;
+            this.comboBoxNewLineType.Items.AddRange(new object[] {
+            "\\r\\n",
+            "\\r",
+            "\\n",
+            "\\0",
+            "-"});
+            this.comboBoxNewLineType.Location = new System.Drawing.Point(6, 223);
+            this.comboBoxNewLineType.Name = "comboBoxNewLineType";
+            this.comboBoxNewLineType.Size = new System.Drawing.Size(72, 21);
+            this.comboBoxNewLineType.TabIndex = 46;
+            this.comboBoxNewLineType.SelectedIndexChanged += new System.EventHandler(this.comboBoxNewLineType_SelectedIndexChanged);
+            // 
+            // labelConstNewLineTypeName
+            // 
+            this.labelConstNewLineTypeName.AutoSize = true;
+            this.labelConstNewLineTypeName.Location = new System.Drawing.Point(84, 226);
+            this.labelConstNewLineTypeName.Name = "labelConstNewLineTypeName";
+            this.labelConstNewLineTypeName.Size = new System.Drawing.Size(71, 13);
+            this.labelConstNewLineTypeName.TabIndex = 47;
+            this.labelConstNewLineTypeName.Text = "New line type";
+            // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -736,7 +756,6 @@
 		private System.Windows.Forms.TextBox textBoxPeriodSendingMessage;
 		private System.Windows.Forms.Label labelSerialPeriodSendingConstTextMessage;
 		private System.Windows.Forms.CheckBox checkBoxLogWithDateTime;
-		private System.Windows.Forms.CheckBox checkBoxSerialAppendPerRPerN;
 		private System.Windows.Forms.ComboBox comboBoxSerialSendingText;
 		private System.Windows.Forms.CheckBox checkBoxSerialConfigClearSendMessageTextAfterSend;
 		private System.Windows.Forms.DataGridView dataGridViewFavCommands;
@@ -750,6 +769,9 @@
         private System.Windows.Forms.CheckBox checkBoxMute;
         private System.Windows.Forms.CheckBox checkBoxWordWrap;
         private System.Windows.Forms.CheckBox checkBoxPrintSend;
+        private System.Windows.Forms.Timer timerCheckSerialPorts;
+        private System.Windows.Forms.ComboBox comboBoxNewLineType;
+        private System.Windows.Forms.Label labelConstNewLineTypeName;
     }
 }
 

@@ -34,7 +34,7 @@ namespace FastenTerminal
 		public bool receiverModeBinary = false; // TODO:
 		public bool needToConvertHex = false;   // TODO:
 
-		public bool needAppendPerRPerN { get; set; }
+		public string newLineString { get; set; }
 
 		public bool PeriodSendingEnable = false;
 		public float PeriodSendingTime = 5.0f;
@@ -476,10 +476,9 @@ namespace FastenTerminal
 		{
 			String logMessage;
 
-			if (needAppendPerRPerN)
+			if (newLineString != null)
 			{
-                // TODO ...
-				message += "\r\n";
+				message += newLineString;
 			}
 
 			if (isOpenedPort)
