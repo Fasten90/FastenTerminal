@@ -19,8 +19,8 @@ namespace FastenTerminal
 {
     public partial class FormFastenTerminal : Form
     {
-		// Configs:
-		public bool NotifyIsEnabled = false;
+		// Const application configs:
+		public bool NotifyIsEnabled = true;
 
 		private const String ApplicationName = "FastenTerminal";
 
@@ -180,6 +180,10 @@ namespace FastenTerminal
 				notifyIconApplication.BalloonTipTitle = "FastenTerminal";
 				notifyIconApplication.ShowBalloonTip(1000);
 			}
+            else
+            {
+                Console.WriteLine("Notify: " + message);
+            }
 		}
 
 
@@ -551,7 +555,11 @@ namespace FastenTerminal
 
         private void setScrollState(bool isEnabled)
         {
-            checkBoxSerialLogScrollBottom.Checked = isEnabled;
+            if (checkBoxSerialLogScrollBottom.Checked != isEnabled)
+            {
+                checkBoxSerialLogScrollBottom.Checked = isEnabled;
+                MessageForUser("Scrolling is turned " + ((isEnabled) ? "on" : "off"));
+            }
         }
 
         private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)

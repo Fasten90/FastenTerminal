@@ -98,7 +98,9 @@
             // 
             // notifyIconApplication
             // 
+            this.notifyIconApplication.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconApplication.Icon")));
             this.notifyIconApplication.Text = "FastenTerminal";
+            this.notifyIconApplication.Visible = true;
             // 
             // buttonClearSerialTexts
             // 
