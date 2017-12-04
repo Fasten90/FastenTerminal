@@ -557,24 +557,28 @@ namespace FastenTerminal
 			tempStringBuffer = "";
 			//richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.TextLength;		// WRONG: Make stack overflow
 			//richTextBoxSerialPortTexts.ScrollToCaret();	// windows is jumping
-
-			
 		}
 
-		private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
+        private void setScrollState(bool isEnabled)
+        {
+            checkBoxSerialLogScrollBottom.Checked = isEnabled;
+        }
+            
+
+        private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
 		{
 
 			// Selected a text, do not scroll!
 			if (richTextBoxSerialPortTexts.SelectionStart != richTextBoxSerialPortTexts.TextLength)
 			{
-				checkBoxSerialLogScrollBottom.Checked = false;
+                setScrollState(false);
 			}
 
 			if (!checkBoxSerialLogScrollBottom.Checked
 				&& (richTextBoxSerialPortTexts.SelectionStart == richTextBoxSerialPortTexts.TextLength) )
 			{
-				// Not scrolling, but click at end
-				checkBoxSerialLogScrollBottom.Checked = true;
+                // Not scrolling, but click at end
+                setScrollState(true);
 				ScrollBottomAndAppendBuffer();
 				return;
 			}
@@ -594,9 +598,9 @@ namespace FastenTerminal
 			if (checkBoxSerialCopySelected.Checked)
 			{
 				// Copy the selected text to the Clipboard.
-
 				if (richTextBoxSerialPortTexts.SelectionLength > 0)
 				{
+                    // Copy text to clipboard
 					richTextBoxSerialPortTexts.Copy();
 
 					// TODO: Copy to textbox?
@@ -618,6 +622,7 @@ namespace FastenTerminal
 
 		private void buttonSerialPortSend_Click(object sender, EventArgs e)
 		{
+            // Pressed Send button
 			SerialMessageSending();
 		}
 
@@ -680,7 +685,10 @@ namespace FastenTerminal
 				SerialAddLastCommand(message);
 
 				SerialMessageText_Clear();
-			}
+
+                // Set scroll to enable
+                setScrollState(true);
+            }
 		}
 
 
