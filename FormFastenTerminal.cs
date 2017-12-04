@@ -125,6 +125,12 @@ namespace FastenTerminal
 
             // TODO: Add newLineString
 
+            // TODO: Add mute
+
+            // TODO: Add word wrap
+
+            // TODO: Add Print sending msg
+
         }
 
 
@@ -1191,6 +1197,20 @@ namespace FastenTerminal
             serial.newLineString = ConvertNewLineToReal(comboBoxNewLineType.Text);
         }
 
+        private void buttonBackGroundColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                richTextBoxSerialPortTexts.BackColor = colorDialog.Color;
+            }
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                richTextBoxSerialPortTexts.ForeColor = colorDialog.Color;
+            }
+        }
     }   // End of class
 }	// End of namespace

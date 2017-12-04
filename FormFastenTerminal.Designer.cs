@@ -37,6 +37,10 @@
             this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
             this.tabPageSerialCommunicationSettings = new System.Windows.Forms.TabPage();
+            this.labelConstNewLineTypeName = new System.Windows.Forms.Label();
+            this.comboBoxNewLineType = new System.Windows.Forms.ComboBox();
+            this.checkBoxPrintSend = new System.Windows.Forms.CheckBox();
+            this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
             this.checkBoxMute = new System.Windows.Forms.CheckBox();
             this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
             this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
@@ -76,11 +80,10 @@
             this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
             this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
             this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
-            this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
-            this.checkBoxPrintSend = new System.Windows.Forms.CheckBox();
             this.timerCheckSerialPorts = new System.Windows.Forms.Timer(this.components);
-            this.comboBoxNewLineType = new System.Windows.Forms.ComboBox();
-            this.labelConstNewLineTypeName = new System.Windows.Forms.Label();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.buttonBackGroundColor = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageSerialCommunicationSettings.SuspendLayout();
             this.tabPageSerialCommands.SuspendLayout();
@@ -151,6 +154,8 @@
             // 
             // tabPageSerialCommunicationSettings
             // 
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.button2);
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonBackGroundColor);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.labelConstNewLineTypeName);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxNewLineType);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxPrintSend);
@@ -176,6 +181,53 @@
             this.tabPageSerialCommunicationSettings.TabIndex = 3;
             this.tabPageSerialCommunicationSettings.Text = "Configuration";
             this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
+            // 
+            // labelConstNewLineTypeName
+            // 
+            this.labelConstNewLineTypeName.AutoSize = true;
+            this.labelConstNewLineTypeName.Location = new System.Drawing.Point(84, 226);
+            this.labelConstNewLineTypeName.Name = "labelConstNewLineTypeName";
+            this.labelConstNewLineTypeName.Size = new System.Drawing.Size(71, 13);
+            this.labelConstNewLineTypeName.TabIndex = 47;
+            this.labelConstNewLineTypeName.Text = "New line type";
+            // 
+            // comboBoxNewLineType
+            // 
+            this.comboBoxNewLineType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNewLineType.FormattingEnabled = true;
+            this.comboBoxNewLineType.Items.AddRange(new object[] {
+            "\\r\\n",
+            "\\r",
+            "\\n",
+            "\\0",
+            "-"});
+            this.comboBoxNewLineType.Location = new System.Drawing.Point(6, 223);
+            this.comboBoxNewLineType.Name = "comboBoxNewLineType";
+            this.comboBoxNewLineType.Size = new System.Drawing.Size(72, 21);
+            this.comboBoxNewLineType.TabIndex = 46;
+            this.comboBoxNewLineType.SelectedIndexChanged += new System.EventHandler(this.comboBoxNewLineType_SelectedIndexChanged);
+            // 
+            // checkBoxPrintSend
+            // 
+            this.checkBoxPrintSend.AutoSize = true;
+            this.checkBoxPrintSend.Location = new System.Drawing.Point(4, 319);
+            this.checkBoxPrintSend.Name = "checkBoxPrintSend";
+            this.checkBoxPrintSend.Size = new System.Drawing.Size(103, 17);
+            this.checkBoxPrintSend.TabIndex = 45;
+            this.checkBoxPrintSend.Text = "Print send event";
+            this.checkBoxPrintSend.UseVisualStyleBackColor = true;
+            this.checkBoxPrintSend.CheckedChanged += new System.EventHandler(this.checkBoxPrintSend_CheckedChanged);
+            // 
+            // checkBoxWordWrap
+            // 
+            this.checkBoxWordWrap.AutoSize = true;
+            this.checkBoxWordWrap.Location = new System.Drawing.Point(4, 296);
+            this.checkBoxWordWrap.Name = "checkBoxWordWrap";
+            this.checkBoxWordWrap.Size = new System.Drawing.Size(78, 17);
+            this.checkBoxWordWrap.TabIndex = 44;
+            this.checkBoxWordWrap.Text = "Word wrap";
+            this.checkBoxWordWrap.UseVisualStyleBackColor = true;
+            this.checkBoxWordWrap.CheckedChanged += new System.EventHandler(this.checkBoxWordWrap_CheckedChanged);
             // 
             // checkBoxMute
             // 
@@ -258,7 +310,7 @@
             // 
             this.buttonSerialPortOpen.Location = new System.Drawing.Point(102, 35);
             this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
-            this.buttonSerialPortOpen.Size = new System.Drawing.Size(90, 23);
+            this.buttonSerialPortOpen.Size = new System.Drawing.Size(100, 23);
             this.buttonSerialPortOpen.TabIndex = 1;
             this.buttonSerialPortOpen.Text = "Port open";
             this.buttonSerialPortOpen.UseVisualStyleBackColor = true;
@@ -305,7 +357,7 @@
             // 
             this.buttonSerialPortRefresh.Location = new System.Drawing.Point(102, 6);
             this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
-            this.buttonSerialPortRefresh.Size = new System.Drawing.Size(90, 23);
+            this.buttonSerialPortRefresh.Size = new System.Drawing.Size(100, 23);
             this.buttonSerialPortRefresh.TabIndex = 8;
             this.buttonSerialPortRefresh.Text = "Port Refresh";
             this.buttonSerialPortRefresh.UseVisualStyleBackColor = true;
@@ -631,57 +683,30 @@
             this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
             this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
             // 
-            // checkBoxWordWrap
-            // 
-            this.checkBoxWordWrap.AutoSize = true;
-            this.checkBoxWordWrap.Location = new System.Drawing.Point(4, 296);
-            this.checkBoxWordWrap.Name = "checkBoxWordWrap";
-            this.checkBoxWordWrap.Size = new System.Drawing.Size(78, 17);
-            this.checkBoxWordWrap.TabIndex = 44;
-            this.checkBoxWordWrap.Text = "Word wrap";
-            this.checkBoxWordWrap.UseVisualStyleBackColor = true;
-            this.checkBoxWordWrap.CheckedChanged += new System.EventHandler(this.checkBoxWordWrap_CheckedChanged);
-            // 
-            // checkBoxPrintSend
-            // 
-            this.checkBoxPrintSend.AutoSize = true;
-            this.checkBoxPrintSend.Location = new System.Drawing.Point(4, 319);
-            this.checkBoxPrintSend.Name = "checkBoxPrintSend";
-            this.checkBoxPrintSend.Size = new System.Drawing.Size(103, 17);
-            this.checkBoxPrintSend.TabIndex = 45;
-            this.checkBoxPrintSend.Text = "Print send event";
-            this.checkBoxPrintSend.UseVisualStyleBackColor = true;
-            this.checkBoxPrintSend.CheckedChanged += new System.EventHandler(this.checkBoxPrintSend_CheckedChanged);
-            // 
             // timerCheckSerialPorts
             // 
             this.timerCheckSerialPorts.Interval = 500;
             this.timerCheckSerialPorts.Tick += new System.EventHandler(this.timerCheckSerialPorts_Tick);
             // 
-            // comboBoxNewLineType
+            // buttonBackGroundColor
             // 
-            this.comboBoxNewLineType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxNewLineType.FormattingEnabled = true;
-            this.comboBoxNewLineType.Items.AddRange(new object[] {
-            "\\r\\n",
-            "\\r",
-            "\\n",
-            "\\0",
-            "-"});
-            this.comboBoxNewLineType.Location = new System.Drawing.Point(6, 223);
-            this.comboBoxNewLineType.Name = "comboBoxNewLineType";
-            this.comboBoxNewLineType.Size = new System.Drawing.Size(72, 21);
-            this.comboBoxNewLineType.TabIndex = 46;
-            this.comboBoxNewLineType.SelectedIndexChanged += new System.EventHandler(this.comboBoxNewLineType_SelectedIndexChanged);
+            this.buttonBackGroundColor.Location = new System.Drawing.Point(127, 64);
+            this.buttonBackGroundColor.Name = "buttonBackGroundColor";
+            this.buttonBackGroundColor.Size = new System.Drawing.Size(75, 23);
+            this.buttonBackGroundColor.TabIndex = 48;
+            this.buttonBackGroundColor.Text = "Background";
+            this.buttonBackGroundColor.UseVisualStyleBackColor = true;
+            this.buttonBackGroundColor.Click += new System.EventHandler(this.buttonBackGroundColor_Click);
             // 
-            // labelConstNewLineTypeName
+            // button2
             // 
-            this.labelConstNewLineTypeName.AutoSize = true;
-            this.labelConstNewLineTypeName.Location = new System.Drawing.Point(84, 226);
-            this.labelConstNewLineTypeName.Name = "labelConstNewLineTypeName";
-            this.labelConstNewLineTypeName.Size = new System.Drawing.Size(71, 13);
-            this.labelConstNewLineTypeName.TabIndex = 47;
-            this.labelConstNewLineTypeName.Text = "New line type";
+            this.button2.Location = new System.Drawing.Point(127, 94);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 49;
+            this.button2.Text = "Foreground";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormFastenTerminal
             // 
@@ -774,6 +799,9 @@
         private System.Windows.Forms.Timer timerCheckSerialPorts;
         private System.Windows.Forms.ComboBox comboBoxNewLineType;
         private System.Windows.Forms.Label labelConstNewLineTypeName;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonBackGroundColor;
+        private System.Windows.Forms.ColorDialog colorDialog;
     }
 }
 
