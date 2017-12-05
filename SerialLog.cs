@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace FastenTerminal
 {
@@ -16,11 +13,12 @@ namespace FastenTerminal
 
 		static SerialLog()
 		{
-			// Old version:
-			//Logger = new TextWriterTraceListener("Serial.log", "SerialLog");
+            logFileName = "Serial_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
 
-			logFileName = "Serial_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
-			Logger = new TextWriterTraceListener(logFileName, "SerialLog");
+            String logFilePath = Environment.CurrentDirectory + @"\LOG\" + logFileName;
+            FileStream logFileStream = new FileStream(logFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+
+			Logger = new TextWriterTraceListener(logFileStream, "SerialLog");
 
 			SendLog("Serial LOG has been started.", true);
 		}

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace FastenTerminal
 {
@@ -30,14 +27,25 @@ namespace FastenTerminal
 
 		static Log()
 		{
-			EventLogger = new TextWriterTraceListener("Events.log", "EventLog");
-			ErrorLogger = new TextWriterTraceListener("Errors.log", "ErrorLog");
+            /*
+            // Example:
+            string logFilePath = Environment.ExpandEnvironmentVariables("%userprofile%") + @"\AppData\MyApp\MyApp.log";
+            FileStream hlogFile = new FileStream(logFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            TextWriterTraceListener myListener = new TextWriterTraceListener(hlogFile);
+            Trace.Listeners.Add(myListener);
+            Trace.WriteLine("Sample Log");
+            */
 
-			SendEventLog("EventLog has been started.");
+            string eventLogFilePath = Environment.CurrentDirectory + @"\LOG\Events.log";
+            FileStream eventLogFileStream = new FileStream(eventLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            EventLogger = new TextWriterTraceListener(eventLogFileStream, "EventLog");    // "Events.log"
+
+            string errorLogFilePath = Environment.CurrentDirectory + @"\LOG\Errors.log";
+            FileStream errorLogFileStream = new FileStream(errorLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            ErrorLogger = new TextWriterTraceListener(errorLogFileStream, "ErrorLog");    // "Errors.log"
+
+            SendEventLog("EventLog has been started.");
 			SendErrorLog("ErrorLog has been started.");
-			//EventLogger.WriteLine("#EventLog has been started.");
-			//EventLogger.WriteLine(DateTime.Now.ToString());
-
 		}
 
 		static public void SendEventLog(String text)
