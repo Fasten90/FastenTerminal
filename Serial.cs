@@ -66,8 +66,6 @@ namespace FastenTerminal
 		public bool needPrint = true;
 
 
-
-
 		public Serial(System.IO.Ports.SerialPort serial, FormFastenTerminal form)
 		{
 			this.serial = serial;
@@ -320,7 +318,6 @@ namespace FastenTerminal
 					// Process message (Log and process)
 					ProcessLine(processMessage);
 				}
-
 			}
 		}
 

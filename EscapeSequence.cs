@@ -43,36 +43,63 @@ namespace FastenTerminal
 				{
 					// The first character is not the ESC, first should print string
 					stringLength = startIndex;
-					escapeType = EscapeType.Escape_StringWithoutEscape;
+					return EscapeType.Escape_StringWithoutEscape;
+                    // If startIndex is not 0, do not process more time
 				}
-				// Check it is CLS?
-				else if (GetItIsClearScreen(message.Substring(startIndex), out escapeType, out length))
+
+                bool results;
+                bool needAppend = false;
+
+                // Check it is CLS?
+                results = GetItIsClearScreen(message.Substring(startIndex), out escapeType, out length);
+                if (results)
 				{
 					// It is CLS (Clear screen)
 					stringLength = length;
 				}
-				// Jump top left			
-				else if (GetItIsStepStopLeft(message.Substring(startIndex), out escapeType, out length))
+                else if (escapeType == EscapeType.Escape_Short_NeedAppend)
+                {
+                    needAppend = true;
+                }
+
+                if (!results)
+                {
+                    // Jump top left			
+                    results = GetItIsStepStopLeft(message.Substring(startIndex), out escapeType, out length);
+                    if (results)
+                    {
+                        // It is CLS (Clear screen)
+                        stringLength = length;
+                    }
+                    else if (escapeType == EscapeType.Escape_Short_NeedAppend)
+                    {
+                        needAppend = true;
+                    }
+                }
+
+                if (!results)
+                {
+                    // Check it is  color escape?
+                    results = GetColor(message.Substring(startIndex), out color, out escapeType, out length);
+                    if (results)
+                    {
+                        // It is color escape
+                        // Check next string (which can sending)
+                        stringLength = length;
+                    }
+                    else if (escapeType == EscapeType.Escape_Short_NeedAppend)
+                    {
+                        needAppend = true;
+                    }
+                }
+
+                // Wrong escape character, skip first escape char
+                // TODO: This check only the last "Short_NeedAppend"
+                if (needAppend)
 				{
-					// It is CLS (Clear screen)
-					stringLength = length;
-				}
-				// Check it is  color escape?
-				else if (GetColor(message.Substring(startIndex), out color, out escapeType, out length))
-				{
-					// It is color escape
-					// Check next string (which can sending)
-					stringLength = length;
-				}
-				else
-				{
-					// Wrong escape character, skip first escape char
-					if (escapeType == EscapeType.Escape_Short_NeedAppend)
-					{
-						// Need append the next string
-						stringLength = message.Length;
-						return EscapeType.Escape_Short_NeedAppend;
-					}
+					// Need append the next string
+					stringLength = message.Length;
+					return EscapeType.Escape_Short_NeedAppend;
 				}
 
 				// Setted escape
@@ -93,6 +120,7 @@ namespace FastenTerminal
 		private static bool GetItIsClearScreen(string escapeMessage, out EscapeType escapeType, out int length)
 		{
 			// CSI n J
+            // E.g. ESC[2J
 			// n = 2, entire display clear
 			length = 0;
 			escapeType = EscapeType.Escape_Nothing;
@@ -125,7 +153,7 @@ namespace FastenTerminal
 		private static bool GetItIsStepStopLeft(string escapeMessage, out EscapeType escapeType, out int length)
 		{
 			// CSI ;1H
-			// ESC[1;1H
+			// E.g.: ESC[1;1H
 			// Jump cursor to step top left
 			length = 0;
 			escapeType = EscapeType.Escape_Nothing;
@@ -158,7 +186,7 @@ namespace FastenTerminal
 
 
 		/// <summary>
-		/// Get color from string (within escape sequences ... ESC[31m...
+		/// Get color from string (within escape sequences ... ESC[31m...)
 		/// </summary>
 		/// <param name="escapeMessage"></param>
 		/// <returns></returns>
