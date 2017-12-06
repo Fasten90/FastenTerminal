@@ -35,13 +35,38 @@ namespace FastenTerminal
             Trace.Listeners.Add(myListener);
             Trace.WriteLine("Sample Log");
             */
+            string eventFileName = @"\LOG\Events.log";
+            string eventLogFilePath = Environment.CurrentDirectory + eventFileName;
+            FileStream eventLogFileStream;
+            try
+            {
+                eventLogFileStream = new FileStream(eventLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error with event file using: " + e.Message);
+                eventFileName = @"\LOG\Events_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
+                eventLogFilePath = Environment.CurrentDirectory + eventFileName;
+                eventLogFileStream = new FileStream(eventLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            }
 
-            string eventLogFilePath = Environment.CurrentDirectory + @"\LOG\Events.log";
-            FileStream eventLogFileStream = new FileStream(eventLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
             EventLogger = new TextWriterTraceListener(eventLogFileStream, "EventLog");    // "Events.log"
 
-            string errorLogFilePath = Environment.CurrentDirectory + @"\LOG\Errors.log";
-            FileStream errorLogFileStream = new FileStream(errorLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            string errorFileName = @"\LOG\Errors.log";
+            string errorLogFilePath = Environment.CurrentDirectory + errorFileName;
+            FileStream errorLogFileStream;
+            try
+            {
+                errorLogFileStream = new FileStream(errorLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error with error file using: " + e.Message);
+                errorFileName = @"\LOG\Errors" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
+                errorLogFilePath = Environment.CurrentDirectory + errorFileName;
+                errorLogFileStream = new FileStream(errorLogFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+            }
+
             ErrorLogger = new TextWriterTraceListener(errorLogFileStream, "ErrorLog");    // "Errors.log"
 
             SendEventLog("EventLog has been started.");
