@@ -50,11 +50,6 @@ namespace FastenTerminal
 
 		private bool IsreceivedIconIsGreen = false;
 
-		// For Calculator
-		String decimalString;
-		String hexadecimalString;
-		String binaryString;
-
 		// Const images
 		const String imgLocReceiveGreen = @"Images\img_receive_green.png";
 		const String imgLocReceiveEmpty = @"Images\img_receive_empty.png";
@@ -78,7 +73,7 @@ namespace FastenTerminal
 			serial = new Serial(serialPortDevice, this);
 
 			// Serial config
-			serial.NeedLog = checkBoxSerialPortLog.Checked;
+			serial.NeedLog = checkBoxLogEnable.Checked;
 			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 			
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
@@ -113,13 +108,19 @@ namespace FastenTerminal
 
 		private void LoadConfigToForm()
 		{
+            // Application configs
+            // TODO: Add background - foregroundcolor
+
+            // Serial configs
             // TODO: Delete com port
-			comboBoxSerialPortCOM.Text = Config.config.portName;
+            comboBoxSerialPortCOM.Text = Config.config.portName;
 			comboBoxSerialPortBaudrate.Text = Config.config.baudrate;
 
-			checkBoxSerialPortLog.Checked = Config.config.needLog;
+            // Logs configs
+			checkBoxLogEnable.Checked = Config.config.needLog;
 			checkBoxLogWithDateTime.Checked = Config.config.dateLog;
 
+            // Message configs
 			checkBoxSerialReceiveBinaryMode.Checked = Config.config.isBinaryMode;
 
             // TODO: Add newLineString
@@ -129,9 +130,6 @@ namespace FastenTerminal
             // TODO: Add word wrap
 
             // TODO: Add Print sending msg
-
-            // TODO: Add background - foregroundcolor
-
         }
 
 
@@ -142,7 +140,7 @@ namespace FastenTerminal
 			Config.config.portName = comboBoxSerialPortCOM.Text;
 			Config.config.baudrate = comboBoxSerialPortBaudrate.Text;
 
-			Config.config.needLog = checkBoxSerialPortLog.Checked;
+			Config.config.needLog = checkBoxLogEnable.Checked;
 			Config.config.dateLog = checkBoxLogWithDateTime.Checked;
 
 			Config.config.isBinaryMode = checkBoxSerialReceiveBinaryMode.Checked;
@@ -713,7 +711,7 @@ namespace FastenTerminal
 
 		private void checkBoxSerialPortLog_CheckedChanged(object sender, EventArgs e)
 		{
-			serial.NeedLog = checkBoxSerialPortLog.Checked;
+			serial.NeedLog = checkBoxLogEnable.Checked;
 
 			if (!serial.NeedLog)
 			{

@@ -61,7 +61,7 @@
             this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
             this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
             this.buttonSerialPortOpen = new System.Windows.Forms.Button();
-            this.checkBoxSerialPortLog = new System.Windows.Forms.CheckBox();
+            this.checkBoxLogEnable = new System.Windows.Forms.CheckBox();
             this.comboBoxSerialPortBaudrate = new System.Windows.Forms.ComboBox();
             this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
             this.checkBoxEscapeSequenceEnable = new System.Windows.Forms.CheckBox();
@@ -134,9 +134,9 @@
             // 
             this.tabControlSerialFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommands);
-            this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialPeriodSending);
             this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommunicationSettings);
+            this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialPeriodSending);
+            this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommands);
             this.tabControlSerialFunctions.Location = new System.Drawing.Point(0, 60);
             this.tabControlSerialFunctions.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlSerialFunctions.Multiline = true;
@@ -291,7 +291,7 @@
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogWithDateTime);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortCOM);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortOpen);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialPortLog);
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogEnable);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortBaudrate);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortRefresh);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxEscapeSequenceEnable);
@@ -328,7 +328,7 @@
             // labelConstNewLineTypeName
             // 
             this.labelConstNewLineTypeName.AutoSize = true;
-            this.labelConstNewLineTypeName.Location = new System.Drawing.Point(84, 226);
+            this.labelConstNewLineTypeName.Location = new System.Drawing.Point(131, 226);
             this.labelConstNewLineTypeName.Name = "labelConstNewLineTypeName";
             this.labelConstNewLineTypeName.Size = new System.Drawing.Size(71, 13);
             this.labelConstNewLineTypeName.TabIndex = 47;
@@ -344,7 +344,7 @@
             "\\n",
             "\\0",
             "-"});
-            this.comboBoxNewLineType.Location = new System.Drawing.Point(6, 223);
+            this.comboBoxNewLineType.Location = new System.Drawing.Point(130, 202);
             this.comboBoxNewLineType.Name = "comboBoxNewLineType";
             this.comboBoxNewLineType.Size = new System.Drawing.Size(72, 21);
             this.comboBoxNewLineType.TabIndex = 46;
@@ -353,18 +353,18 @@
             // checkBoxPrintSend
             // 
             this.checkBoxPrintSend.AutoSize = true;
-            this.checkBoxPrintSend.Location = new System.Drawing.Point(4, 319);
+            this.checkBoxPrintSend.Location = new System.Drawing.Point(6, 271);
             this.checkBoxPrintSend.Name = "checkBoxPrintSend";
-            this.checkBoxPrintSend.Size = new System.Drawing.Size(103, 17);
+            this.checkBoxPrintSend.Size = new System.Drawing.Size(100, 17);
             this.checkBoxPrintSend.TabIndex = 45;
-            this.checkBoxPrintSend.Text = "Print send event";
+            this.checkBoxPrintSend.Text = "Log send event";
             this.checkBoxPrintSend.UseVisualStyleBackColor = true;
             this.checkBoxPrintSend.CheckedChanged += new System.EventHandler(this.checkBoxPrintSend_CheckedChanged);
             // 
             // checkBoxWordWrap
             // 
             this.checkBoxWordWrap.AutoSize = true;
-            this.checkBoxWordWrap.Location = new System.Drawing.Point(4, 296);
+            this.checkBoxWordWrap.Location = new System.Drawing.Point(6, 248);
             this.checkBoxWordWrap.Name = "checkBoxWordWrap";
             this.checkBoxWordWrap.Size = new System.Drawing.Size(78, 17);
             this.checkBoxWordWrap.TabIndex = 44;
@@ -375,7 +375,7 @@
             // checkBoxMute
             // 
             this.checkBoxMute.AutoSize = true;
-            this.checkBoxMute.Location = new System.Drawing.Point(4, 272);
+            this.checkBoxMute.Location = new System.Drawing.Point(6, 224);
             this.checkBoxMute.Name = "checkBoxMute";
             this.checkBoxMute.Size = new System.Drawing.Size(50, 17);
             this.checkBoxMute.TabIndex = 43;
@@ -407,7 +407,7 @@
             // checkBoxSerialConfigClearSendMessageTextAfterSend
             // 
             this.checkBoxSerialConfigClearSendMessageTextAfterSend.AutoSize = true;
-            this.checkBoxSerialConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(4, 248);
+            this.checkBoxSerialConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(6, 200);
             this.checkBoxSerialConfigClearSendMessageTextAfterSend.Name = "checkBoxSerialConfigClearSendMessageTextAfterSend";
             this.checkBoxSerialConfigClearSendMessageTextAfterSend.Size = new System.Drawing.Size(100, 17);
             this.checkBoxSerialConfigClearSendMessageTextAfterSend.TabIndex = 40;
@@ -450,16 +450,16 @@
             // 
             // checkBoxSerialPortLog
             // 
-            this.checkBoxSerialPortLog.AutoSize = true;
-            this.checkBoxSerialPortLog.Checked = true;
-            this.checkBoxSerialPortLog.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSerialPortLog.Location = new System.Drawing.Point(6, 62);
-            this.checkBoxSerialPortLog.Name = "checkBoxSerialPortLog";
-            this.checkBoxSerialPortLog.Size = new System.Drawing.Size(72, 17);
-            this.checkBoxSerialPortLog.TabIndex = 2;
-            this.checkBoxSerialPortLog.Text = "Log to file";
-            this.checkBoxSerialPortLog.UseVisualStyleBackColor = true;
-            this.checkBoxSerialPortLog.CheckedChanged += new System.EventHandler(this.checkBoxSerialPortLog_CheckedChanged);
+            this.checkBoxLogEnable.AutoSize = true;
+            this.checkBoxLogEnable.Checked = true;
+            this.checkBoxLogEnable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxLogEnable.Location = new System.Drawing.Point(6, 62);
+            this.checkBoxLogEnable.Name = "checkBoxSerialPortLog";
+            this.checkBoxLogEnable.Size = new System.Drawing.Size(72, 17);
+            this.checkBoxLogEnable.TabIndex = 2;
+            this.checkBoxLogEnable.Text = "Log to file";
+            this.checkBoxLogEnable.UseVisualStyleBackColor = true;
+            this.checkBoxLogEnable.CheckedChanged += new System.EventHandler(this.checkBoxSerialPortLog_CheckedChanged);
             // 
             // comboBoxSerialPortBaudrate
             // 
@@ -495,13 +495,13 @@
             this.buttonSerialPortRefresh.UseVisualStyleBackColor = true;
             this.buttonSerialPortRefresh.Click += new System.EventHandler(this.buttonSerialPortRefresh_Click);
             // 
-            // checkBoxSerialTextColouring
+            // checkBoxEscapeSequenceEnable
             // 
             this.checkBoxEscapeSequenceEnable.AutoSize = true;
             this.checkBoxEscapeSequenceEnable.Checked = true;
             this.checkBoxEscapeSequenceEnable.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEscapeSequenceEnable.Location = new System.Drawing.Point(6, 154);
-            this.checkBoxEscapeSequenceEnable.Name = "checkBoxSerialTextColouring";
+            this.checkBoxEscapeSequenceEnable.Name = "checkBoxEscapeSequenceEnable";
             this.checkBoxEscapeSequenceEnable.Size = new System.Drawing.Size(117, 17);
             this.checkBoxEscapeSequenceEnable.TabIndex = 31;
             this.checkBoxEscapeSequenceEnable.Text = "Escape sequences";
@@ -676,7 +676,7 @@
 		private System.Windows.Forms.TabPage tabPageSerialCommunicationSettings;
 		private System.Windows.Forms.ComboBox comboBoxSerialPortCOM;
 		private System.Windows.Forms.Button buttonSerialPortOpen;
-		private System.Windows.Forms.CheckBox checkBoxSerialPortLog;
+		private System.Windows.Forms.CheckBox checkBoxLogEnable;
 		private System.Windows.Forms.ComboBox comboBoxSerialPortBaudrate;
 		private System.Windows.Forms.Button buttonSerialPortRefresh;
 		private System.Windows.Forms.CheckBox checkBoxEscapeSequenceEnable;
