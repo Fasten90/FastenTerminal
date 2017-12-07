@@ -9,13 +9,13 @@ namespace FastenTerminal
 		// Copied form "Log.cs"
 
 		static TextWriterTraceListener Logger;
-		static public String logFileName = "";
+		static public String logFilePath = "";
 
 		static SerialLog()
 		{
-            logFileName = "Serial_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
+            String  logFileName = "Serial_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
 
-            String logFilePath = Environment.CurrentDirectory + @"\LOG\" + logFileName;
+            logFilePath = Environment.CurrentDirectory + @"\LOG\" + logFileName;
             FileStream logFileStream = new FileStream(logFilePath, FileMode.OpenOrCreate, FileAccess.Write);
 
 			Logger = new TextWriterTraceListener(logFileStream, "SerialLog");

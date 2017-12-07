@@ -145,33 +145,33 @@ namespace FastenTerminal
 						int nbrDataRead = serial.Read(data, 0, dataLength);
 
 						// Append to buffer
-						actualReceivedSerialMessage = Common.ByteArrayToString(data);
-						receivedSerialMessage += actualReceivedSerialMessage;
+						actualReceivedMessage = Common.ByteArrayToString(data);
+						receivedMessage += actualReceivedMessage;
 
 						// Append to GUI
-						AppendReceivedTextToGui(actualReceivedSerialMessage);
+						AppendReceivedTextToGui(actualReceivedMessage);
 					}
 					else
 					{
                         // String mode
 
 						// Append to buffer
-						actualReceivedSerialMessage = serial.ReadExisting();
+						actualReceivedMessage = serial.ReadExisting();
                         // TODO: If we have a large message, this operation is slow (~5ms)
-                        receivedSerialMessage += actualReceivedSerialMessage;
+                        receivedMessage += actualReceivedMessage;
 
 
 						// Append to GUI
-						AppendReceivedTextToGui(actualReceivedSerialMessage);
+						AppendReceivedTextToGui(actualReceivedMessage);
 					}
 				}
 
 
-				// Need to process?
-				if (receivedSerialMessage.Contains(ProcessStartCharacter))
+                // Need to save? (have we a line?)
+                if (receivedMessage.IndexOfAny(LogSaveStartCharacters.ToCharArray()) != -1)
 				{
 					// Received "process character"
-					ThreadPool.QueueUserWorkItem(DataReceived);
+					ThreadPool.QueueUserWorkItem(SaveLineLog);
 				}
 			}
 			catch (Exception ex)
@@ -246,7 +246,7 @@ namespace FastenTerminal
 					logMessage = "[Application] Port error\n";
 
                     // Stop periodical sending
-                    if (PeriodSendingEnable)
+                    if (PeriodSending_Enable)
                     {
                         PeriodSendingStop();
                     }
@@ -259,7 +259,7 @@ namespace FastenTerminal
 			{
 				logMessage = "[Application] Cannot send message, because there is not opened port\n";
 
-				if (PeriodSendingEnable)
+				if (PeriodSending_Enable)
 				{
 					PeriodSendingStop();
 				}
@@ -283,20 +283,20 @@ namespace FastenTerminal
 		public void PeriodSendingStart(float sec, string message)
 		{
 			// Start periodical sending
-			PeriodSendingEnable = true;
-			PeriodSendingTime = sec;
-			PeriodSendingMessage = message;
+			PeriodSending_Enable = true;
+			PeriodSending_Time = sec;
+			PeriodSending_Message = message;
 
 			// Start timer
-			PeriodSendingTimer = new System.Windows.Forms.Timer();
-			PeriodSendingTimer.Interval = (int)(PeriodSendingTime * 1000);    // =millisec
-			PeriodSendingTimer.Enabled = true;
-			PeriodSendingTimer.Start();
-			PeriodSendingTimer.Tick += new System.EventHandler(this.timerPeriodTimerSending_Tick);
+			PeriodSending_Timer = new System.Windows.Forms.Timer();
+			PeriodSending_Timer.Interval = (int)(PeriodSending_Time * 1000);    // =millisec
+			PeriodSending_Timer.Enabled = true;
+			PeriodSending_Timer.Start();
+			PeriodSending_Timer.Tick += new System.EventHandler(this.timerPeriodTimerSending_Tick);
 
 			// Log
 			string logMessage = "[Application] Periodical message sending started...\n" +
-				"  Time: " + PeriodSendingTime.ToString() + "  Message: " + PeriodSendingMessage + "\n";
+				"  Time: " + PeriodSending_Time.ToString() + "  Message: " + PeriodSending_Message + "\n";
 
 			form.AppendTextSerialLogEvent(logMessage);
 			Log.SendEventLog(logMessage);
@@ -307,11 +307,11 @@ namespace FastenTerminal
 		public void PeriodSendingStop()
 		{
 			// Stop periodical sending
-			PeriodSendingEnable = false;
+			PeriodSending_Enable = false;
 
 			// Stop timer
-			PeriodSendingTimer.Stop();
-			PeriodSendingTimer.Enabled = false;
+			PeriodSending_Timer.Stop();
+			PeriodSending_Timer.Enabled = false;
 
 			// Log
 			string logMessage = "[Application] Periodical message sending stopped\n";
@@ -330,7 +330,7 @@ namespace FastenTerminal
 			// Period Sending time actual
 
 			// Send message
-			SendMessage(PeriodSendingMessage, true);
+			SendMessage(PeriodSending_Message, true);
 
 			// Log
 			//form.AppendTextSerialLogEvent("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");

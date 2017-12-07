@@ -73,9 +73,9 @@ namespace FastenTerminal
 
 		Process.Start(fileName);
 		 */
-		public static void OpenTextFile(String fileName)
+		public static void OpenTextFile(String logFilePath)
 		{
-			Process.Start(fileName);
+			Process.Start(logFilePath);
 		}
 
 	}

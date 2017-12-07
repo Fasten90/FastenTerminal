@@ -20,7 +20,7 @@ namespace FastenTerminal
         // LOG - aux variables
         protected String logMessage = "";
 
-        public char ProcessStartCharacter = '\r';
+        protected string LogSaveStartCharacters = "\r\n\0";
 
 
         public bool printSentEvent = true;
@@ -31,16 +31,16 @@ namespace FastenTerminal
 
 
         protected Object receiveLocker = new Object();
-        protected string receivedSerialMessage = "";
-        protected string actualReceivedSerialMessage = "";
+        protected string receivedMessage = "";
+        protected string actualReceivedMessage = "";
 
         protected Object messageLocker = new Object();
 
         // Periodical sending
-        public bool PeriodSendingEnable = false;
-        public float PeriodSendingTime = 5.0f;
-        protected System.Windows.Forms.Timer PeriodSendingTimer;
-        protected string PeriodSendingMessage = "";
+        public bool PeriodSending_Enable = false;
+        public float PeriodSending_Time = 5.0f;
+        protected System.Windows.Forms.Timer PeriodSending_Timer;
+        protected string PeriodSending_Message = "";
 
         // Form
         protected FormFastenTerminal form;
@@ -49,7 +49,7 @@ namespace FastenTerminal
         public bool needPrint = true;
 
 
-        public void DataReceived(object state)
+        public void SaveLineLog(object state)
         {
             String checkMsg = "";
 
@@ -57,7 +57,7 @@ namespace FastenTerminal
             // Event function - received serial message
 
             // For secure: drop "" (null) string
-            if (receivedSerialMessage == "")
+            if (receivedMessage == "")
             {
                 // Do not Log this null message
                 return;
@@ -67,14 +67,13 @@ namespace FastenTerminal
             // Get string from serial buffer
             lock (receiveLocker)
             {
-                checkMsg = receivedSerialMessage;
-                receivedSerialMessage = "";
+                checkMsg = receivedMessage;
+                receivedMessage = "";
             }
 
 
             // OLD version: PROBLEM: once character is printed one line
             // Example: received "Fasten", printed in log sometimes, "F", "a", "st", "en" "\r\n"
-
 
             // Save received message
             lock (messageLocker)
@@ -115,19 +114,19 @@ namespace FastenTerminal
 
 
 
-        private void saveMsg(string processMessage)
+        private void saveMsg(string msg)
         {
             // Send to protocol Checker
             // TODO: do with "event" or delegate
 
             // Process
-            if (processMessage != "")
+            if (msg != "")
             {
                 // Need log?
                 if (NeedLog)
                 {
                     // LogWithDateTime parameter --> put or do not put DateTime to log file
-                    SerialLog.SendLog(processMessage, LogWithDateTime);
+                    SerialLog.SendLog(msg, LogWithDateTime);
                 }
             }
 
@@ -143,6 +142,7 @@ namespace FastenTerminal
 
             if (message != "")
             {
+                // TODO: Why dont used .IndexOfAny("*&#".ToCharArray()) != -1
                 // newline characters
                 List<char> newlineCharacters = new List<char>();
                 newlineCharacters.Add('\r');

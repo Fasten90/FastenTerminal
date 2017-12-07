@@ -812,7 +812,7 @@ namespace FastenTerminal
             // TODO: Has we opened serial port? Checked in below, but if isOpenedPort state is wrong?
 
 
-            if (serial.PeriodSendingEnable)
+            if (serial.PeriodSending_Enable)
             {
                 // Now, enabled, so need to stop
                 serial.PeriodSendingStop();
@@ -1011,7 +1011,7 @@ namespace FastenTerminal
 		private void OpenLogFile()
 		{
 			// Open log file
-			Common.OpenTextFile(SerialLog.logFileName);
+			Common.OpenTextFile(SerialLog.logFilePath);
 		}
 
 
