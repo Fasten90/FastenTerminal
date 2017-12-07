@@ -195,6 +195,9 @@ namespace FastenTerminal
 		{
             if (!receiverModeBinary)
             {
+                // String mode
+
+                // New line
                 // Print on output text
                 // For richText, where \r\n is two new line, we need only one newline
                 // Drop '\n', and hold '\r'
@@ -209,9 +212,9 @@ namespace FastenTerminal
                 message = message.Replace(needReplaceCharacter, Environment.NewLine);
             }
 
-            //////////////////////////////////
-            //  Append received text on serial log
-            //////////////////////////////////
+            /*
+             *      Append received text on serial log
+             */
             form.AppendTextSerialLogData(message);
 		}
 

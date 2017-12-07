@@ -478,8 +478,13 @@ namespace FastenTerminal
 			}
 			else
 			{
-				// Not enabled escape sequences
-				AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
+                // Escape sequence disabled
+
+                // Escape (Replace 'ESC' character with "[ESC]"
+                message = message.Replace("\x1B", "[ESC]");
+
+                // Not enabled escape sequences
+                AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
 			}
 
 			// Append received log
