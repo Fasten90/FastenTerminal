@@ -80,7 +80,6 @@ namespace FastenTerminal
 			// Serial config
 			serial.NeedLog = checkBoxSerialPortLog.Checked;
 			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
-			//serial.newLineString = checkBoxSerialAppendPerRPerN.Checked;
 			
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
@@ -856,14 +855,7 @@ namespace FastenTerminal
 			// Need to log with DateTime?
 			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 
-			SaveConfig();
-		}
-
-
-
-		private void checkSerialAppendPerRPerN_CheckedChanged(object sender, EventArgs e)
-		{
-
+			//SaveConfig();
 		}
 
 

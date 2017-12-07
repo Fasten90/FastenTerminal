@@ -93,6 +93,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="EscapeSequence.cs" />
     <Compile Include="FastenTerminalConfig.cs" />
+    <Compile Include="Communication.cs" />
     <Compile Include="SerialLog.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="FormFastenTerminal.cs">
