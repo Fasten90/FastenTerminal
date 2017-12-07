@@ -78,36 +78,44 @@ namespace FastenTerminal
             // Save received message
             lock (messageLocker)
             {
-                if (logMessage == "")
+                if (!receiverModeBinary)
                 {
-                    // Drop first newline characters
-                    logMessage = DropStartNewlineCharacters(checkMsg);
+                    if (logMessage == "")
+                    {
+                        // Drop first newline characters
+                        logMessage = DropStartNewlineCharacters(checkMsg);
+                    }
+                    else
+                    {
+                        // We have a string, it is endline characters
+                        // Append
+                        logMessage += checkMsg;
+                    }
+
+
+                    // Has end character?
+                    int length = IsHasEndCharacter(logMessage);
+                    if ((length > -1) && (logMessage != "") && (length <= logMessage.Length))
+                    {
+                        // Has end character, and not start with it
+                        // First "line"
+                        String cleanedMsg = logMessage.Substring(0, (length + 1));
+                        cleanedMsg = DropEndNewlineCharacters(cleanedMsg);
+
+                        // After line
+                        logMessage = logMessage.Substring((length + 1));
+                        // Drop newline characters from begin
+                        logMessage = DropStartNewlineCharacters(logMessage);
+
+                        // This is a line, which can be processing
+                        // Process message (Log and process)
+                        saveMsg(cleanedMsg);
+                    }
                 }
                 else
                 {
-                    // We have a string, it is endline characters
-                    // Append
-                    logMessage += checkMsg;
-                }
-
-
-                // Has end character?
-                int length = IsHasEndCharacter(logMessage);
-                if ((length > -1) && (logMessage != "") && (length <= logMessage.Length))
-                {
-                    // Has end character, and not start with it
-                    // First "line"
-                    String processMessage = logMessage.Substring(0, (length + 1));
-                    processMessage = DropEndNewlineCharacters(processMessage);
-
-                    // After line
-                    logMessage = logMessage.Substring((length + 1));
-                    // Drop newline characters from begin
-                    logMessage = DropStartNewlineCharacters(logMessage);
-
-                    // This is a line, which can be processing
-                    // Process message (Log and process)
-                    saveMsg(processMessage);
+                    // receiverModeBinary
+                    saveMsg(checkMsg);
                 }
             }
         }

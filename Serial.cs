@@ -150,7 +150,14 @@ namespace FastenTerminal
 
 						// Append to GUI
 						AppendReceivedTextToGui(actualReceivedMessage);
-					}
+
+                        // Save, if has long msg
+                        if (receivedMessage.Length > 50)
+                        {
+                            // Received "process character"
+                            ThreadPool.QueueUserWorkItem(SaveLineLog);
+                        }
+                    }
 					else
 					{
                         // String mode
@@ -163,15 +170,15 @@ namespace FastenTerminal
 
 						// Append to GUI
 						AppendReceivedTextToGui(actualReceivedMessage);
-					}
-				}
 
 
-                // Need to save? (have we a line?)
-                if (receivedMessage.IndexOfAny(LogSaveStartCharacters.ToCharArray()) != -1)
-				{
-					// Received "process character"
-					ThreadPool.QueueUserWorkItem(SaveLineLog);
+                        // Need to save? (have we a line?)
+                        if (receivedMessage.IndexOfAny(LogSaveStartCharacters.ToCharArray()) != -1)
+                        {
+                            // Received "process character"
+                            ThreadPool.QueueUserWorkItem(SaveLineLog);
+                        }
+                    }
 				}
 			}
 			catch (Exception ex)
@@ -186,14 +193,8 @@ namespace FastenTerminal
 
 		private void AppendReceivedTextToGui(string message)
 		{
-			if (needToConvertHex && !receiverModeBinary)
-			{
-				// If need convert to hex and not binary mode
-				// Convert hex
-				message = Common.ToHexString(message);
-			}
-			else if (receiverModeBinary)
-			{
+            if (!receiverModeBinary)
+            {
                 // Print on output text
                 // For richText, where \r\n is two new line, we need only one newline
                 // Drop '\n', and hold '\r'
@@ -207,11 +208,6 @@ namespace FastenTerminal
                 String needReplaceCharacter = "\r";
                 message = message.Replace(needReplaceCharacter, Environment.NewLine);
             }
-            else
-            {
-                // Not need to convert hex
-            }
-
 
             //////////////////////////////////
             //  Append received text on serial log

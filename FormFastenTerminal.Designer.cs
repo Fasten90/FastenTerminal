@@ -59,13 +59,12 @@
             this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialConfigClearSendMessageTextAfterSend = new System.Windows.Forms.CheckBox();
             this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
-            this.checkBoxSerialHex = new System.Windows.Forms.CheckBox();
             this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
             this.buttonSerialPortOpen = new System.Windows.Forms.Button();
             this.checkBoxSerialPortLog = new System.Windows.Forms.CheckBox();
             this.comboBoxSerialPortBaudrate = new System.Windows.Forms.ComboBox();
             this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
-            this.checkBoxSerialTextColouring = new System.Windows.Forms.CheckBox();
+            this.checkBoxEscapeSequenceEnable = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialLogScrollBottom = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
             this.buttonSerialPortSend = new System.Windows.Forms.Button();
@@ -290,13 +289,12 @@
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialConfigClearSendMessageTextAfterSend);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogWithDateTime);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialHex);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortCOM);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortOpen);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialPortLog);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortBaudrate);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortRefresh);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialTextColouring);
+            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxEscapeSequenceEnable);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialLogScrollBottom);
             this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialCopySelected);
             this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 22);
@@ -430,17 +428,6 @@
             this.checkBoxLogWithDateTime.UseVisualStyleBackColor = true;
             this.checkBoxLogWithDateTime.CheckedChanged += new System.EventHandler(this.checkBoxLogWithDateTime_CheckedChanged);
             // 
-            // checkBoxSerialHex
-            // 
-            this.checkBoxSerialHex.AutoSize = true;
-            this.checkBoxSerialHex.Location = new System.Drawing.Point(6, 200);
-            this.checkBoxSerialHex.Name = "checkBoxSerialHex";
-            this.checkBoxSerialHex.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxSerialHex.TabIndex = 37;
-            this.checkBoxSerialHex.Text = "Hex";
-            this.checkBoxSerialHex.UseVisualStyleBackColor = true;
-            this.checkBoxSerialHex.CheckedChanged += new System.EventHandler(this.checkBoxSerialHex_CheckedChanged);
-            // 
             // comboBoxSerialPortCOM
             // 
             this.comboBoxSerialPortCOM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -510,16 +497,16 @@
             // 
             // checkBoxSerialTextColouring
             // 
-            this.checkBoxSerialTextColouring.AutoSize = true;
-            this.checkBoxSerialTextColouring.Checked = true;
-            this.checkBoxSerialTextColouring.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSerialTextColouring.Location = new System.Drawing.Point(6, 154);
-            this.checkBoxSerialTextColouring.Name = "checkBoxSerialTextColouring";
-            this.checkBoxSerialTextColouring.Size = new System.Drawing.Size(117, 17);
-            this.checkBoxSerialTextColouring.TabIndex = 31;
-            this.checkBoxSerialTextColouring.Text = "Escape sequences";
-            this.checkBoxSerialTextColouring.UseVisualStyleBackColor = true;
-            this.checkBoxSerialTextColouring.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextEscapeSequenceCheckingCheckedChanged);
+            this.checkBoxEscapeSequenceEnable.AutoSize = true;
+            this.checkBoxEscapeSequenceEnable.Checked = true;
+            this.checkBoxEscapeSequenceEnable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxEscapeSequenceEnable.Location = new System.Drawing.Point(6, 154);
+            this.checkBoxEscapeSequenceEnable.Name = "checkBoxSerialTextColouring";
+            this.checkBoxEscapeSequenceEnable.Size = new System.Drawing.Size(117, 17);
+            this.checkBoxEscapeSequenceEnable.TabIndex = 31;
+            this.checkBoxEscapeSequenceEnable.Text = "Escape sequences";
+            this.checkBoxEscapeSequenceEnable.UseVisualStyleBackColor = true;
+            this.checkBoxEscapeSequenceEnable.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextEscapeSequenceCheckingCheckedChanged);
             // 
             // checkBoxSerialLogScrollBottom
             // 
@@ -687,13 +674,12 @@
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandSending;
 		private System.Windows.Forms.TabPage tabPageSerialPeriodSending;
 		private System.Windows.Forms.TabPage tabPageSerialCommunicationSettings;
-		private System.Windows.Forms.CheckBox checkBoxSerialHex;
 		private System.Windows.Forms.ComboBox comboBoxSerialPortCOM;
 		private System.Windows.Forms.Button buttonSerialPortOpen;
 		private System.Windows.Forms.CheckBox checkBoxSerialPortLog;
 		private System.Windows.Forms.ComboBox comboBoxSerialPortBaudrate;
 		private System.Windows.Forms.Button buttonSerialPortRefresh;
-		private System.Windows.Forms.CheckBox checkBoxSerialTextColouring;
+		private System.Windows.Forms.CheckBox checkBoxEscapeSequenceEnable;
 		private System.Windows.Forms.CheckBox checkBoxSerialLogScrollBottom;
 		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
 		private System.Windows.Forms.Button buttonSerialPortSend;

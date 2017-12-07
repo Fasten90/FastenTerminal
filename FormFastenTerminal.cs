@@ -99,7 +99,7 @@ namespace FastenTerminal
 			}
 
 			// Form configs
-			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
+			GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
 
             checkBoxPrintSend.Checked = serial.printSentEvent;
 
@@ -113,6 +113,7 @@ namespace FastenTerminal
 
 		private void LoadConfigToForm()
 		{
+            // TODO: Delete com port
 			comboBoxSerialPortCOM.Text = Config.config.portName;
 			comboBoxSerialPortBaudrate.Text = Config.config.baudrate;
 
@@ -120,7 +121,6 @@ namespace FastenTerminal
 			checkBoxLogWithDateTime.Checked = Config.config.dateLog;
 
 			checkBoxSerialReceiveBinaryMode.Checked = Config.config.isBinaryMode;
-			checkBoxSerialHex.Checked = Config.config.isHex;
 
             // TODO: Add newLineString
 
@@ -138,6 +138,7 @@ namespace FastenTerminal
 
         private void SaveConfig()
 		{
+            // TODO: Sync with LoadConfigToForm
 			Config.config.portName = comboBoxSerialPortCOM.Text;
 			Config.config.baudrate = comboBoxSerialPortBaudrate.Text;
 
@@ -145,7 +146,6 @@ namespace FastenTerminal
 			Config.config.dateLog = checkBoxLogWithDateTime.Checked;
 
 			Config.config.isBinaryMode = checkBoxSerialReceiveBinaryMode.Checked;
-			Config.config.isHex = checkBoxSerialHex.Checked;
 
 			Config.SaveConfigToXml();
 		}
@@ -988,15 +988,14 @@ namespace FastenTerminal
 		{
 			serial.receiverModeBinary = checkBoxSerialReceiveBinaryMode.Checked;
 
-			// If checked receive mode binary, check the Hex is too!
-			if (serial.receiverModeBinary)
-			{
-				// If binary, is hex!
-				checkBoxSerialHex.Checked = true;
-			}
+            if (serial.receiverModeBinary)
+            {
+                // Turn off Escape
+                checkBoxEscapeSequenceEnable.Checked = false;
+            }
 
-			SaveConfig();
-		}
+            SaveConfig();
+        }
 
 
 
@@ -1016,22 +1015,6 @@ namespace FastenTerminal
 
 
 
-		private void checkBoxSerialHex_CheckedChanged(object sender, EventArgs e)
-		{
-			// Serial print in hex (look at serial class)
-			serial.needToConvertHex = checkBoxSerialHex.Checked;
-
-			if (serial.needToConvertHex)
-			{
-				// Turn off Escape
-				checkBoxSerialTextColouring.Checked = false;
-			}
-
-			SaveConfig();
-		}
-
-
-
 		private void buttonSerialSaveConfig_Click(object sender, EventArgs e)
 		{
 			SaveConfig();
@@ -1041,11 +1024,11 @@ namespace FastenTerminal
 
 		private void checkBoxSerialTextEscapeSequenceCheckingCheckedChanged(object sender, EventArgs e)
 		{
-			GlobalEscapeEnabled = checkBoxSerialTextColouring.Checked;
+			GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
 
 			if (GlobalEscapeEnabled)
 			{
-				checkBoxSerialHex.Checked = false;
+				checkBoxSerialReceiveBinaryMode.Checked = false;
 			}
 		}
 
