@@ -169,7 +169,8 @@ namespace FastenTerminal
 			{
 				// Notify close
 				notifyIconApplication.Visible = false;
-			}
+                notifyIconApplication.Dispose();
+            }
 		}
 
 		private void RefreshTitle()
