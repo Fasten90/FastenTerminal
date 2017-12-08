@@ -105,6 +105,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serial.cs" />
+    <Compile Include="Telnet.cs" />
     <Compile Include="XmlSerialization.cs" />
     <EmbeddedResource Include="FormFastenTerminal.resx">
       <DependentUpon>FormFastenTerminal.cs</DependentUpon>

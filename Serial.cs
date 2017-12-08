@@ -54,7 +54,7 @@ namespace FastenTerminal
 				// Wrong COM
 				String errorMessage = "[Application] Error: Empty portname\n";
 				Log.SendErrorLog(errorMessage);
-				form.AppendTextSerialLogEvent(errorMessage);
+				form.AppendTextLogEvent(errorMessage);
 				return false;
 			}
 			else
@@ -77,7 +77,7 @@ namespace FastenTerminal
 					String message = "[Application] Successful open serial port. " +
 									serial.PortName + " " + serial.BaudRate + "\n";
 					Log.SendEventLog(message);
-					form.AppendTextSerialLogEvent(message);
+					form.AppendTextLogEvent(message);
 					isOpenedPort = true;
 					return true;
 				}
@@ -85,7 +85,7 @@ namespace FastenTerminal
 				{
 					String errorMessage = "[Application] Error with port opening.\n";
 					Log.SendErrorLog(errorMessage + e.Message);
-					form.AppendTextSerialLogEvent(errorMessage);
+					form.AppendTextLogEvent(errorMessage);
 					return false;
 				}
 			}
@@ -116,7 +116,7 @@ namespace FastenTerminal
 			String message = "[Application] Closed Serial port\n";
 			if (needPrint)
 			{
-				form.AppendTextSerialLogEvent(message);
+				form.AppendTextLogEvent(message);
 			}
 			Log.SendEventLog(message);
 
@@ -189,38 +189,7 @@ namespace FastenTerminal
 			}
 		}
 
-
-
-		private void AppendReceivedTextToGui(string message)
-		{
-            if (!receiverModeBinary)
-            {
-                // String mode
-
-                // New line
-                // Print on output text
-                // For richText, where \r\n is two new line, we need only one newline
-                // Drop '\n', and hold '\r'
-                String dropCharacter = "\n";
-                if (message.Contains(dropCharacter))
-                {
-                    message = message.Replace(dropCharacter, String.Empty);
-                }
-
-                // Replace '\r' to '\r\n'
-                String needReplaceCharacter = "\r";
-                message = message.Replace(needReplaceCharacter, Environment.NewLine);
-            }
-
-            /*
-             *      Append received text on serial log
-             */
-            form.AppendTextSerialLogData(message);
-		}
-
-
-
-		public String SendMessage(String message, bool printOutput = false)
+		public String SendMessage(String message)
 		{
 			String logMessage;
 
@@ -269,9 +238,9 @@ namespace FastenTerminal
 				MessageLog.SendLog(logMessage, true);
 			}
 
-			if (printOutput && printSentEvent)
+			if (printSentEvent)
 			{
-				form.AppendTextSerialLogEvent(logMessage);
+				form.AppendTextLogEvent(logMessage);
 			}
 
 			return logMessage;
@@ -297,7 +266,7 @@ namespace FastenTerminal
 			string logMessage = "[Application] Periodical message sending started...\n" +
 				"  Time: " + PeriodSending_Time.ToString() + "  Message: " + PeriodSending_Message + "\n";
 
-			form.AppendTextSerialLogEvent(logMessage);
+			form.AppendTextLogEvent(logMessage);
 			Log.SendEventLog(logMessage);
 		}
 
@@ -315,7 +284,7 @@ namespace FastenTerminal
 			// Log
 			string logMessage = "[Application] Periodical message sending stopped\n";
 
-			form.AppendTextSerialLogEvent(logMessage);
+			form.AppendTextLogEvent(logMessage);
 			Log.SendEventLog(logMessage);
 
             // Not running state
@@ -329,7 +298,7 @@ namespace FastenTerminal
 			// Period Sending time actual
 
 			// Send message
-			SendMessage(PeriodSending_Message, true);
+			SendMessage(PeriodSending_Message);
 
 			// Log
 			//form.AppendTextSerialLogEvent("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");

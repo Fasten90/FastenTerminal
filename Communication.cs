@@ -120,8 +120,6 @@ namespace FastenTerminal
             }
         }
 
-
-
         private void saveMsg(string msg)
         {
             // Send to protocol Checker
@@ -140,8 +138,6 @@ namespace FastenTerminal
 
             return;
         }
-
-
 
         private int IsHasEndCharacter(string message)
         {
@@ -192,8 +188,6 @@ namespace FastenTerminal
             return length;
         }
 
-
-
         private bool IsHasStartEndCharacter(string receivedMessage)
         {
             // Is start with end character?
@@ -209,8 +203,6 @@ namespace FastenTerminal
                 return false;
             }
         }
-
-
 
         private string DropStartNewlineCharacters(string receivedMessage)
         {
@@ -237,8 +229,6 @@ namespace FastenTerminal
 
         }
 
-
-
         private string DropEndNewlineCharacters(string processMessage)
         {
             String goodMessage = processMessage;
@@ -259,6 +249,31 @@ namespace FastenTerminal
             return goodMessage;
         }
 
+        protected void AppendReceivedTextToGui(string message)
+        {
+            if (!receiverModeBinary)
+            {
+                // String mode
 
+                // New line
+                // Print on output text
+                // For richText, where \r\n is two new line, we need only one newline
+                // Drop '\n', and hold '\r'
+                String dropCharacter = "\n";
+                if (message.Contains(dropCharacter))
+                {
+                    message = message.Replace(dropCharacter, String.Empty);
+                }
+
+                // Replace '\r' to '\r\n'
+                String needReplaceCharacter = "\r";
+                message = message.Replace(needReplaceCharacter, Environment.NewLine);
+            }
+
+            /*
+             *      Append received text on text log
+             */
+            form.AppendTextLogData(message);
+        }
     }
 }

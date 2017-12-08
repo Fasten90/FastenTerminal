@@ -78,5 +78,29 @@ namespace FastenTerminal
 			Process.Start(logFilePath);
 		}
 
-	}
+
+        public static String ConvertNewLineToReal(String newLineTypeName)
+        {
+            String newLineString = "";
+
+            if (newLineTypeName != null)
+            {
+                if (newLineTypeName == "\\r\\n")
+                {
+                    newLineString = "\r\n";
+                }
+                else if (newLineTypeName == "\\r")
+                {
+                    newLineString = "\r";
+                }
+                else if (newLineTypeName == "\\n")
+                {
+                    newLineString = "\n";
+                }
+            }
+
+            return newLineString;
+        }
+
+    }
 }

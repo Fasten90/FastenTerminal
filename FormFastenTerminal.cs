@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -24,20 +25,24 @@ namespace FastenTerminal
 
 		private const String ApplicationName = "FastenTerminal";
 
-		// Others
 
+		// Communications
 		public Serial serial;
+        public Telnet telnet;
 
-		public FavouriteCommandHandler favouriteCommands;
+        private bool TelnetIsConnected = false;
+        private bool SerialIsConnected = false;
+
+
+        public FavouriteCommandHandler favouriteCommands;
 
 		//public BindingSource commandList;
 		public List<Command> commandList;
 		public BindingList<Command> commandBindingList;
 
-		private bool SerialMessageTextBoxEntered = false;
-        private bool EnteredToPeriodMessageTextBox = false;
-        private bool SerialSendMessage_ClearAfterSend = false;
-
+		private bool SendMessageTextBox_Entered = false;
+        private bool PeriodMessageTextBox_Entered = false;
+        private bool SendMessageTextBox_ClearAfterSend = false;
 
         private Color GlobalTextColor = Color.Black;
 		private Color GlobalBackgroundColor = Form.DefaultBackColor;
@@ -158,6 +163,9 @@ namespace FastenTerminal
 			serial.needPrint = false;
 			serial.SerialPortComClose();
 
+            // Close Telnet
+            // TODO: Close telnet
+
 			// Log closed
 			Log.SendEventLog("Application closed");
 			Log.SendErrorLog("Application closed");
@@ -177,7 +185,7 @@ namespace FastenTerminal
 			this.Text = ApplicationName + " - " + serial.stateInfo;
 		}
 
-		private void MessageForUser(String message)
+		private void notifyMessageForUser(String message)
 		{
 			if (NotifyIsEnabled)
 			{
@@ -193,9 +201,9 @@ namespace FastenTerminal
 		}
 
 
-		////////////////////////////////////////////////
-		//			 SERIAL
-		////////////////////////////////////////////////
+		/*
+		 *			 SERIAL
+		 */
 
 
 		private void buttonSerialPortRefresh_Click(object sender, EventArgs e)
@@ -301,28 +309,20 @@ namespace FastenTerminal
 			RefreshTitle();
         }
 
-
-
 		private void comboBoxSerialPortCOM_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			serial.ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
 		}
-
-
 			
 		private void comboBoxSerialPortBaudrate_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			serial.Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
 		}
 
-
-
 		private void serialPortDevice_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
 		{
 			SerialReceive();
 		}
-
-
 
 		private void SerialReceive()
 		{
@@ -337,13 +337,31 @@ namespace FastenTerminal
 			ReceivedACharacterEvent();
 		}
 
+        public void ReceivedACharacterEvent()
+        {
+            if (InvokeRequired)
+            {
+                this.BeginInvoke(new Action(ReceivedACharacterEvent), new object[] { });
+                return;
+            }
 
+            SerialReceiveEvent(true);
+        }
 
-		public void AppendTextSerialLogEvent(string message)
+        private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
+        {
+            Log.SendErrorLog("Serial: Error received:" + e.ToString());
+        }
+
+        /*
+         *      Text log
+         */
+
+        public void AppendTextLogEvent(string message)
 		{
 			if (InvokeRequired)
 			{
-				this.Invoke(new Action<string>(AppendTextSerialLogEvent), new object[] { message });
+				this.Invoke(new Action<string>(AppendTextLogEvent), new object[] { message });
 				return;
 			}
 
@@ -351,13 +369,11 @@ namespace FastenTerminal
 			AppendTextLog(message, Color.Blue, Color.Yellow);
 		}
 
-
-
-		public void AppendTextSerialLogData(string message)
+		public void AppendTextLogData(string message)
 		{
 			if (InvokeRequired)
 			{
-				this.Invoke(new Action<string>(AppendTextSerialLogData), new object[] { message });
+				this.Invoke(new Action<string>(AppendTextLogData), new object[] { message });
 				return;
 			}
 
@@ -411,7 +427,7 @@ namespace FastenTerminal
 							break;
 
 						case EscapeType.Escape_CLS:
-							DeleteSerialTexts();
+							DeleteTextLog();
                             // TODO: It is not very good...
 							break;
 
@@ -440,7 +456,7 @@ namespace FastenTerminal
                             if (message.Length > 50)
                             {
                                 Log.SendErrorLog("ERROR: Escape_Short_NeedAppend error (too large message): " + message + "\"");
-                                MessageForUser("Fatal error! Tell this problem the developer!");
+                                notifyMessageForUser("Fatal error! Tell this problem the developer!");
                                 startIndex = 1;
                             }
 							break;
@@ -453,7 +469,7 @@ namespace FastenTerminal
 						default:
                             // TODO: Drop this char
                             Log.SendErrorLog("ERROR: Wrong escape sequence: " + message + "\", start index: "+ startIndex.ToString());
-                            MessageForUser("Fatal error! Tell this problem the developer!");
+                            notifyMessageForUser("Fatal error! Tell this problem the developer!");
                             break;
 					}
 
@@ -468,7 +484,7 @@ namespace FastenTerminal
                         catch (Exception e)
                         {
                             Log.SendErrorLog("ERROR: Out of range in array: " + message + startIndex.ToString() + e.Message);
-                            MessageForUser("Fatal error! Tell this problem the developer!");
+                            notifyMessageForUser("Fatal error! Tell this problem the developer!");
                         }
                     }
 				}
@@ -502,7 +518,7 @@ namespace FastenTerminal
 			richTextBoxSerialPortTexts.SelectionColor = textColor;
 			richTextBoxSerialPortTexts.SelectionBackColor = backgroundColor;
 
-			if (checkBoxSerialLogScrollBottom.Checked)
+			if (checkBoxLogScrollBottom.Checked)
 			{
 				// Append text to box
 				richTextBoxSerialPortTexts.AppendText(message);     // If you use it, it automatic scroll bottom
@@ -522,18 +538,6 @@ namespace FastenTerminal
 			}
 		}
 
-
-		public void ReceivedACharacterEvent ()
-		{
-			if (InvokeRequired)
-			{
-				this.BeginInvoke(new Action(ReceivedACharacterEvent), new object[] { });
-				return;
-			}
-
-			SerialReceiveEvent(true);
-		}
-
 		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
 		{
 			ClearScreen();
@@ -542,22 +546,22 @@ namespace FastenTerminal
 		private void ClearScreen()
 		{
             tempStringBuffer = "";
-            DeleteSerialTexts();
-			checkBoxSerialLogScrollBottom.Checked = true;
+            DeleteTextLog();
+			checkBoxLogScrollBottom.Checked = true;
 			GlobalBackgroundColor = Form.DefaultBackColor;
 			GlobalTextColor = Color.Black;
 			// checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
 		}
 
-		private void DeleteSerialTexts()
+		private void DeleteTextLog()
 		{
 			richTextBoxSerialPortTexts.Clear();
 		}
 
-		private void checkBoxSerialLogScrollBottom_CheckedChanged(object sender, EventArgs e)
+		private void checkBoxLogScrollBottom_CheckedChanged(object sender, EventArgs e)
 		{
 			// Added buffered string, and scroll bottom
-			if (checkBoxSerialLogScrollBottom.Checked)
+			if (checkBoxLogScrollBottom.Checked)
 			{
 				ScrollBottomAndAppendBuffer();
 			}
@@ -575,14 +579,14 @@ namespace FastenTerminal
 
         private void setScrollState(bool isEnabled)
         {
-            if (checkBoxSerialLogScrollBottom.Checked != isEnabled)
+            if (checkBoxLogScrollBottom.Checked != isEnabled)
             {
-                checkBoxSerialLogScrollBottom.Checked = isEnabled;
-                MessageForUser("Scrolling is turned " + ((isEnabled) ? "on" : "off"));
+                checkBoxLogScrollBottom.Checked = isEnabled;
+                notifyMessageForUser("Scrolling is turned " + ((isEnabled) ? "on" : "off"));
             }
         }
 
-        private void richTextBoxSerialPortTexts_SelectionChanged(object sender, EventArgs e)
+        private void richTextBoxTextLog_SelectionChanged(object sender, EventArgs e)
 		{
 			// Selected a text, do not scroll!
 			if (richTextBoxSerialPortTexts.SelectionStart != richTextBoxSerialPortTexts.TextLength)
@@ -590,7 +594,7 @@ namespace FastenTerminal
                 setScrollState(false);
 			}
 
-			if (!checkBoxSerialLogScrollBottom.Checked
+			if (!checkBoxLogScrollBottom.Checked
 				&& (richTextBoxSerialPortTexts.SelectionStart == richTextBoxSerialPortTexts.TextLength) )
 			{
                 // Not scrolling, but click at end
@@ -636,10 +640,10 @@ namespace FastenTerminal
 
 
 
-		private void buttonSerialPortSend_Click(object sender, EventArgs e)
+		private void buttonSendMessage_Click(object sender, EventArgs e)
 		{
             // Pressed Send button
-			SerialMessageSending();
+			SendMessage();
 		}
 
 
@@ -650,7 +654,7 @@ namespace FastenTerminal
 			if (e.KeyChar == (char)Keys.Return)
 			{
 				// If pressed enter
-				SerialMessageSending();
+				SendMessage();
 			}
 		}
 
@@ -659,39 +663,49 @@ namespace FastenTerminal
 		private void SerialMessageText_Clear()
 		{
 			// Need clear text?
-			if (SerialSendMessage_ClearAfterSend)
+			if (SendMessageTextBox_ClearAfterSend)
 			{
 				// Clear text
-				comboBoxSerialSendingText.Text = "";
+				comboBoxSendingText.Text = "";
 			}
 		}
 
 
 
-		private void comboBoxSerialSendMessage_Enter(object sender, EventArgs e)
+		private void comboBoxSendMessage_Enter(object sender, EventArgs e)
 		{
 			// Enter on SerialMessage TextBox
-			if (SerialMessageTextBoxEntered == false)
+			if (SendMessageTextBox_Entered == false)
 			{
 				// Clear textbox at first time
-				comboBoxSerialSendingText.Text = "";
-				SerialMessageTextBoxEntered = true;
+				comboBoxSendingText.Text = "";
+				SendMessageTextBox_Entered = true;
 			}
 		}
 
 
 
-		private void SerialMessageSending()
+		private void SendMessage()
 		{
-			if (comboBoxSerialSendingText.Text != null)
+			if (comboBoxSendingText.Text != null)
 			{
                 // Message text
-				String message = comboBoxSerialSendingText.Text;
+				String message = comboBoxSendingText.Text;
 
-				// Successful or not successful
-				String messageResult = serial.SendMessage(message, true);
+                // Successful or not successful
+                String messageResult = "";
+                if (TelnetIsConnected)
+                    telnet.Telnet_SendMessage(message);
+                else if (SerialIsConnected)
+                    serial.SendMessage(message);
+                else
+                {
+                    // There is no connection
+                    AppendTextLogEvent("There is no connection, cannot send!");
+                    return;
+                }
 
-				Log.SendEventLog(messageResult);	// TODO: Biztos kell ez?
+				Log.SendEventLog(messageResult);	            // TODO: Biztos kell ez?
 				//AppendTextSerialData(messageResult);
 
 				// The message
@@ -709,11 +723,13 @@ namespace FastenTerminal
 
 
 
-		private void checkBoxSerialPortLog_CheckedChanged(object sender, EventArgs e)
+		private void checkBoxNeedLog_CheckedChanged(object sender, EventArgs e)
 		{
+            // TODO: Do better?
 			serial.NeedLog = checkBoxLogEnable.Checked;
+            telnet.NeedLog = checkBoxLogEnable.Checked;
 
-			if (!serial.NeedLog)
+            if (!serial.NeedLog)
 			{
 				// If not log
 				checkBoxLogWithDateTime.Checked = false;
@@ -724,10 +740,10 @@ namespace FastenTerminal
 
 
 
-		private void checkBoxSerialConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
+		private void checkBoxConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
 		{
             // Do nothing
-            SerialSendMessage_ClearAfterSend = checkBoxSerialConfigClearSendMessageTextAfterSend.Checked;
+            SendMessageTextBox_ClearAfterSend = checkBoxConfigClearSendMessageTextAfterSend.Checked;
         }
 
 
@@ -758,7 +774,7 @@ namespace FastenTerminal
 
 				// Search started flag: for TextChange event skipping
 				//isSearching = true;
-				this.richTextBoxSerialPortTexts.SelectionChanged -= new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
+				this.richTextBoxSerialPortTexts.SelectionChanged -= new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
 
 				// Find
 				// TODO: This is the First searched item...
@@ -782,18 +798,9 @@ namespace FastenTerminal
 
 				// Search started flag: for TextChange event skipping
 				//isSearching = false;
-				this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxSerialPortTexts_SelectionChanged);
+				this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
 			}
 		}
-
-
-
-		private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
-		{
-			Log.SendErrorLog("Serial: Error received:" + e.ToString());
-		}
-
-
 
         public void SerialPeriodSend_SetState(bool state)
         {
@@ -839,7 +846,7 @@ namespace FastenTerminal
                 else
                 {
                     string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
-                    AppendTextSerialLogData(logMessage);
+                    AppendTextLogData(logMessage);
                     Log.SendEventLog(logMessage);
                 }
             }
@@ -867,7 +874,7 @@ namespace FastenTerminal
 		private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			// Copy clicked text to sending message text
-			comboBoxSerialSendingText.Text = (String)comboBoxSerialSendingText.SelectedItem;
+			comboBoxSendingText.Text = (String)comboBoxSendingText.SelectedItem;
 		}
 
 
@@ -896,7 +903,7 @@ namespace FastenTerminal
 		private void buttonSerialFavouriteCommandSending_Click(object sender, EventArgs e)
 		{
 			String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
-			serial.SendMessage(message, true);
+			serial.SendMessage(message);
 		}
 
 
@@ -908,14 +915,14 @@ namespace FastenTerminal
 			// Copy
 			command = message;
 
-			if (comboBoxSerialSendingText.FindString(command) >= 0)
+			if (comboBoxSendingText.FindString(command) >= 0)
 			{
 				// We have this command in the list
 				// TODO: put to top?
 			}
 			else
 			{
-				comboBoxSerialSendingText.Items.Add(command);
+				comboBoxSendingText.Items.Add(command);
 			}
 		}
 
@@ -1041,22 +1048,18 @@ namespace FastenTerminal
         private void textBoxPeriodSendingMessage_Enter(object sender, EventArgs e)
         {
             // Entered to PeriodMessageText textbox
-            if (EnteredToPeriodMessageTextBox == false)
+            if (PeriodMessageTextBox_Entered == false)
             {
                 // Clear textbox at first time
                 textBoxPeriodSendingMessage.Text = "";
-                EnteredToPeriodMessageTextBox = true;
+                PeriodMessageTextBox_Entered = true;
             }
         }
-
-
 
         private void checkBoxMute_CheckedChanged(object sender, EventArgs e)
         {
             soundIsDisabled = checkBoxMute.Checked;
         }
-
-
 
         private void textBoxPeriodSendingMessage_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1090,32 +1093,9 @@ namespace FastenTerminal
             }
         }
 
-        private String ConvertNewLineToReal(String newLineTypeName)
-        {
-            String newLineString = "";
-
-            if (newLineTypeName != null)
-            {
-                if (newLineTypeName == "\\r\\n")
-                {
-                    newLineString = "\r\n";
-                }
-                else if (newLineTypeName == "\\r")
-                {
-                    newLineString = "\r";
-                }
-                else if (newLineTypeName == "\\n")
-                {
-                    newLineString = "\n";
-                }
-            }
-
-            return newLineString;
-        }
-
         private void comboBoxNewLineType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            serial.newLineString = ConvertNewLineToReal(comboBoxNewLineType.Text);
+            serial.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
         }
 
         private void buttonBackGroundColor_Click(object sender, EventArgs e)
@@ -1126,12 +1106,63 @@ namespace FastenTerminal
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonForeGroundColor_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 richTextBoxSerialPortTexts.ForeColor = colorDialog.Color;
             }
         }
-    }   // End of class
+
+        /*
+         *          Telnet
+         */ 
+
+        private void setTelnetState(bool isConnected)
+        {
+            if (isConnected)
+            {
+                // Print: "Close"
+                groupBoxCommTelnet.Text = "Close";
+            }
+            else
+            {
+                // Closed, print "open"
+                groupBoxCommTelnet.Text = "Open";
+            }
+
+            TelnetIsConnected = isConnected;
+        }
+
+        private void buttonTelnetConnect_Click(object sender, EventArgs e)
+        {
+            if (TelnetIsConnected == false)
+            {
+                telnet = new Telnet(this);
+                TelnetIsConnected = telnet.Telnet_Connect(maskedTextBoxTelnetIP.Text, "", "");
+                // It is slow function !
+
+                IPAddress ipAddress;
+                if (IPAddress.TryParse(maskedTextBoxTelnetIP.Text, out ipAddress))
+                {
+                    // Valid ip
+                    // Connect
+                    // TODO:
+                    //telnet = new Telnet();
+                    //telnet.Telnet_Connect(maskedTextBoxTelnetIP.Text, "", "");
+                }
+                else
+                {
+                    // Is not valid ip
+                    notifyMessageForUser("Wrong IP!");
+                }
+            }
+            else
+            {
+                // Close...
+                // TODO:
+            }
+        }
+
+}   // End of class
 }	// End of namespace

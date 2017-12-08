@@ -87,14 +87,14 @@ namespace FastenTerminal
 		{
 			// +"\r\n";	SendMessage() függvényben lett
 			String message = "[Application] Send command: " + command;
-			form.AppendTextSerialLogData(message);
+			form.AppendTextLogData(message);
 			Log.SendEventLog(message);
 
 
 			String messageResult = "";
 
 			// Send on serial
-			messageResult = form.serial.SendMessage(command,true);
+			messageResult = form.serial.SendMessage(command);
 
 
 			Log.SendEventLog(messageResult);
