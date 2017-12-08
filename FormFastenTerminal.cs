@@ -1014,7 +1014,7 @@ namespace FastenTerminal
 		private void OpenLogFile()
 		{
 			// Open log file
-			Common.OpenTextFile(SerialLog.logFilePath);
+			Common.OpenTextFile(MessageLog.logFilePath);
 		}
 
 

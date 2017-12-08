@@ -94,7 +94,7 @@
     <Compile Include="EscapeSequence.cs" />
     <Compile Include="FastenTerminalConfig.cs" />
     <Compile Include="Communication.cs" />
-    <Compile Include="SerialLog.cs" />
+    <Compile Include="MessageLog.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="FormFastenTerminal.cs">
       <SubType>Form</SubType>

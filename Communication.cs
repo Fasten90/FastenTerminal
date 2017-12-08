@@ -134,7 +134,7 @@ namespace FastenTerminal
                 if (NeedLog)
                 {
                     // LogWithDateTime parameter --> put or do not put DateTime to log file
-                    SerialLog.SendLog(msg, LogWithDateTime);
+                    MessageLog.SendLog(msg, LogWithDateTime);
                 }
             }
 

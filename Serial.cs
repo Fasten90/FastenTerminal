@@ -266,7 +266,7 @@ namespace FastenTerminal
 
 			if (NeedLog)
 			{
-				SerialLog.SendLog(logMessage, true);
+				MessageLog.SendLog(logMessage, true);
 			}
 
 			if (printOutput && printSentEvent)

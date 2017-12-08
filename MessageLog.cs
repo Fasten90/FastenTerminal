@@ -4,23 +4,23 @@ using System.IO;
 
 namespace FastenTerminal
 {
-	static public class SerialLog
+	static public class MessageLog
 	{
 		// Copied form "Log.cs"
 
 		static TextWriterTraceListener Logger;
 		static public String logFilePath = "";
 
-		static SerialLog()
+		static MessageLog()
 		{
-            String  logFileName = "Serial_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
+            String  logFileName = "MessageLog_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".log";
 
             logFilePath = Environment.CurrentDirectory + @"\LOG\" + logFileName;
             FileStream logFileStream = new FileStream(logFilePath, FileMode.OpenOrCreate, FileAccess.Write);
 
-			Logger = new TextWriterTraceListener(logFileStream, "SerialLog");
+			Logger = new TextWriterTraceListener(logFileStream, "MessageLog");
 
-			SendLog("Serial LOG has been started.", true);
+			SendLog("Message LOG has been started.", true);
 		}
 
 		static public void SendLog(String text, bool putDatetime = false)
