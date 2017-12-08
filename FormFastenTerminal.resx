@@ -1256,6 +1256,29 @@
         AAAAAAAAAAAAf/+AAAAAAAAAAAAAAAAAAf8=
 </value>
   </data>
+  <data name="pictureBoxSerialReceiving.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfgCg0QNhoKEroh
+        AAADyUlEQVQ4T42UDWiUdRzHPyUrA3Pbvay73e62u909t9tuG9uOu2633V5altu0sjYbWOrMUhIkWYhr
+        s6G1KCaCKAsNoxBWo0AyipLeGYkgWSHZixhSIBJ0b8+97W7ref7bzpmj/MKX3x/u///+Xu73fViM1tbW
+        +RMEg0Gam5sF/X4/Pp9P0Ov10tDQMH8Lamtr50//QktLSy6q9Hg8dK3pon/rZoZfGmLv6DD92/rpWttJ
+        tbuaurq6nFhVVZWIOSwWa2pq4r772/n1j1/IzmYJzf7NtZmr/Dlzhd+zl7g8+xtn/vqG9u523G63wjkx
+        p9MpomhNhSqmtjc0Nsi12atcyV7mUvZnLmZ/5IfMOc5lzvBt5iu+nj7NZ9MfcXr2FD0HHsJV4aKiokJo
+        5KCKNjU18/RoPxcy5/kuc5azmSmmpr/gy+lP+HT6FB+m3+NkeoLJ9FucSB3lzdQRjqcPUzNuRbJLOBwO
+        ysvL5wWbg3ja6pma+Vxk/zh9kg/Sk7yfPsFE6jhvp17njdQhxpNjHEqOMpYcYTQxyL7EAD2pduw9luti
+        6sx8DT4e/2k1kyk1+zGR/WjyIIeTr3IwuZ/XEsO8nNjNi4nn2BPfwUB8KzvjG9ku97Eu1kLx+TysJTZK
+        S0shEAjgXu1i18wWkf1AYoRX1OzJAYYSO9kd38aueD875Cd4Ru5ls/wwG2KdrI918EgsSCDixBADqUbC
+        bDZDY2MjtidNdMt+BhPP8nxCzb6J7fE+npIfZWNsDX3ygzwWa2NtLEBnzEtHtJZgtJLGqIPS8J0Yo+DY
+        W4zJZIJ7vX4se7RYQnewRV7HBrmL9XKHaKU75ueBaANt0WoCUSe+SBl1ERNVET1SeCXmUB7GEBgjYJ3Q
+        YDQawevxYXlBJ36whpeLxyJ7xI4nYqEmYsAV0WAPrxDVmEK3z4kspiJoe0eDwWBAOKJ8UwnG8PUL6iNL
+        OI+S0DKKQ7fd+HgpKi1L+0ooKiqC+vp6Klc5McaXuHirlBWnuCV0Ot2cuatdNRRfXLb05Vug5cJd6PJ1
+        aLXauV1UPSmtsonSl3rwXzQklep6rGg0mjkxFZWVlbicLqxj+htm+X80KK06jt1D4d0aCgsLBXOfHtXg
+        UrmEdVwrZrKUwGKqlali+hVFFBQUCI0cJEkS0W63Yyuz4egtxfz9coyKA8QYlLVQaVDPSjJ1Zs5em6hs
+        QSw/P1/EHBbMXVZWJjxpNlpwKnaSRkqwvatRqKVivxlntYR2pVYILYjdVOFiWCwWEVUbqZuvLqu6X3q9
+        XvyL6vDFrBTcLAT/APcCjZCiQwioAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="timerReceiveIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>290, 1</value>
   </metadata>

@@ -36,21 +36,9 @@
             this.labelConstTextSearching = new System.Windows.Forms.Label();
             this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
-            this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
-            this.buttonSerialFavouriteCommandsAdd = new System.Windows.Forms.Button();
-            this.buttonSerialFavouriteCommandsSave = new System.Windows.Forms.Button();
-            this.dataGridViewFavCommands = new System.Windows.Forms.DataGridView();
-            this.buttonSerialFavouriteCommandSending = new System.Windows.Forms.Button();
-            this.tabPageSerialPeriodSending = new System.Windows.Forms.TabPage();
-            this.labelSerialPeriodSendingConstTextMessage = new System.Windows.Forms.Label();
-            this.textBoxPeriodSendingMessage = new System.Windows.Forms.TextBox();
-            this.buttonSerialPeriodSendingStart = new System.Windows.Forms.Button();
-            this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
-            this.numericUpDownSerialPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
-            this.tabPageSerialCommunicationSettings = new System.Windows.Forms.TabPage();
+            this.tabPageConfiguration = new System.Windows.Forms.TabPage();
             this.buttonForeGroundColorChange = new System.Windows.Forms.Button();
             this.buttonBackGroundColorChange = new System.Windows.Forms.Button();
-            this.labelConstNewLineTypeName = new System.Windows.Forms.Label();
             this.comboBoxNewLineType = new System.Windows.Forms.ComboBox();
             this.checkBoxPrintSend = new System.Windows.Forms.CheckBox();
             this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
@@ -67,6 +55,17 @@
             this.checkBoxEscapeSequenceEnable = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialLogScrollBottom = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
+            this.tabPageMessage = new System.Windows.Forms.TabPage();
+            this.labelSerialPeriodSendingConstTextMessage = new System.Windows.Forms.Label();
+            this.textBoxPeriodSendingMessage = new System.Windows.Forms.TextBox();
+            this.buttonSerialPeriodSendingStart = new System.Windows.Forms.Button();
+            this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
+            this.numericUpDownSerialPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
+            this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
+            this.buttonSerialFavouriteCommandsAdd = new System.Windows.Forms.Button();
+            this.buttonSerialFavouriteCommandsSave = new System.Windows.Forms.Button();
+            this.dataGridViewFavCommands = new System.Windows.Forms.DataGridView();
+            this.buttonSerialFavouriteCommandSending = new System.Windows.Forms.Button();
             this.buttonSerialPortSend = new System.Windows.Forms.Button();
             this.comboBoxSerialSendingText = new System.Windows.Forms.ComboBox();
             this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
@@ -77,15 +76,18 @@
             this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
             this.panelSettings = new System.Windows.Forms.Panel();
             this.panelLog = new System.Windows.Forms.Panel();
+            this.tabPageCommunication = new System.Windows.Forms.TabPage();
+            this.checkBoxNewLineEnabled = new System.Windows.Forms.CheckBox();
             this.tabControlSerialFunctions.SuspendLayout();
+            this.tabPageConfiguration.SuspendLayout();
+            this.tabPageMessage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).BeginInit();
             this.tabPageSerialCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).BeginInit();
-            this.tabPageSerialPeriodSending.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).BeginInit();
-            this.tabPageSerialCommunicationSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
             this.panelSettings.SuspendLayout();
             this.panelLog.SuspendLayout();
+            this.tabPageCommunication.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -103,7 +105,7 @@
             // buttonClearSerialTexts
             // 
             this.buttonClearSerialTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearSerialTexts.Location = new System.Drawing.Point(133, 30);
+            this.buttonClearSerialTexts.Location = new System.Drawing.Point(148, 3);
             this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
             this.buttonClearSerialTexts.Size = new System.Drawing.Size(90, 23);
             this.buttonClearSerialTexts.TabIndex = 36;
@@ -115,7 +117,7 @@
             // 
             this.labelConstTextSearching.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelConstTextSearching.AutoSize = true;
-            this.labelConstTextSearching.Location = new System.Drawing.Point(17, 7);
+            this.labelConstTextSearching.Location = new System.Drawing.Point(13, 9);
             this.labelConstTextSearching.Name = "labelConstTextSearching";
             this.labelConstTextSearching.Size = new System.Drawing.Size(44, 13);
             this.labelConstTextSearching.TabIndex = 33;
@@ -124,7 +126,7 @@
             // textBoxSerialTextFind
             // 
             this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSerialTextFind.Location = new System.Drawing.Point(71, 4);
+            this.textBoxSerialTextFind.Location = new System.Drawing.Point(67, 6);
             this.textBoxSerialTextFind.Name = "textBoxSerialTextFind";
             this.textBoxSerialTextFind.Size = new System.Drawing.Size(152, 20);
             this.textBoxSerialTextFind.TabIndex = 32;
@@ -134,180 +136,46 @@
             // 
             this.tabControlSerialFunctions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommunicationSettings);
-            this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialPeriodSending);
+            this.tabControlSerialFunctions.Controls.Add(this.tabPageConfiguration);
+            this.tabControlSerialFunctions.Controls.Add(this.tabPageCommunication);
+            this.tabControlSerialFunctions.Controls.Add(this.tabPageMessage);
             this.tabControlSerialFunctions.Controls.Add(this.tabPageSerialCommands);
-            this.tabControlSerialFunctions.Location = new System.Drawing.Point(0, 60);
+            this.tabControlSerialFunctions.Location = new System.Drawing.Point(0, 29);
             this.tabControlSerialFunctions.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlSerialFunctions.Multiline = true;
             this.tabControlSerialFunctions.Name = "tabControlSerialFunctions";
             this.tabControlSerialFunctions.Padding = new System.Drawing.Point(0, 0);
             this.tabControlSerialFunctions.SelectedIndex = 0;
-            this.tabControlSerialFunctions.Size = new System.Drawing.Size(245, 398);
+            this.tabControlSerialFunctions.Size = new System.Drawing.Size(245, 429);
             this.tabControlSerialFunctions.TabIndex = 41;
             // 
-            // tabPageSerialCommands
+            // tabPageConfiguration
             // 
-            this.tabPageSerialCommands.Controls.Add(this.buttonSerialFavouriteCommandsAdd);
-            this.tabPageSerialCommands.Controls.Add(this.buttonSerialFavouriteCommandsSave);
-            this.tabPageSerialCommands.Controls.Add(this.dataGridViewFavCommands);
-            this.tabPageSerialCommands.Controls.Add(this.buttonSerialFavouriteCommandSending);
-            this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSerialCommands.Name = "tabPageSerialCommands";
-            this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSerialCommands.Size = new System.Drawing.Size(237, 372);
-            this.tabPageSerialCommands.TabIndex = 0;
-            this.tabPageSerialCommands.Text = "Commands";
-            this.tabPageSerialCommands.UseVisualStyleBackColor = true;
-            // 
-            // buttonSerialFavouriteCommandsAdd
-            // 
-            this.buttonSerialFavouriteCommandsAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSerialFavouriteCommandsAdd.Location = new System.Drawing.Point(130, 331);
-            this.buttonSerialFavouriteCommandsAdd.Name = "buttonSerialFavouriteCommandsAdd";
-            this.buttonSerialFavouriteCommandsAdd.Size = new System.Drawing.Size(62, 23);
-            this.buttonSerialFavouriteCommandsAdd.TabIndex = 24;
-            this.buttonSerialFavouriteCommandsAdd.Text = "Add";
-            this.buttonSerialFavouriteCommandsAdd.UseVisualStyleBackColor = true;
-            this.buttonSerialFavouriteCommandsAdd.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsAdd_Click);
-            // 
-            // buttonSerialFavouriteCommandsSave
-            // 
-            this.buttonSerialFavouriteCommandsSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSerialFavouriteCommandsSave.Location = new System.Drawing.Point(73, 331);
-            this.buttonSerialFavouriteCommandsSave.Name = "buttonSerialFavouriteCommandsSave";
-            this.buttonSerialFavouriteCommandsSave.Size = new System.Drawing.Size(51, 23);
-            this.buttonSerialFavouriteCommandsSave.TabIndex = 23;
-            this.buttonSerialFavouriteCommandsSave.Text = "Save";
-            this.buttonSerialFavouriteCommandsSave.UseVisualStyleBackColor = true;
-            this.buttonSerialFavouriteCommandsSave.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsSave_Click);
-            // 
-            // dataGridViewFavCommands
-            // 
-            this.dataGridViewFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewFavCommands.Location = new System.Drawing.Point(0, 3);
-            this.dataGridViewFavCommands.MultiSelect = false;
-            this.dataGridViewFavCommands.Name = "dataGridViewFavCommands";
-            this.dataGridViewFavCommands.RowHeadersVisible = false;
-            this.dataGridViewFavCommands.Size = new System.Drawing.Size(234, 322);
-            this.dataGridViewFavCommands.TabIndex = 22;
-            // 
-            // buttonSerialFavouriteCommandSending
-            // 
-            this.buttonSerialFavouriteCommandSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSerialFavouriteCommandSending.Location = new System.Drawing.Point(6, 331);
-            this.buttonSerialFavouriteCommandSending.Name = "buttonSerialFavouriteCommandSending";
-            this.buttonSerialFavouriteCommandSending.Size = new System.Drawing.Size(61, 23);
-            this.buttonSerialFavouriteCommandSending.TabIndex = 14;
-            this.buttonSerialFavouriteCommandSending.Text = "Send";
-            this.buttonSerialFavouriteCommandSending.UseVisualStyleBackColor = true;
-            this.buttonSerialFavouriteCommandSending.Click += new System.EventHandler(this.buttonSerialFavouriteCommandSending_Click);
-            // 
-            // tabPageSerialPeriodSending
-            // 
-            this.tabPageSerialPeriodSending.Controls.Add(this.labelSerialPeriodSendingConstTextMessage);
-            this.tabPageSerialPeriodSending.Controls.Add(this.textBoxPeriodSendingMessage);
-            this.tabPageSerialPeriodSending.Controls.Add(this.buttonSerialPeriodSendingStart);
-            this.tabPageSerialPeriodSending.Controls.Add(this.labelSerialPeriodSendingConstText);
-            this.tabPageSerialPeriodSending.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
-            this.tabPageSerialPeriodSending.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSerialPeriodSending.Name = "tabPageSerialPeriodSending";
-            this.tabPageSerialPeriodSending.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSerialPeriodSending.Size = new System.Drawing.Size(237, 372);
-            this.tabPageSerialPeriodSending.TabIndex = 2;
-            this.tabPageSerialPeriodSending.Text = "Periodical sending";
-            this.tabPageSerialPeriodSending.UseVisualStyleBackColor = true;
-            // 
-            // labelSerialPeriodSendingConstTextMessage
-            // 
-            this.labelSerialPeriodSendingConstTextMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSerialPeriodSendingConstTextMessage.AutoSize = true;
-            this.labelSerialPeriodSendingConstTextMessage.Location = new System.Drawing.Point(30, 47);
-            this.labelSerialPeriodSendingConstTextMessage.Name = "labelSerialPeriodSendingConstTextMessage";
-            this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(94, 13);
-            this.labelSerialPeriodSendingConstTextMessage.TabIndex = 4;
-            this.labelSerialPeriodSendingConstTextMessage.Text = "Sending message:";
-            // 
-            // textBoxPeriodSendingMessage
-            // 
-            this.textBoxPeriodSendingMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPeriodSendingMessage.Location = new System.Drawing.Point(32, 63);
-            this.textBoxPeriodSendingMessage.Name = "textBoxPeriodSendingMessage";
-            this.textBoxPeriodSendingMessage.Size = new System.Drawing.Size(186, 20);
-            this.textBoxPeriodSendingMessage.TabIndex = 3;
-            this.textBoxPeriodSendingMessage.Text = "<Periodical sending message>";
-            this.textBoxPeriodSendingMessage.Enter += new System.EventHandler(this.textBoxPeriodSendingMessage_Enter);
-            this.textBoxPeriodSendingMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPeriodSendingMessage_KeyPress);
-            // 
-            // buttonSerialPeriodSendingStart
-            // 
-            this.buttonSerialPeriodSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSerialPeriodSendingStart.Location = new System.Drawing.Point(168, 8);
-            this.buttonSerialPeriodSendingStart.Name = "buttonSerialPeriodSendingStart";
-            this.buttonSerialPeriodSendingStart.Size = new System.Drawing.Size(50, 23);
-            this.buttonSerialPeriodSendingStart.TabIndex = 2;
-            this.buttonSerialPeriodSendingStart.Text = "Start";
-            this.buttonSerialPeriodSendingStart.UseVisualStyleBackColor = true;
-            this.buttonSerialPeriodSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
-            // 
-            // labelSerialPeriodSendingConstText
-            // 
-            this.labelSerialPeriodSendingConstText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSerialPeriodSendingConstText.AutoSize = true;
-            this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(29, 13);
-            this.labelSerialPeriodSendingConstText.Name = "labelSerialPeriodSendingConstText";
-            this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(47, 13);
-            this.labelSerialPeriodSendingConstText.TabIndex = 1;
-            this.labelSerialPeriodSendingConstText.Text = "Second:";
-            // 
-            // numericUpDownSerialPeriodSendingTime
-            // 
-            this.numericUpDownSerialPeriodSendingTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(98, 11);
-            this.numericUpDownSerialPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
-            this.numericUpDownSerialPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
-            this.numericUpDownSerialPeriodSendingTime.TabIndex = 0;
-            this.numericUpDownSerialPeriodSendingTime.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // tabPageSerialCommunicationSettings
-            // 
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonForeGroundColorChange);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonBackGroundColorChange);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.labelConstNewLineTypeName);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxNewLineType);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxPrintSend);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxWordWrap);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxMute);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialSaveConfig);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialConfigClearSendMessageTextAfterSend);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogWithDateTime);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortCOM);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortOpen);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxLogEnable);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.comboBoxSerialPortBaudrate);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.buttonSerialPortRefresh);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxEscapeSequenceEnable);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialLogScrollBottom);
-            this.tabPageSerialCommunicationSettings.Controls.Add(this.checkBoxSerialCopySelected);
-            this.tabPageSerialCommunicationSettings.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSerialCommunicationSettings.Name = "tabPageSerialCommunicationSettings";
-            this.tabPageSerialCommunicationSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSerialCommunicationSettings.Size = new System.Drawing.Size(237, 372);
-            this.tabPageSerialCommunicationSettings.TabIndex = 3;
-            this.tabPageSerialCommunicationSettings.Text = "Configuration";
-            this.tabPageSerialCommunicationSettings.UseVisualStyleBackColor = true;
+            this.tabPageConfiguration.Controls.Add(this.checkBoxNewLineEnabled);
+            this.tabPageConfiguration.Controls.Add(this.buttonForeGroundColorChange);
+            this.tabPageConfiguration.Controls.Add(this.buttonBackGroundColorChange);
+            this.tabPageConfiguration.Controls.Add(this.comboBoxNewLineType);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxPrintSend);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxWordWrap);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxMute);
+            this.tabPageConfiguration.Controls.Add(this.buttonSerialSaveConfig);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxSerialConfigClearSendMessageTextAfterSend);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxLogWithDateTime);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxLogEnable);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxEscapeSequenceEnable);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxSerialCopySelected);
+            this.tabPageConfiguration.Location = new System.Drawing.Point(4, 22);
+            this.tabPageConfiguration.Name = "tabPageConfiguration";
+            this.tabPageConfiguration.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageConfiguration.Size = new System.Drawing.Size(237, 403);
+            this.tabPageConfiguration.TabIndex = 3;
+            this.tabPageConfiguration.Text = "Config";
+            this.tabPageConfiguration.UseVisualStyleBackColor = true;
             // 
             // buttonForeGroundColorChange
             // 
-            this.buttonForeGroundColorChange.Location = new System.Drawing.Point(127, 94);
+            this.buttonForeGroundColorChange.Location = new System.Drawing.Point(9, 36);
             this.buttonForeGroundColorChange.Name = "buttonForeGroundColorChange";
             this.buttonForeGroundColorChange.Size = new System.Drawing.Size(75, 23);
             this.buttonForeGroundColorChange.TabIndex = 49;
@@ -317,22 +185,13 @@
             // 
             // buttonBackGroundColorChange
             // 
-            this.buttonBackGroundColorChange.Location = new System.Drawing.Point(127, 64);
+            this.buttonBackGroundColorChange.Location = new System.Drawing.Point(9, 6);
             this.buttonBackGroundColorChange.Name = "buttonBackGroundColorChange";
             this.buttonBackGroundColorChange.Size = new System.Drawing.Size(75, 23);
             this.buttonBackGroundColorChange.TabIndex = 48;
             this.buttonBackGroundColorChange.Text = "Background";
             this.buttonBackGroundColorChange.UseVisualStyleBackColor = true;
             this.buttonBackGroundColorChange.Click += new System.EventHandler(this.buttonBackGroundColor_Click);
-            // 
-            // labelConstNewLineTypeName
-            // 
-            this.labelConstNewLineTypeName.AutoSize = true;
-            this.labelConstNewLineTypeName.Location = new System.Drawing.Point(131, 226);
-            this.labelConstNewLineTypeName.Name = "labelConstNewLineTypeName";
-            this.labelConstNewLineTypeName.Size = new System.Drawing.Size(71, 13);
-            this.labelConstNewLineTypeName.TabIndex = 47;
-            this.labelConstNewLineTypeName.Text = "New line type";
             // 
             // comboBoxNewLineType
             // 
@@ -344,9 +203,9 @@
             "\\n",
             "\\0",
             "-"});
-            this.comboBoxNewLineType.Location = new System.Drawing.Point(130, 202);
+            this.comboBoxNewLineType.Location = new System.Drawing.Point(86, 294);
             this.comboBoxNewLineType.Name = "comboBoxNewLineType";
-            this.comboBoxNewLineType.Size = new System.Drawing.Size(72, 21);
+            this.comboBoxNewLineType.Size = new System.Drawing.Size(57, 21);
             this.comboBoxNewLineType.TabIndex = 46;
             this.comboBoxNewLineType.SelectedIndexChanged += new System.EventHandler(this.comboBoxNewLineType_SelectedIndexChanged);
             // 
@@ -385,7 +244,7 @@
             // 
             // buttonSerialSaveConfig
             // 
-            this.buttonSerialSaveConfig.Location = new System.Drawing.Point(127, 313);
+            this.buttonSerialSaveConfig.Location = new System.Drawing.Point(3, 319);
             this.buttonSerialSaveConfig.Name = "buttonSerialSaveConfig";
             this.buttonSerialSaveConfig.Size = new System.Drawing.Size(75, 23);
             this.buttonSerialSaveConfig.TabIndex = 42;
@@ -420,7 +279,7 @@
             this.checkBoxLogWithDateTime.AutoSize = true;
             this.checkBoxLogWithDateTime.Checked = true;
             this.checkBoxLogWithDateTime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 85);
+            this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 107);
             this.checkBoxLogWithDateTime.Name = "checkBoxLogWithDateTime";
             this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(90, 17);
             this.checkBoxLogWithDateTime.TabIndex = 38;
@@ -432,7 +291,7 @@
             // 
             this.comboBoxSerialPortCOM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSerialPortCOM.FormattingEnabled = true;
-            this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(6, 8);
+            this.comboBoxSerialPortCOM.Location = new System.Drawing.Point(6, 6);
             this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
             this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(82, 21);
             this.comboBoxSerialPortCOM.TabIndex = 3;
@@ -440,7 +299,7 @@
             // 
             // buttonSerialPortOpen
             // 
-            this.buttonSerialPortOpen.Location = new System.Drawing.Point(102, 35);
+            this.buttonSerialPortOpen.Location = new System.Drawing.Point(102, 33);
             this.buttonSerialPortOpen.Name = "buttonSerialPortOpen";
             this.buttonSerialPortOpen.Size = new System.Drawing.Size(100, 23);
             this.buttonSerialPortOpen.TabIndex = 1;
@@ -448,13 +307,13 @@
             this.buttonSerialPortOpen.UseVisualStyleBackColor = true;
             this.buttonSerialPortOpen.Click += new System.EventHandler(this.buttonSerialPortOpen_Click);
             // 
-            // checkBoxSerialPortLog
+            // checkBoxLogEnable
             // 
             this.checkBoxLogEnable.AutoSize = true;
             this.checkBoxLogEnable.Checked = true;
             this.checkBoxLogEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLogEnable.Location = new System.Drawing.Point(6, 62);
-            this.checkBoxLogEnable.Name = "checkBoxSerialPortLog";
+            this.checkBoxLogEnable.Location = new System.Drawing.Point(6, 84);
+            this.checkBoxLogEnable.Name = "checkBoxLogEnable";
             this.checkBoxLogEnable.Size = new System.Drawing.Size(72, 17);
             this.checkBoxLogEnable.TabIndex = 2;
             this.checkBoxLogEnable.Text = "Log to file";
@@ -479,7 +338,7 @@
             "230400",
             "460800",
             "921600"});
-            this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(6, 35);
+            this.comboBoxSerialPortBaudrate.Location = new System.Drawing.Point(6, 33);
             this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
             this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(82, 21);
             this.comboBoxSerialPortBaudrate.TabIndex = 4;
@@ -487,7 +346,7 @@
             // 
             // buttonSerialPortRefresh
             // 
-            this.buttonSerialPortRefresh.Location = new System.Drawing.Point(102, 6);
+            this.buttonSerialPortRefresh.Location = new System.Drawing.Point(102, 4);
             this.buttonSerialPortRefresh.Name = "buttonSerialPortRefresh";
             this.buttonSerialPortRefresh.Size = new System.Drawing.Size(100, 23);
             this.buttonSerialPortRefresh.TabIndex = 8;
@@ -513,7 +372,7 @@
             this.checkBoxSerialLogScrollBottom.AutoSize = true;
             this.checkBoxSerialLogScrollBottom.Checked = true;
             this.checkBoxSerialLogScrollBottom.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSerialLogScrollBottom.Location = new System.Drawing.Point(6, 108);
+            this.checkBoxSerialLogScrollBottom.Location = new System.Drawing.Point(76, 6);
             this.checkBoxSerialLogScrollBottom.Name = "checkBoxSerialLogScrollBottom";
             this.checkBoxSerialLogScrollBottom.Size = new System.Drawing.Size(66, 17);
             this.checkBoxSerialLogScrollBottom.TabIndex = 12;
@@ -526,12 +385,145 @@
             this.checkBoxSerialCopySelected.AutoSize = true;
             this.checkBoxSerialCopySelected.Checked = true;
             this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 131);
+            this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 130);
             this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
             this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(137, 17);
             this.checkBoxSerialCopySelected.TabIndex = 13;
             this.checkBoxSerialCopySelected.Text = "Copy text with selecting";
             this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
+            // 
+            // tabPageMessage
+            // 
+            this.tabPageMessage.Controls.Add(this.buttonSerialOpenLogFile);
+            this.tabPageMessage.Controls.Add(this.textBoxSerialTextFind);
+            this.tabPageMessage.Controls.Add(this.labelConstTextSearching);
+            this.tabPageMessage.Controls.Add(this.labelSerialPeriodSendingConstTextMessage);
+            this.tabPageMessage.Controls.Add(this.textBoxPeriodSendingMessage);
+            this.tabPageMessage.Controls.Add(this.buttonSerialPeriodSendingStart);
+            this.tabPageMessage.Controls.Add(this.labelSerialPeriodSendingConstText);
+            this.tabPageMessage.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
+            this.tabPageMessage.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMessage.Name = "tabPageMessage";
+            this.tabPageMessage.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMessage.Size = new System.Drawing.Size(237, 403);
+            this.tabPageMessage.TabIndex = 2;
+            this.tabPageMessage.Text = "Message";
+            this.tabPageMessage.UseVisualStyleBackColor = true;
+            // 
+            // labelSerialPeriodSendingConstTextMessage
+            // 
+            this.labelSerialPeriodSendingConstTextMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSerialPeriodSendingConstTextMessage.AutoSize = true;
+            this.labelSerialPeriodSendingConstTextMessage.Location = new System.Drawing.Point(7, 98);
+            this.labelSerialPeriodSendingConstTextMessage.Name = "labelSerialPeriodSendingConstTextMessage";
+            this.labelSerialPeriodSendingConstTextMessage.Size = new System.Drawing.Size(94, 13);
+            this.labelSerialPeriodSendingConstTextMessage.TabIndex = 4;
+            this.labelSerialPeriodSendingConstTextMessage.Text = "Sending message:";
+            // 
+            // textBoxPeriodSendingMessage
+            // 
+            this.textBoxPeriodSendingMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxPeriodSendingMessage.Location = new System.Drawing.Point(9, 114);
+            this.textBoxPeriodSendingMessage.Name = "textBoxPeriodSendingMessage";
+            this.textBoxPeriodSendingMessage.Size = new System.Drawing.Size(186, 20);
+            this.textBoxPeriodSendingMessage.TabIndex = 3;
+            this.textBoxPeriodSendingMessage.Text = "<Periodical sending message>";
+            this.textBoxPeriodSendingMessage.Enter += new System.EventHandler(this.textBoxPeriodSendingMessage_Enter);
+            this.textBoxPeriodSendingMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPeriodSendingMessage_KeyPress);
+            // 
+            // buttonSerialPeriodSendingStart
+            // 
+            this.buttonSerialPeriodSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSerialPeriodSendingStart.Location = new System.Drawing.Point(145, 59);
+            this.buttonSerialPeriodSendingStart.Name = "buttonSerialPeriodSendingStart";
+            this.buttonSerialPeriodSendingStart.Size = new System.Drawing.Size(50, 23);
+            this.buttonSerialPeriodSendingStart.TabIndex = 2;
+            this.buttonSerialPeriodSendingStart.Text = "Start";
+            this.buttonSerialPeriodSendingStart.UseVisualStyleBackColor = true;
+            this.buttonSerialPeriodSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
+            // 
+            // labelSerialPeriodSendingConstText
+            // 
+            this.labelSerialPeriodSendingConstText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSerialPeriodSendingConstText.AutoSize = true;
+            this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(6, 64);
+            this.labelSerialPeriodSendingConstText.Name = "labelSerialPeriodSendingConstText";
+            this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(47, 13);
+            this.labelSerialPeriodSendingConstText.TabIndex = 1;
+            this.labelSerialPeriodSendingConstText.Text = "Second:";
+            // 
+            // numericUpDownSerialPeriodSendingTime
+            // 
+            this.numericUpDownSerialPeriodSendingTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(75, 62);
+            this.numericUpDownSerialPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
+            this.numericUpDownSerialPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
+            this.numericUpDownSerialPeriodSendingTime.TabIndex = 0;
+            this.numericUpDownSerialPeriodSendingTime.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // tabPageSerialCommands
+            // 
+            this.tabPageSerialCommands.Controls.Add(this.buttonSerialFavouriteCommandsAdd);
+            this.tabPageSerialCommands.Controls.Add(this.buttonSerialFavouriteCommandsSave);
+            this.tabPageSerialCommands.Controls.Add(this.dataGridViewFavCommands);
+            this.tabPageSerialCommands.Controls.Add(this.buttonSerialFavouriteCommandSending);
+            this.tabPageSerialCommands.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSerialCommands.Name = "tabPageSerialCommands";
+            this.tabPageSerialCommands.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSerialCommands.Size = new System.Drawing.Size(237, 403);
+            this.tabPageSerialCommands.TabIndex = 0;
+            this.tabPageSerialCommands.Text = "Command";
+            this.tabPageSerialCommands.UseVisualStyleBackColor = true;
+            // 
+            // buttonSerialFavouriteCommandsAdd
+            // 
+            this.buttonSerialFavouriteCommandsAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSerialFavouriteCommandsAdd.Location = new System.Drawing.Point(130, 362);
+            this.buttonSerialFavouriteCommandsAdd.Name = "buttonSerialFavouriteCommandsAdd";
+            this.buttonSerialFavouriteCommandsAdd.Size = new System.Drawing.Size(62, 23);
+            this.buttonSerialFavouriteCommandsAdd.TabIndex = 24;
+            this.buttonSerialFavouriteCommandsAdd.Text = "Add";
+            this.buttonSerialFavouriteCommandsAdd.UseVisualStyleBackColor = true;
+            this.buttonSerialFavouriteCommandsAdd.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsAdd_Click);
+            // 
+            // buttonSerialFavouriteCommandsSave
+            // 
+            this.buttonSerialFavouriteCommandsSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSerialFavouriteCommandsSave.Location = new System.Drawing.Point(73, 362);
+            this.buttonSerialFavouriteCommandsSave.Name = "buttonSerialFavouriteCommandsSave";
+            this.buttonSerialFavouriteCommandsSave.Size = new System.Drawing.Size(51, 23);
+            this.buttonSerialFavouriteCommandsSave.TabIndex = 23;
+            this.buttonSerialFavouriteCommandsSave.Text = "Save";
+            this.buttonSerialFavouriteCommandsSave.UseVisualStyleBackColor = true;
+            this.buttonSerialFavouriteCommandsSave.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsSave_Click);
+            // 
+            // dataGridViewFavCommands
+            // 
+            this.dataGridViewFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFavCommands.Location = new System.Drawing.Point(0, 3);
+            this.dataGridViewFavCommands.MultiSelect = false;
+            this.dataGridViewFavCommands.Name = "dataGridViewFavCommands";
+            this.dataGridViewFavCommands.RowHeadersVisible = false;
+            this.dataGridViewFavCommands.Size = new System.Drawing.Size(234, 353);
+            this.dataGridViewFavCommands.TabIndex = 22;
+            // 
+            // buttonSerialFavouriteCommandSending
+            // 
+            this.buttonSerialFavouriteCommandSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSerialFavouriteCommandSending.Location = new System.Drawing.Point(6, 362);
+            this.buttonSerialFavouriteCommandSending.Name = "buttonSerialFavouriteCommandSending";
+            this.buttonSerialFavouriteCommandSending.Size = new System.Drawing.Size(61, 23);
+            this.buttonSerialFavouriteCommandSending.TabIndex = 14;
+            this.buttonSerialFavouriteCommandSending.Text = "Send";
+            this.buttonSerialFavouriteCommandSending.UseVisualStyleBackColor = true;
+            this.buttonSerialFavouriteCommandSending.Click += new System.EventHandler(this.buttonSerialFavouriteCommandSending_Click);
             // 
             // buttonSerialPortSend
             // 
@@ -560,7 +552,8 @@
             // pictureBoxSerialReceiving
             // 
             this.pictureBoxSerialReceiving.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxSerialReceiving.Location = new System.Drawing.Point(20, 30);
+            this.pictureBoxSerialReceiving.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxSerialReceiving.InitialImage")));
+            this.pictureBoxSerialReceiving.Location = new System.Drawing.Point(4, 4);
             this.pictureBoxSerialReceiving.Name = "pictureBoxSerialReceiving";
             this.pictureBoxSerialReceiving.Size = new System.Drawing.Size(20, 20);
             this.pictureBoxSerialReceiving.TabIndex = 43;
@@ -573,7 +566,7 @@
             // buttonSerialOpenLogFile
             // 
             this.buttonSerialOpenLogFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(52, 30);
+            this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(152, 152);
             this.buttonSerialOpenLogFile.Name = "buttonSerialOpenLogFile";
             this.buttonSerialOpenLogFile.Size = new System.Drawing.Size(75, 23);
             this.buttonSerialOpenLogFile.TabIndex = 44;
@@ -608,12 +601,10 @@
             // 
             this.panelSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSettings.Controls.Add(this.textBoxSerialTextFind);
-            this.panelSettings.Controls.Add(this.labelConstTextSearching);
-            this.panelSettings.Controls.Add(this.buttonSerialOpenLogFile);
             this.panelSettings.Controls.Add(this.buttonClearSerialTexts);
             this.panelSettings.Controls.Add(this.pictureBoxSerialReceiving);
             this.panelSettings.Controls.Add(this.tabControlSerialFunctions);
+            this.panelSettings.Controls.Add(this.checkBoxSerialLogScrollBottom);
             this.panelSettings.Location = new System.Drawing.Point(574, 3);
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(245, 458);
@@ -633,6 +624,30 @@
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
             // 
+            // tabPageCommunication
+            // 
+            this.tabPageCommunication.Controls.Add(this.comboBoxSerialPortCOM);
+            this.tabPageCommunication.Controls.Add(this.buttonSerialPortOpen);
+            this.tabPageCommunication.Controls.Add(this.comboBoxSerialPortBaudrate);
+            this.tabPageCommunication.Controls.Add(this.buttonSerialPortRefresh);
+            this.tabPageCommunication.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCommunication.Name = "tabPageCommunication";
+            this.tabPageCommunication.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCommunication.Size = new System.Drawing.Size(237, 403);
+            this.tabPageCommunication.TabIndex = 4;
+            this.tabPageCommunication.Text = "Comm";
+            this.tabPageCommunication.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxNewLineEnabled
+            // 
+            this.checkBoxNewLineEnabled.AutoSize = true;
+            this.checkBoxNewLineEnabled.Location = new System.Drawing.Point(6, 296);
+            this.checkBoxNewLineEnabled.Name = "checkBoxNewLineEnabled";
+            this.checkBoxNewLineEnabled.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxNewLineEnabled.TabIndex = 50;
+            this.checkBoxNewLineEnabled.Text = "New line";
+            this.checkBoxNewLineEnabled.UseVisualStyleBackColor = true;
+            // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -647,17 +662,18 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FastenTerminal_FormClosing);
             this.Load += new System.EventHandler(this.FormFastenTerminalMain_Load);
             this.tabControlSerialFunctions.ResumeLayout(false);
+            this.tabPageConfiguration.ResumeLayout(false);
+            this.tabPageConfiguration.PerformLayout();
+            this.tabPageMessage.ResumeLayout(false);
+            this.tabPageMessage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).EndInit();
             this.tabPageSerialCommands.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).EndInit();
-            this.tabPageSerialPeriodSending.ResumeLayout(false);
-            this.tabPageSerialPeriodSending.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).EndInit();
-            this.tabPageSerialCommunicationSettings.ResumeLayout(false);
-            this.tabPageSerialCommunicationSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
             this.panelSettings.ResumeLayout(false);
             this.panelSettings.PerformLayout();
             this.panelLog.ResumeLayout(false);
+            this.tabPageCommunication.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -672,8 +688,8 @@
 		private System.Windows.Forms.TabControl tabControlSerialFunctions;
 		private System.Windows.Forms.TabPage tabPageSerialCommands;
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandSending;
-		private System.Windows.Forms.TabPage tabPageSerialPeriodSending;
-		private System.Windows.Forms.TabPage tabPageSerialCommunicationSettings;
+		private System.Windows.Forms.TabPage tabPageMessage;
+		private System.Windows.Forms.TabPage tabPageConfiguration;
 		private System.Windows.Forms.ComboBox comboBoxSerialPortCOM;
 		private System.Windows.Forms.Button buttonSerialPortOpen;
 		private System.Windows.Forms.CheckBox checkBoxLogEnable;
@@ -704,13 +720,14 @@
         private System.Windows.Forms.CheckBox checkBoxPrintSend;
         private System.Windows.Forms.Timer timerCheckSerialPorts;
         private System.Windows.Forms.ComboBox comboBoxNewLineType;
-        private System.Windows.Forms.Label labelConstNewLineTypeName;
         private System.Windows.Forms.Button buttonForeGroundColorChange;
         private System.Windows.Forms.Button buttonBackGroundColorChange;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.RichTextBox richTextBoxSerialPortTexts;
         private System.Windows.Forms.Panel panelSettings;
         private System.Windows.Forms.Panel panelLog;
+        private System.Windows.Forms.TabPage tabPageCommunication;
+        private System.Windows.Forms.CheckBox checkBoxNewLineEnabled;
     }
 }
 
