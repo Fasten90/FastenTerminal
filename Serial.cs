@@ -81,7 +81,12 @@ namespace FastenTerminal
 			}
 		}
 
-		public void SerialPortComClose()
+        public override void Close()
+        {
+            SerialPortComClose();
+        }
+
+        public void SerialPortComClose()
 		{
 			// Create new thread
 			Thread closeThread = new Thread(SerialPortCloseInOtherThread);
@@ -109,7 +114,14 @@ namespace FastenTerminal
             SerialRegistrateClose();
         }
 
-		public void Receive()
+        private void SerialRegistrateClose()
+        {
+            stateInfo = "Closed";
+            isOpened = false;
+            form.SerialSetStateOpenedOrClosed(false);
+        }
+
+        public void Receive()
 		{
 			// Help: http://stackoverflow.com/questions/8843301/c-sharp-winform-freezing-on-serialport-close
 			// For not dead-lock
@@ -241,13 +253,6 @@ namespace FastenTerminal
             {
                 SerialRegistrateClose();
             }
-        }
-
-        private void SerialRegistrateClose()
-        {
-            stateInfo = "Closed";
-            isOpened = false;
-            form.SerialSetStateOpenedOrClosed(false);
         }
     }
 }

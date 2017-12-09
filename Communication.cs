@@ -340,6 +340,10 @@ namespace FastenTerminal
             //form.AppendTextSerialLogEvent("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");
         }
 
+        public virtual void Close()
+        {
+            Console.WriteLine("Do not call virtual Close()");
+        }
 
     }
 }

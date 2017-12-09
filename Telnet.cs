@@ -33,12 +33,10 @@ namespace FastenTerminal
             this.form = form;
         }
 
-        // SOurce: https://dotblogs.com.tw/masterhsu/2016/07/13/150206
+        // Source: https://dotblogs.com.tw/masterhsu/2016/07/13/150206
         public bool Telnet_Connect(string IP, string user, string passwd)
         {
-            // TODO: Fix this
-            //this.IP = IP;
-            IP = this.IP;
+            this.IP = IP;
             this.user = user;
             this.passwd = passwd;
 
@@ -62,13 +60,13 @@ namespace FastenTerminal
                     t = new Thread(Telnet_Read);
                     t.Start();
                     //Thread.Sleep(100);
-                    form.AppendTextLogEvent("Telnet connection successful!");
+                    form.AppendTextLogEvent("Telnet connection successful!\n");
                     result = true;
                     isOpened = true;
                 }
                 else
                 {
-                    form.AppendTextLogEvent("Telnet connection failed!");
+                    form.AppendTextLogEvent("Telnet connection failed!\n");
                 }
             }
             catch (Exception ex)
@@ -99,7 +97,6 @@ namespace FastenTerminal
                         Console.WriteLine("Received from telnet: " + Telnet_out);
 
                         AppendReceivedTextToGui(Telnet_out);
-                        //form.AppendTextLogData(Telnet_out);
 
                         // Sent message display
                         // TODO: 
@@ -172,6 +169,13 @@ namespace FastenTerminal
             }
 
             return logMessage;
+        }
+
+        public override void Close()
+        {
+            //Console.WriteLine("Implement telnet close!");
+            telnetStream_A.Close();
+            form.AppendTextLogEvent("Telnet connection closed\n");
         }
     }
 }

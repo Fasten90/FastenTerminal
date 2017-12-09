@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -100,6 +101,21 @@ namespace FastenTerminal
             }
 
             return newLineString;
+        }
+
+        public static bool CheckIpAddressIsValid(String IPstring)
+        {
+            IPAddress ipAddress;
+            if (IPAddress.TryParse(IPstring, out ipAddress))
+            {
+                // Valid ip
+                return true;
+            }
+            else
+            {
+                // Is not valid ip
+                return false;
+            }
         }
 
     }

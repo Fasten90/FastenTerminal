@@ -94,7 +94,7 @@ namespace FastenTerminal
 			String messageResult = "";
 
 			// Send on serial
-			messageResult = form.serial.SendMessage(command);
+			messageResult = form.comm.SendMessage(command);
 
 
 			Log.SendEventLog(messageResult);

@@ -27,12 +27,8 @@ namespace FastenTerminal
 
 
 		// Communications
-		public Serial serial;
-        public Telnet telnet;
-
-        private bool TelnetIsConnected = false;
-        private bool SerialIsConnected = false;
-
+		public Communication comm;
+ 
 
         public FavouriteCommandHandler favouriteCommands;
 
@@ -75,11 +71,11 @@ namespace FastenTerminal
 			Config = new FastenTerminalConfigs();
 
 			// Load Serial
-			serial = new Serial(serialPortDevice, this);
+			comm = new Serial(serialPortDevice, this);
 
 			// Serial config
-			serial.NeedLog = checkBoxLogEnable.Checked;
-			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
+			comm.NeedLog = checkBoxLogEnable.Checked;
+			comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 			
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
@@ -101,7 +97,7 @@ namespace FastenTerminal
 			// Form configs
 			GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
 
-            checkBoxPrintSend.Checked = serial.printSentEvent;
+            checkBoxPrintSend.Checked = comm.printSentEvent;
 
             comboBoxNewLineType.Text = "\\r\\n";
 
@@ -160,8 +156,8 @@ namespace FastenTerminal
 			// Close event
 
 			// Close serial
-			serial.needPrint = false;
-			serial.SerialPortComClose();
+			comm.needPrint = false;
+			comm.Close();
 
             // Close Telnet
             // TODO: Close telnet
@@ -182,7 +178,7 @@ namespace FastenTerminal
 		private void RefreshTitle()
 		{
 			// For example: "FastenTerminal - COM9 - 9600"
-			this.Text = ApplicationName + " - " + serial.stateInfo;
+			this.Text = ApplicationName + " - " + comm.stateInfo;
 		}
 
 		private void notifyMessageForUser(String message)
@@ -223,15 +219,15 @@ namespace FastenTerminal
 		private void SerialRefresh()
 		{
 			// Refresh Serial COM ports
-			serial.SerialPortComRefresh();
+			((Serial)comm).SerialPortComRefresh();
 
-			if (serial.ComAvailableList != null && serial.ComAvailableList.Length != 0) 
+			if (((Serial)comm).ComAvailableList != null && ((Serial)comm).ComAvailableList.Length != 0) 
 			{
 				// Clear
 				comboBoxSerialPortCOM.Items.Clear();
 
 				// Load new values
-				foreach (string s in serial.ComAvailableList)
+				foreach (string s in ((Serial)comm).ComAvailableList)
 				{
 					comboBoxSerialPortCOM.Items.Add(s);
 				}
@@ -246,19 +242,14 @@ namespace FastenTerminal
                 comboBoxSerialPortCOM.Items.Clear();
             }
 
-
 			// Wrong
 			//comboBoxSerialPortCOM.DataSource = serial.ComAvailableList;
 		}
 
-
-
-		private void buttonSerialPortOpen_Click(object sender, EventArgs e)
+		private void buttonSerialPortOpenClose_Click(object sender, EventArgs e)
 		{
 			SerialOpenClose();
 		}
-
-
 
         public void SerialSetStateOpenedOrClosed(bool isOpened)
         {
@@ -266,11 +257,11 @@ namespace FastenTerminal
             {
                 if (isOpened)
                 {
-                    buttonSerialPortOpen.Text = "Port close";
+                    buttonSerialPortOpenClose.Text = "Port close";
                 }
                 else
                 {
-                    buttonSerialPortOpen.Text = "Port open";
+                    buttonSerialPortOpenClose.Text = "Port open";
                 }
             }
             catch (Exception e)
@@ -280,14 +271,13 @@ namespace FastenTerminal
             }
         }
 
-
 		private void SerialOpenClose()
 		{
 			// Is opened?
-			if (serial.isOpened == false)
+			if (comm.isOpened == false)
 			{
 				// If there is not opened port, open
-				if (serial.SerialPortComOpen())
+				if (((Serial)comm).SerialPortComOpen())
 				{
                     // Successful port opening
                     SerialSetStateOpenedOrClosed(true);
@@ -301,7 +291,7 @@ namespace FastenTerminal
 			else
 			{
 				// If opened, close
-				serial.SerialPortComClose();
+				comm.Close();
                 SerialSetStateOpenedOrClosed(false);
             }
 
@@ -311,12 +301,12 @@ namespace FastenTerminal
 
 		private void comboBoxSerialPortCOM_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			serial.ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
+            ((Serial)comm).ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
 		}
 			
 		private void comboBoxSerialPortBaudrate_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			serial.Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
+            ((Serial)comm).Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
 		}
 
 		private void serialPortDevice_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
@@ -332,7 +322,7 @@ namespace FastenTerminal
 				return;
 			}
 
-			serial.Receive();
+            ((Serial)comm).Receive();
 
 			ReceivedACharacterEvent();
 		}
@@ -694,14 +684,12 @@ namespace FastenTerminal
 
                 // Successful or not successful
                 String messageResult = "";
-                if (TelnetIsConnected)
-                    telnet.SendMessage(message);
-                else if (SerialIsConnected)
-                    serial.SendMessage(message);
+                if (comm.isOpened)
+                    comm.SendMessage(message);
                 else
                 {
                     // There is no connection
-                    AppendTextLogEvent("There is no connection, cannot send!");
+                    AppendTextLogEvent("[Application] There is no connection, cannot send!\n");
                     return;
                 }
 
@@ -726,10 +714,9 @@ namespace FastenTerminal
 		private void checkBoxNeedLog_CheckedChanged(object sender, EventArgs e)
 		{
             // TODO: Do better?
-			serial.NeedLog = checkBoxLogEnable.Checked;
-            telnet.NeedLog = checkBoxLogEnable.Checked;
+			comm.NeedLog = checkBoxLogEnable.Checked;
 
-            if (!serial.NeedLog)
+            if (!comm.NeedLog)
 			{
 				// If not log
 				checkBoxLogWithDateTime.Checked = false;
@@ -823,10 +810,10 @@ namespace FastenTerminal
             // TODO: Has we opened serial port? Checked in below, but if isOpenedPort state is wrong?
 
 
-            if (serial.PeriodSending_Enable)
+            if (comm.PeriodSending_Enable)
             {
                 // Now, enabled, so need to stop
-                serial.PeriodSendingStop();
+                comm.PeriodSendingStop();
 
                 SerialPeriodSend_SetState(false);
             }
@@ -835,10 +822,10 @@ namespace FastenTerminal
                 // Now disabled, need to be enabling & starting
 
                 // Has opened port?
-                if (serial.isOpened)
+                if (comm.isOpened)
                 {
                     // Has opened port
-                    serial.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
+                    comm.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
                         textBoxPeriodSendingMessage.Text);
 
                     SerialPeriodSend_SetState(true);
@@ -864,7 +851,7 @@ namespace FastenTerminal
 		private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
 		{
 			// Need to log with DateTime?
-			serial.LogWithDateTime = checkBoxLogWithDateTime.Checked;
+			comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 
 			//SaveConfig();
 		}
@@ -904,7 +891,7 @@ namespace FastenTerminal
 		{
 			String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
             // TODO: Not serial
-			serial.SendMessage(message);
+			comm.SendMessage(message);
 		}
 
 
@@ -998,9 +985,9 @@ namespace FastenTerminal
 
 		private void checkBoxSerialReceiveBinaryMode_CheckedChanged(object sender, EventArgs e)
 		{
-			serial.receiverModeBinary = checkBoxSerialReceiveBinaryMode.Checked;
+			comm.receiverModeBinary = checkBoxSerialReceiveBinaryMode.Checked;
 
-            if (serial.receiverModeBinary)
+            if (comm.receiverModeBinary)
             {
                 // Turn off Escape
                 checkBoxEscapeSequenceEnable.Checked = false;
@@ -1079,7 +1066,7 @@ namespace FastenTerminal
 
         private void checkBoxPrintSend_CheckedChanged(object sender, EventArgs e)
         {
-            serial.printSentEvent = checkBoxPrintSend.Checked;
+            comm.printSentEvent = checkBoxPrintSend.Checked;
         }
 
         private void timerCheckSerialPorts_Tick(object sender, EventArgs e)
@@ -1096,7 +1083,7 @@ namespace FastenTerminal
 
         private void comboBoxNewLineType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            serial.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
+            comm.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
         }
 
         private void buttonBackGroundColor_Click(object sender, EventArgs e)
@@ -1119,38 +1106,34 @@ namespace FastenTerminal
          *          Telnet
          */ 
 
-        private void setTelnetState(bool isConnected)
+        private void setTelnetState(bool isOpened)
         {
-            if (isConnected)
+            if (comm.isOpened)
             {
                 // Print: "Close"
-                groupBoxCommTelnet.Text = "Close";
+                buttonTelnetOpenClose.Text = "Close";
             }
             else
             {
                 // Closed, print "open"
-                groupBoxCommTelnet.Text = "Open";
+                buttonTelnetOpenClose.Text = "Open";
             }
 
-            TelnetIsConnected = isConnected;
+            comm.isOpened = isOpened;
         }
 
-        private void buttonTelnetConnect_Click(object sender, EventArgs e)
+        private void buttonTelnetOpenClose_Click(object sender, EventArgs e)
         {
-            if (TelnetIsConnected == false)
+            if (comm.isOpened == false)
             {
-                telnet = new Telnet(this);
-                TelnetIsConnected = telnet.Telnet_Connect(maskedTextBoxTelnetIP.Text, "", "");
-                // It is slow function !
-
-                IPAddress ipAddress;
-                if (IPAddress.TryParse(maskedTextBoxTelnetIP.Text, out ipAddress))
+                if (Common.CheckIpAddressIsValid(textBoxTelnetIP.Text))
                 {
                     // Valid ip
                     // Connect
-                    // TODO:
-                    //telnet = new Telnet();
-                    //telnet.Telnet_Connect(maskedTextBoxTelnetIP.Text, "", "");
+                    comm = new Telnet(this);
+                    ((Telnet)comm).Telnet_Connect(textBoxTelnetIP.Text, "", "");
+                    // TODO: It is slow function !
+                    setTelnetState(comm.isOpened);
                 }
                 else
                 {
@@ -1162,6 +1145,8 @@ namespace FastenTerminal
             {
                 // Close...
                 // TODO:
+                comm.Close();
+                setTelnetState(false);
             }
         }
 
