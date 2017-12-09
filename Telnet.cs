@@ -173,10 +173,13 @@ namespace FastenTerminal
 
         public override void Close()
         {
-            telnetStream_A.Close();
-            form.AppendTextLogEvent("Telnet connection closed");
-            isOpened = false;
-            stateInfo = "Closed";
+            if (telnetStream_A != null)
+            {
+                telnetStream_A.Close();
+                form.AppendTextLogEvent("Telnet connection closed");
+                isOpened = false;
+                stateInfo = "Closed";
+            }
         }
     }
 }
