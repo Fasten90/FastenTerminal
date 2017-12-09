@@ -175,7 +175,7 @@
             this.groupBoxCommTelnet.Controls.Add(this.maskedTextBoxTelnetIP);
             this.groupBoxCommTelnet.Location = new System.Drawing.Point(7, 93);
             this.groupBoxCommTelnet.Name = "groupBoxCommTelnet";
-            this.groupBoxCommTelnet.Size = new System.Drawing.Size(219, 106);
+            this.groupBoxCommTelnet.Size = new System.Drawing.Size(219, 77);
             this.groupBoxCommTelnet.TabIndex = 10;
             this.groupBoxCommTelnet.TabStop = false;
             this.groupBoxCommTelnet.Text = "Telnet";
@@ -205,6 +205,7 @@
             this.maskedTextBoxTelnetIP.Location = new System.Drawing.Point(7, 48);
             this.maskedTextBoxTelnetIP.Mask = "###.###.###.###";
             this.maskedTextBoxTelnetIP.Name = "maskedTextBoxTelnetIP";
+            this.maskedTextBoxTelnetIP.ReadOnly = true;
             this.maskedTextBoxTelnetIP.Size = new System.Drawing.Size(100, 20);
             this.maskedTextBoxTelnetIP.TabIndex = 0;
             // 
@@ -325,11 +326,11 @@
             this.textBoxPeriodSendingMessage.Enter += new System.EventHandler(this.textBoxPeriodSendingMessage_Enter);
             this.textBoxPeriodSendingMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPeriodSendingMessage_KeyPress);
             // 
-            // buttonSerialPeriodSendingStart
+            // buttonPeriodicalSendingStart
             // 
             this.buttonPeriodicalSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPeriodicalSendingStart.Location = new System.Drawing.Point(145, 59);
-            this.buttonPeriodicalSendingStart.Name = "buttonSerialPeriodSendingStart";
+            this.buttonPeriodicalSendingStart.Name = "buttonPeriodicalSendingStart";
             this.buttonPeriodicalSendingStart.Size = new System.Drawing.Size(50, 23);
             this.buttonPeriodicalSendingStart.TabIndex = 2;
             this.buttonPeriodicalSendingStart.Text = "Start";
@@ -532,11 +533,11 @@
             this.buttonSerialSaveConfig.UseVisualStyleBackColor = true;
             this.buttonSerialSaveConfig.Click += new System.EventHandler(this.buttonSerialSaveConfig_Click);
             // 
-            // checkBoxSerialReceiveBinaryMode
+            // checkBoxReceiveBinaryMode
             // 
             this.checkBoxReceiveBinaryMode.AutoSize = true;
             this.checkBoxReceiveBinaryMode.Location = new System.Drawing.Point(6, 177);
-            this.checkBoxReceiveBinaryMode.Name = "checkBoxSerialReceiveBinaryMode";
+            this.checkBoxReceiveBinaryMode.Name = "checkBoxReceiveBinaryMode";
             this.checkBoxReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
             this.checkBoxReceiveBinaryMode.TabIndex = 41;
             this.checkBoxReceiveBinaryMode.Text = "Receive Binary";
@@ -661,7 +662,7 @@
             this.timerCheckSerialPorts.Interval = 500;
             this.timerCheckSerialPorts.Tick += new System.EventHandler(this.timerCheckSerialPorts_Tick);
             // 
-            // richTextBoxSerialPortTexts
+            // richTextBoxTextLog
             // 
             this.richTextBoxTextLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -670,7 +671,7 @@
             this.richTextBoxTextLog.DetectUrls = false;
             this.richTextBoxTextLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.richTextBoxTextLog.Location = new System.Drawing.Point(3, 3);
-            this.richTextBoxTextLog.Name = "richTextBoxSerialPortTexts";
+            this.richTextBoxTextLog.Name = "richTextBoxTextLog";
             this.richTextBoxTextLog.ReadOnly = true;
             this.richTextBoxTextLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
             this.richTextBoxTextLog.Size = new System.Drawing.Size(562, 419);

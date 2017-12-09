@@ -75,7 +75,7 @@ namespace FastenTerminal
 			Config = new FastenTerminalConfigs();
 
 			// Load Serial
-			comm = new Serial(serialPortDevice, this);
+			comm = new Serial(ref serialPortDevice, this);
 
 			// Serial config
 			comm.NeedLog = checkBoxLogEnable.Checked;
@@ -233,7 +233,7 @@ namespace FastenTerminal
             catch (Exception ex)
             {
                 // Load Serial
-                comm = new Serial(serialPortDevice, this);
+                comm = new Serial(ref serialPortDevice, this);
                 ((Serial)comm).SerialPortComRefresh();
             }
 
@@ -310,7 +310,7 @@ namespace FastenTerminal
                 }
                 catch (Exception ex)
                 {
-                    comm = new Serial(serialPortDevice, this);
+                    comm = new Serial(ref serialPortDevice, this);
 
                     // TODO: To a new function?
                     ((Serial)comm).ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;

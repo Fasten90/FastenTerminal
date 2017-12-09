@@ -30,6 +30,7 @@ namespace FastenTerminal
 
         public Telnet(FormFastenTerminal form)
         {
+            // TODO: Do more beautiful (delegate?)
             this.form = form;
         }
 

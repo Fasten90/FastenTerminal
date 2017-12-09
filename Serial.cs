@@ -22,11 +22,12 @@ namespace FastenTerminal
 		private const Int32 preferredBaudrate = 115200;
 
 
-		public Serial(System.IO.Ports.SerialPort serial, FormFastenTerminal form)
+		public Serial(ref System.IO.Ports.SerialPort serial, FormFastenTerminal form)
 		{
 			this.serial = serial;
 
-			this.form = form;
+            // TODO: Do more beautiful (delegate?)
+            this.form = form;
 
             SerialPortComRefresh();
 		}
