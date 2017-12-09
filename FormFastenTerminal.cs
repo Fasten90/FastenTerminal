@@ -284,7 +284,7 @@ namespace FastenTerminal
 		private void SerialOpenClose()
 		{
 			// Is opened?
-			if (serial.isOpenedPort == false)
+			if (serial.isOpened == false)
 			{
 				// If there is not opened port, open
 				if (serial.SerialPortComOpen())
@@ -695,7 +695,7 @@ namespace FastenTerminal
                 // Successful or not successful
                 String messageResult = "";
                 if (TelnetIsConnected)
-                    telnet.Telnet_SendMessage(message);
+                    telnet.SendMessage(message);
                 else if (SerialIsConnected)
                     serial.SendMessage(message);
                 else
@@ -835,7 +835,7 @@ namespace FastenTerminal
                 // Now disabled, need to be enabling & starting
 
                 // Has opened port?
-                if (serial.isOpenedPort)
+                if (serial.isOpened)
                 {
                     // Has opened port
                     serial.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
@@ -903,6 +903,7 @@ namespace FastenTerminal
 		private void buttonSerialFavouriteCommandSending_Click(object sender, EventArgs e)
 		{
 			String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
+            // TODO: Not serial
 			serial.SendMessage(message);
 		}
 

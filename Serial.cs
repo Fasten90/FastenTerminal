@@ -13,20 +13,12 @@ using System.Windows.Forms;
 
 namespace FastenTerminal
 {
-
-	public class SerialConfig
-	{
-		// TODO: implement this
-	}
-
-
 	public class Serial : Communication
 	{
 		public string[] ComAvailableList;
 		public string ComSelected = "";
 		public System.IO.Ports.SerialPort serial;
 		public string Baudrate = "115200";
-		public bool isOpenedPort = false;
 		private const Int32 preferredBaudrate = 115200;
 
 
@@ -39,13 +31,11 @@ namespace FastenTerminal
 			SerialPortComRefresh();
 		}
 
-
 		public void SerialPortComRefresh()
 		{
 			// Get active ports
 			ComAvailableList = SerialPort.GetPortNames();
 		}
-
 
 		public bool SerialPortComOpen()
 		{
@@ -78,7 +68,7 @@ namespace FastenTerminal
 									serial.PortName + " " + serial.BaudRate + "\n";
 					Log.SendEventLog(message);
 					form.AppendTextLogEvent(message);
-					isOpenedPort = true;
+					isOpened = true;
 					return true;
 				}
 				catch (Exception e)
@@ -91,16 +81,12 @@ namespace FastenTerminal
 			}
 		}
 
-
-
 		public void SerialPortComClose()
 		{
 			// Create new thread
 			Thread closeThread = new Thread(SerialPortCloseInOtherThread);
 			closeThread.Start();
 		}
-
-
 
 		private void SerialPortCloseInOtherThread()
 		{
@@ -122,8 +108,6 @@ namespace FastenTerminal
 
             SerialRegistrateClose();
         }
-
-
 
 		public void Receive()
 		{
@@ -189,7 +173,7 @@ namespace FastenTerminal
 			}
 		}
 
-		public String SendMessage(String message)
+		public override String SendMessage(String message)
 		{
 			String logMessage;
 
@@ -198,7 +182,7 @@ namespace FastenTerminal
 				message += newLineString;
 			}
 
-			if (isOpenedPort)
+			if (isOpened)
 			{
 				try
 				{
@@ -246,66 +230,6 @@ namespace FastenTerminal
 			return logMessage;
 		}
 
-
-
-		public void PeriodSendingStart(float sec, string message)
-		{
-			// Start periodical sending
-			PeriodSending_Enable = true;
-			PeriodSending_Time = sec;
-			PeriodSending_Message = message;
-
-			// Start timer
-			PeriodSending_Timer = new System.Windows.Forms.Timer();
-			PeriodSending_Timer.Interval = (int)(PeriodSending_Time * 1000);    // =millisec
-			PeriodSending_Timer.Enabled = true;
-			PeriodSending_Timer.Start();
-			PeriodSending_Timer.Tick += new System.EventHandler(this.timerPeriodTimerSending_Tick);
-
-			// Log
-			string logMessage = "[Application] Periodical message sending started...\n" +
-				"  Time: " + PeriodSending_Time.ToString() + "  Message: " + PeriodSending_Message + "\n";
-
-			form.AppendTextLogEvent(logMessage);
-			Log.SendEventLog(logMessage);
-		}
-
-
-
-		public void PeriodSendingStop()
-		{
-			// Stop periodical sending
-			PeriodSending_Enable = false;
-
-			// Stop timer
-			PeriodSending_Timer.Stop();
-			PeriodSending_Timer.Enabled = false;
-
-			// Log
-			string logMessage = "[Application] Periodical message sending stopped\n";
-
-			form.AppendTextLogEvent(logMessage);
-			Log.SendEventLog(logMessage);
-
-            // Not running state
-            form.SerialPeriodSend_SetState(false);
-        }
-
-
-
-		private void timerPeriodTimerSending_Tick(object sender, EventArgs e)
-		{
-			// Period Sending time actual
-
-			// Send message
-			SendMessage(PeriodSending_Message);
-
-			// Log
-			//form.AppendTextSerialLogEvent("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");
-		}
-
-
-
         public void SerialError()
         {
             // Close serial port, because has error
@@ -319,12 +243,10 @@ namespace FastenTerminal
             }
         }
 
-
-   
         private void SerialRegistrateClose()
         {
             stateInfo = "Closed";
-            isOpenedPort = false;
+            isOpened = false;
             form.SerialSetStateOpenedOrClosed(false);
         }
     }

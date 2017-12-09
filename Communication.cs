@@ -10,8 +10,9 @@ namespace FastenTerminal
     {
         public string stateInfo = "";
 
-        public bool receiverModeBinary = false; // TODO:
-        public bool needToConvertHex = false;   // TODO:
+        public bool isOpened = false;
+        public bool receiverModeBinary = false;
+        public bool needToConvertHex = false;
 
         public string newLineString { get; set; }
 
@@ -254,7 +255,7 @@ namespace FastenTerminal
             if (!receiverModeBinary)
             {
                 // String mode
-
+                /*
                 // New line
                 // Print on output text
                 // For richText, where \r\n is two new line, we need only one newline
@@ -268,6 +269,7 @@ namespace FastenTerminal
                 // Replace '\r' to '\r\n'
                 String needReplaceCharacter = "\r";
                 message = message.Replace(needReplaceCharacter, Environment.NewLine);
+                */
             }
 
             /*
@@ -275,5 +277,69 @@ namespace FastenTerminal
              */
             form.AppendTextLogData(message);
         }
+
+
+        public virtual String SendMessage(String message)
+        {
+            return "ERROR: Virtual SendMesage, do not call!";
+        }
+
+        /*
+         *      Periodical Sending
+         */
+
+        public void PeriodSendingStart(float sec, string message)
+        {
+            // Start periodical sending
+            PeriodSending_Enable = true;
+            PeriodSending_Time = sec;
+            PeriodSending_Message = message;
+
+            // Start timer
+            PeriodSending_Timer = new System.Windows.Forms.Timer();
+            PeriodSending_Timer.Interval = (int)(PeriodSending_Time * 1000);    // =millisec
+            PeriodSending_Timer.Enabled = true;
+            PeriodSending_Timer.Start();
+            PeriodSending_Timer.Tick += new System.EventHandler(this.timerPeriodTimerSending_Tick);
+
+            // Log
+            string logMessage = "[Application] Periodical message sending started...\n" +
+                "  Time: " + PeriodSending_Time.ToString() + "  Message: " + PeriodSending_Message + "\n";
+
+            form.AppendTextLogEvent(logMessage);
+            Log.SendEventLog(logMessage);
+        }
+  
+        public void PeriodSendingStop()
+        {
+            // Stop periodical sending
+            PeriodSending_Enable = false;
+
+            // Stop timer
+            PeriodSending_Timer.Stop();
+            PeriodSending_Timer.Enabled = false;
+
+            // Log
+            string logMessage = "[Application] Periodical message sending stopped\n";
+
+            form.AppendTextLogEvent(logMessage);
+            Log.SendEventLog(logMessage);
+
+            // Not running state
+            form.SerialPeriodSend_SetState(false);
+        }
+
+        private void timerPeriodTimerSending_Tick(object sender, EventArgs e)
+        {
+            // Period Sending time actual
+
+            // Send message
+            SendMessage(PeriodSending_Message);
+
+            // Log
+            //form.AppendTextSerialLogEvent("[Application] Periodical sending message:\n\t" + PeriodSendingMessage +"\n");
+        }
+
+
     }
 }

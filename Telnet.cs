@@ -64,6 +64,7 @@ namespace FastenTerminal
                     //Thread.Sleep(100);
                     form.AppendTextLogEvent("Telnet connection successful!");
                     result = true;
+                    isOpened = true;
                 }
                 else
                 {
@@ -117,37 +118,60 @@ namespace FastenTerminal
             }
         }
 
-        //telnet sendData
-        public void Telnet_SendMessage(string s)
+        public override String SendMessage(String message)
         {
             byte[] bytWrite_telnet_A;
+            String logMessage = "";
 
-            if (s != null)
+            if (isOpened)
             {
-                try
+                if (message != null)
                 {
-                    bytWrite_telnet_A = Encoding.ASCII.GetBytes(s + "\r");
-                    // Write datas
-                    telnetStream_A.Write(bytWrite_telnet_A, 0, bytWrite_telnet_A.Length);
-
-                    if (NeedLog)
+                    try
                     {
-                        MessageLog.SendLog(s, true);
-                    }
+                        bytWrite_telnet_A = Encoding.ASCII.GetBytes(message + newLineString);
+                        // Write datas
+                        telnetStream_A.Write(bytWrite_telnet_A, 0, bytWrite_telnet_A.Length);
 
-                    if (printSentEvent)
-                    {
-                        form.AppendTextLogEvent("Sent on telnet: " + s);
+                        logMessage = "\n[Application] Successful sent message:\t" + message + "\n";
                     }
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                    // TODO: Implement
-                    form.AppendTextLogEvent("Failed sent telnet message: " + ex.Message);
-                    Log.SendErrorLog(ex.Message);
+                    catch (Exception ex)
+                    {
+                        logMessage = "[Application] Failed sent telnet message:" + ex.Message;
+                        Log.SendErrorLog(logMessage);
+
+                        // Stop periodical sending
+                        if (PeriodSending_Enable)
+                        {
+                            PeriodSendingStop();
+                        }
+
+                        // TODO: Call TelnetError()
+
+                    }
                 }
             }
+            else
+            {
+                logMessage = "[Application] Cannot send message, because there is not connection to telnet\n";
+
+                if (PeriodSending_Enable)
+                {
+                    PeriodSendingStop();
+                }
+            }
+
+            if (NeedLog)
+            {
+                MessageLog.SendLog(logMessage, true);
+            }
+
+            if (printSentEvent)
+            {
+                form.AppendTextLogEvent(logMessage);
+            }
+
+            return logMessage;
         }
     }
 }
