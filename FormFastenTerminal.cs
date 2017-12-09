@@ -413,11 +413,18 @@ namespace FastenTerminal
                 char lastReceivedCharacter = richTextBoxTextLog.Text[richTextBoxTextLog.TextLength - 1];
                 if (lastReceivedCharacter != '\r' && lastReceivedCharacter != '\n' && lastReceivedCharacter != '\0')
                 {
+                    // Last char is not newline (start with newline)
                     message = Environment.NewLine + ApplicationMessage + message + Environment.NewLine;
+                }
+                else
+                {
+                    // Last char is new line
+                    message = ApplicationMessage + message + Environment.NewLine;
                 }
             }
             else
             {
+                // Not received char
                 message = ApplicationMessage + message + Environment.NewLine;
             }
 

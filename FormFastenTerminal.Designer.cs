@@ -116,10 +116,10 @@
             // 
             this.buttonClearSerialTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClearSerialTexts.Image = ((System.Drawing.Image)(resources.GetObject("buttonClearSerialTexts.Image")));
-            this.buttonClearSerialTexts.Location = new System.Drawing.Point(56, 4);
+            this.buttonClearSerialTexts.Location = new System.Drawing.Point(56, 3);
             this.buttonClearSerialTexts.Margin = new System.Windows.Forms.Padding(0);
             this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
-            this.buttonClearSerialTexts.Size = new System.Drawing.Size(20, 20);
+            this.buttonClearSerialTexts.Size = new System.Drawing.Size(22, 22);
             this.buttonClearSerialTexts.TabIndex = 36;
             this.buttonClearSerialTexts.UseVisualStyleBackColor = true;
             this.buttonClearSerialTexts.Click += new System.EventHandler(this.buttonClearSerialTexts_Click);
