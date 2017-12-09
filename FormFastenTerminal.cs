@@ -21,13 +21,34 @@ namespace FastenTerminal
     public partial class FormFastenTerminal : Form
     {
 		// Const application configs:
-		public bool NotifyIsEnabled = true;
-
+		private bool NotifyIsEnabled = true;
 		private const String ApplicationName = "FastenTerminal";
+        private const String ApplicationMessage = "[Application] ";
+
+        // Const images
+        private const String imgLocReceiveGreen = @"Images\img_receive_green.png";
+        private const String imgLocReceiveEmpty = @"Images\img_receive_empty.png";
+        private const String imgLocScrollingActive = @"Images\img_scrolling_active.png";
+        private const String imgLocScrollingInctive = @"Images\img_scrolling_inactive.png";
+
+        // Const sounds
+        private const String soundBellPath = @"Sounds\sound_bell.wav";
 
 
-		// Communications
-		public Communication comm;
+        // Configs
+        private Color GlobalTextColor = Color.Black;
+        private Color GlobalBackgroundColor = Form.DefaultBackColor;
+        private bool GlobalEscapeEnabled = true;
+
+        // TODO: Add to config
+        private Color EventLogTextColor = Color.Blue;
+        private Color EventLogBackgroundColor = Color.Yellow;
+
+        private bool soundIsDisabled = false;
+
+
+        // Communications
+        public Communication comm;
         private CommType commType = CommType.NotInitialized;
 
         public FavouriteCommandHandler favouriteCommands;
@@ -36,36 +57,27 @@ namespace FastenTerminal
 		public List<Command> commandList;
 		public BindingList<Command> commandBindingList;
 
-		private bool SendMessageTextBox_Entered = false;
+        private FastenTerminalConfigs Config;
+
+        // LOG - text variables
+        private bool SendMessageTextBox_Entered = false;
         private bool PeriodMessageTextBox_Entered = false;
         private bool SendMessageTextBox_ClearAfterSend = false;
 
-        private Color GlobalTextColor = Color.Black;
-		private Color GlobalBackgroundColor = Form.DefaultBackColor;
-		private bool GlobalEscapeEnabled;
+        // LOG - strings
+        private String tempStringBuffer = "";
+		private String tempStringEscapeBuffer = ""; // For not ended escape string
 
-        // TODO: Add to config
-        private Color EventLogTextColor = Color.Blue;
-        private Color EventLogBackgroundColor = Color.Yellow;
-
-
-        private FastenTerminalConfigs Config;
-
-		String tempStringBuffer = "";
-		String tempStringEscapeBuffer = ""; // For not ended escape string
-
-		private bool IsreceivedIconIsGreen = false;
-
-		// Const images
-		const String imgLocReceiveGreen = @"Images\img_receive_green.png";
-		const String imgLocReceiveEmpty = @"Images\img_receive_empty.png";
-
-		// Const sounds
-		const String soundBellPath = @"Sounds\sound_bell.wav";
-        bool soundIsDisabled = false;
+        // Events / Variable configs
+        private bool textLogScrollisEnabled = true;
+        private bool IsreceivedIconIsGreen = false;
 
 
-		public FormFastenTerminal()
+        /*
+         *                  Methods
+         */ 
+
+        public FormFastenTerminal()
         {
             InitializeComponent();
         }
@@ -401,12 +413,12 @@ namespace FastenTerminal
                 char lastReceivedCharacter = richTextBoxTextLog.Text[richTextBoxTextLog.TextLength - 1];
                 if (lastReceivedCharacter != '\r' && lastReceivedCharacter != '\n' && lastReceivedCharacter != '\0')
                 {
-                    message = Environment.NewLine + "[Application] " + message + Environment.NewLine;
+                    message = Environment.NewLine + ApplicationMessage + message + Environment.NewLine;
                 }
             }
             else
             {
-                message = "[Application] " + message + Environment.NewLine;
+                message = ApplicationMessage + message + Environment.NewLine;
             }
 
 			AppendTextLog(message, Color.Blue, Color.Yellow);
@@ -561,7 +573,7 @@ namespace FastenTerminal
 			richTextBoxTextLog.SelectionColor = textColor;
 			richTextBoxTextLog.SelectionBackColor = backgroundColor;
 
-			if (checkBoxLogScrollBottom.Checked)
+			if (textLogScrollisEnabled)
 			{
 				// Append text to box
 				richTextBoxTextLog.AppendText(message);     // If you use it, it automatic scroll bottom
@@ -590,7 +602,7 @@ namespace FastenTerminal
 		{
             tempStringBuffer = "";
             DeleteTextLog();
-			checkBoxLogScrollBottom.Checked = true;
+            SetScrollStateFinal(true);
 			GlobalBackgroundColor = Form.DefaultBackColor;
 			GlobalTextColor = Color.Black;
 			// checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
@@ -601,16 +613,42 @@ namespace FastenTerminal
 			richTextBoxTextLog.Clear();
 		}
 
-		private void checkBoxLogScrollBottom_CheckedChanged(object sender, EventArgs e)
-		{
-			// Added buffered string, and scroll bottom
-			if (checkBoxLogScrollBottom.Checked)
-			{
-				ScrollBottomAndAppendBuffer();
-			}
-		}
+        private void pictureBoxScrollingEnabled_Click(object sender, EventArgs e)
+        {
+            // Change by user
+            // Change actual state (negate)
+            SetScrollStateFinal(!textLogScrollisEnabled);
+        }
 
-		private void ScrollBottomAndAppendBuffer()
+        private void SetScrollStateFinal(bool newState)
+        {
+            if (textLogScrollisEnabled != newState)
+            {
+                textLogScrollisEnabled = newState;
+
+                if (textLogScrollisEnabled)
+                {
+                    pictureBoxScrollingEnabled.ImageLocation = imgLocScrollingActive;
+                    // Added buffered string, and scroll bottom
+                    ScrollBottomAndAppendBuffer();
+                }
+                else
+                {
+                    pictureBoxScrollingEnabled.ImageLocation = imgLocScrollingInctive;
+                }
+            }
+        }
+
+        private void setScrollStateByApplication(bool isEnabled)
+        {
+            if (textLogScrollisEnabled != isEnabled)
+            {
+                SetScrollStateFinal(isEnabled);
+                notifyMessageForUser("Scrolling is turned " + ((isEnabled) ? "on" : "off") + " by Application");
+            }
+        }
+
+        private void ScrollBottomAndAppendBuffer()
 		{
 			//richTextBoxSerialPortTexts.Text += tempStringBuffer;
 			AppendTextLog(tempStringBuffer, GlobalTextColor, GlobalBackgroundColor);
@@ -620,28 +658,19 @@ namespace FastenTerminal
 			//richTextBoxSerialPortTexts.ScrollToCaret();	// windows is jumping
 		}
 
-        private void setScrollState(bool isEnabled)
-        {
-            if (checkBoxLogScrollBottom.Checked != isEnabled)
-            {
-                checkBoxLogScrollBottom.Checked = isEnabled;
-                notifyMessageForUser("Scrolling is turned " + ((isEnabled) ? "on" : "off"));
-            }
-        }
-
         private void richTextBoxTextLog_SelectionChanged(object sender, EventArgs e)
 		{
 			// Selected a text, do not scroll!
 			if (richTextBoxTextLog.SelectionStart != richTextBoxTextLog.TextLength)
 			{
-                setScrollState(false);
+                setScrollStateByApplication(false);
 			}
 
-			if (!checkBoxLogScrollBottom.Checked
+			if (!textLogScrollisEnabled
 				&& (richTextBoxTextLog.SelectionStart == richTextBoxTextLog.TextLength) )
 			{
                 // Not scrolling, but click at end
-                setScrollState(true);
+                setScrollStateByApplication(true);
 				ScrollBottomAndAppendBuffer();
 				return;
 			}
@@ -748,7 +777,7 @@ namespace FastenTerminal
 				SerialMessageText_Clear();
 
                 // Set scroll to enable
-                setScrollState(true);
+                setScrollStateByApplication(true);
             }
 		}
 
@@ -1190,7 +1219,6 @@ namespace FastenTerminal
                     break;
             }
         }
-
 
     }   // End of class
 }	// End of namespace
