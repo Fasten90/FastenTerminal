@@ -59,10 +59,10 @@ namespace FastenTerminal
                     telnet_receiving = true;
                     t = new Thread(Telnet_Read);
                     t.Start();
-                    //Thread.Sleep(100);
                     form.AppendTextLogEvent("Telnet connection successful!");
                     result = true;
                     isOpened = true;
+                    stateInfo = "Telnet: " + IP;
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace FastenTerminal
             {
                 //MessageBox.Show(ex.Message);
                 // TODO: Implement
-                form.AppendTextLogEvent("Telnet connection failed: " + ex.Message);
+                form.AppendTextLogEvent("Telnet connection failed:\n" + ex.Message);
                 Log.SendErrorLog(ex.Message);
             }
 
@@ -174,6 +174,8 @@ namespace FastenTerminal
         {
             telnetStream_A.Close();
             form.AppendTextLogEvent("Telnet connection closed");
+            isOpened = false;
+            stateInfo = "Closed";
         }
     }
 }

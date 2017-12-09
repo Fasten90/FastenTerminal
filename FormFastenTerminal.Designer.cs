@@ -50,7 +50,7 @@
             this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
             this.labelSerialPeriodSendingConstTextMessage = new System.Windows.Forms.Label();
             this.textBoxPeriodSendingMessage = new System.Windows.Forms.TextBox();
-            this.buttonSerialPeriodSendingStart = new System.Windows.Forms.Button();
+            this.buttonPeriodicalSendingStart = new System.Windows.Forms.Button();
             this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
             this.numericUpDownSerialPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
             this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
@@ -67,7 +67,7 @@
             this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
             this.checkBoxMute = new System.Windows.Forms.CheckBox();
             this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
-            this.checkBoxSerialReceiveBinaryMode = new System.Windows.Forms.CheckBox();
+            this.checkBoxReceiveBinaryMode = new System.Windows.Forms.CheckBox();
             this.checkBoxConfigClearSendMessageTextAfterSend = new System.Windows.Forms.CheckBox();
             this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
             this.checkBoxLogEnable = new System.Windows.Forms.CheckBox();
@@ -282,7 +282,7 @@
             this.tabPageMessage.Controls.Add(this.labelConstTextSearching);
             this.tabPageMessage.Controls.Add(this.labelSerialPeriodSendingConstTextMessage);
             this.tabPageMessage.Controls.Add(this.textBoxPeriodSendingMessage);
-            this.tabPageMessage.Controls.Add(this.buttonSerialPeriodSendingStart);
+            this.tabPageMessage.Controls.Add(this.buttonPeriodicalSendingStart);
             this.tabPageMessage.Controls.Add(this.labelSerialPeriodSendingConstText);
             this.tabPageMessage.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
             this.tabPageMessage.Location = new System.Drawing.Point(4, 22);
@@ -327,14 +327,14 @@
             // 
             // buttonSerialPeriodSendingStart
             // 
-            this.buttonSerialPeriodSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSerialPeriodSendingStart.Location = new System.Drawing.Point(145, 59);
-            this.buttonSerialPeriodSendingStart.Name = "buttonSerialPeriodSendingStart";
-            this.buttonSerialPeriodSendingStart.Size = new System.Drawing.Size(50, 23);
-            this.buttonSerialPeriodSendingStart.TabIndex = 2;
-            this.buttonSerialPeriodSendingStart.Text = "Start";
-            this.buttonSerialPeriodSendingStart.UseVisualStyleBackColor = true;
-            this.buttonSerialPeriodSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
+            this.buttonPeriodicalSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPeriodicalSendingStart.Location = new System.Drawing.Point(145, 59);
+            this.buttonPeriodicalSendingStart.Name = "buttonSerialPeriodSendingStart";
+            this.buttonPeriodicalSendingStart.Size = new System.Drawing.Size(50, 23);
+            this.buttonPeriodicalSendingStart.TabIndex = 2;
+            this.buttonPeriodicalSendingStart.Text = "Start";
+            this.buttonPeriodicalSendingStart.UseVisualStyleBackColor = true;
+            this.buttonPeriodicalSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
             // 
             // labelSerialPeriodSendingConstText
             // 
@@ -429,7 +429,7 @@
             this.tabPageConfiguration.Controls.Add(this.checkBoxWordWrap);
             this.tabPageConfiguration.Controls.Add(this.checkBoxMute);
             this.tabPageConfiguration.Controls.Add(this.buttonSerialSaveConfig);
-            this.tabPageConfiguration.Controls.Add(this.checkBoxSerialReceiveBinaryMode);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxReceiveBinaryMode);
             this.tabPageConfiguration.Controls.Add(this.checkBoxConfigClearSendMessageTextAfterSend);
             this.tabPageConfiguration.Controls.Add(this.checkBoxLogWithDateTime);
             this.tabPageConfiguration.Controls.Add(this.checkBoxLogEnable);
@@ -534,14 +534,14 @@
             // 
             // checkBoxSerialReceiveBinaryMode
             // 
-            this.checkBoxSerialReceiveBinaryMode.AutoSize = true;
-            this.checkBoxSerialReceiveBinaryMode.Location = new System.Drawing.Point(6, 177);
-            this.checkBoxSerialReceiveBinaryMode.Name = "checkBoxSerialReceiveBinaryMode";
-            this.checkBoxSerialReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
-            this.checkBoxSerialReceiveBinaryMode.TabIndex = 41;
-            this.checkBoxSerialReceiveBinaryMode.Text = "Receive Binary";
-            this.checkBoxSerialReceiveBinaryMode.UseVisualStyleBackColor = true;
-            this.checkBoxSerialReceiveBinaryMode.CheckedChanged += new System.EventHandler(this.checkBoxSerialReceiveBinaryMode_CheckedChanged);
+            this.checkBoxReceiveBinaryMode.AutoSize = true;
+            this.checkBoxReceiveBinaryMode.Location = new System.Drawing.Point(6, 177);
+            this.checkBoxReceiveBinaryMode.Name = "checkBoxSerialReceiveBinaryMode";
+            this.checkBoxReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
+            this.checkBoxReceiveBinaryMode.TabIndex = 41;
+            this.checkBoxReceiveBinaryMode.Text = "Receive Binary";
+            this.checkBoxReceiveBinaryMode.UseVisualStyleBackColor = true;
+            this.checkBoxReceiveBinaryMode.CheckedChanged += new System.EventHandler(this.checkBoxReceiveBinaryMode_CheckedChanged);
             // 
             // checkBoxConfigClearSendMessageTextAfterSend
             // 
@@ -760,7 +760,7 @@
 		private System.Windows.Forms.CheckBox checkBoxLogScrollBottom;
 		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
 		private System.Windows.Forms.Button buttonSerialPortSend;
-		private System.Windows.Forms.Button buttonSerialPeriodSendingStart;
+		private System.Windows.Forms.Button buttonPeriodicalSendingStart;
 		private System.Windows.Forms.Label labelSerialPeriodSendingConstText;
 		private System.Windows.Forms.NumericUpDown numericUpDownSerialPeriodSendingTime;
 		private System.Windows.Forms.TextBox textBoxPeriodSendingMessage;
@@ -773,7 +773,7 @@
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandsAdd;
 		private System.Windows.Forms.PictureBox pictureBoxSerialReceiving;
 		private System.Windows.Forms.Timer timerReceiveIcon;
-		private System.Windows.Forms.CheckBox checkBoxSerialReceiveBinaryMode;
+		private System.Windows.Forms.CheckBox checkBoxReceiveBinaryMode;
 		private System.Windows.Forms.Button buttonSerialOpenLogFile;
 		private System.Windows.Forms.Button buttonSerialSaveConfig;
         private System.Windows.Forms.CheckBox checkBoxMute;

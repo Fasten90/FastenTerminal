@@ -28,7 +28,7 @@ namespace FastenTerminal
 
 			this.form = form;
 
-			SerialPortComRefresh();
+            SerialPortComRefresh();
 		}
 
 		public void SerialPortComRefresh()

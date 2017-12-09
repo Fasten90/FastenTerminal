@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FastenTerminal
 {
+    public enum CommType
+    {
+        NotInitialized,
+        Serial,
+        Telnet
+    }
+
     public class Communication
     {
         public string stateInfo = "";
@@ -324,7 +328,7 @@ namespace FastenTerminal
             Log.SendEventLog(logMessage);
 
             // Not running state
-            form.SerialPeriodSend_SetState(false);
+            form.PeriodicalSend_SetState(false);
         }
 
         private void timerPeriodTimerSending_Tick(object sender, EventArgs e)

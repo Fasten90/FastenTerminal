@@ -28,7 +28,7 @@ namespace FastenTerminal
 
 		// Communications
 		public Communication comm;
- 
+        private CommType commType = CommType.NotInitialized;
 
         public FavouriteCommandHandler favouriteCommands;
 
@@ -129,7 +129,7 @@ namespace FastenTerminal
 			checkBoxLogWithDateTime.Checked = Config.config.dateLog;
 
             // Message configs
-			checkBoxSerialReceiveBinaryMode.Checked = Config.config.isBinaryMode;
+			checkBoxReceiveBinaryMode.Checked = Config.config.isBinaryMode;
 
             // TODO: Add newLineString
 
@@ -151,7 +151,7 @@ namespace FastenTerminal
 			Config.config.needLog = checkBoxLogEnable.Checked;
 			Config.config.dateLog = checkBoxLogWithDateTime.Checked;
 
-			Config.config.isBinaryMode = checkBoxSerialReceiveBinaryMode.Checked;
+			Config.config.isBinaryMode = checkBoxReceiveBinaryMode.Checked;
 
 			Config.SaveConfigToXml();
 		}
@@ -225,8 +225,17 @@ namespace FastenTerminal
 
 		private void SerialRefresh()
 		{
-			// Refresh Serial COM ports
-			((Serial)comm).SerialPortComRefresh();
+            // Refresh Serial COM ports
+            try
+            {
+			    ((Serial)comm).SerialPortComRefresh();
+            }
+            catch (Exception ex)
+            {
+                // Load Serial
+                comm = new Serial(serialPortDevice, this);
+                ((Serial)comm).SerialPortComRefresh();
+            }
 
 			if (((Serial)comm).ComAvailableList != null && ((Serial)comm).ComAvailableList.Length != 0) 
 			{
@@ -265,10 +274,12 @@ namespace FastenTerminal
                 if (isOpened)
                 {
                     buttonSerialPortOpenClose.Text = "Port close";
+                    CommStateChanged(CommType.Serial);
                 }
                 else
                 {
                     buttonSerialPortOpenClose.Text = "Port open";
+                    CommStateChanged(CommType.NotInitialized);
                 }
             }
             catch (Exception e)
@@ -284,15 +295,37 @@ namespace FastenTerminal
 			if (comm.isOpened == false)
 			{
 				// If there is not opened port, open
-				if (((Serial)comm).SerialPortComOpen())
-				{
-                    // Successful port opening
-                    SerialSetStateOpenedOrClosed(true);
-                }
-                else
+                try
                 {
-                    // Failed open
-                    // "Notify" message is printed from SerialPortComOpen() 
+				    if (((Serial)comm).SerialPortComOpen())
+				    {
+                        // Successful port opening
+                        SerialSetStateOpenedOrClosed(true);
+                    }
+                    else
+                    {
+                        // Failed open
+                        // "Notify" message is printed from SerialPortComOpen() 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    comm = new Serial(serialPortDevice, this);
+
+                    // TODO: To a new function?
+                    ((Serial)comm).ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
+                    ((Serial)comm).Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
+
+                    if (((Serial)comm).SerialPortComOpen())
+                    {
+                        // Successful port opening
+                        SerialSetStateOpenedOrClosed(true);
+                    }
+                    else
+                    {
+                        // Failed open
+                        // "Notify" message is printed from SerialPortComOpen() 
+                    }
                 }
             }
 			else
@@ -733,75 +766,21 @@ namespace FastenTerminal
 			SaveConfig();
 		}
 
-		private void checkBoxConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
-		{
-            // Do nothing
-            SendMessageTextBox_ClearAfterSend = checkBoxConfigClearSendMessageTextAfterSend.Checked;
-        }
+        /*
+         *              Periodical sending
+         */
 
-		private void textBoxSerialTextFind_KeyPress(object sender, KeyPressEventArgs e)
-		{
-
-			// Find, if pressed enter
-			if (e.KeyChar == (char)Keys.Return)
-			{
-				// Pressed enter
-				FindText();
-			}
-		}
-
-		private void FindText()
-		{
-			String searchText = textBoxSerialTextFind.Text;
-			int searchTextLength = textBoxSerialTextFind.Text.Length;
-			int startIndex = 0;
-
-			// Search in log, if not null text
-			if (searchTextLength > 0)
-			{
-				// Not null search string
-
-				// Search started flag: for TextChange event skipping
-				//isSearching = true;
-				this.richTextBoxTextLog.SelectionChanged -= new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
-
-				// Find
-				// TODO: This is the First searched item...
-				//int result = richTextBoxSerialPortTexts.Find(searchText);
-
-				// Find
-				int result = 1;
-				while ((result = richTextBoxTextLog.Text.IndexOf(searchText, startIndex)) != -1)
-				{
-					// Founded a string
-
-					// Select founded string
-
-					richTextBoxTextLog.Select(result, searchTextLength);
-					richTextBoxTextLog.SelectionBackColor = Color.Yellow;
-
-					startIndex = result + searchTextLength;
-				}
-
-				// End of finding
-
-				// Search started flag: for TextChange event skipping
-				//isSearching = false;
-				this.richTextBoxTextLog.SelectionChanged += new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
-			}
-		}
-
-        public void SerialPeriodSend_SetState(bool state)
+        public void PeriodicalSend_SetState(bool state)
         {
             // Enable, now it is running --> Write "Stop"
             // Disabled, not it is not running --> Write "Start"
             if  (state)
             {
-                buttonSerialPeriodSendingStart.Text = "Stop";
+                buttonPeriodicalSendingStart.Text = "Stop";
             }
             else
             {
-                buttonSerialPeriodSendingStart.Text = "Start";
+                buttonPeriodicalSendingStart.Text = "Start";
             }
         }
 
@@ -809,13 +788,12 @@ namespace FastenTerminal
         {
             // TODO: Has we opened serial port? Checked in below, but if isOpenedPort state is wrong?
 
-
             if (comm.PeriodSending_Enable)
             {
                 // Now, enabled, so need to stop
                 comm.PeriodSendingStop();
 
-                SerialPeriodSend_SetState(false);
+                PeriodicalSend_SetState(false);
             }
             else
             {
@@ -828,12 +806,12 @@ namespace FastenTerminal
                     comm.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
                         textBoxPeriodSendingMessage.Text);
 
-                    SerialPeriodSend_SetState(true);
+                    PeriodicalSend_SetState(true);
                 }
                 else
                 {
-                    string logMessage = "[Application] There is no opened port, you can't start periodical message sending\n";
-                    AppendTextLogData(logMessage);
+                    string logMessage = "There is no opened port, you can't start periodical message sending";
+                    AppendTextLogEvent(logMessage);
                     Log.SendEventLog(logMessage);
                 }
             }
@@ -845,20 +823,26 @@ namespace FastenTerminal
             SerialPeriodSending_Start();
         }
 
-		private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
-		{
-			// Need to log with DateTime?
-			comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
+        private void textBoxPeriodSendingMessage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // If pressed in "PeriodMessage textbox" enter --> Send the message
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                // If pressed enter
+                SerialPeriodSending_Start();
+            }
+        }
 
-			//SaveConfig();
-		}
-
-		private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			// Copy clicked text to sending message text
-			comboBoxSendingText.Text = (String)comboBoxSendingText.SelectedItem;
-		}
-
+        private void textBoxPeriodSendingMessage_Enter(object sender, EventArgs e)
+        {
+            // Entered to PeriodMessageText textbox
+            if (PeriodMessageTextBox_Entered == false)
+            {
+                // Clear textbox at first time
+                textBoxPeriodSendingMessage.Text = "";
+                PeriodMessageTextBox_Entered = true;
+            }
+        }
 
 		/*
 		 *		Favourite commands
@@ -939,35 +923,39 @@ namespace FastenTerminal
 			}
 		}
 
+        /*
+         *                  Settings
+         */
+
         void SerialReceivePictureChange(bool isReceived)
-		{
+        {
             // Show "Receive picture", if changed
-			if (isReceived)
-			{
-				if (IsreceivedIconIsGreen != isReceived)
-				{
-					pictureBoxSerialReceiving.ImageLocation = imgLocReceiveGreen;
-				}		
-			}
-			else
-			{
-				if (IsreceivedIconIsGreen != isReceived)
-				{
-					pictureBoxSerialReceiving.ImageLocation = imgLocReceiveEmpty;
-				}
-			}
+            if (isReceived)
+            {
+                if (IsreceivedIconIsGreen != isReceived)
+                {
+                    pictureBoxSerialReceiving.ImageLocation = imgLocReceiveGreen;
+                }
+            }
+            else
+            {
+                if (IsreceivedIconIsGreen != isReceived)
+                {
+                    pictureBoxSerialReceiving.ImageLocation = imgLocReceiveEmpty;
+                }
+            }
 
-			IsreceivedIconIsGreen = isReceived;
-		}
+            IsreceivedIconIsGreen = isReceived;
+        }
 
-		private void timerReceiveIcon_Tick(object sender, EventArgs e)
-		{
-			SerialReceiveEvent(false);
-		}
+        private void timerReceiveIcon_Tick(object sender, EventArgs e)
+        {
+            SerialReceiveEvent(false);
+        }
 
-		private void checkBoxSerialReceiveBinaryMode_CheckedChanged(object sender, EventArgs e)
-		{
-			comm.receiverModeBinary = checkBoxSerialReceiveBinaryMode.Checked;
+        private void checkBoxReceiveBinaryMode_CheckedChanged(object sender, EventArgs e)
+        {
+            comm.receiverModeBinary = checkBoxReceiveBinaryMode.Checked;
 
             if (comm.receiverModeBinary)
             {
@@ -978,57 +966,50 @@ namespace FastenTerminal
             SaveConfig();
         }
 
-		private void buttonSerialOpenLogFile_Click(object sender, EventArgs e)
-		{
-			// Open log file
-			OpenLogFile();
-		}
-
-		private void OpenLogFile()
-		{
-			// Open log file
-			Common.OpenTextFile(MessageLog.logFilePath);
-		}
-
-		private void buttonSerialSaveConfig_Click(object sender, EventArgs e)
-		{
-			SaveConfig();
-		}
-
-		private void checkBoxSerialTextEscapeSequenceCheckingCheckedChanged(object sender, EventArgs e)
-		{
-			GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
-
-			if (GlobalEscapeEnabled)
-			{
-				checkBoxSerialReceiveBinaryMode.Checked = false;
-			}
-		}
-
-        private void textBoxPeriodSendingMessage_Enter(object sender, EventArgs e)
+        private void buttonSerialOpenLogFile_Click(object sender, EventArgs e)
         {
-            // Entered to PeriodMessageText textbox
-            if (PeriodMessageTextBox_Entered == false)
+            // Open log file
+            OpenLogFile();
+        }
+
+        private void OpenLogFile()
+        {
+            // Open log file
+            Common.OpenTextFile(MessageLog.logFilePath);
+        }
+
+        private void buttonSerialSaveConfig_Click(object sender, EventArgs e)
+        {
+            SaveConfig();
+        }
+
+        private void checkBoxSerialTextEscapeSequenceCheckingCheckedChanged(object sender, EventArgs e)
+        {
+            GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
+
+            if (GlobalEscapeEnabled)
             {
-                // Clear textbox at first time
-                textBoxPeriodSendingMessage.Text = "";
-                PeriodMessageTextBox_Entered = true;
+                checkBoxReceiveBinaryMode.Checked = false;
             }
+        }
+
+        private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
+        {
+            // Need to log with DateTime?
+            comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
+
+            //SaveConfig();
+        }
+
+        private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Copy clicked text to sending message text
+            comboBoxSendingText.Text = (String)comboBoxSendingText.SelectedItem;
         }
 
         private void checkBoxMute_CheckedChanged(object sender, EventArgs e)
         {
             soundIsDisabled = checkBoxMute.Checked;
-        }
-
-        private void textBoxPeriodSendingMessage_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // If pressed in "PeriodMessage textbox" enter --> Send the message
-            if (e.KeyChar == (char)Keys.Return)
-            {
-                // If pressed enter
-                SerialPeriodSending_Start();
-            }
         }
 
         private void checkBoxWordWrap_CheckedChanged(object sender, EventArgs e)
@@ -1074,9 +1055,67 @@ namespace FastenTerminal
             }
         }
 
+        private void checkBoxConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
+        {
+            // Do nothing
+            SendMessageTextBox_ClearAfterSend = checkBoxConfigClearSendMessageTextAfterSend.Checked;
+        }
+
+        private void textBoxSerialTextFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            // Find, if pressed enter
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                // Pressed enter
+                FindText();
+            }
+        }
+
+        private void FindText()
+        {
+            String searchText = textBoxSerialTextFind.Text;
+            int searchTextLength = textBoxSerialTextFind.Text.Length;
+            int startIndex = 0;
+
+            // Search in log, if not null text
+            if (searchTextLength > 0)
+            {
+                // Not null search string
+
+                // Search started flag: for TextChange event skipping
+                //isSearching = true;
+                this.richTextBoxTextLog.SelectionChanged -= new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
+
+                // Find
+                // TODO: This is the First searched item...
+                //int result = richTextBoxSerialPortTexts.Find(searchText);
+
+                // Find
+                int result = 1;
+                while ((result = richTextBoxTextLog.Text.IndexOf(searchText, startIndex)) != -1)
+                {
+                    // Founded a string
+
+                    // Select founded string
+
+                    richTextBoxTextLog.Select(result, searchTextLength);
+                    richTextBoxTextLog.SelectionBackColor = Color.Yellow;
+
+                    startIndex = result + searchTextLength;
+                }
+
+                // End of finding
+
+                // Search started flag: for TextChange event skipping
+                //isSearching = false;
+                this.richTextBoxTextLog.SelectionChanged += new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
+            }
+        }
+
         /*
          *          Telnet
-         */ 
+         */
 
         private void setTelnetState(bool isOpened)
         {
@@ -1084,11 +1123,13 @@ namespace FastenTerminal
             {
                 // Print: "Close"
                 buttonTelnetOpenClose.Text = "Close";
+                CommStateChanged(CommType.Telnet);
             }
             else
             {
                 // Closed, print "open"
                 buttonTelnetOpenClose.Text = "Open";
+                CommStateChanged(CommType.NotInitialized);
             }
 
             comm.isOpened = isOpened;
@@ -1122,5 +1163,34 @@ namespace FastenTerminal
             }
         }
 
-}   // End of class
+        /*
+         *          Communication
+         */
+
+        void CommStateChanged(CommType newCommState)
+        {
+            commType = newCommState;
+
+            switch(newCommState)
+            {
+                case CommType.Serial:
+                    buttonTelnetOpenClose.Enabled = false;
+                    break;
+
+                case CommType.Telnet:
+                    buttonSerialPortOpenClose.Enabled = false;
+                    buttonSerialPortRefresh.Enabled = false;
+                    break;
+
+                case CommType.NotInitialized:
+                default:
+                    buttonTelnetOpenClose.Enabled = true;
+                    buttonSerialPortOpenClose.Enabled = true;
+                    buttonSerialPortRefresh.Enabled = true;
+                    break;
+            }
+        }
+
+
+    }   // End of class
 }	// End of namespace
