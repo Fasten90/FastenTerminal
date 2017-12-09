@@ -80,7 +80,7 @@
             this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
             this.timerCheckSerialPorts = new System.Windows.Forms.Timer(this.components);
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.richTextBoxSerialPortTexts = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxTextLog = new System.Windows.Forms.RichTextBox();
             this.panelSettings = new System.Windows.Forms.Panel();
             this.panelLog = new System.Windows.Forms.Panel();
             this.tabControlSerialFunctions.SuspendLayout();
@@ -663,21 +663,21 @@
             // 
             // richTextBoxSerialPortTexts
             // 
-            this.richTextBoxSerialPortTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.richTextBoxTextLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxSerialPortTexts.AutoWordSelection = true;
-            this.richTextBoxSerialPortTexts.DetectUrls = false;
-            this.richTextBoxSerialPortTexts.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.richTextBoxSerialPortTexts.Location = new System.Drawing.Point(3, 3);
-            this.richTextBoxSerialPortTexts.Name = "richTextBoxSerialPortTexts";
-            this.richTextBoxSerialPortTexts.ReadOnly = true;
-            this.richTextBoxSerialPortTexts.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.richTextBoxSerialPortTexts.Size = new System.Drawing.Size(562, 419);
-            this.richTextBoxSerialPortTexts.TabIndex = 37;
-            this.richTextBoxSerialPortTexts.Text = "";
-            this.richTextBoxSerialPortTexts.WordWrap = false;
-            this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
+            this.richTextBoxTextLog.AutoWordSelection = true;
+            this.richTextBoxTextLog.DetectUrls = false;
+            this.richTextBoxTextLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.richTextBoxTextLog.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxTextLog.Name = "richTextBoxSerialPortTexts";
+            this.richTextBoxTextLog.ReadOnly = true;
+            this.richTextBoxTextLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.richTextBoxTextLog.Size = new System.Drawing.Size(562, 419);
+            this.richTextBoxTextLog.TabIndex = 37;
+            this.richTextBoxTextLog.Text = "";
+            this.richTextBoxTextLog.WordWrap = false;
+            this.richTextBoxTextLog.SelectionChanged += new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
             // 
             // panelSettings
             // 
@@ -699,7 +699,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelLog.Controls.Add(this.comboBoxSendingText);
             this.panelLog.Controls.Add(this.buttonSerialPortSend);
-            this.panelLog.Controls.Add(this.richTextBoxSerialPortTexts);
+            this.panelLog.Controls.Add(this.richTextBoxTextLog);
             this.panelLog.Location = new System.Drawing.Point(3, 3);
             this.panelLog.Margin = new System.Windows.Forms.Padding(0);
             this.panelLog.Name = "panelLog";
@@ -784,7 +784,7 @@
         private System.Windows.Forms.Button buttonForeGroundColorChange;
         private System.Windows.Forms.Button buttonBackGroundColorChange;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.RichTextBox richTextBoxSerialPortTexts;
+        private System.Windows.Forms.RichTextBox richTextBoxTextLog;
         private System.Windows.Forms.Panel panelSettings;
         private System.Windows.Forms.Panel panelLog;
         private System.Windows.Forms.TabPage tabPageCommunication;

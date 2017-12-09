@@ -303,9 +303,8 @@ namespace FastenTerminal
             PeriodSending_Timer.Tick += new System.EventHandler(this.timerPeriodTimerSending_Tick);
 
             // Log
-            string logMessage = "[Application] Periodical message sending started...\n" +
-                "  Time: " + PeriodSending_Time.ToString() + "  Message: " + PeriodSending_Message + "\n";
-
+            string logMessage = "Periodical message sending started...\n" +
+                "  Time: " + PeriodSending_Time.ToString() + "  Message: " + PeriodSending_Message;
             form.AppendTextLogEvent(logMessage);
             Log.SendEventLog(logMessage);
         }
@@ -320,8 +319,7 @@ namespace FastenTerminal
             PeriodSending_Timer.Enabled = false;
 
             // Log
-            string logMessage = "[Application] Periodical message sending stopped\n";
-
+            string logMessage = "Periodical message sending stopped";
             form.AppendTextLogEvent(logMessage);
             Log.SendEventLog(logMessage);
 

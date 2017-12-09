@@ -60,13 +60,13 @@ namespace FastenTerminal
                     t = new Thread(Telnet_Read);
                     t.Start();
                     //Thread.Sleep(100);
-                    form.AppendTextLogEvent("Telnet connection successful!\n");
+                    form.AppendTextLogEvent("Telnet connection successful!");
                     result = true;
                     isOpened = true;
                 }
                 else
                 {
-                    form.AppendTextLogEvent("Telnet connection failed!\n");
+                    form.AppendTextLogEvent("Telnet connection failed!");
                 }
             }
             catch (Exception ex)
@@ -130,11 +130,11 @@ namespace FastenTerminal
                         // Write datas
                         telnetStream_A.Write(bytWrite_telnet_A, 0, bytWrite_telnet_A.Length);
 
-                        logMessage = "\n[Application] Successful sent message:\t" + message + "\n";
+                        logMessage = "Successful sent message: \"" + message + "\"";
                     }
                     catch (Exception ex)
                     {
-                        logMessage = "[Application] Failed sent telnet message:" + ex.Message;
+                        logMessage = "ERROR! Failed sent telnet message: " + ex.Message;
                         Log.SendErrorLog(logMessage);
 
                         // Stop periodical sending
@@ -144,13 +144,12 @@ namespace FastenTerminal
                         }
 
                         // TODO: Call TelnetError()
-
                     }
                 }
             }
             else
             {
-                logMessage = "[Application] Cannot send message, because there is not connection to telnet\n";
+                logMessage = "Cannot send message, because there is not connection to telnet";
 
                 if (PeriodSending_Enable)
                 {
@@ -173,9 +172,8 @@ namespace FastenTerminal
 
         public override void Close()
         {
-            //Console.WriteLine("Implement telnet close!");
             telnetStream_A.Close();
-            form.AppendTextLogEvent("Telnet connection closed\n");
+            form.AppendTextLogEvent("Telnet connection closed");
         }
     }
 }

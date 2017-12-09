@@ -77,7 +77,7 @@ namespace FastenTerminal
 		{
 			EventLogger.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\t " + text);
 			EventLogger.Flush();
-			Console.WriteLine(text);
+			Console.WriteLine("[Application Event] " + text);
 		}
 
 		static public void SendErrorLog(String text)

@@ -44,7 +44,12 @@ namespace FastenTerminal
 		private Color GlobalBackgroundColor = Form.DefaultBackColor;
 		private bool GlobalEscapeEnabled;
 
-		private FastenTerminalConfigs Config;
+        // TODO: Add to config
+        private Color EventLogTextColor = Color.Blue;
+        private Color EventLogBackgroundColor = Color.Yellow;
+
+
+        private FastenTerminalConfigs Config;
 
 		String tempStringBuffer = "";
 		String tempStringEscapeBuffer = ""; // For not ended escape string
@@ -59,12 +64,11 @@ namespace FastenTerminal
 		const String soundBellPath = @"Sounds\sound_bell.wav";
         bool soundIsDisabled = false;
 
+
 		public FormFastenTerminal()
         {
             InitializeComponent();
         }
-
-
 
         private void FormFastenTerminalMain_Load(object sender, EventArgs e)
         {
@@ -111,6 +115,9 @@ namespace FastenTerminal
 		{
             // Application configs
             // TODO: Add background - foregroundcolor
+
+            // TODO:        private Color EventLogTextColor = Color.Blue;
+            // private Color EventLogBackgroundColor = Color.Yellow;
 
             // Serial configs
             // TODO: Delete com port
@@ -355,7 +362,20 @@ namespace FastenTerminal
 				return;
 			}
 
-			// Note log (not received log!)
+            // Note log (not received log!)
+            if (richTextBoxTextLog.TextLength > 0)
+            {
+                char lastReceivedCharacter = richTextBoxTextLog.Text[richTextBoxTextLog.TextLength - 1];
+                if (lastReceivedCharacter != '\r' && lastReceivedCharacter != '\n' && lastReceivedCharacter != '\0')
+                {
+                    message = Environment.NewLine + "[Application] " + message + Environment.NewLine;
+                }
+            }
+            else
+            {
+                message = "[Application] " + message + Environment.NewLine;
+            }
+
 			AppendTextLog(message, Color.Blue, Color.Yellow);
 		}
 
@@ -505,16 +525,16 @@ namespace FastenTerminal
 		/// <param name="backgroundColor"></param>
 		private void AppendTextLog(String message, Color textColor, Color backgroundColor)
 		{
-			richTextBoxSerialPortTexts.SelectionColor = textColor;
-			richTextBoxSerialPortTexts.SelectionBackColor = backgroundColor;
+			richTextBoxTextLog.SelectionColor = textColor;
+			richTextBoxTextLog.SelectionBackColor = backgroundColor;
 
 			if (checkBoxLogScrollBottom.Checked)
 			{
 				// Append text to box
-				richTextBoxSerialPortTexts.AppendText(message);     // If you use it, it automatic scroll bottom
+				richTextBoxTextLog.AppendText(message);     // If you use it, it automatic scroll bottom
                 
                 // TODO: This operation is very slow! 49ms
-                richTextBoxSerialPortTexts.ScrollToCaret();			// scroll top/bot without selection start setting
+                richTextBoxTextLog.ScrollToCaret();			// scroll top/bot without selection start setting
                
                 // set the current caret position to the end
                 //richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.Text.Length;
@@ -545,7 +565,7 @@ namespace FastenTerminal
 
 		private void DeleteTextLog()
 		{
-			richTextBoxSerialPortTexts.Clear();
+			richTextBoxTextLog.Clear();
 		}
 
 		private void checkBoxLogScrollBottom_CheckedChanged(object sender, EventArgs e)
@@ -579,13 +599,13 @@ namespace FastenTerminal
         private void richTextBoxTextLog_SelectionChanged(object sender, EventArgs e)
 		{
 			// Selected a text, do not scroll!
-			if (richTextBoxSerialPortTexts.SelectionStart != richTextBoxSerialPortTexts.TextLength)
+			if (richTextBoxTextLog.SelectionStart != richTextBoxTextLog.TextLength)
 			{
                 setScrollState(false);
 			}
 
 			if (!checkBoxLogScrollBottom.Checked
-				&& (richTextBoxSerialPortTexts.SelectionStart == richTextBoxSerialPortTexts.TextLength) )
+				&& (richTextBoxTextLog.SelectionStart == richTextBoxTextLog.TextLength) )
 			{
                 // Not scrolling, but click at end
                 setScrollState(true);
@@ -608,15 +628,15 @@ namespace FastenTerminal
 			if (checkBoxSerialCopySelected.Checked)
 			{
 				// Copy the selected text to the Clipboard.
-				if (richTextBoxSerialPortTexts.SelectionLength > 0)
+				if (richTextBoxTextLog.SelectionLength > 0)
 				{
                     // Copy text to clipboard
-					richTextBoxSerialPortTexts.Copy();
+					richTextBoxTextLog.Copy();
 
 					// TODO: Copy to textbox?
-					if (richTextBoxSerialPortTexts.SelectedText.Length < 1000)
+					if (richTextBoxTextLog.SelectedText.Length < 1000)
 					{
-						Console.WriteLine("Copied texts: " + richTextBoxSerialPortTexts.SelectedText);
+						Console.WriteLine("Copied texts: " + richTextBoxTextLog.SelectedText);
 					}
 					else
 					{
@@ -628,15 +648,11 @@ namespace FastenTerminal
 			}
 		}
 
-
-
 		private void buttonSendMessage_Click(object sender, EventArgs e)
 		{
             // Pressed Send button
 			SendMessage();
 		}
-
-
 
 		private void comboBoxSerialSendMessage_KeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -648,8 +664,6 @@ namespace FastenTerminal
 			}
 		}
 
-
-
 		private void SerialMessageText_Clear()
 		{
 			// Need clear text?
@@ -659,8 +673,6 @@ namespace FastenTerminal
 				comboBoxSendingText.Text = "";
 			}
 		}
-
-
 
 		private void comboBoxSendMessage_Enter(object sender, EventArgs e)
 		{
@@ -672,8 +684,6 @@ namespace FastenTerminal
 				SendMessageTextBox_Entered = true;
 			}
 		}
-
-
 
 		private void SendMessage()
 		{
@@ -689,7 +699,7 @@ namespace FastenTerminal
                 else
                 {
                     // There is no connection
-                    AppendTextLogEvent("[Application] There is no connection, cannot send!\n");
+                    AppendTextLogEvent("There is no connection, cannot send!");
                     return;
                 }
 
@@ -700,7 +710,7 @@ namespace FastenTerminal
 				//Log.SendEventLog(message);
 				//AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
 
-				SerialAddLastCommand(message);
+				SendMessageAddLastCommand(message);
 
 				SerialMessageText_Clear();
 
@@ -708,8 +718,6 @@ namespace FastenTerminal
                 setScrollState(true);
             }
 		}
-
-
 
 		private void checkBoxNeedLog_CheckedChanged(object sender, EventArgs e)
 		{
@@ -725,15 +733,11 @@ namespace FastenTerminal
 			SaveConfig();
 		}
 
-
-
 		private void checkBoxConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
 		{
             // Do nothing
             SendMessageTextBox_ClearAfterSend = checkBoxConfigClearSendMessageTextAfterSend.Checked;
         }
-
-
 
 		private void textBoxSerialTextFind_KeyPress(object sender, KeyPressEventArgs e)
 		{
@@ -745,8 +749,6 @@ namespace FastenTerminal
 				FindText();
 			}
 		}
-
-
 
 		private void FindText()
 		{
@@ -761,7 +763,7 @@ namespace FastenTerminal
 
 				// Search started flag: for TextChange event skipping
 				//isSearching = true;
-				this.richTextBoxSerialPortTexts.SelectionChanged -= new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
+				this.richTextBoxTextLog.SelectionChanged -= new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
 
 				// Find
 				// TODO: This is the First searched item...
@@ -769,14 +771,14 @@ namespace FastenTerminal
 
 				// Find
 				int result = 1;
-				while ((result = richTextBoxSerialPortTexts.Text.IndexOf(searchText, startIndex)) != -1)
+				while ((result = richTextBoxTextLog.Text.IndexOf(searchText, startIndex)) != -1)
 				{
 					// Founded a string
 
 					// Select founded string
 
-					richTextBoxSerialPortTexts.Select(result, searchTextLength);
-					richTextBoxSerialPortTexts.SelectionBackColor = Color.Yellow;
+					richTextBoxTextLog.Select(result, searchTextLength);
+					richTextBoxTextLog.SelectionBackColor = Color.Yellow;
 
 					startIndex = result + searchTextLength;
 				}
@@ -785,7 +787,7 @@ namespace FastenTerminal
 
 				// Search started flag: for TextChange event skipping
 				//isSearching = false;
-				this.richTextBoxSerialPortTexts.SelectionChanged += new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
+				this.richTextBoxTextLog.SelectionChanged += new System.EventHandler(this.richTextBoxTextLog_SelectionChanged);
 			}
 		}
 
@@ -802,8 +804,6 @@ namespace FastenTerminal
                 buttonSerialPeriodSendingStart.Text = "Start";
             }
         }
-
-
 
         private void SerialPeriodSending_Start()
         {
@@ -839,14 +839,11 @@ namespace FastenTerminal
             }
         }
 
-
 		private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
 		{
             // Clicked Serial - Period sending start-stop button
             SerialPeriodSending_Start();
         }
-
-
 
 		private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
 		{
@@ -856,8 +853,6 @@ namespace FastenTerminal
 			//SaveConfig();
 		}
 
-
-
 		private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			// Copy clicked text to sending message text
@@ -865,11 +860,9 @@ namespace FastenTerminal
 		}
 
 
-
-		//////////////////////////////
-		//		Favourite commands
-		//////////////////////////////
-
+		/*
+		 *		Favourite commands
+		 */
 
 		public void LoadFavouriteCommands()
 		{
@@ -885,8 +878,6 @@ namespace FastenTerminal
 			dataGridViewFavCommands.Refresh();
 		}
 
-
-
 		private void buttonSerialFavouriteCommandSending_Click(object sender, EventArgs e)
 		{
 			String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
@@ -894,9 +885,7 @@ namespace FastenTerminal
 			comm.SendMessage(message);
 		}
 
-
-
-		private void SerialAddLastCommand(String message)
+		private void SendMessageAddLastCommand(String message)
 		{
 			String command = "";
 			
@@ -913,7 +902,6 @@ namespace FastenTerminal
 				comboBoxSendingText.Items.Add(command);
 			}
 		}
-
 
 		private void buttonSerialFavouriteCommandsSave_Click(object sender, EventArgs e)
 		{
@@ -951,8 +939,6 @@ namespace FastenTerminal
 			}
 		}
 
-
-
         void SerialReceivePictureChange(bool isReceived)
 		{
             // Show "Receive picture", if changed
@@ -974,14 +960,10 @@ namespace FastenTerminal
 			IsreceivedIconIsGreen = isReceived;
 		}
 
-
-
 		private void timerReceiveIcon_Tick(object sender, EventArgs e)
 		{
 			SerialReceiveEvent(false);
 		}
-
-
 
 		private void checkBoxSerialReceiveBinaryMode_CheckedChanged(object sender, EventArgs e)
 		{
@@ -996,15 +978,11 @@ namespace FastenTerminal
             SaveConfig();
         }
 
-
-
 		private void buttonSerialOpenLogFile_Click(object sender, EventArgs e)
 		{
 			// Open log file
 			OpenLogFile();
 		}
-
-
 
 		private void OpenLogFile()
 		{
@@ -1012,14 +990,10 @@ namespace FastenTerminal
 			Common.OpenTextFile(MessageLog.logFilePath);
 		}
 
-
-
 		private void buttonSerialSaveConfig_Click(object sender, EventArgs e)
 		{
 			SaveConfig();
 		}
-
-
 
 		private void checkBoxSerialTextEscapeSequenceCheckingCheckedChanged(object sender, EventArgs e)
 		{
@@ -1030,8 +1004,6 @@ namespace FastenTerminal
 				checkBoxSerialReceiveBinaryMode.Checked = false;
 			}
 		}
-
-
 
         private void textBoxPeriodSendingMessage_Enter(object sender, EventArgs e)
         {
@@ -1061,7 +1033,7 @@ namespace FastenTerminal
 
         private void checkBoxWordWrap_CheckedChanged(object sender, EventArgs e)
         {
-            richTextBoxSerialPortTexts.WordWrap = checkBoxWordWrap.Checked;
+            richTextBoxTextLog.WordWrap = checkBoxWordWrap.Checked;
         }
 
         private void checkBoxPrintSend_CheckedChanged(object sender, EventArgs e)
@@ -1090,7 +1062,7 @@ namespace FastenTerminal
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                richTextBoxSerialPortTexts.BackColor = colorDialog.Color;
+                richTextBoxTextLog.BackColor = colorDialog.Color;
             }
         }
 
@@ -1098,7 +1070,7 @@ namespace FastenTerminal
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                richTextBoxSerialPortTexts.ForeColor = colorDialog.Color;
+                richTextBoxTextLog.ForeColor = colorDialog.Color;
             }
         }
 

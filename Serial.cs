@@ -42,7 +42,7 @@ namespace FastenTerminal
 			if (ComSelected == null || ComSelected == "")
 			{
 				// Wrong COM
-				String errorMessage = "[Application] Error: Empty portname\n";
+				String errorMessage = "Error: Empty portname\n";
 				Log.SendErrorLog(errorMessage);
 				form.AppendTextLogEvent(errorMessage);
 				return false;
@@ -64,8 +64,7 @@ namespace FastenTerminal
 				{
 					serial.Open();
 					stateInfo = serial.PortName + " - " + serial.BaudRate;
-					String message = "[Application] Successful open serial port. " +
-									serial.PortName + " " + serial.BaudRate + "\n";
+					String message = "Successful open serial port. " + serial.PortName + " " + serial.BaudRate;
 					Log.SendEventLog(message);
 					form.AppendTextLogEvent(message);
 					isOpened = true;
@@ -73,7 +72,7 @@ namespace FastenTerminal
 				}
 				catch (Exception e)
 				{
-					String errorMessage = "[Application] Error with port opening.\n";
+					String errorMessage = "Error with port opening";
 					Log.SendErrorLog(errorMessage + e.Message);
 					form.AppendTextLogEvent(errorMessage);
 					return false;
@@ -104,7 +103,7 @@ namespace FastenTerminal
 				Log.SendErrorLog(e.Message);
 			}
 
-			String message = "[Application] Closed Serial port\n";
+			String message = "Closed Serial port";
 			if (needPrint)
 			{
 				form.AppendTextLogEvent(message);
@@ -202,12 +201,12 @@ namespace FastenTerminal
 					//serial.WriteLine(message);	// Be careful, sending with newline '\n' character
 					serial.Write(message);          // Send without newline
 													// Successful
-					logMessage = "\n[Application] Successful sent message:\t" + message + "\n";
+					logMessage = "Successful sent message: \"" + message.Trim() +"\"";
 				}
 				catch (Exception e)
 				{
 					Log.SendErrorLog(e.Message);
-					logMessage = "[Application] Port error\n";
+					logMessage = "Port error";
 
                     // Stop periodical sending
                     if (PeriodSending_Enable)
@@ -221,7 +220,7 @@ namespace FastenTerminal
 			}
 			else
 			{
-				logMessage = "[Application] Cannot send message, because there is not opened port\n";
+				logMessage = "Cannot send message, because there is not opened port";
 
 				if (PeriodSending_Enable)
 				{
