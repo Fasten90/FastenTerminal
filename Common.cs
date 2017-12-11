@@ -118,5 +118,36 @@ namespace FastenTerminal
             }
         }
 
+        public static bool CheckPortisValid(String portString, out int port)
+        {
+            if (portString != null)
+            {
+                try
+                {
+                    int convertedPort = 0;
+                    if (int.TryParse(portString, out convertedPort))
+                    {
+                        port = convertedPort;
+                        return true;
+                    }
+                    else
+                    {
+                        port = -1;
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    port = -1;
+                    return false;
+                }
+            }
+            else
+            {
+                port = -1;
+                return false;
+            }
+        }
+
     }
 }

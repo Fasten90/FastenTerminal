@@ -10,9 +10,8 @@ namespace FastenTerminal
 {
     public class Telnet : Communication
     {
-        // TODO: change to 23
         //public const int PORT = 8000;
-        public const int PORT = 2000;
+        public int port = 2000;
 
         private NetworkStream telnetStream_A;
         private TcpClient telnet_A;
@@ -35,9 +34,10 @@ namespace FastenTerminal
         }
 
         // Source: https://dotblogs.com.tw/masterhsu/2016/07/13/150206
-        public bool Telnet_Connect(string IP, string user, string passwd)
+        public bool Telnet_Connect(string IP, int port = 23, string user = "", string passwd = "")
         {
             this.IP = IP;
+            this.port = port;
             this.user = user;
             this.passwd = passwd;
 
@@ -48,7 +48,7 @@ namespace FastenTerminal
                 telnet_A = new TcpClient();
                 telnet_A.SendTimeout = 1000;
                 telnet_A.ReceiveTimeout = 1000;
-                telnet_A.Connect(IP, PORT);
+                telnet_A.Connect(IP, port);
 
                 // TODO: Blocked operation!!!!!!!!!!
 

@@ -986,6 +986,8 @@ namespace FastenTerminal
                 case CommType.Telnet:
                     buttonSerialPortOpenClose.Enabled = false;
                     buttonSerialPortRefresh.Enabled = false;
+                    // Disable Serial refresh!
+                    timerCheckSerialPorts.Stop();
                     break;
 
                 case CommType.NotInitialized:
@@ -993,6 +995,7 @@ namespace FastenTerminal
                     buttonTelnetOpenClose.Enabled = true;
                     buttonSerialPortOpenClose.Enabled = true;
                     buttonSerialPortRefresh.Enabled = true;
+                    SerialPeriodicalRefreshStart();
                     break;
             }
         }
@@ -1023,12 +1026,13 @@ namespace FastenTerminal
         {
             if (comm.isOpened == false)
             {
-                if (Common.CheckIpAddressIsValid(textBoxTelnetIP.Text))
+                int port = 0;
+                if (Common.CheckIpAddressIsValid(textBoxTelnetIP.Text) && (Common.CheckPortisValid(textBoxTelnetPort.Text, out port)))
                 {
-                    // Valid ip
+                    // Valid ip & port
                     // Connect
                     comm = new Telnet(this);
-                    ((Telnet)comm).Telnet_Connect(textBoxTelnetIP.Text, "", "");
+                    ((Telnet)comm).Telnet_Connect(textBoxTelnetIP.Text, port, "", "");
                     // TODO: It is slow function !
                     setTelnetState(comm.isOpened);
                 }

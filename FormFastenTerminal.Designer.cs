@@ -39,18 +39,19 @@
             this.groupBoxCommTelnet = new System.Windows.Forms.GroupBox();
             this.textBoxTelnetIP = new System.Windows.Forms.TextBox();
             this.buttonTelnetOpenClose = new System.Windows.Forms.Button();
-            this.maskedTextBoxTelnetIP = new System.Windows.Forms.MaskedTextBox();
             this.groupBoxCommSerial = new System.Windows.Forms.GroupBox();
             this.comboBoxSerialPortCOM = new System.Windows.Forms.ComboBox();
             this.buttonSerialPortRefresh = new System.Windows.Forms.Button();
             this.buttonSerialPortOpenClose = new System.Windows.Forms.Button();
             this.comboBoxSerialPortBaudrate = new System.Windows.Forms.ComboBox();
             this.tabPageMessage = new System.Windows.Forms.TabPage();
-            this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
-            this.textBoxPeriodSendingMessage = new System.Windows.Forms.TextBox();
+            this.groupBoxPeriodicalSending = new System.Windows.Forms.GroupBox();
             this.buttonPeriodicalSendingStart = new System.Windows.Forms.Button();
-            this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
             this.numericUpDownSerialPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
+            this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
+            this.textBoxPeriodSendingMessage = new System.Windows.Forms.TextBox();
+            this.groupBoxMessageSearch = new System.Windows.Forms.GroupBox();
+            this.buttonSerialOpenLogFile = new System.Windows.Forms.Button();
             this.tabPageSerialCommands = new System.Windows.Forms.TabPage();
             this.buttonSerialFavouriteCommandsAdd = new System.Windows.Forms.Button();
             this.buttonSerialFavouriteCommandsSave = new System.Windows.Forms.Button();
@@ -81,14 +82,15 @@
             this.panelSettings = new System.Windows.Forms.Panel();
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
-            this.groupBoxMessageSearch = new System.Windows.Forms.GroupBox();
-            this.groupBoxPeriodicalSending = new System.Windows.Forms.GroupBox();
+            this.textBoxTelnetPort = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
             this.groupBoxCommSerial.SuspendLayout();
             this.tabPageMessage.SuspendLayout();
+            this.groupBoxPeriodicalSending.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).BeginInit();
+            this.groupBoxMessageSearch.SuspendLayout();
             this.tabPageSerialCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).BeginInit();
             this.tabPageConfiguration.SuspendLayout();
@@ -96,8 +98,6 @@
             this.panelSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
-            this.groupBoxMessageSearch.SuspendLayout();
-            this.groupBoxPeriodicalSending.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -165,9 +165,9 @@
             // 
             // groupBoxCommTelnet
             // 
+            this.groupBoxCommTelnet.Controls.Add(this.textBoxTelnetPort);
             this.groupBoxCommTelnet.Controls.Add(this.textBoxTelnetIP);
             this.groupBoxCommTelnet.Controls.Add(this.buttonTelnetOpenClose);
-            this.groupBoxCommTelnet.Controls.Add(this.maskedTextBoxTelnetIP);
             this.groupBoxCommTelnet.Location = new System.Drawing.Point(7, 93);
             this.groupBoxCommTelnet.Name = "groupBoxCommTelnet";
             this.groupBoxCommTelnet.Size = new System.Drawing.Size(219, 77);
@@ -192,17 +192,6 @@
             this.buttonTelnetOpenClose.Text = "Open";
             this.buttonTelnetOpenClose.UseVisualStyleBackColor = true;
             this.buttonTelnetOpenClose.Click += new System.EventHandler(this.buttonTelnetOpenClose_Click);
-            // 
-            // maskedTextBoxTelnetIP
-            // 
-            this.maskedTextBoxTelnetIP.Culture = new System.Globalization.CultureInfo("en-US");
-            this.maskedTextBoxTelnetIP.Enabled = false;
-            this.maskedTextBoxTelnetIP.Location = new System.Drawing.Point(7, 48);
-            this.maskedTextBoxTelnetIP.Mask = "###.###.###.###";
-            this.maskedTextBoxTelnetIP.Name = "maskedTextBoxTelnetIP";
-            this.maskedTextBoxTelnetIP.ReadOnly = true;
-            this.maskedTextBoxTelnetIP.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBoxTelnetIP.TabIndex = 0;
             // 
             // groupBoxCommSerial
             // 
@@ -284,16 +273,52 @@
             this.tabPageMessage.Text = "Message";
             this.tabPageMessage.UseVisualStyleBackColor = true;
             // 
-            // buttonSerialOpenLogFile
+            // groupBoxPeriodicalSending
             // 
-            this.buttonSerialOpenLogFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(6, 152);
-            this.buttonSerialOpenLogFile.Name = "buttonSerialOpenLogFile";
-            this.buttonSerialOpenLogFile.Size = new System.Drawing.Size(75, 23);
-            this.buttonSerialOpenLogFile.TabIndex = 44;
-            this.buttonSerialOpenLogFile.Text = "Open log";
-            this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
-            this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
+            this.groupBoxPeriodicalSending.Controls.Add(this.buttonPeriodicalSendingStart);
+            this.groupBoxPeriodicalSending.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
+            this.groupBoxPeriodicalSending.Controls.Add(this.labelSerialPeriodSendingConstText);
+            this.groupBoxPeriodicalSending.Controls.Add(this.textBoxPeriodSendingMessage);
+            this.groupBoxPeriodicalSending.Location = new System.Drawing.Point(3, 60);
+            this.groupBoxPeriodicalSending.Name = "groupBoxPeriodicalSending";
+            this.groupBoxPeriodicalSending.Size = new System.Drawing.Size(228, 75);
+            this.groupBoxPeriodicalSending.TabIndex = 46;
+            this.groupBoxPeriodicalSending.TabStop = false;
+            this.groupBoxPeriodicalSending.Text = "Periodical sending";
+            // 
+            // buttonPeriodicalSendingStart
+            // 
+            this.buttonPeriodicalSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPeriodicalSendingStart.Location = new System.Drawing.Point(172, 19);
+            this.buttonPeriodicalSendingStart.Name = "buttonPeriodicalSendingStart";
+            this.buttonPeriodicalSendingStart.Size = new System.Drawing.Size(50, 23);
+            this.buttonPeriodicalSendingStart.TabIndex = 2;
+            this.buttonPeriodicalSendingStart.Text = "Start";
+            this.buttonPeriodicalSendingStart.UseVisualStyleBackColor = true;
+            this.buttonPeriodicalSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
+            // 
+            // numericUpDownSerialPeriodSendingTime
+            // 
+            this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(66, 45);
+            this.numericUpDownSerialPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
+            this.numericUpDownSerialPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
+            this.numericUpDownSerialPeriodSendingTime.TabIndex = 0;
+            this.numericUpDownSerialPeriodSendingTime.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // labelSerialPeriodSendingConstText
+            // 
+            this.labelSerialPeriodSendingConstText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSerialPeriodSendingConstText.AutoSize = true;
+            this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(13, 47);
+            this.labelSerialPeriodSendingConstText.Name = "labelSerialPeriodSendingConstText";
+            this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(47, 13);
+            this.labelSerialPeriodSendingConstText.TabIndex = 1;
+            this.labelSerialPeriodSendingConstText.Text = "Second:";
             // 
             // textBoxPeriodSendingMessage
             // 
@@ -307,39 +332,26 @@
             this.textBoxPeriodSendingMessage.Enter += new System.EventHandler(this.textBoxPeriodSendingMessage_Enter);
             this.textBoxPeriodSendingMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPeriodSendingMessage_KeyPress);
             // 
-            // buttonPeriodicalSendingStart
+            // groupBoxMessageSearch
             // 
-            this.buttonPeriodicalSendingStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPeriodicalSendingStart.Location = new System.Drawing.Point(172, 19);
-            this.buttonPeriodicalSendingStart.Name = "buttonPeriodicalSendingStart";
-            this.buttonPeriodicalSendingStart.Size = new System.Drawing.Size(50, 23);
-            this.buttonPeriodicalSendingStart.TabIndex = 2;
-            this.buttonPeriodicalSendingStart.Text = "Start";
-            this.buttonPeriodicalSendingStart.UseVisualStyleBackColor = true;
-            this.buttonPeriodicalSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
+            this.groupBoxMessageSearch.Controls.Add(this.textBoxSerialTextFind);
+            this.groupBoxMessageSearch.Location = new System.Drawing.Point(3, 6);
+            this.groupBoxMessageSearch.Name = "groupBoxMessageSearch";
+            this.groupBoxMessageSearch.Size = new System.Drawing.Size(228, 48);
+            this.groupBoxMessageSearch.TabIndex = 45;
+            this.groupBoxMessageSearch.TabStop = false;
+            this.groupBoxMessageSearch.Text = "Search Text in LOG";
             // 
-            // labelSerialPeriodSendingConstText
+            // buttonSerialOpenLogFile
             // 
-            this.labelSerialPeriodSendingConstText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSerialPeriodSendingConstText.AutoSize = true;
-            this.labelSerialPeriodSendingConstText.Location = new System.Drawing.Point(13, 47);
-            this.labelSerialPeriodSendingConstText.Name = "labelSerialPeriodSendingConstText";
-            this.labelSerialPeriodSendingConstText.Size = new System.Drawing.Size(47, 13);
-            this.labelSerialPeriodSendingConstText.TabIndex = 1;
-            this.labelSerialPeriodSendingConstText.Text = "Second:";
-            // 
-            // numericUpDownSerialPeriodSendingTime
-            // 
-            this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(66, 45);
-            this.numericUpDownSerialPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
-            this.numericUpDownSerialPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
-            this.numericUpDownSerialPeriodSendingTime.TabIndex = 0;
-            this.numericUpDownSerialPeriodSendingTime.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            this.buttonSerialOpenLogFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSerialOpenLogFile.Location = new System.Drawing.Point(6, 152);
+            this.buttonSerialOpenLogFile.Name = "buttonSerialOpenLogFile";
+            this.buttonSerialOpenLogFile.Size = new System.Drawing.Size(75, 23);
+            this.buttonSerialOpenLogFile.TabIndex = 44;
+            this.buttonSerialOpenLogFile.Text = "Open log";
+            this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
+            this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
             // 
             // tabPageSerialCommands
             // 
@@ -688,28 +700,13 @@
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
             // 
-            // groupBoxMessageSearch
+            // textBoxTelnetPort
             // 
-            this.groupBoxMessageSearch.Controls.Add(this.textBoxSerialTextFind);
-            this.groupBoxMessageSearch.Location = new System.Drawing.Point(3, 6);
-            this.groupBoxMessageSearch.Name = "groupBoxMessageSearch";
-            this.groupBoxMessageSearch.Size = new System.Drawing.Size(228, 48);
-            this.groupBoxMessageSearch.TabIndex = 45;
-            this.groupBoxMessageSearch.TabStop = false;
-            this.groupBoxMessageSearch.Text = "Search Text in LOG";
-            // 
-            // groupBoxPeriodicalSending
-            // 
-            this.groupBoxPeriodicalSending.Controls.Add(this.buttonPeriodicalSendingStart);
-            this.groupBoxPeriodicalSending.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
-            this.groupBoxPeriodicalSending.Controls.Add(this.labelSerialPeriodSendingConstText);
-            this.groupBoxPeriodicalSending.Controls.Add(this.textBoxPeriodSendingMessage);
-            this.groupBoxPeriodicalSending.Location = new System.Drawing.Point(3, 60);
-            this.groupBoxPeriodicalSending.Name = "groupBoxPeriodicalSending";
-            this.groupBoxPeriodicalSending.Size = new System.Drawing.Size(228, 75);
-            this.groupBoxPeriodicalSending.TabIndex = 46;
-            this.groupBoxPeriodicalSending.TabStop = false;
-            this.groupBoxPeriodicalSending.Text = "Periodical sending";
+            this.textBoxTelnetPort.Location = new System.Drawing.Point(7, 45);
+            this.textBoxTelnetPort.Name = "textBoxTelnetPort";
+            this.textBoxTelnetPort.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTelnetPort.TabIndex = 3;
+            this.textBoxTelnetPort.Text = "23";
             // 
             // FormFastenTerminal
             // 
@@ -730,7 +727,11 @@
             this.groupBoxCommTelnet.PerformLayout();
             this.groupBoxCommSerial.ResumeLayout(false);
             this.tabPageMessage.ResumeLayout(false);
+            this.groupBoxPeriodicalSending.ResumeLayout(false);
+            this.groupBoxPeriodicalSending.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).EndInit();
+            this.groupBoxMessageSearch.ResumeLayout(false);
+            this.groupBoxMessageSearch.PerformLayout();
             this.tabPageSerialCommands.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).EndInit();
             this.tabPageConfiguration.ResumeLayout(false);
@@ -739,10 +740,6 @@
             this.panelSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
-            this.groupBoxMessageSearch.ResumeLayout(false);
-            this.groupBoxMessageSearch.PerformLayout();
-            this.groupBoxPeriodicalSending.ResumeLayout(false);
-            this.groupBoxPeriodicalSending.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -796,12 +793,12 @@
         private System.Windows.Forms.CheckBox checkBoxNewLineEnabled;
         private System.Windows.Forms.GroupBox groupBoxCommSerial;
         private System.Windows.Forms.GroupBox groupBoxCommTelnet;
-        private System.Windows.Forms.MaskedTextBox maskedTextBoxTelnetIP;
         private System.Windows.Forms.Button buttonTelnetOpenClose;
         private System.Windows.Forms.TextBox textBoxTelnetIP;
         private System.Windows.Forms.PictureBox pictureBoxScrollingEnabled;
         private System.Windows.Forms.GroupBox groupBoxMessageSearch;
         private System.Windows.Forms.GroupBox groupBoxPeriodicalSending;
+        private System.Windows.Forms.TextBox textBoxTelnetPort;
     }
 }
 
