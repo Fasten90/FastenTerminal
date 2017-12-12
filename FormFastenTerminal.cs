@@ -131,6 +131,10 @@ namespace FastenTerminal
             // TODO:        private Color EventLogTextColor = Color.Blue;
             // private Color EventLogBackgroundColor = Color.Yellow;
 
+            // TODO: Add Telnet configs
+            // IP
+            // Port
+
             // Serial configs
             // TODO: Delete com port
             comboBoxSerialPortCOM.Text = Config.config.portName;
@@ -942,11 +946,6 @@ namespace FastenTerminal
             }
         }
 
-        private void comboBoxNewLineType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comm.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
-        }
-
         private void buttonBackGroundColor_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
@@ -998,6 +997,20 @@ namespace FastenTerminal
                     SerialPeriodicalRefreshStart();
                     break;
             }
+        }
+
+        private void checkBoxNewLineEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBoxNewLineEnabled.Checked)
+                comm.newLineString = "";
+            else
+                comm.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
+        }
+
+        private void comboBoxNewLineType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO: Refresh the communication newLineString, if communication is changed !!
+            comm.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
         }
 
         /*

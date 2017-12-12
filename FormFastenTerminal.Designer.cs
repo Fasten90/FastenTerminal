@@ -37,6 +37,7 @@
             this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
             this.tabPageCommunication = new System.Windows.Forms.TabPage();
             this.groupBoxCommTelnet = new System.Windows.Forms.GroupBox();
+            this.textBoxTelnetPort = new System.Windows.Forms.TextBox();
             this.textBoxTelnetIP = new System.Windows.Forms.TextBox();
             this.buttonTelnetOpenClose = new System.Windows.Forms.Button();
             this.groupBoxCommSerial = new System.Windows.Forms.GroupBox();
@@ -82,7 +83,6 @@
             this.panelSettings = new System.Windows.Forms.Panel();
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
-            this.textBoxTelnetPort = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -174,6 +174,14 @@
             this.groupBoxCommTelnet.TabIndex = 10;
             this.groupBoxCommTelnet.TabStop = false;
             this.groupBoxCommTelnet.Text = "Telnet";
+            // 
+            // textBoxTelnetPort
+            // 
+            this.textBoxTelnetPort.Location = new System.Drawing.Point(7, 45);
+            this.textBoxTelnetPort.Name = "textBoxTelnetPort";
+            this.textBoxTelnetPort.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTelnetPort.TabIndex = 3;
+            this.textBoxTelnetPort.Text = "23";
             // 
             // textBoxTelnetIP
             // 
@@ -440,12 +448,15 @@
             // checkBoxNewLineEnabled
             // 
             this.checkBoxNewLineEnabled.AutoSize = true;
+            this.checkBoxNewLineEnabled.Checked = true;
+            this.checkBoxNewLineEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxNewLineEnabled.Location = new System.Drawing.Point(6, 296);
             this.checkBoxNewLineEnabled.Name = "checkBoxNewLineEnabled";
             this.checkBoxNewLineEnabled.Size = new System.Drawing.Size(67, 17);
             this.checkBoxNewLineEnabled.TabIndex = 50;
             this.checkBoxNewLineEnabled.Text = "New line";
             this.checkBoxNewLineEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxNewLineEnabled.CheckedChanged += new System.EventHandler(this.checkBoxNewLineEnabled_CheckedChanged);
             // 
             // buttonForeGroundColorChange
             // 
@@ -699,14 +710,6 @@
             this.panelLog.Name = "panelLog";
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
-            // 
-            // textBoxTelnetPort
-            // 
-            this.textBoxTelnetPort.Location = new System.Drawing.Point(7, 45);
-            this.textBoxTelnetPort.Name = "textBoxTelnetPort";
-            this.textBoxTelnetPort.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTelnetPort.TabIndex = 3;
-            this.textBoxTelnetPort.Text = "23";
             // 
             // FormFastenTerminal
             // 

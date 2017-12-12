@@ -18,7 +18,7 @@ namespace FastenTerminal
         public bool receiverModeBinary = false;
         public bool needToConvertHex = false;
 
-        public string newLineString { get; set; }
+        public string newLineString = "\r\n";
 
         protected String receivedMsg = "";
 
