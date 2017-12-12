@@ -63,7 +63,7 @@ namespace FastenTerminal
                     form.AppendTextLogEvent("Telnet connection successful!");
                     result = true;
                     isOpened = true;
-                    stateInfo = "Telnet: " + IP;
+                    stateInfo = "Telnet: " + IP + ":" + port.ToString();
                 }
                 else
                 {

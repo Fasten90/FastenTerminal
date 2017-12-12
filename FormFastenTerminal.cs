@@ -1032,7 +1032,10 @@ namespace FastenTerminal
                 CommStateChanged(CommType.NotInitialized);
             }
 
-            comm.isOpened = isOpened;
+            // Refresh application name
+            RefreshTitle();
+
+            //comm.isOpened = isOpened;
         }
 
         private void buttonTelnetOpenClose_Click(object sender, EventArgs e)
@@ -1052,7 +1055,7 @@ namespace FastenTerminal
                 else
                 {
                     // Is not valid ip
-                    notifyMessageForUser("Wrong IP!");
+                    notifyMessageForUser("Wrong IP or port!");
                 }
             }
             else
