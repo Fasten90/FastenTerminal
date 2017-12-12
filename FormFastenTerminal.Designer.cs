@@ -74,7 +74,7 @@
             this.checkBoxEscapeSequenceEnable = new System.Windows.Forms.CheckBox();
             this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
             this.buttonSerialPortSend = new System.Windows.Forms.Button();
-            this.comboBoxSendingText = new System.Windows.Forms.ComboBox();
+            this.comboBoxSendMessage = new System.Windows.Forms.ComboBox();
             this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
             this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
             this.timerCheckSerialPorts = new System.Windows.Forms.Timer(this.components);
@@ -621,18 +621,19 @@
             this.buttonSerialPortSend.UseVisualStyleBackColor = true;
             this.buttonSerialPortSend.Click += new System.EventHandler(this.buttonSendMessage_Click);
             // 
-            // comboBoxSendingText
+            // comboBoxSendMessage
             // 
-            this.comboBoxSendingText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBoxSendMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxSendingText.FormattingEnabled = true;
-            this.comboBoxSendingText.Location = new System.Drawing.Point(3, 428);
-            this.comboBoxSendingText.Name = "comboBoxSendingText";
-            this.comboBoxSendingText.Size = new System.Drawing.Size(481, 21);
-            this.comboBoxSendingText.TabIndex = 42;
-            this.comboBoxSendingText.Text = "<Sending message with \\r\\n>";
-            this.comboBoxSendingText.Enter += new System.EventHandler(this.comboBoxSendMessage_Enter);
-            this.comboBoxSendingText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSerialSendMessage_KeyPress);
+            this.comboBoxSendMessage.FormattingEnabled = true;
+            this.comboBoxSendMessage.Location = new System.Drawing.Point(3, 428);
+            this.comboBoxSendMessage.Name = "comboBoxSendMessage";
+            this.comboBoxSendMessage.Size = new System.Drawing.Size(481, 21);
+            this.comboBoxSendMessage.TabIndex = 42;
+            this.comboBoxSendMessage.Text = "<Sending message with \\r\\n>";
+            this.comboBoxSendMessage.Enter += new System.EventHandler(this.comboBoxSendMessage_Enter);
+            this.comboBoxSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSerialSendMessage_KeyPress);
+            this.comboBoxSendMessage.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.comboBoxSendMessage_PreviewKeyDown);
             // 
             // pictureBoxSerialReceiving
             // 
@@ -702,7 +703,7 @@
             this.panelLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelLog.Controls.Add(this.comboBoxSendingText);
+            this.panelLog.Controls.Add(this.comboBoxSendMessage);
             this.panelLog.Controls.Add(this.buttonSerialPortSend);
             this.panelLog.Controls.Add(this.richTextBoxTextLog);
             this.panelLog.Location = new System.Drawing.Point(3, 3);
@@ -771,7 +772,7 @@
 		private System.Windows.Forms.NumericUpDown numericUpDownSerialPeriodSendingTime;
 		private System.Windows.Forms.TextBox textBoxPeriodSendingMessage;
 		private System.Windows.Forms.CheckBox checkBoxLogWithDateTime;
-		private System.Windows.Forms.ComboBox comboBoxSendingText;
+		private System.Windows.Forms.ComboBox comboBoxSendMessage;
 		private System.Windows.Forms.CheckBox checkBoxConfigClearSendMessageTextAfterSend;
 		private System.Windows.Forms.DataGridView dataGridViewFavCommands;
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandsSave;

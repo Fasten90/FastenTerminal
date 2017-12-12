@@ -573,6 +573,20 @@ namespace FastenTerminal
 				// If pressed enter
 				SendMessage();
 			}
+            else if (e.KeyChar == (char)Keys.Tab)
+            {
+                // Extend command
+                // 1. Search
+                int findIndex = comboBoxSendMessage.FindString(comboBoxSendMessage.Text);
+                if (findIndex >= 0)
+                {
+                    // Found
+                    comboBoxSendMessage.SelectedIndex = findIndex;
+                    // comboBoxSendingText.Items[findIndex];
+                    //comboBoxSendingText.GetItemText();
+                }
+                // else : not found
+            }
 		}
 
 		private void SerialMessageText_Clear()
@@ -581,7 +595,7 @@ namespace FastenTerminal
 			if (SendMessageTextBox_ClearAfterSend)
 			{
 				// Clear text
-				comboBoxSendingText.Text = "";
+				comboBoxSendMessage.Text = "";
 			}
 		}
 
@@ -591,17 +605,27 @@ namespace FastenTerminal
 			if (SendMessageTextBox_Entered == false)
 			{
 				// Clear textbox at first time
-				comboBoxSendingText.Text = "";
+				comboBoxSendMessage.Text = "";
 				SendMessageTextBox_Entered = true;
 			}
-		}
 
-		private void SendMessage()
+            // TODO: Delete these
+            //Forms("Suppliers").Controls("City").TabStop = False
+            //OwnedForms.Controls("").T
+        }
+
+        private void comboBoxSendMessage_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+                e.IsInputKey = true;
+        }
+
+        private void SendMessage()
 		{
-			if (comboBoxSendingText.Text != null)
+			if (comboBoxSendMessage.Text != null)
 			{
                 // Message text
-				String message = comboBoxSendingText.Text;
+				String message = comboBoxSendMessage.Text;
 
                 // Successful or not successful
                 String messageResult = "";
@@ -797,14 +821,14 @@ namespace FastenTerminal
 			// Copy
 			command = message;
 
-			if (comboBoxSendingText.FindString(command) >= 0)
+			if (comboBoxSendMessage.FindString(command) >= 0)
 			{
 				// We have this command in the list
 				// TODO: put to top?
 			}
 			else
 			{
-				comboBoxSendingText.Items.Add(command);
+				comboBoxSendMessage.Items.Add(command);
 			}
 		}
 
@@ -916,7 +940,7 @@ namespace FastenTerminal
         private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Copy clicked text to sending message text
-            comboBoxSendingText.Text = (String)comboBoxSendingText.SelectedItem;
+            comboBoxSendMessage.Text = (String)comboBoxSendMessage.SelectedItem;
         }
 
         private void checkBoxMute_CheckedChanged(object sender, EventArgs e)
