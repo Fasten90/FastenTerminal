@@ -99,6 +99,8 @@ namespace FastenTerminal
 
                         AppendReceivedTextToGui(Telnet_out);
 
+                        form.CommReceivedCharacterEvent();
+
                         // Sent message display
                         // TODO: 
                         //Display d = new Display(ShowMessage);

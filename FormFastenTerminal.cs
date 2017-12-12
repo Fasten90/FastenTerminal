@@ -1013,6 +1013,17 @@ namespace FastenTerminal
             comm.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
         }
 
+        public void CommReceivedCharacterEvent()
+        {
+            if (InvokeRequired)
+            {
+                this.BeginInvoke(new Action(CommReceivedCharacterEvent), new object[] { });
+                return;
+            }
+
+            ReceiveEvent(true);
+        }
+
         /*
          *          Telnet
          */
@@ -1229,18 +1240,7 @@ namespace FastenTerminal
 
             ((Serial)comm).Receive();
 
-            SerialReceivedCharacterEvent();
-        }
-
-        public void SerialReceivedCharacterEvent()
-        {
-            if (InvokeRequired)
-            {
-                this.BeginInvoke(new Action(SerialReceivedCharacterEvent), new object[] { });
-                return;
-            }
-
-            ReceiveEvent(true);
+            CommReceivedCharacterEvent();
         }
 
         private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
