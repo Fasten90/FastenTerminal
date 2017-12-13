@@ -1044,6 +1044,10 @@ namespace FastenTerminal
             ApplicationBackgroundColor = color;
             richTextBoxTextLog.BackColor = color;
             pictureBoxBackGroundColor.BackColor = color;
+            this.BackColor = color;
+            panelSettings.BackColor = color;
+            panelLog.BackColor = color;
+
         }
 
         private void SetForeGroundColor(Color color)
@@ -1066,6 +1070,7 @@ namespace FastenTerminal
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 EventLogBackgroundColor = colorDialog.Color;
+                pictureBoxEventBackgrondColor.BackColor = colorDialog.Color; ;
             }
         }
 
@@ -1074,6 +1079,7 @@ namespace FastenTerminal
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 EventLogTextColor = colorDialog.Color;
+                pictureBoxEventTextColor.BackColor = colorDialog.Color; ;
             }
         }
 
