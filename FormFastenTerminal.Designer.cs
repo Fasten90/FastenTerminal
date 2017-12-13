@@ -131,12 +131,12 @@
             this.notifyIconApplication.Text = "FastenTerminal";
             this.notifyIconApplication.Visible = true;
             // 
-            // textBoxSerialTextFind
+            // textBoxTextLogSearch
             // 
             this.textBoxTextLogSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTextLogSearch.Location = new System.Drawing.Point(3, 19);
-            this.textBoxTextLogSearch.Name = "textBoxSerialTextFind";
+            this.textBoxTextLogSearch.Name = "textBoxTextLogSearch";
             this.textBoxTextLogSearch.Size = new System.Drawing.Size(219, 20);
             this.textBoxTextLogSearch.TabIndex = 32;
             this.textBoxTextLogSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTextLogSearch_KeyPress);
@@ -316,10 +316,10 @@
             this.buttonPeriodicalSendingStart.UseVisualStyleBackColor = true;
             this.buttonPeriodicalSendingStart.Click += new System.EventHandler(this.buttonPeriodSendingStart_Click);
             // 
-            // numericUpDownSerialPeriodSendingTime
+            // numericUpDownPeriodSendingTime
             // 
             this.numericUpDownPeriodSendingTime.Location = new System.Drawing.Point(66, 45);
-            this.numericUpDownPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
+            this.numericUpDownPeriodSendingTime.Name = "numericUpDownPeriodSendingTime";
             this.numericUpDownPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
             this.numericUpDownPeriodSendingTime.TabIndex = 0;
             this.numericUpDownPeriodSendingTime.Value = new decimal(new int[] {
@@ -682,13 +682,13 @@
             this.checkBoxEscapeSequenceEnable.UseVisualStyleBackColor = true;
             this.checkBoxEscapeSequenceEnable.CheckedChanged += new System.EventHandler(this.checkBoxTextEscapeSequenceEnable_CheckedChanged);
             // 
-            // checkBoxSerialCopySelected
+            // checkBoxTextLogCopySelected
             // 
             this.checkBoxTextLogCopySelected.AutoSize = true;
             this.checkBoxTextLogCopySelected.Checked = true;
             this.checkBoxTextLogCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxTextLogCopySelected.Location = new System.Drawing.Point(6, 137);
-            this.checkBoxTextLogCopySelected.Name = "checkBoxSerialCopySelected";
+            this.checkBoxTextLogCopySelected.Name = "checkBoxTextLogCopySelected";
             this.checkBoxTextLogCopySelected.Size = new System.Drawing.Size(137, 17);
             this.checkBoxTextLogCopySelected.TabIndex = 13;
             this.checkBoxTextLogCopySelected.Text = "Copy text with selecting";
@@ -719,13 +719,13 @@
             this.comboBoxSendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSerialSendMessage_KeyPress);
             this.comboBoxSendMessage.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.comboBoxSendMessage_PreviewKeyDown);
             // 
-            // pictureBoxSerialReceiving
+            // pictureBoxIsReceivedText
             // 
             this.pictureBoxIsReceivedText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxIsReceivedText.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSerialReceiving.Image")));
-            this.pictureBoxIsReceivedText.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxSerialReceiving.InitialImage")));
+            this.pictureBoxIsReceivedText.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxIsReceivedText.Image")));
+            this.pictureBoxIsReceivedText.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxIsReceivedText.InitialImage")));
             this.pictureBoxIsReceivedText.Location = new System.Drawing.Point(4, 4);
-            this.pictureBoxIsReceivedText.Name = "pictureBoxSerialReceiving";
+            this.pictureBoxIsReceivedText.Name = "pictureBoxIsReceivedText";
             this.pictureBoxIsReceivedText.Size = new System.Drawing.Size(20, 20);
             this.pictureBoxIsReceivedText.TabIndex = 43;
             this.pictureBoxIsReceivedText.TabStop = false;
