@@ -247,6 +247,7 @@ namespace FastenTerminal
             {
                 // Notify close
                 notifyIconApplication.Visible = false;
+                notifyIconApplication.Icon = null;
                 notifyIconApplication.Dispose();
             }
         }
