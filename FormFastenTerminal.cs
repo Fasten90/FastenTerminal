@@ -46,12 +46,16 @@ namespace FastenTerminal
         private Color ApplicationDefaultTextColor = Color.Black;
 
         // Log colors
-        private Color GlobalTextColor = Color.Black;
         private Color GlobalBackgroundColor = Form.DefaultBackColor;
+        private Color GlobalTextColor = Color.Black;
+
         private bool GlobalEscapeEnabled = true;
 
-        private Color EventLogTextColor = Color.Blue;
         private Color EventLogBackgroundColor = Color.Yellow;
+        private Color EventLogTextColor = Color.Blue;
+
+        private Color SearchTextBackgroundColor = Color.Green;
+        private Color SearchTextTextColor = Color.Black;
 
         private bool soundIsDisabled = false;
 
@@ -803,7 +807,6 @@ namespace FastenTerminal
 
         private void textBoxTextLogSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             // Find, if pressed enter
             if (e.KeyChar == (char)Keys.Return)
             {
@@ -840,7 +843,8 @@ namespace FastenTerminal
                     // Select founded string
 
                     richTextBoxTextLog.Select(result, searchTextLength);
-                    richTextBoxTextLog.SelectionBackColor = Color.Yellow;
+                    richTextBoxTextLog.SelectionBackColor = SearchTextBackgroundColor;
+                    richTextBoxTextLog.SelectionColor = SearchTextTextColor;
 
                     startIndex = result + searchTextLength;
                 }
