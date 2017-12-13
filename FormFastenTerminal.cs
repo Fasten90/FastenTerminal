@@ -30,6 +30,7 @@ namespace FastenTerminal
         private const String imgLocReceiveEmpty = @"Images\img_receive_empty.png";
         private const String imgLocScrollingActive = @"Images\img_scrolling_active.png";
         private const String imgLocScrollingInctive = @"Images\img_scrolling_inactive.png";
+        private const String imgWarning = @"Images\img_warning.png";
 
         // Const sounds
         private const String soundBellPath = @"Sounds\sound_bell.wav";
@@ -110,10 +111,6 @@ namespace FastenTerminal
 				notifyIconApplication.Visible = true;  
 			}
 
-            checkBoxPrintSend.Checked = comm.printSentEvent;
-
-            comboBoxNewLineType.Text = "\\r\\n";
-
             // Serial list refresh
             SerialPeriodicalRefreshStart();
         }
@@ -146,6 +143,10 @@ namespace FastenTerminal
 
             checkBoxWordWrap.Checked = Config.config.wordWrap;
             richTextBoxTextLog.WordWrap = checkBoxWordWrap.Checked;
+
+            checkBoxPrintSend.Checked = Config.config.printSendingMsg;
+
+            comboBoxNewLineType.Text = Config.config.newLineString;
         }
 
 		private void LoadConfig()
@@ -179,6 +180,8 @@ namespace FastenTerminal
 
             LoadConfigToForm();
             LoadConfigToComm();
+
+            pictureBoxConfigIsChanged.ImageLocation = "";
         }
 
         private void SaveConfig()
@@ -212,7 +215,9 @@ namespace FastenTerminal
             Config.config.SerialBaudrate = comboBoxSerialPortBaudrate.Text;
 
             Config.SaveConfigToXml();
-		}
+
+            pictureBoxConfigIsChanged.ImageLocation = "";
+        }
 
 		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -916,7 +921,7 @@ namespace FastenTerminal
                 checkBoxLogWithDateTime.Checked = false;
             }
 
-            SaveConfig();
+            ConfigIsChanged();
         }
 
         void ReceivePictureChange(bool isReceived)
@@ -950,7 +955,7 @@ namespace FastenTerminal
                 checkBoxEscapeSequenceEnable.Checked = false;
             }
 
-            SaveConfig();
+            ConfigIsChanged();
         }
 
         private void buttonSerialOpenLogFile_Click(object sender, EventArgs e)
@@ -970,7 +975,7 @@ namespace FastenTerminal
             SaveConfig();
         }
 
-        private void checkBoxSerialTextEscapeSequenceCheckingCheckedChanged(object sender, EventArgs e)
+        private void checkBoxSerialTextEscapeSequenceEnable_CheckedChanged(object sender, EventArgs e)
         {
             GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
 
@@ -978,14 +983,14 @@ namespace FastenTerminal
             {
                 checkBoxReceiveBinaryMode.Checked = false;
             }
+            ConfigIsChanged();
         }
 
         private void checkBoxLogWithDateTime_CheckedChanged(object sender, EventArgs e)
         {
             // Need to log with DateTime?
             comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
-
-            //SaveConfig();
+            ConfigIsChanged();
         }
 
         private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
@@ -997,16 +1002,19 @@ namespace FastenTerminal
         private void checkBoxMute_CheckedChanged(object sender, EventArgs e)
         {
             soundIsDisabled = checkBoxMute.Checked;
+            ConfigIsChanged();
         }
 
         private void checkBoxWordWrap_CheckedChanged(object sender, EventArgs e)
         {
             richTextBoxTextLog.WordWrap = checkBoxWordWrap.Checked;
+            ConfigIsChanged();
         }
 
         private void checkBoxPrintSend_CheckedChanged(object sender, EventArgs e)
         {
             comm.printSentEvent = checkBoxPrintSend.Checked;
+            ConfigIsChanged();
         }
 
         private void timerCheckSerialPorts_Tick(object sender, EventArgs e)
@@ -1027,6 +1035,11 @@ namespace FastenTerminal
             SendMessageTextBox_ClearAfterSend = checkBoxConfigClearSendMessageTextAfterSend.Checked;
         }
 
+        void ConfigIsChanged()
+        {
+            pictureBoxConfigIsChanged.ImageLocation = imgWarning;
+        }
+
         /*
          *      Colors
          */
@@ -1036,6 +1049,7 @@ namespace FastenTerminal
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 SetBackGroundColor(colorDialog.Color);
+                ConfigIsChanged();
             }
         }
 
@@ -1062,6 +1076,7 @@ namespace FastenTerminal
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 SetForeGroundColor(colorDialog.Color);
+                ConfigIsChanged();
             }
         }
 
@@ -1071,6 +1086,7 @@ namespace FastenTerminal
             {
                 EventLogBackgroundColor = colorDialog.Color;
                 pictureBoxEventBackgrondColor.BackColor = colorDialog.Color; ;
+                ConfigIsChanged();
             }
         }
 
@@ -1080,6 +1096,7 @@ namespace FastenTerminal
             {
                 EventLogTextColor = colorDialog.Color;
                 pictureBoxEventTextColor.BackColor = colorDialog.Color; ;
+                ConfigIsChanged();
             }
         }
 

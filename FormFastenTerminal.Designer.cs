@@ -91,6 +91,7 @@
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBoxConfigIsChanged = new System.Windows.Forms.PictureBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -111,6 +112,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).BeginInit();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -441,6 +443,7 @@
             // 
             // tabPageConfiguration
             // 
+            this.tabPageConfiguration.Controls.Add(this.pictureBoxConfigIsChanged);
             this.tabPageConfiguration.Controls.Add(this.labelConstEventTextColor);
             this.tabPageConfiguration.Controls.Add(this.labelConstEventBackgrondColor);
             this.tabPageConfiguration.Controls.Add(this.labelConstForeGroundColor);
@@ -472,7 +475,7 @@
             // labelConstEventTextColor
             // 
             this.labelConstEventTextColor.AutoSize = true;
-            this.labelConstEventTextColor.Location = new System.Drawing.Point(23, 69);
+            this.labelConstEventTextColor.Location = new System.Drawing.Point(23, 72);
             this.labelConstEventTextColor.Name = "labelConstEventTextColor";
             this.labelConstEventTextColor.Size = new System.Drawing.Size(81, 13);
             this.labelConstEventTextColor.TabIndex = 58;
@@ -481,7 +484,7 @@
             // labelConstEventBackgrondColor
             // 
             this.labelConstEventBackgrondColor.AutoSize = true;
-            this.labelConstEventBackgrondColor.Location = new System.Drawing.Point(23, 49);
+            this.labelConstEventBackgrondColor.Location = new System.Drawing.Point(23, 50);
             this.labelConstEventBackgrondColor.Name = "labelConstEventBackgrondColor";
             this.labelConstEventBackgrondColor.Size = new System.Drawing.Size(121, 13);
             this.labelConstEventBackgrondColor.TabIndex = 57;
@@ -507,20 +510,22 @@
             // 
             // pictureBoxEventTextColor
             // 
-            this.pictureBoxEventTextColor.Location = new System.Drawing.Point(6, 68);
+            this.pictureBoxEventTextColor.Location = new System.Drawing.Point(6, 71);
             this.pictureBoxEventTextColor.Name = "pictureBoxEventTextColor";
             this.pictureBoxEventTextColor.Size = new System.Drawing.Size(14, 14);
             this.pictureBoxEventTextColor.TabIndex = 54;
             this.pictureBoxEventTextColor.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxEventTextColor, "Event text color");
             this.pictureBoxEventTextColor.Click += new System.EventHandler(this.pictureBoxEventTextColor_Click);
             // 
             // pictureBoxEventBackgrondColor
             // 
-            this.pictureBoxEventBackgrondColor.Location = new System.Drawing.Point(6, 48);
+            this.pictureBoxEventBackgrondColor.Location = new System.Drawing.Point(6, 49);
             this.pictureBoxEventBackgrondColor.Name = "pictureBoxEventBackgrondColor";
             this.pictureBoxEventBackgrondColor.Size = new System.Drawing.Size(14, 14);
             this.pictureBoxEventBackgrondColor.TabIndex = 53;
             this.pictureBoxEventBackgrondColor.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxEventBackgrondColor, "Event background color");
             this.pictureBoxEventBackgrondColor.Click += new System.EventHandler(this.pictureBoxEventBackgrondColor_Click);
             // 
             // pictureBoxForeGroundColor
@@ -530,6 +535,7 @@
             this.pictureBoxForeGroundColor.Size = new System.Drawing.Size(14, 14);
             this.pictureBoxForeGroundColor.TabIndex = 52;
             this.pictureBoxForeGroundColor.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxForeGroundColor, "Foreground color");
             this.pictureBoxForeGroundColor.Click += new System.EventHandler(this.pictureBoxForeGroundColor_Click);
             // 
             // pictureBoxBackGroundColor
@@ -539,6 +545,7 @@
             this.pictureBoxBackGroundColor.Size = new System.Drawing.Size(14, 14);
             this.pictureBoxBackGroundColor.TabIndex = 51;
             this.pictureBoxBackGroundColor.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxBackGroundColor, "Background color");
             this.pictureBoxBackGroundColor.Click += new System.EventHandler(this.pictureBoxBackGroundColor_Click);
             // 
             // checkBoxNewLineEnabled
@@ -546,7 +553,7 @@
             this.checkBoxNewLineEnabled.AutoSize = true;
             this.checkBoxNewLineEnabled.Checked = true;
             this.checkBoxNewLineEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxNewLineEnabled.Location = new System.Drawing.Point(6, 303);
+            this.checkBoxNewLineEnabled.Location = new System.Drawing.Point(6, 298);
             this.checkBoxNewLineEnabled.Name = "checkBoxNewLineEnabled";
             this.checkBoxNewLineEnabled.Size = new System.Drawing.Size(67, 17);
             this.checkBoxNewLineEnabled.TabIndex = 50;
@@ -564,7 +571,7 @@
             "\\n",
             "\\0",
             "-"});
-            this.comboBoxNewLineType.Location = new System.Drawing.Point(86, 301);
+            this.comboBoxNewLineType.Location = new System.Drawing.Point(86, 296);
             this.comboBoxNewLineType.Name = "comboBoxNewLineType";
             this.comboBoxNewLineType.Size = new System.Drawing.Size(57, 21);
             this.comboBoxNewLineType.TabIndex = 46;
@@ -573,7 +580,7 @@
             // checkBoxPrintSend
             // 
             this.checkBoxPrintSend.AutoSize = true;
-            this.checkBoxPrintSend.Location = new System.Drawing.Point(6, 278);
+            this.checkBoxPrintSend.Location = new System.Drawing.Point(6, 275);
             this.checkBoxPrintSend.Name = "checkBoxPrintSend";
             this.checkBoxPrintSend.Size = new System.Drawing.Size(100, 17);
             this.checkBoxPrintSend.TabIndex = 45;
@@ -584,7 +591,7 @@
             // checkBoxWordWrap
             // 
             this.checkBoxWordWrap.AutoSize = true;
-            this.checkBoxWordWrap.Location = new System.Drawing.Point(6, 255);
+            this.checkBoxWordWrap.Location = new System.Drawing.Point(6, 252);
             this.checkBoxWordWrap.Name = "checkBoxWordWrap";
             this.checkBoxWordWrap.Size = new System.Drawing.Size(78, 17);
             this.checkBoxWordWrap.TabIndex = 44;
@@ -595,7 +602,7 @@
             // checkBoxMute
             // 
             this.checkBoxMute.AutoSize = true;
-            this.checkBoxMute.Location = new System.Drawing.Point(6, 231);
+            this.checkBoxMute.Location = new System.Drawing.Point(6, 229);
             this.checkBoxMute.Name = "checkBoxMute";
             this.checkBoxMute.Size = new System.Drawing.Size(50, 17);
             this.checkBoxMute.TabIndex = 43;
@@ -605,7 +612,7 @@
             // 
             // buttonSerialSaveConfig
             // 
-            this.buttonSerialSaveConfig.Location = new System.Drawing.Point(3, 326);
+            this.buttonSerialSaveConfig.Location = new System.Drawing.Point(3, 348);
             this.buttonSerialSaveConfig.Name = "buttonSerialSaveConfig";
             this.buttonSerialSaveConfig.Size = new System.Drawing.Size(75, 23);
             this.buttonSerialSaveConfig.TabIndex = 42;
@@ -616,7 +623,7 @@
             // checkBoxReceiveBinaryMode
             // 
             this.checkBoxReceiveBinaryMode.AutoSize = true;
-            this.checkBoxReceiveBinaryMode.Location = new System.Drawing.Point(6, 184);
+            this.checkBoxReceiveBinaryMode.Location = new System.Drawing.Point(6, 183);
             this.checkBoxReceiveBinaryMode.Name = "checkBoxReceiveBinaryMode";
             this.checkBoxReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
             this.checkBoxReceiveBinaryMode.TabIndex = 41;
@@ -627,7 +634,7 @@
             // checkBoxConfigClearSendMessageTextAfterSend
             // 
             this.checkBoxConfigClearSendMessageTextAfterSend.AutoSize = true;
-            this.checkBoxConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(6, 207);
+            this.checkBoxConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(6, 206);
             this.checkBoxConfigClearSendMessageTextAfterSend.Name = "checkBoxConfigClearSendMessageTextAfterSend";
             this.checkBoxConfigClearSendMessageTextAfterSend.Size = new System.Drawing.Size(100, 17);
             this.checkBoxConfigClearSendMessageTextAfterSend.TabIndex = 40;
@@ -666,13 +673,13 @@
             this.checkBoxEscapeSequenceEnable.AutoSize = true;
             this.checkBoxEscapeSequenceEnable.Checked = true;
             this.checkBoxEscapeSequenceEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxEscapeSequenceEnable.Location = new System.Drawing.Point(6, 161);
+            this.checkBoxEscapeSequenceEnable.Location = new System.Drawing.Point(6, 160);
             this.checkBoxEscapeSequenceEnable.Name = "checkBoxEscapeSequenceEnable";
             this.checkBoxEscapeSequenceEnable.Size = new System.Drawing.Size(117, 17);
             this.checkBoxEscapeSequenceEnable.TabIndex = 31;
             this.checkBoxEscapeSequenceEnable.Text = "Escape sequences";
             this.checkBoxEscapeSequenceEnable.UseVisualStyleBackColor = true;
-            this.checkBoxEscapeSequenceEnable.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextEscapeSequenceCheckingCheckedChanged);
+            this.checkBoxEscapeSequenceEnable.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextEscapeSequenceEnable_CheckedChanged);
             // 
             // checkBoxSerialCopySelected
             // 
@@ -774,7 +781,7 @@
             this.pictureBoxHelp.Size = new System.Drawing.Size(20, 20);
             this.pictureBoxHelp.TabIndex = 45;
             this.pictureBoxHelp.TabStop = false;
-            this.toolTipHelp.SetToolTip(this.pictureBoxHelp, "Scrolling enable");
+            this.toolTipHelp.SetToolTip(this.pictureBoxHelp, "Help menu");
             this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
             // 
             // pictureBoxScrollingEnabled
@@ -803,6 +810,15 @@
             this.panelLog.Name = "panelLog";
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
+            // 
+            // pictureBoxConfigIsChanged
+            // 
+            this.pictureBoxConfigIsChanged.Location = new System.Drawing.Point(202, 7);
+            this.pictureBoxConfigIsChanged.Name = "pictureBoxConfigIsChanged";
+            this.pictureBoxConfigIsChanged.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxConfigIsChanged.TabIndex = 59;
+            this.pictureBoxConfigIsChanged.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxConfigIsChanged, "Config is changed?");
             // 
             // FormFastenTerminal
             // 
@@ -841,6 +857,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -908,6 +925,7 @@
         private System.Windows.Forms.Label labelConstEventTextColor;
         private System.Windows.Forms.Label labelConstEventBackgrondColor;
         private System.Windows.Forms.Label labelConstForeGroundColor;
+        private System.Windows.Forms.PictureBox pictureBoxConfigIsChanged;
     }
 }
 
