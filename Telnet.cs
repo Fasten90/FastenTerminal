@@ -33,6 +33,12 @@ namespace FastenTerminal
             this.form = form;
         }
 
+        ~Telnet()
+        {
+            printSentEvent = false;
+            Close();
+        }
+
         // Source: https://dotblogs.com.tw/masterhsu/2016/07/13/150206
         public bool Telnet_Connect(string IP, int port = 23, string user = "", string passwd = "")
         {
@@ -177,8 +183,10 @@ namespace FastenTerminal
         {
             if (telnetStream_A != null)
             {
+                telnet_receiving = false;
                 telnetStream_A.Close();
-                form.AppendTextLogEvent("Telnet connection closed");
+                if (printSentEvent)
+                    form.AppendTextLogEvent("Telnet connection closed");
                 isOpened = false;
                 stateInfo = "Closed";
             }

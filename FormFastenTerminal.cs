@@ -298,7 +298,7 @@ namespace FastenTerminal
 			}
 
             // Note log (not received log!)
-            if (richTextBoxTextLog.TextLength > 0)
+            if (richTextBoxTextLog != null && richTextBoxTextLog.TextLength > 0)
             {
                 char lastReceivedCharacter = richTextBoxTextLog.Text[richTextBoxTextLog.TextLength - 1];
                 if (lastReceivedCharacter != '\r' && lastReceivedCharacter != '\n' && lastReceivedCharacter != '\0')
