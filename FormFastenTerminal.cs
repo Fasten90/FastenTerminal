@@ -215,6 +215,17 @@ namespace FastenTerminal
             }
 		}
 
+        private void pictureBoxHelp_Click(object sender, EventArgs e)
+        {
+            string message = "FastenTerminal\n" +
+                "Author: Vizi Gábor\n" +
+                "Webpage: http://www.fasten.e5tv.hu/";
+
+            string caption = "FastenTerminal - help menu";
+
+            MessageBox.Show(message, caption);
+        }
+
         /*
          *      Text log
          */

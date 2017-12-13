@@ -84,6 +84,7 @@
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -99,6 +100,7 @@
             this.panelSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -684,6 +686,7 @@
             // 
             this.panelSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelSettings.Controls.Add(this.pictureBoxHelp);
             this.panelSettings.Controls.Add(this.pictureBoxScrollingEnabled);
             this.panelSettings.Controls.Add(this.buttonClearSerialTexts);
             this.panelSettings.Controls.Add(this.pictureBoxSerialReceiving);
@@ -720,6 +723,19 @@
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
             // 
+            // pictureBoxHelp
+            // 
+            this.pictureBoxHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxHelp.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxHelp.Image")));
+            this.pictureBoxHelp.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxHelp.InitialImage")));
+            this.pictureBoxHelp.Location = new System.Drawing.Point(221, 4);
+            this.pictureBoxHelp.Name = "pictureBoxHelp";
+            this.pictureBoxHelp.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxHelp.TabIndex = 45;
+            this.pictureBoxHelp.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxHelp, "Scrolling enable");
+            this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
+            // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -752,6 +768,7 @@
             this.panelSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -812,6 +829,7 @@
         private System.Windows.Forms.GroupBox groupBoxPeriodicalSending;
         private System.Windows.Forms.TextBox textBoxTelnetPort;
         private System.Windows.Forms.ToolTip toolTipHelp;
+        private System.Windows.Forms.PictureBox pictureBoxHelp;
     }
 }
 
