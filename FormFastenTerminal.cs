@@ -71,7 +71,7 @@ namespace FastenTerminal
         private FastenTerminalConfigs Config;
 
         // LOG - text variables
-        private bool SendMessageTextBox_Entered = false;
+        private bool SendMessageInput_Entered = false;
         private bool PeriodMessageTextBox_Entered = false;
         private bool SendMessageTextBox_ClearAfterSend = false;
 
@@ -121,10 +121,9 @@ namespace FastenTerminal
             SerialPeriodicalRefreshStart();
         }
 
-
         private void LoadConfigToComm()
         {
-            // Serial config
+            // Communication configs
             comm.NeedLog = checkBoxLogEnable.Checked;
             comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 
@@ -153,6 +152,15 @@ namespace FastenTerminal
             checkBoxPrintSend.Checked = Config.config.printSendingMsg;
 
             comboBoxNewLineType.Text = Config.config.newLineString;
+
+            // Telnet configs
+            // IP
+            textBoxTelnetIP.Text = Config.config.TelnetIPaddress;
+            // Port
+            textBoxTelnetPort.Text = Config.config.TelnetPort;
+
+            // Serial configs
+            comboBoxSerialPortBaudrate.Text = Config.config.SerialBaudrate;
         }
 
         private void LoadConfig()
@@ -174,15 +182,6 @@ namespace FastenTerminal
             //public bool wordWrap;
             //public bool printSendingMsg 
             GlobalEscapeEnabled = Config.config.escapeSequenceIsEnabled;
-
-            // Telnet configs
-            // IP
-            textBoxTelnetIP.Text = Config.config.TelnetIPaddress;
-            // Port
-            textBoxTelnetPort.Text = Config.config.TelnetPort;
-
-            // Serial configs
-            comboBoxSerialPortBaudrate.Text = Config.config.SerialBaudrate;
 
             LoadConfigToForm();
             LoadConfigToComm();
@@ -348,7 +347,7 @@ namespace FastenTerminal
             }
 
             // Original text appending, It is Work!!
-            //richTextBoxSerialPortTexts.Text += value;
+            //richTextBoxTextLog.Text += value;
             if (message == "")
             {
                 return;
@@ -495,9 +494,9 @@ namespace FastenTerminal
                 richTextBoxTextLog.ScrollToCaret();         // scroll top/bot without selection start setting
 
                 // set the current caret position to the end
-                //richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.Text.Length;
+                //richTextBoxTextLog.SelectionStart = richTextBoxTextLog.Text.Length;
                 // scroll it automatically
-                //richTextBoxSerialPortTexts.ScrollToCaret();
+                //richTextBoxTextLog.ScrollToCaret();
             }
             else
             {
@@ -571,12 +570,12 @@ namespace FastenTerminal
 
         private void ScrollBottomAndAppendBuffer()
         {
-            //richTextBoxSerialPortTexts.Text += tempStringBuffer;
+            //richTextBoxTextLog.Text += tempStringBuffer;
             AppendTextLog(tempStringBuffer, GlobalTextColor, GlobalBackgroundColor);
 
             tempStringBuffer = "";
-            //richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.TextLength;		// WRONG: Make stack overflow
-            //richTextBoxSerialPortTexts.ScrollToCaret();	// windows is jumping
+            //richTextBoxTextLog.SelectionStart = richTextBoxTextLog.TextLength;		// WRONG: Make stack overflow
+            //richTextBoxTextLog.ScrollToCaret();	// windows is jumping
         }
 
         private void richTextBoxTextLog_SelectionChanged(object sender, EventArgs e)
@@ -597,7 +596,7 @@ namespace FastenTerminal
             }
 
             // Copy is enabled
-            if (checkBoxSerialCopySelected.Checked)
+            if (checkBoxTextLogCopySelected.Checked)
             {
                 // Copy the selected text to the Clipboard.
                 if (richTextBoxTextLog.SelectionLength > 0)
@@ -654,7 +653,7 @@ namespace FastenTerminal
             }
         }
 
-        private void SerialMessageText_Clear()
+        private void SendMessageText_Clear()
         {
             // Need clear text?
             if (SendMessageTextBox_ClearAfterSend)
@@ -666,12 +665,12 @@ namespace FastenTerminal
 
         private void comboBoxSendMessage_Enter(object sender, EventArgs e)
         {
-            // Enter on SerialMessage TextBox
-            if (SendMessageTextBox_Entered == false)
+            // Enter on SendMessageTextBox TextBox
+            if (SendMessageInput_Entered == false)
             {
                 // Clear textbox at first time
                 comboBoxSendMessage.Text = "";
-                SendMessageTextBox_Entered = true;
+                SendMessageInput_Entered = true;
             }
 
             // TODO: Delete these
@@ -703,16 +702,16 @@ namespace FastenTerminal
                     return;
                 }
 
-                Log.SendEventLog(messageResult);                // TODO: Biztos kell ez?
-                                                                //AppendTextSerialData(messageResult);
+                Log.SendEventLog(messageResult);                // TODO: It is good solution?
+                //AppendTextLogEvent(messageResult);
 
                 // The message
                 //Log.SendEventLog(message);
-                //AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
+                //AppendTextLogEvent(message + "\r\n");		// Send on Serial with endline (\r\n)
 
                 SendMessageAddLastCommand(message);
 
-                SerialMessageText_Clear();
+                SendMessageText_Clear();
 
                 // Set scroll to enable
                 setScrollStateByApplication(true);
@@ -738,9 +737,9 @@ namespace FastenTerminal
             }
         }
 
-        private void SerialPeriodSending_Start()
+        private void PeriodSending_Start()
         {
-            // TODO: Has we opened serial port? Checked in below, but if isOpenedPort state is wrong?
+            // TODO: Has we opened serial/telnet connection? Checked in below, but if isOpenedPort state is wrong?
 
             if (comm.PeriodSending_Enable)
             {
@@ -757,7 +756,7 @@ namespace FastenTerminal
                 if (comm.isOpened)
                 {
                     // Has opened port
-                    comm.PeriodSendingStart((float)numericUpDownSerialPeriodSendingTime.Value,
+                    comm.PeriodSendingStart((float)numericUpDownPeriodSendingTime.Value,
                         textBoxPeriodSendingMessage.Text);
 
                     PeriodicalSend_SetState(true);
@@ -771,10 +770,10 @@ namespace FastenTerminal
             }
         }
 
-        private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
+        private void buttonPeriodSendingStart_Click(object sender, EventArgs e)
         {
-            // Clicked Serial - Period sending start-stop button
-            SerialPeriodSending_Start();
+            // Clicked Period sending start-stop button
+            PeriodSending_Start();
         }
 
         private void textBoxPeriodSendingMessage_KeyPress(object sender, KeyPressEventArgs e)
@@ -783,7 +782,7 @@ namespace FastenTerminal
             if (e.KeyChar == (char)Keys.Return)
             {
                 // If pressed enter
-                SerialPeriodSending_Start();
+                PeriodSending_Start();
             }
         }
 
@@ -799,24 +798,24 @@ namespace FastenTerminal
         }
 
         /*
-         *      Find text in log
+         *      Search text in log
          */
 
-        private void textBoxSerialTextFind_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxTextLogSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
 
             // Find, if pressed enter
             if (e.KeyChar == (char)Keys.Return)
             {
                 // Pressed enter
-                FindText();
+                SearchTextInTextLog();
             }
         }
 
-        private void FindText()
+        private void SearchTextInTextLog()
         {
-            String searchText = textBoxSerialTextFind.Text;
-            int searchTextLength = textBoxSerialTextFind.Text.Length;
+            String searchText = textBoxTextLogSearch.Text;
+            int searchTextLength = textBoxTextLogSearch.Text.Length;
             int startIndex = 0;
 
             // Search in log, if not null text
@@ -830,7 +829,7 @@ namespace FastenTerminal
 
                 // Find
                 // TODO: This is the First searched item...
-                //int result = richTextBoxSerialPortTexts.Find(searchText);
+                //int result = richTextBoxTextLog.Find(searchText);
 
                 // Find
                 int result = 1;
@@ -872,10 +871,9 @@ namespace FastenTerminal
             dataGridViewFavCommands.Refresh();
         }
 
-        private void buttonSerialFavouriteCommandSending_Click(object sender, EventArgs e)
+        private void buttonFavouriteCommandSending_Click(object sender, EventArgs e)
         {
             String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
-            // TODO: Not serial
             comm.SendMessage(message);
         }
 
@@ -897,13 +895,13 @@ namespace FastenTerminal
             }
         }
 
-        private void buttonSerialFavouriteCommandsSave_Click(object sender, EventArgs e)
+        private void buttonFavouriteCommandsSave_Click(object sender, EventArgs e)
         {
             // Save favourite commands
             favouriteCommands.SaveCommandConfig();
         }
 
-        private void buttonSerialFavouriteCommandsAdd_Click(object sender, EventArgs e)
+        private void buttonFavouriteCommandsAdd_Click(object sender, EventArgs e)
         {
             favouriteCommands.AddNewCommand("", "");
 
@@ -940,14 +938,14 @@ namespace FastenTerminal
             {
                 if (IsreceivedIconIsGreen != isReceived)
                 {
-                    pictureBoxSerialReceiving.ImageLocation = imgLocReceiveGreen;
+                    pictureBoxIsReceivedText.ImageLocation = imgLocReceiveGreen;
                 }
             }
             else
             {
                 if (IsreceivedIconIsGreen != isReceived)
                 {
-                    pictureBoxSerialReceiving.ImageLocation = imgLocReceiveEmpty;
+                    pictureBoxIsReceivedText.ImageLocation = imgLocReceiveEmpty;
                 }
             }
 
@@ -967,7 +965,7 @@ namespace FastenTerminal
             ConfigIsChanged();
         }
 
-        private void buttonSerialOpenLogFile_Click(object sender, EventArgs e)
+        private void buttonOpenLogFile_Click(object sender, EventArgs e)
         {
             // Open log file
             OpenLogFile();
@@ -979,7 +977,7 @@ namespace FastenTerminal
             Common.OpenTextFile(MessageLog.logFilePath);
         }
 
-        private void checkBoxSerialTextEscapeSequenceEnable_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxTextEscapeSequenceEnable_CheckedChanged(object sender, EventArgs e)
         {
             GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
 
@@ -1239,7 +1237,7 @@ namespace FastenTerminal
         }
 
         /*
-		 *			 SERIAL
+		 *			 Serial port
 		 */
 
         private void buttonSerialPortRefresh_Click(object sender, EventArgs e)

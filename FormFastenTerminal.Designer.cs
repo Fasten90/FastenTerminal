@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFastenTerminal));
             this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
             this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
-            this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
+            this.textBoxTextLogSearch = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
             this.tabPageCommunication = new System.Windows.Forms.TabPage();
             this.groupBoxCommTelnet = new System.Windows.Forms.GroupBox();
@@ -47,7 +47,7 @@
             this.tabPageMessage = new System.Windows.Forms.TabPage();
             this.groupBoxPeriodicalSending = new System.Windows.Forms.GroupBox();
             this.buttonPeriodicalSendingStart = new System.Windows.Forms.Button();
-            this.numericUpDownSerialPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownPeriodSendingTime = new System.Windows.Forms.NumericUpDown();
             this.labelSerialPeriodSendingConstText = new System.Windows.Forms.Label();
             this.textBoxPeriodSendingMessage = new System.Windows.Forms.TextBox();
             this.groupBoxMessageSearch = new System.Windows.Forms.GroupBox();
@@ -78,10 +78,10 @@
             this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
             this.checkBoxLogEnable = new System.Windows.Forms.CheckBox();
             this.checkBoxEscapeSequenceEnable = new System.Windows.Forms.CheckBox();
-            this.checkBoxSerialCopySelected = new System.Windows.Forms.CheckBox();
+            this.checkBoxTextLogCopySelected = new System.Windows.Forms.CheckBox();
             this.buttonSerialPortSend = new System.Windows.Forms.Button();
             this.comboBoxSendMessage = new System.Windows.Forms.ComboBox();
-            this.pictureBoxSerialReceiving = new System.Windows.Forms.PictureBox();
+            this.pictureBoxIsReceivedText = new System.Windows.Forms.PictureBox();
             this.timerReceiveIcon = new System.Windows.Forms.Timer(this.components);
             this.timerCheckSerialPorts = new System.Windows.Forms.Timer(this.components);
             this.colorDialog = new System.Windows.Forms.ColorDialog();
@@ -99,7 +99,7 @@
             this.groupBoxCommSerial.SuspendLayout();
             this.tabPageMessage.SuspendLayout();
             this.groupBoxPeriodicalSending.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriodSendingTime)).BeginInit();
             this.groupBoxMessageSearch.SuspendLayout();
             this.tabPageSerialCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).BeginInit();
@@ -110,7 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventBackgrondColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForeGroundColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIsReceivedText)).BeginInit();
             this.panelSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClearScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).BeginInit();
@@ -133,13 +133,13 @@
             // 
             // textBoxSerialTextFind
             // 
-            this.textBoxSerialTextFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxTextLogSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSerialTextFind.Location = new System.Drawing.Point(3, 19);
-            this.textBoxSerialTextFind.Name = "textBoxSerialTextFind";
-            this.textBoxSerialTextFind.Size = new System.Drawing.Size(219, 20);
-            this.textBoxSerialTextFind.TabIndex = 32;
-            this.textBoxSerialTextFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSerialTextFind_KeyPress);
+            this.textBoxTextLogSearch.Location = new System.Drawing.Point(3, 19);
+            this.textBoxTextLogSearch.Name = "textBoxSerialTextFind";
+            this.textBoxTextLogSearch.Size = new System.Drawing.Size(219, 20);
+            this.textBoxTextLogSearch.TabIndex = 32;
+            this.textBoxTextLogSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTextLogSearch_KeyPress);
             // 
             // tabControlSerialFunctions
             // 
@@ -295,7 +295,7 @@
             // groupBoxPeriodicalSending
             // 
             this.groupBoxPeriodicalSending.Controls.Add(this.buttonPeriodicalSendingStart);
-            this.groupBoxPeriodicalSending.Controls.Add(this.numericUpDownSerialPeriodSendingTime);
+            this.groupBoxPeriodicalSending.Controls.Add(this.numericUpDownPeriodSendingTime);
             this.groupBoxPeriodicalSending.Controls.Add(this.labelSerialPeriodSendingConstText);
             this.groupBoxPeriodicalSending.Controls.Add(this.textBoxPeriodSendingMessage);
             this.groupBoxPeriodicalSending.Location = new System.Drawing.Point(3, 60);
@@ -314,15 +314,15 @@
             this.buttonPeriodicalSendingStart.TabIndex = 2;
             this.buttonPeriodicalSendingStart.Text = "Start";
             this.buttonPeriodicalSendingStart.UseVisualStyleBackColor = true;
-            this.buttonPeriodicalSendingStart.Click += new System.EventHandler(this.buttonSerialPeriodSendingStart_Click);
+            this.buttonPeriodicalSendingStart.Click += new System.EventHandler(this.buttonPeriodSendingStart_Click);
             // 
             // numericUpDownSerialPeriodSendingTime
             // 
-            this.numericUpDownSerialPeriodSendingTime.Location = new System.Drawing.Point(66, 45);
-            this.numericUpDownSerialPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
-            this.numericUpDownSerialPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
-            this.numericUpDownSerialPeriodSendingTime.TabIndex = 0;
-            this.numericUpDownSerialPeriodSendingTime.Value = new decimal(new int[] {
+            this.numericUpDownPeriodSendingTime.Location = new System.Drawing.Point(66, 45);
+            this.numericUpDownPeriodSendingTime.Name = "numericUpDownSerialPeriodSendingTime";
+            this.numericUpDownPeriodSendingTime.Size = new System.Drawing.Size(64, 20);
+            this.numericUpDownPeriodSendingTime.TabIndex = 0;
+            this.numericUpDownPeriodSendingTime.Value = new decimal(new int[] {
             5,
             0,
             0,
@@ -353,7 +353,7 @@
             // 
             // groupBoxMessageSearch
             // 
-            this.groupBoxMessageSearch.Controls.Add(this.textBoxSerialTextFind);
+            this.groupBoxMessageSearch.Controls.Add(this.textBoxTextLogSearch);
             this.groupBoxMessageSearch.Location = new System.Drawing.Point(3, 6);
             this.groupBoxMessageSearch.Name = "groupBoxMessageSearch";
             this.groupBoxMessageSearch.Size = new System.Drawing.Size(228, 48);
@@ -370,7 +370,7 @@
             this.buttonSerialOpenLogFile.TabIndex = 44;
             this.buttonSerialOpenLogFile.Text = "Open log";
             this.buttonSerialOpenLogFile.UseVisualStyleBackColor = true;
-            this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonSerialOpenLogFile_Click);
+            this.buttonSerialOpenLogFile.Click += new System.EventHandler(this.buttonOpenLogFile_Click);
             // 
             // tabPageSerialCommands
             // 
@@ -395,7 +395,7 @@
             this.buttonSerialFavouriteCommandsAdd.TabIndex = 24;
             this.buttonSerialFavouriteCommandsAdd.Text = "Add";
             this.buttonSerialFavouriteCommandsAdd.UseVisualStyleBackColor = true;
-            this.buttonSerialFavouriteCommandsAdd.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsAdd_Click);
+            this.buttonSerialFavouriteCommandsAdd.Click += new System.EventHandler(this.buttonFavouriteCommandsAdd_Click);
             // 
             // buttonSerialFavouriteCommandsSave
             // 
@@ -406,7 +406,7 @@
             this.buttonSerialFavouriteCommandsSave.TabIndex = 23;
             this.buttonSerialFavouriteCommandsSave.Text = "Save";
             this.buttonSerialFavouriteCommandsSave.UseVisualStyleBackColor = true;
-            this.buttonSerialFavouriteCommandsSave.Click += new System.EventHandler(this.buttonSerialFavouriteCommandsSave_Click);
+            this.buttonSerialFavouriteCommandsSave.Click += new System.EventHandler(this.buttonFavouriteCommandsSave_Click);
             // 
             // dataGridViewFavCommands
             // 
@@ -430,7 +430,7 @@
             this.buttonSerialFavouriteCommandSending.TabIndex = 14;
             this.buttonSerialFavouriteCommandSending.Text = "Send";
             this.buttonSerialFavouriteCommandSending.UseVisualStyleBackColor = true;
-            this.buttonSerialFavouriteCommandSending.Click += new System.EventHandler(this.buttonSerialFavouriteCommandSending_Click);
+            this.buttonSerialFavouriteCommandSending.Click += new System.EventHandler(this.buttonFavouriteCommandSending_Click);
             // 
             // tabPageConfiguration
             // 
@@ -454,7 +454,7 @@
             this.tabPageConfiguration.Controls.Add(this.checkBoxLogWithDateTime);
             this.tabPageConfiguration.Controls.Add(this.checkBoxLogEnable);
             this.tabPageConfiguration.Controls.Add(this.checkBoxEscapeSequenceEnable);
-            this.tabPageConfiguration.Controls.Add(this.checkBoxSerialCopySelected);
+            this.tabPageConfiguration.Controls.Add(this.checkBoxTextLogCopySelected);
             this.tabPageConfiguration.Location = new System.Drawing.Point(4, 22);
             this.tabPageConfiguration.Name = "tabPageConfiguration";
             this.tabPageConfiguration.Padding = new System.Windows.Forms.Padding(3);
@@ -680,19 +680,19 @@
             this.checkBoxEscapeSequenceEnable.TabIndex = 31;
             this.checkBoxEscapeSequenceEnable.Text = "Escape sequences";
             this.checkBoxEscapeSequenceEnable.UseVisualStyleBackColor = true;
-            this.checkBoxEscapeSequenceEnable.CheckedChanged += new System.EventHandler(this.checkBoxSerialTextEscapeSequenceEnable_CheckedChanged);
+            this.checkBoxEscapeSequenceEnable.CheckedChanged += new System.EventHandler(this.checkBoxTextEscapeSequenceEnable_CheckedChanged);
             // 
             // checkBoxSerialCopySelected
             // 
-            this.checkBoxSerialCopySelected.AutoSize = true;
-            this.checkBoxSerialCopySelected.Checked = true;
-            this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 137);
-            this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
-            this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(137, 17);
-            this.checkBoxSerialCopySelected.TabIndex = 13;
-            this.checkBoxSerialCopySelected.Text = "Copy text with selecting";
-            this.checkBoxSerialCopySelected.UseVisualStyleBackColor = true;
+            this.checkBoxTextLogCopySelected.AutoSize = true;
+            this.checkBoxTextLogCopySelected.Checked = true;
+            this.checkBoxTextLogCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxTextLogCopySelected.Location = new System.Drawing.Point(6, 137);
+            this.checkBoxTextLogCopySelected.Name = "checkBoxSerialCopySelected";
+            this.checkBoxTextLogCopySelected.Size = new System.Drawing.Size(137, 17);
+            this.checkBoxTextLogCopySelected.TabIndex = 13;
+            this.checkBoxTextLogCopySelected.Text = "Copy text with selecting";
+            this.checkBoxTextLogCopySelected.UseVisualStyleBackColor = true;
             // 
             // buttonSerialPortSend
             // 
@@ -721,15 +721,15 @@
             // 
             // pictureBoxSerialReceiving
             // 
-            this.pictureBoxSerialReceiving.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxSerialReceiving.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSerialReceiving.Image")));
-            this.pictureBoxSerialReceiving.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxSerialReceiving.InitialImage")));
-            this.pictureBoxSerialReceiving.Location = new System.Drawing.Point(4, 4);
-            this.pictureBoxSerialReceiving.Name = "pictureBoxSerialReceiving";
-            this.pictureBoxSerialReceiving.Size = new System.Drawing.Size(20, 20);
-            this.pictureBoxSerialReceiving.TabIndex = 43;
-            this.pictureBoxSerialReceiving.TabStop = false;
-            this.toolTipHelp.SetToolTip(this.pictureBoxSerialReceiving, "Is receiving message (at last 1 second)?");
+            this.pictureBoxIsReceivedText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxIsReceivedText.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSerialReceiving.Image")));
+            this.pictureBoxIsReceivedText.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxSerialReceiving.InitialImage")));
+            this.pictureBoxIsReceivedText.Location = new System.Drawing.Point(4, 4);
+            this.pictureBoxIsReceivedText.Name = "pictureBoxSerialReceiving";
+            this.pictureBoxIsReceivedText.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxIsReceivedText.TabIndex = 43;
+            this.pictureBoxIsReceivedText.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxIsReceivedText, "Is receiving message (at last 1 second)?");
             // 
             // timerReceiveIcon
             // 
@@ -766,7 +766,7 @@
             this.panelSettings.Controls.Add(this.pictureBoxTop);
             this.panelSettings.Controls.Add(this.pictureBoxHelp);
             this.panelSettings.Controls.Add(this.pictureBoxScrollingEnabled);
-            this.panelSettings.Controls.Add(this.pictureBoxSerialReceiving);
+            this.panelSettings.Controls.Add(this.pictureBoxIsReceivedText);
             this.panelSettings.Controls.Add(this.tabControlSerialFunctions);
             this.panelSettings.Location = new System.Drawing.Point(574, 3);
             this.panelSettings.Name = "panelSettings";
@@ -856,7 +856,7 @@
             this.tabPageMessage.ResumeLayout(false);
             this.groupBoxPeriodicalSending.ResumeLayout(false);
             this.groupBoxPeriodicalSending.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSerialPeriodSendingTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriodSendingTime)).EndInit();
             this.groupBoxMessageSearch.ResumeLayout(false);
             this.groupBoxMessageSearch.PerformLayout();
             this.tabPageSerialCommands.ResumeLayout(false);
@@ -869,7 +869,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventBackgrondColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForeGroundColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIsReceivedText)).EndInit();
             this.panelSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClearScreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).EndInit();
@@ -884,7 +884,7 @@
 
 		private System.IO.Ports.SerialPort serialPortDevice;
 		public System.Windows.Forms.NotifyIcon notifyIconApplication;
-		private System.Windows.Forms.TextBox textBoxSerialTextFind;
+		private System.Windows.Forms.TextBox textBoxTextLogSearch;
 		private System.Windows.Forms.TabControl tabControlSerialFunctions;
 		private System.Windows.Forms.TabPage tabPageSerialCommands;
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandSending;
@@ -896,11 +896,11 @@
 		private System.Windows.Forms.ComboBox comboBoxSerialPortBaudrate;
 		private System.Windows.Forms.Button buttonSerialPortRefresh;
 		private System.Windows.Forms.CheckBox checkBoxEscapeSequenceEnable;
-		private System.Windows.Forms.CheckBox checkBoxSerialCopySelected;
+		private System.Windows.Forms.CheckBox checkBoxTextLogCopySelected;
 		private System.Windows.Forms.Button buttonSerialPortSend;
 		private System.Windows.Forms.Button buttonPeriodicalSendingStart;
 		private System.Windows.Forms.Label labelSerialPeriodSendingConstText;
-		private System.Windows.Forms.NumericUpDown numericUpDownSerialPeriodSendingTime;
+		private System.Windows.Forms.NumericUpDown numericUpDownPeriodSendingTime;
 		private System.Windows.Forms.TextBox textBoxPeriodSendingMessage;
 		private System.Windows.Forms.CheckBox checkBoxLogWithDateTime;
 		private System.Windows.Forms.ComboBox comboBoxSendMessage;
@@ -908,7 +908,7 @@
 		private System.Windows.Forms.DataGridView dataGridViewFavCommands;
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandsSave;
 		private System.Windows.Forms.Button buttonSerialFavouriteCommandsAdd;
-		private System.Windows.Forms.PictureBox pictureBoxSerialReceiving;
+		private System.Windows.Forms.PictureBox pictureBoxIsReceivedText;
 		private System.Windows.Forms.Timer timerReceiveIcon;
 		private System.Windows.Forms.CheckBox checkBoxReceiveBinaryMode;
 		private System.Windows.Forms.Button buttonSerialOpenLogFile;
