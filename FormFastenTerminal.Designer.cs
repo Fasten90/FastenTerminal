@@ -92,6 +92,7 @@
             this.panelLog = new System.Windows.Forms.Panel();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBoxConfigIsChanged = new System.Windows.Forms.PictureBox();
+            this.pictureBoxTop = new System.Windows.Forms.PictureBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -113,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).BeginInit();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -761,6 +763,7 @@
             // 
             this.panelSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelSettings.Controls.Add(this.pictureBoxTop);
             this.panelSettings.Controls.Add(this.pictureBoxHelp);
             this.panelSettings.Controls.Add(this.pictureBoxScrollingEnabled);
             this.panelSettings.Controls.Add(this.buttonClearSerialTexts);
@@ -820,6 +823,16 @@
             this.pictureBoxConfigIsChanged.TabStop = false;
             this.toolTipHelp.SetToolTip(this.pictureBoxConfigIsChanged, "Config is changed?");
             // 
+            // pictureBoxTop
+            // 
+            this.pictureBoxTop.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxTop.Image")));
+            this.pictureBoxTop.Location = new System.Drawing.Point(82, 4);
+            this.pictureBoxTop.Name = "pictureBoxTop";
+            this.pictureBoxTop.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxTop.TabIndex = 46;
+            this.pictureBoxTop.TabStop = false;
+            this.pictureBoxTop.Click += new System.EventHandler(this.pictureBoxTop_Click);
+            // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -858,6 +871,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -926,6 +940,7 @@
         private System.Windows.Forms.Label labelConstEventBackgrondColor;
         private System.Windows.Forms.Label labelConstForeGroundColor;
         private System.Windows.Forms.PictureBox pictureBoxConfigIsChanged;
+        private System.Windows.Forms.PictureBox pictureBoxTop;
     }
 }
 

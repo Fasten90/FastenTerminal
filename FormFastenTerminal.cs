@@ -20,9 +20,9 @@ namespace FastenTerminal
 {
     public partial class FormFastenTerminal : Form
     {
-		// Const application configs:
-		private bool NotifyIsEnabled = true;
-		private const String ApplicationName = "FastenTerminal";
+        // Const application configs:
+        private bool NotifyIsEnabled = true;
+        private const String ApplicationName = "FastenTerminal";
         private const String ApplicationMessage = "[Application] ";
 
         // Const images
@@ -31,6 +31,8 @@ namespace FastenTerminal
         private const String imgLocScrollingActive = @"Images\img_scrolling_active.png";
         private const String imgLocScrollingInctive = @"Images\img_scrolling_inactive.png";
         private const String imgWarning = @"Images\img_warning.png";
+        private const String imgTopActive = @"Images\img_top_active.png";
+        private const String imgTopInactive = @"Images\img_top_inactive.png";
 
         // Const sounds
         private const String soundBellPath = @"Sounds\sound_bell.wav";
@@ -51,6 +53,8 @@ namespace FastenTerminal
 
         private bool soundIsDisabled = false;
 
+        private bool ApplicationIsTop = false;
+
 
         // Communications
         public Communication comm;
@@ -58,9 +62,9 @@ namespace FastenTerminal
 
         public FavouriteCommandHandler favouriteCommands;
 
-		//public BindingSource commandList;
-		public List<Command> commandList;
-		public BindingList<Command> commandBindingList;
+        //public BindingSource commandList;
+        public List<Command> commandList;
+        public BindingList<Command> commandBindingList;
 
         private FastenTerminalConfigs Config;
 
@@ -71,7 +75,7 @@ namespace FastenTerminal
 
         // LOG - strings
         private String tempStringBuffer = "";
-		private String tempStringEscapeBuffer = ""; // For not ended escape string
+        private String tempStringEscapeBuffer = ""; // For not ended escape string
 
         // Events / Variable configs
         private bool textLogScrollisEnabled = true;
@@ -80,7 +84,7 @@ namespace FastenTerminal
 
         /*
          *          Methods
-         */ 
+         */
 
         public FormFastenTerminal()
         {
@@ -89,27 +93,27 @@ namespace FastenTerminal
 
         private void FormFastenTerminalMain_Load(object sender, EventArgs e)
         {
-			Config = new FastenTerminalConfigs();
+            Config = new FastenTerminalConfigs();
 
-			// Load Serial
-			comm = new Serial(ref serialPortDevice, this);
+            // Load Serial
+            comm = new Serial(ref serialPortDevice, this);
 
-			comboBoxSerialPortBaudrate.SelectedIndex = 0;
+            comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
-			SerialRefresh();
+            SerialRefresh();
 
-			// Load config
-			LoadConfig();
+            // Load config
+            LoadConfig();
 
-			// Load commands
-			favouriteCommands = new FavouriteCommandHandler(this);
-			LoadFavouriteCommands();
+            // Load commands
+            favouriteCommands = new FavouriteCommandHandler(this);
+            LoadFavouriteCommands();
 
-			// Notify
-			if (NotifyIsEnabled)
-			{ 
-				notifyIconApplication.Visible = true;  
-			}
+            // Notify
+            if (NotifyIsEnabled)
+            {
+                notifyIconApplication.Visible = true;
+            }
 
             // Serial list refresh
             SerialPeriodicalRefreshStart();
@@ -149,8 +153,8 @@ namespace FastenTerminal
             comboBoxNewLineType.Text = Config.config.newLineString;
         }
 
-		private void LoadConfig()
-		{
+        private void LoadConfig()
+        {
             // Application configs
             // TODO: These colors sets are duplicated
             SetBackGroundColor(ColorTranslator.FromHtml(Config.config.BackgroundColor));
@@ -185,7 +189,7 @@ namespace FastenTerminal
         }
 
         private void SaveConfig()
-		{
+        {
             // Aplication configs
             Config.config.BackgroundColor = ColorTranslator.ToHtml(ApplicationBackgroundColor);
             Config.config.TextColor = ColorTranslator.ToHtml(ApplicationDefaultTextColor);
@@ -199,8 +203,8 @@ namespace FastenTerminal
 
             // Message configs
             Config.config.needLog = checkBoxLogEnable.Checked;
-			Config.config.dateLog = checkBoxLogWithDateTime.Checked;
-			Config.config.isBinaryMode = checkBoxReceiveBinaryMode.Checked;
+            Config.config.dateLog = checkBoxLogWithDateTime.Checked;
+            Config.config.isBinaryMode = checkBoxReceiveBinaryMode.Checked;
             Config.config.newLineString = comboBoxNewLineType.Text;
             Config.config.mute = checkBoxMute.Checked;
             Config.config.wordWrap = checkBoxWordWrap.Checked;
@@ -219,46 +223,46 @@ namespace FastenTerminal
             pictureBoxConfigIsChanged.ImageLocation = "";
         }
 
-		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			// Close event
+        private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Close event
 
-			// Close Serial / Telnet / ...
-			comm.needPrint = false;
-			comm.Close();
+            // Close Serial / Telnet / ...
+            comm.needPrint = false;
+            comm.Close();
 
-			// Log closed
-			Log.SendEventLog("Application closed");
-			Log.SendErrorLog("Application closed");
+            // Log closed
+            Log.SendEventLog("Application closed");
+            Log.SendErrorLog("Application closed");
 
-			if (NotifyIsEnabled)
-			{
-				// Notify close
-				notifyIconApplication.Visible = false;
+            if (NotifyIsEnabled)
+            {
+                // Notify close
+                notifyIconApplication.Visible = false;
                 notifyIconApplication.Dispose();
             }
-		}
+        }
 
-		private void RefreshTitle()
-		{
-			// For example: "FastenTerminal - COM9 - 9600"
-			this.Text = ApplicationName + " - " + comm.stateInfo;
-		}
+        private void RefreshTitle()
+        {
+            // For example: "FastenTerminal - COM9 - 9600"
+            this.Text = ApplicationName + " - " + comm.stateInfo;
+        }
 
-		private void notifyMessageForUser(String message)
-		{
-			if (NotifyIsEnabled)
-			{
-				notifyIconApplication.BalloonTipText = message;
-				//notifyIconForParent.Text = message;   // Ikon neve
-				notifyIconApplication.BalloonTipTitle = "FastenTerminal";
-				notifyIconApplication.ShowBalloonTip(1000);
-			}
+        private void notifyMessageForUser(String message)
+        {
+            if (NotifyIsEnabled)
+            {
+                notifyIconApplication.BalloonTipText = message;
+                //notifyIconForParent.Text = message;   // Ikon neve
+                notifyIconApplication.BalloonTipTitle = "FastenTerminal";
+                notifyIconApplication.ShowBalloonTip(1000);
+            }
             else
             {
                 Console.WriteLine("Notify: " + message);
             }
-		}
+        }
 
         private void pictureBoxHelp_Click(object sender, EventArgs e)
         {
@@ -299,12 +303,12 @@ namespace FastenTerminal
         }
 
         public void AppendTextLogEvent(string message)
-		{
-			if (InvokeRequired)
-			{
-				this.Invoke(new Action<string>(AppendTextLogEvent), new object[] { message });
-				return;
-			}
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(AppendTextLogEvent), new object[] { message });
+                return;
+            }
 
             // Note log (not received log!)
             if (richTextBoxTextLog != null && richTextBoxTextLog.TextLength > 0)
@@ -327,112 +331,112 @@ namespace FastenTerminal
                 message = ApplicationMessage + message + Environment.NewLine;
             }
 
-			AppendTextLog(message, EventLogTextColor, EventLogBackgroundColor);
-    }
+            AppendTextLog(message, EventLogTextColor, EventLogBackgroundColor);
+        }
 
-		public void AppendTextLogData(string message)
-		{
-			if (InvokeRequired)
-			{
-				this.Invoke(new Action<string>(AppendTextLogData), new object[] { message });
-				return;
-			}
+        public void AppendTextLogData(string message)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(AppendTextLogData), new object[] { message });
+                return;
+            }
 
-			// Original text appending, It is Work!!
-			//richTextBoxSerialPortTexts.Text += value;
-			if (message == "")
-			{
-				return;
-			}
+            // Original text appending, It is Work!!
+            //richTextBoxSerialPortTexts.Text += value;
+            if (message == "")
+            {
+                return;
+            }
 
-			if (GlobalEscapeEnabled)
-			{
-				// Enabled escape sequences, Check that
+            if (GlobalEscapeEnabled)
+            {
+                // Enabled escape sequences, Check that
 
-				if (tempStringEscapeBuffer.Length > 0)
-				{
-					message = tempStringEscapeBuffer + message;
-					tempStringEscapeBuffer = "";
-				}
+                if (tempStringEscapeBuffer.Length > 0)
+                {
+                    message = tempStringEscapeBuffer + message;
+                    tempStringEscapeBuffer = "";
+                }
 
-				Color color = Color.Black;
-				EscapeType actualEscapeType = EscapeType.Escape_Nothing;
-				int startIndex = 0;
-
-
-				// Check Bell character
-				if (!soundIsDisabled && message.Contains("\a"))
-				{
-					// Contain Bell, remove it
-					message = message.Replace("\a", "");
-					Common.PlaySound(soundBellPath);
-				}
+                Color color = Color.Black;
+                EscapeType actualEscapeType = EscapeType.Escape_Nothing;
+                int startIndex = 0;
 
 
-				// Check, has Escape sequence?
-				while (message.Length > 0)
-				{
-					actualEscapeType = EscapeSequence.ProcessEscapeMessage(message, out color, out startIndex);
+                // Check Bell character
+                if (!soundIsDisabled && message.Contains("\a"))
+                {
+                    // Contain Bell, remove it
+                    message = message.Replace("\a", "");
+                    Common.PlaySound(soundBellPath);
+                }
 
-					switch (actualEscapeType)
-					{
-						case EscapeType.Escape_Nothing:
-							// Append entire string
-							AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
-							message = "";
-							break;
 
-						case EscapeType.Escape_StringWithoutEscape:
-							// Append first some character (string), which is not contain the Escape sequence!
-							AppendTextLog(message.Substring(0, startIndex), GlobalTextColor, GlobalBackgroundColor);
-							break;
+                // Check, has Escape sequence?
+                while (message.Length > 0)
+                {
+                    actualEscapeType = EscapeSequence.ProcessEscapeMessage(message, out color, out startIndex);
 
-						case EscapeType.Escape_CLS:
-							DeleteTextLog();
+                    switch (actualEscapeType)
+                    {
+                        case EscapeType.Escape_Nothing:
+                            // Append entire string
+                            AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
+                            message = "";
+                            break;
+
+                        case EscapeType.Escape_StringWithoutEscape:
+                            // Append first some character (string), which is not contain the Escape sequence!
+                            AppendTextLog(message.Substring(0, startIndex), GlobalTextColor, GlobalBackgroundColor);
+                            break;
+
+                        case EscapeType.Escape_CLS:
+                            DeleteTextLog();
                             // TODO: It is not very good...
-							break;
+                            break;
 
-						case EscapeType.Escape_TextColor:
-							GlobalTextColor = color;
-							break;
+                        case EscapeType.Escape_TextColor:
+                            GlobalTextColor = color;
+                            break;
 
-						case EscapeType.Escape_BackgroundColor:
-							if (color == Color.White)
-							{
-								GlobalBackgroundColor = Form.DefaultBackColor;
-							}
-							else
-							{
-								GlobalBackgroundColor = color;
-							}
-							break;
+                        case EscapeType.Escape_BackgroundColor:
+                            if (color == Color.White)
+                            {
+                                GlobalBackgroundColor = Form.DefaultBackColor;
+                            }
+                            else
+                            {
+                                GlobalBackgroundColor = color;
+                            }
+                            break;
 
-						case EscapeType.Escape_CursorMoving:
-							// TODO: Not implemented
-							break;
+                        case EscapeType.Escape_CursorMoving:
+                            // TODO: Not implemented
+                            break;
 
-						case EscapeType.Escape_Short_NeedAppend:
-							// Save to buffer and wait for continue
-							tempStringEscapeBuffer = message;
+                        case EscapeType.Escape_Short_NeedAppend:
+                            // Save to buffer and wait for continue
+                            tempStringEscapeBuffer = message;
                             if (message.Length > 50)
                             {
                                 Log.SendErrorLog("ERROR: Escape_Short_NeedAppend error (too large message): " + message + "\"");
                                 notifyMessageForUser("Fatal error! Tell this problem the developer!");
                                 startIndex = 1;
                             }
-							break;
+                            break;
 
-						case EscapeType.Escape_Skip_NotImplemented:
-							AppendTextLog(message.Substring(startIndex), GlobalTextColor, GlobalBackgroundColor);
-							break;
+                        case EscapeType.Escape_Skip_NotImplemented:
+                            AppendTextLog(message.Substring(startIndex), GlobalTextColor, GlobalBackgroundColor);
+                            break;
 
                         case EscapeType.Escape_Wrong:
-						default:
+                        default:
                             // TODO: Drop this char
-                            Log.SendErrorLog("ERROR: Wrong escape sequence: " + message + "\", start index: "+ startIndex.ToString());
+                            Log.SendErrorLog("ERROR: Wrong escape sequence: " + message + "\", start index: " + startIndex.ToString());
                             notifyMessageForUser("Fatal error! Tell this problem the developer!");
                             break;
-					}
+                    }
 
                     // Cut escape message string
                     if (startIndex != 0)    // && startIndex != message.Length
@@ -448,11 +452,11 @@ namespace FastenTerminal
                             notifyMessageForUser("Fatal error! Tell this problem the developer!");
                         }
                     }
-				}
-				// End of check escape
-			}
-			else
-			{
+                }
+                // End of check escape
+            }
+            else
+            {
                 // Escape sequence disabled
 
                 // Escape (Replace 'ESC' character with "[ESC]"
@@ -460,66 +464,66 @@ namespace FastenTerminal
 
                 // Not enabled escape sequences
                 AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
-			}
+            }
 
-			// Append received log
-			//AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
-		}
+            // Append received log
+            //AppendTextLog(message, GlobalTextColor, GlobalBackgroundColor);
+        }
 
-		/// <summary>
-		/// DO NOT USE FROM OTHER THREAD
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="textColor"></param>
-		/// <param name="backgroundColor"></param>
-		private void AppendTextLog(String message, Color textColor, Color backgroundColor)
-		{
-			richTextBoxTextLog.SelectionColor = textColor;
-			richTextBoxTextLog.SelectionBackColor = backgroundColor;
+        /// <summary>
+        /// DO NOT USE FROM OTHER THREAD
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="textColor"></param>
+        /// <param name="backgroundColor"></param>
+        private void AppendTextLog(String message, Color textColor, Color backgroundColor)
+        {
+            richTextBoxTextLog.SelectionColor = textColor;
+            richTextBoxTextLog.SelectionBackColor = backgroundColor;
 
-			if (textLogScrollisEnabled)
-			{
-				// Append text to box
-				richTextBoxTextLog.AppendText(message);     // If you use it, it automatic scroll bottom
-                
+            if (textLogScrollisEnabled)
+            {
+                // Append text to box
+                richTextBoxTextLog.AppendText(message);     // If you use it, it automatic scroll bottom
+
                 // TODO: This operation is very slow! 49ms
-                richTextBoxTextLog.ScrollToCaret();			// scroll top/bot without selection start setting
-               
+                richTextBoxTextLog.ScrollToCaret();         // scroll top/bot without selection start setting
+
                 // set the current caret position to the end
                 //richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.Text.Length;
                 // scroll it automatically
                 //richTextBoxSerialPortTexts.ScrollToCaret();
             }
-			else
-			{
-				// Append text to buffer
-				tempStringBuffer += message;
-			}
-		}
+            else
+            {
+                // Append text to buffer
+                tempStringBuffer += message;
+            }
+        }
 
         /*
          *          Clear text log
-         */ 
+         */
 
-		private void buttonClearSerialTexts_Click(object sender, EventArgs e)
-		{
-			ClearScreen();
-		}
+        private void buttonClearSerialTexts_Click(object sender, EventArgs e)
+        {
+            ClearScreen();
+        }
 
-		private void ClearScreen()
-		{
+        private void ClearScreen()
+        {
             tempStringBuffer = "";
             DeleteTextLog();
             SetScrollStateFinal(true);
-			GlobalBackgroundColor = Form.DefaultBackColor;
-			GlobalTextColor = Color.Black;
-			// checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
-		}
+            GlobalBackgroundColor = Form.DefaultBackColor;
+            GlobalTextColor = Color.Black;
+            // checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
+        }
 
-		private void DeleteTextLog()
-		{
-			richTextBoxTextLog.Clear();
-		}
+        private void DeleteTextLog()
+        {
+            richTextBoxTextLog.Clear();
+        }
 
         /*
          *          Scrolling
@@ -561,74 +565,74 @@ namespace FastenTerminal
         }
 
         private void ScrollBottomAndAppendBuffer()
-		{
-			//richTextBoxSerialPortTexts.Text += tempStringBuffer;
-			AppendTextLog(tempStringBuffer, GlobalTextColor, GlobalBackgroundColor);
+        {
+            //richTextBoxSerialPortTexts.Text += tempStringBuffer;
+            AppendTextLog(tempStringBuffer, GlobalTextColor, GlobalBackgroundColor);
 
-			tempStringBuffer = "";
-			//richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.TextLength;		// WRONG: Make stack overflow
-			//richTextBoxSerialPortTexts.ScrollToCaret();	// windows is jumping
-		}
+            tempStringBuffer = "";
+            //richTextBoxSerialPortTexts.SelectionStart = richTextBoxSerialPortTexts.TextLength;		// WRONG: Make stack overflow
+            //richTextBoxSerialPortTexts.ScrollToCaret();	// windows is jumping
+        }
 
         private void richTextBoxTextLog_SelectionChanged(object sender, EventArgs e)
-		{
-			// Selected a text, do not scroll!
-			if (richTextBoxTextLog.SelectionStart != richTextBoxTextLog.TextLength)
-			{
+        {
+            // Selected a text, do not scroll!
+            if (richTextBoxTextLog.SelectionStart != richTextBoxTextLog.TextLength)
+            {
                 setScrollStateByApplication(false);
-			}
+            }
 
-			if (!textLogScrollisEnabled
-				&& (richTextBoxTextLog.SelectionStart == richTextBoxTextLog.TextLength) )
-			{
+            if (!textLogScrollisEnabled
+                && (richTextBoxTextLog.SelectionStart == richTextBoxTextLog.TextLength))
+            {
                 // Not scrolling, but click at end
                 setScrollStateByApplication(true);
-				ScrollBottomAndAppendBuffer();
-				return;
-			}
+                ScrollBottomAndAppendBuffer();
+                return;
+            }
 
-			// Copy is enabled
-			if (checkBoxSerialCopySelected.Checked)
-			{
-				// Copy the selected text to the Clipboard.
-				if (richTextBoxTextLog.SelectionLength > 0)
-				{
+            // Copy is enabled
+            if (checkBoxSerialCopySelected.Checked)
+            {
+                // Copy the selected text to the Clipboard.
+                if (richTextBoxTextLog.SelectionLength > 0)
+                {
                     // Copy text to clipboard
-					richTextBoxTextLog.Copy();
+                    richTextBoxTextLog.Copy();
 
-					// TODO: Copy to textbox?
-					if (richTextBoxTextLog.SelectedText.Length < 1000)
-					{
-						Console.WriteLine("Copied texts: " + richTextBoxTextLog.SelectedText);
-					}
-					else
-					{
-						Console.WriteLine("Copied long text to clipboard.");
-					}
+                    // TODO: Copy to textbox?
+                    if (richTextBoxTextLog.SelectedText.Length < 1000)
+                    {
+                        Console.WriteLine("Copied texts: " + richTextBoxTextLog.SelectedText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Copied long text to clipboard.");
+                    }
 
-					// TODO: show message? (notify, notification)
-				}
-			}
-		}
+                    // TODO: show message? (notify, notification)
+                }
+            }
+        }
 
         /*
          *              Send message
-         */ 
+         */
 
-		private void buttonSendMessage_Click(object sender, EventArgs e)
-		{
+        private void buttonSendMessage_Click(object sender, EventArgs e)
+        {
             // Pressed Send button
-			SendMessage();
-		}
+            SendMessage();
+        }
 
-		private void comboBoxSerialSendMessage_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			// If pressed in "SendMessage textbox" enter --> Send the message
-			if (e.KeyChar == (char)Keys.Return)
-			{
-				// If pressed enter
-				SendMessage();
-			}
+        private void comboBoxSerialSendMessage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // If pressed in "SendMessage textbox" enter --> Send the message
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                // If pressed enter
+                SendMessage();
+            }
             else if (e.KeyChar == (char)Keys.Tab)
             {
                 // Extend command
@@ -643,27 +647,27 @@ namespace FastenTerminal
                 }
                 // else : not found
             }
-		}
+        }
 
-		private void SerialMessageText_Clear()
-		{
-			// Need clear text?
-			if (SendMessageTextBox_ClearAfterSend)
-			{
-				// Clear text
-				comboBoxSendMessage.Text = "";
-			}
-		}
+        private void SerialMessageText_Clear()
+        {
+            // Need clear text?
+            if (SendMessageTextBox_ClearAfterSend)
+            {
+                // Clear text
+                comboBoxSendMessage.Text = "";
+            }
+        }
 
-		private void comboBoxSendMessage_Enter(object sender, EventArgs e)
-		{
-			// Enter on SerialMessage TextBox
-			if (SendMessageTextBox_Entered == false)
-			{
-				// Clear textbox at first time
-				comboBoxSendMessage.Text = "";
-				SendMessageTextBox_Entered = true;
-			}
+        private void comboBoxSendMessage_Enter(object sender, EventArgs e)
+        {
+            // Enter on SerialMessage TextBox
+            if (SendMessageTextBox_Entered == false)
+            {
+                // Clear textbox at first time
+                comboBoxSendMessage.Text = "";
+                SendMessageTextBox_Entered = true;
+            }
 
             // TODO: Delete these
             //Forms("Suppliers").Controls("City").TabStop = False
@@ -677,11 +681,11 @@ namespace FastenTerminal
         }
 
         private void SendMessage()
-		{
-			if (comboBoxSendMessage.Text != null)
-			{
+        {
+            if (comboBoxSendMessage.Text != null)
+            {
                 // Message text
-				String message = comboBoxSendMessage.Text;
+                String message = comboBoxSendMessage.Text;
 
                 // Successful or not successful
                 String messageResult = "";
@@ -694,21 +698,21 @@ namespace FastenTerminal
                     return;
                 }
 
-				Log.SendEventLog(messageResult);	            // TODO: Biztos kell ez?
-				//AppendTextSerialData(messageResult);
+                Log.SendEventLog(messageResult);                // TODO: Biztos kell ez?
+                                                                //AppendTextSerialData(messageResult);
 
-				// The message
-				//Log.SendEventLog(message);
-				//AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
+                // The message
+                //Log.SendEventLog(message);
+                //AppendTextSerialData(message + "\r\n");		// Send on Serial with endline (\r\n)
 
-				SendMessageAddLastCommand(message);
+                SendMessageAddLastCommand(message);
 
-				SerialMessageText_Clear();
+                SerialMessageText_Clear();
 
                 // Set scroll to enable
                 setScrollStateByApplication(true);
             }
-		}
+        }
 
 
         /*
@@ -719,7 +723,7 @@ namespace FastenTerminal
         {
             // Enable, now it is running --> Write "Stop"
             // Disabled, not it is not running --> Write "Start"
-            if  (state)
+            if (state)
             {
                 buttonPeriodicalSendingStart.Text = "Stop";
             }
@@ -762,8 +766,8 @@ namespace FastenTerminal
             }
         }
 
-		private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
-		{
+        private void buttonSerialPeriodSendingStart_Click(object sender, EventArgs e)
+        {
             // Clicked Serial - Period sending start-stop button
             SerialPeriodSending_Start();
         }
@@ -850,61 +854,61 @@ namespace FastenTerminal
 		 */
 
         public void LoadFavouriteCommands()
-		{
-			// Load favourite commands to Settings -> FavCommands dataGridView
+        {
+            // Load favourite commands to Settings -> FavCommands dataGridView
 
-			// Mode 1
-			dataGridViewFavCommands.AutoGenerateColumns = true;
-			commandList = favouriteCommands.GetCommands();
+            // Mode 1
+            dataGridViewFavCommands.AutoGenerateColumns = true;
+            commandList = favouriteCommands.GetCommands();
 
-			commandBindingList = new BindingList<Command>(commandList);
-			var source = new BindingSource(commandBindingList, null);
-			dataGridViewFavCommands.DataSource = source;
-			dataGridViewFavCommands.Refresh();
-		}
+            commandBindingList = new BindingList<Command>(commandList);
+            var source = new BindingSource(commandBindingList, null);
+            dataGridViewFavCommands.DataSource = source;
+            dataGridViewFavCommands.Refresh();
+        }
 
-		private void buttonSerialFavouriteCommandSending_Click(object sender, EventArgs e)
-		{
-			String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
+        private void buttonSerialFavouriteCommandSending_Click(object sender, EventArgs e)
+        {
+            String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
             // TODO: Not serial
-			comm.SendMessage(message);
-		}
+            comm.SendMessage(message);
+        }
 
-		private void SendMessageAddLastCommand(String message)
-		{
-			String command = "";
-			
-			// Copy
-			command = message;
+        private void SendMessageAddLastCommand(String message)
+        {
+            String command = "";
 
-			if (comboBoxSendMessage.FindString(command) >= 0)
-			{
-				// We have this command in the list
-				// TODO: put to top?
-			}
-			else
-			{
-				comboBoxSendMessage.Items.Add(command);
-			}
-		}
+            // Copy
+            command = message;
 
-		private void buttonSerialFavouriteCommandsSave_Click(object sender, EventArgs e)
-		{
-			// Save favourite commands
-			favouriteCommands.SaveCommandConfig();
-		}
+            if (comboBoxSendMessage.FindString(command) >= 0)
+            {
+                // We have this command in the list
+                // TODO: put to top?
+            }
+            else
+            {
+                comboBoxSendMessage.Items.Add(command);
+            }
+        }
 
-		private void buttonSerialFavouriteCommandsAdd_Click(object sender, EventArgs e)
-		{
-			favouriteCommands.AddNewCommand("", "");
+        private void buttonSerialFavouriteCommandsSave_Click(object sender, EventArgs e)
+        {
+            // Save favourite commands
+            favouriteCommands.SaveCommandConfig();
+        }
 
-			commandList = favouriteCommands.GetCommands();
+        private void buttonSerialFavouriteCommandsAdd_Click(object sender, EventArgs e)
+        {
+            favouriteCommands.AddNewCommand("", "");
 
-			commandBindingList = new BindingList<Command>(commandList);
-			var source = new BindingSource(commandBindingList, null);
-			dataGridViewFavCommands.DataSource = source;
-			dataGridViewFavCommands.Refresh();
-		}
+            commandList = favouriteCommands.GetCommands();
+
+            commandBindingList = new BindingList<Command>(commandList);
+            var source = new BindingSource(commandBindingList, null);
+            dataGridViewFavCommands.DataSource = source;
+            dataGridViewFavCommands.Refresh();
+        }
 
         /*
          *                  Settings
@@ -1038,6 +1042,22 @@ namespace FastenTerminal
         void ConfigIsChanged()
         {
             pictureBoxConfigIsChanged.ImageLocation = imgWarning;
+        }
+
+        private void pictureBoxTop_Click(object sender, EventArgs e)
+        {
+            ApplicationTopChange();
+        }
+
+        private void ApplicationTopChange()
+        {
+            ApplicationIsTop = !ApplicationIsTop;
+            if (ApplicationIsTop)
+                pictureBoxTop.ImageLocation = imgTopActive;
+            else
+                pictureBoxTop.ImageLocation = imgTopInactive;
+
+            this.TopMost = ApplicationIsTop;
         }
 
         /*
