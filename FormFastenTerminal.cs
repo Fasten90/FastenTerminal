@@ -132,8 +132,12 @@ namespace FastenTerminal
 
         private void LoadConfigToForm()
         {
+            // Call before this function the LoadConfig()
             SetBackGroundColor(ApplicationBackgroundColor);
             SetForeGroundColor(ApplicationDefaultTextColor);
+
+            pictureBoxEventBackgrondColor.BackColor = EventLogBackgroundColor;
+            pictureBoxEventTextColor.BackColor = EventLogTextColor;
 
             checkBoxLogEnable.Checked = Config.config.needLog;
             checkBoxLogWithDateTime.Checked = Config.config.dateLog;
@@ -1017,7 +1021,17 @@ namespace FastenTerminal
             }
         }
 
-        private void buttonBackGroundColor_Click(object sender, EventArgs e)
+        private void checkBoxConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
+        {
+            // Do nothing
+            SendMessageTextBox_ClearAfterSend = checkBoxConfigClearSendMessageTextAfterSend.Checked;
+        }
+
+        /*
+         *      Colors
+         */
+
+        private void pictureBoxBackGroundColor_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
@@ -1029,9 +1043,17 @@ namespace FastenTerminal
         {
             ApplicationBackgroundColor = color;
             richTextBoxTextLog.BackColor = color;
+            pictureBoxBackGroundColor.BackColor = color;
         }
 
-        private void buttonForeGroundColor_Click(object sender, EventArgs e)
+        private void SetForeGroundColor(Color color)
+        {
+            ApplicationDefaultTextColor = color;
+            richTextBoxTextLog.ForeColor = color;
+            pictureBoxForeGroundColor.BackColor = color;
+        }
+
+        private void pictureBoxForeGroundColor_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
@@ -1039,16 +1061,20 @@ namespace FastenTerminal
             }
         }
 
-        private void SetForeGroundColor(Color color)
+        private void pictureBoxEventBackgrondColor_Click(object sender, EventArgs e)
         {
-            ApplicationDefaultTextColor = color;
-            richTextBoxTextLog.ForeColor = color;
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                EventLogBackgroundColor = colorDialog.Color;
+            }
         }
 
-        private void checkBoxConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
+        private void pictureBoxEventTextColor_Click(object sender, EventArgs e)
         {
-            // Do nothing
-            SendMessageTextBox_ClearAfterSend = checkBoxConfigClearSendMessageTextAfterSend.Checked;
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                EventLogTextColor = colorDialog.Color;
+            }
         }
 
         /*

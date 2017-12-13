@@ -59,9 +59,15 @@
             this.dataGridViewFavCommands = new System.Windows.Forms.DataGridView();
             this.buttonSerialFavouriteCommandSending = new System.Windows.Forms.Button();
             this.tabPageConfiguration = new System.Windows.Forms.TabPage();
+            this.labelConstEventTextColor = new System.Windows.Forms.Label();
+            this.labelConstEventBackgrondColor = new System.Windows.Forms.Label();
+            this.labelConstForeGroundColor = new System.Windows.Forms.Label();
+            this.labelConstBackGroundColor = new System.Windows.Forms.Label();
+            this.pictureBoxEventTextColor = new System.Windows.Forms.PictureBox();
+            this.pictureBoxEventBackgrondColor = new System.Windows.Forms.PictureBox();
+            this.pictureBoxForeGroundColor = new System.Windows.Forms.PictureBox();
+            this.pictureBoxBackGroundColor = new System.Windows.Forms.PictureBox();
             this.checkBoxNewLineEnabled = new System.Windows.Forms.CheckBox();
-            this.buttonForeGroundColorChange = new System.Windows.Forms.Button();
-            this.buttonBackGroundColorChange = new System.Windows.Forms.Button();
             this.comboBoxNewLineType = new System.Windows.Forms.ComboBox();
             this.checkBoxPrintSend = new System.Windows.Forms.CheckBox();
             this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
@@ -96,6 +102,10 @@
             this.tabPageSerialCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).BeginInit();
             this.tabPageConfiguration.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventTextColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventBackgrondColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForeGroundColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
             this.panelSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
@@ -431,9 +441,15 @@
             // 
             // tabPageConfiguration
             // 
+            this.tabPageConfiguration.Controls.Add(this.labelConstEventTextColor);
+            this.tabPageConfiguration.Controls.Add(this.labelConstEventBackgrondColor);
+            this.tabPageConfiguration.Controls.Add(this.labelConstForeGroundColor);
+            this.tabPageConfiguration.Controls.Add(this.labelConstBackGroundColor);
+            this.tabPageConfiguration.Controls.Add(this.pictureBoxEventTextColor);
+            this.tabPageConfiguration.Controls.Add(this.pictureBoxEventBackgrondColor);
+            this.tabPageConfiguration.Controls.Add(this.pictureBoxForeGroundColor);
+            this.tabPageConfiguration.Controls.Add(this.pictureBoxBackGroundColor);
             this.tabPageConfiguration.Controls.Add(this.checkBoxNewLineEnabled);
-            this.tabPageConfiguration.Controls.Add(this.buttonForeGroundColorChange);
-            this.tabPageConfiguration.Controls.Add(this.buttonBackGroundColorChange);
             this.tabPageConfiguration.Controls.Add(this.comboBoxNewLineType);
             this.tabPageConfiguration.Controls.Add(this.checkBoxPrintSend);
             this.tabPageConfiguration.Controls.Add(this.checkBoxWordWrap);
@@ -453,38 +469,90 @@
             this.tabPageConfiguration.Text = "Config";
             this.tabPageConfiguration.UseVisualStyleBackColor = true;
             // 
+            // labelConstEventTextColor
+            // 
+            this.labelConstEventTextColor.AutoSize = true;
+            this.labelConstEventTextColor.Location = new System.Drawing.Point(23, 69);
+            this.labelConstEventTextColor.Name = "labelConstEventTextColor";
+            this.labelConstEventTextColor.Size = new System.Drawing.Size(81, 13);
+            this.labelConstEventTextColor.TabIndex = 58;
+            this.labelConstEventTextColor.Text = "Event text color";
+            // 
+            // labelConstEventBackgrondColor
+            // 
+            this.labelConstEventBackgrondColor.AutoSize = true;
+            this.labelConstEventBackgrondColor.Location = new System.Drawing.Point(23, 49);
+            this.labelConstEventBackgrondColor.Name = "labelConstEventBackgrondColor";
+            this.labelConstEventBackgrondColor.Size = new System.Drawing.Size(121, 13);
+            this.labelConstEventBackgrondColor.TabIndex = 57;
+            this.labelConstEventBackgrondColor.Text = "Event background color";
+            // 
+            // labelConstForeGroundColor
+            // 
+            this.labelConstForeGroundColor.AutoSize = true;
+            this.labelConstForeGroundColor.Location = new System.Drawing.Point(23, 28);
+            this.labelConstForeGroundColor.Name = "labelConstForeGroundColor";
+            this.labelConstForeGroundColor.Size = new System.Drawing.Size(87, 13);
+            this.labelConstForeGroundColor.TabIndex = 56;
+            this.labelConstForeGroundColor.Text = "Foreground color";
+            // 
+            // labelConstBackGroundColor
+            // 
+            this.labelConstBackGroundColor.AutoSize = true;
+            this.labelConstBackGroundColor.Location = new System.Drawing.Point(23, 6);
+            this.labelConstBackGroundColor.Name = "labelConstBackGroundColor";
+            this.labelConstBackGroundColor.Size = new System.Drawing.Size(91, 13);
+            this.labelConstBackGroundColor.TabIndex = 55;
+            this.labelConstBackGroundColor.Text = "Background color";
+            // 
+            // pictureBoxEventTextColor
+            // 
+            this.pictureBoxEventTextColor.Location = new System.Drawing.Point(6, 68);
+            this.pictureBoxEventTextColor.Name = "pictureBoxEventTextColor";
+            this.pictureBoxEventTextColor.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxEventTextColor.TabIndex = 54;
+            this.pictureBoxEventTextColor.TabStop = false;
+            this.pictureBoxEventTextColor.Click += new System.EventHandler(this.pictureBoxEventTextColor_Click);
+            // 
+            // pictureBoxEventBackgrondColor
+            // 
+            this.pictureBoxEventBackgrondColor.Location = new System.Drawing.Point(6, 48);
+            this.pictureBoxEventBackgrondColor.Name = "pictureBoxEventBackgrondColor";
+            this.pictureBoxEventBackgrondColor.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxEventBackgrondColor.TabIndex = 53;
+            this.pictureBoxEventBackgrondColor.TabStop = false;
+            this.pictureBoxEventBackgrondColor.Click += new System.EventHandler(this.pictureBoxEventBackgrondColor_Click);
+            // 
+            // pictureBoxForeGroundColor
+            // 
+            this.pictureBoxForeGroundColor.Location = new System.Drawing.Point(6, 28);
+            this.pictureBoxForeGroundColor.Name = "pictureBoxForeGroundColor";
+            this.pictureBoxForeGroundColor.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxForeGroundColor.TabIndex = 52;
+            this.pictureBoxForeGroundColor.TabStop = false;
+            this.pictureBoxForeGroundColor.Click += new System.EventHandler(this.pictureBoxForeGroundColor_Click);
+            // 
+            // pictureBoxBackGroundColor
+            // 
+            this.pictureBoxBackGroundColor.Location = new System.Drawing.Point(6, 6);
+            this.pictureBoxBackGroundColor.Name = "pictureBoxBackGroundColor";
+            this.pictureBoxBackGroundColor.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxBackGroundColor.TabIndex = 51;
+            this.pictureBoxBackGroundColor.TabStop = false;
+            this.pictureBoxBackGroundColor.Click += new System.EventHandler(this.pictureBoxBackGroundColor_Click);
+            // 
             // checkBoxNewLineEnabled
             // 
             this.checkBoxNewLineEnabled.AutoSize = true;
             this.checkBoxNewLineEnabled.Checked = true;
             this.checkBoxNewLineEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxNewLineEnabled.Location = new System.Drawing.Point(6, 296);
+            this.checkBoxNewLineEnabled.Location = new System.Drawing.Point(6, 303);
             this.checkBoxNewLineEnabled.Name = "checkBoxNewLineEnabled";
             this.checkBoxNewLineEnabled.Size = new System.Drawing.Size(67, 17);
             this.checkBoxNewLineEnabled.TabIndex = 50;
             this.checkBoxNewLineEnabled.Text = "New line";
             this.checkBoxNewLineEnabled.UseVisualStyleBackColor = true;
             this.checkBoxNewLineEnabled.CheckedChanged += new System.EventHandler(this.checkBoxNewLineEnabled_CheckedChanged);
-            // 
-            // buttonForeGroundColorChange
-            // 
-            this.buttonForeGroundColorChange.Location = new System.Drawing.Point(9, 36);
-            this.buttonForeGroundColorChange.Name = "buttonForeGroundColorChange";
-            this.buttonForeGroundColorChange.Size = new System.Drawing.Size(75, 23);
-            this.buttonForeGroundColorChange.TabIndex = 49;
-            this.buttonForeGroundColorChange.Text = "Foreground";
-            this.buttonForeGroundColorChange.UseVisualStyleBackColor = true;
-            this.buttonForeGroundColorChange.Click += new System.EventHandler(this.buttonForeGroundColor_Click);
-            // 
-            // buttonBackGroundColorChange
-            // 
-            this.buttonBackGroundColorChange.Location = new System.Drawing.Point(9, 6);
-            this.buttonBackGroundColorChange.Name = "buttonBackGroundColorChange";
-            this.buttonBackGroundColorChange.Size = new System.Drawing.Size(75, 23);
-            this.buttonBackGroundColorChange.TabIndex = 48;
-            this.buttonBackGroundColorChange.Text = "Background";
-            this.buttonBackGroundColorChange.UseVisualStyleBackColor = true;
-            this.buttonBackGroundColorChange.Click += new System.EventHandler(this.buttonBackGroundColor_Click);
             // 
             // comboBoxNewLineType
             // 
@@ -496,7 +564,7 @@
             "\\n",
             "\\0",
             "-"});
-            this.comboBoxNewLineType.Location = new System.Drawing.Point(86, 294);
+            this.comboBoxNewLineType.Location = new System.Drawing.Point(86, 301);
             this.comboBoxNewLineType.Name = "comboBoxNewLineType";
             this.comboBoxNewLineType.Size = new System.Drawing.Size(57, 21);
             this.comboBoxNewLineType.TabIndex = 46;
@@ -505,7 +573,7 @@
             // checkBoxPrintSend
             // 
             this.checkBoxPrintSend.AutoSize = true;
-            this.checkBoxPrintSend.Location = new System.Drawing.Point(6, 271);
+            this.checkBoxPrintSend.Location = new System.Drawing.Point(6, 278);
             this.checkBoxPrintSend.Name = "checkBoxPrintSend";
             this.checkBoxPrintSend.Size = new System.Drawing.Size(100, 17);
             this.checkBoxPrintSend.TabIndex = 45;
@@ -516,7 +584,7 @@
             // checkBoxWordWrap
             // 
             this.checkBoxWordWrap.AutoSize = true;
-            this.checkBoxWordWrap.Location = new System.Drawing.Point(6, 248);
+            this.checkBoxWordWrap.Location = new System.Drawing.Point(6, 255);
             this.checkBoxWordWrap.Name = "checkBoxWordWrap";
             this.checkBoxWordWrap.Size = new System.Drawing.Size(78, 17);
             this.checkBoxWordWrap.TabIndex = 44;
@@ -527,7 +595,7 @@
             // checkBoxMute
             // 
             this.checkBoxMute.AutoSize = true;
-            this.checkBoxMute.Location = new System.Drawing.Point(6, 224);
+            this.checkBoxMute.Location = new System.Drawing.Point(6, 231);
             this.checkBoxMute.Name = "checkBoxMute";
             this.checkBoxMute.Size = new System.Drawing.Size(50, 17);
             this.checkBoxMute.TabIndex = 43;
@@ -537,7 +605,7 @@
             // 
             // buttonSerialSaveConfig
             // 
-            this.buttonSerialSaveConfig.Location = new System.Drawing.Point(3, 319);
+            this.buttonSerialSaveConfig.Location = new System.Drawing.Point(3, 326);
             this.buttonSerialSaveConfig.Name = "buttonSerialSaveConfig";
             this.buttonSerialSaveConfig.Size = new System.Drawing.Size(75, 23);
             this.buttonSerialSaveConfig.TabIndex = 42;
@@ -548,7 +616,7 @@
             // checkBoxReceiveBinaryMode
             // 
             this.checkBoxReceiveBinaryMode.AutoSize = true;
-            this.checkBoxReceiveBinaryMode.Location = new System.Drawing.Point(6, 177);
+            this.checkBoxReceiveBinaryMode.Location = new System.Drawing.Point(6, 184);
             this.checkBoxReceiveBinaryMode.Name = "checkBoxReceiveBinaryMode";
             this.checkBoxReceiveBinaryMode.Size = new System.Drawing.Size(98, 17);
             this.checkBoxReceiveBinaryMode.TabIndex = 41;
@@ -559,7 +627,7 @@
             // checkBoxConfigClearSendMessageTextAfterSend
             // 
             this.checkBoxConfigClearSendMessageTextAfterSend.AutoSize = true;
-            this.checkBoxConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(6, 200);
+            this.checkBoxConfigClearSendMessageTextAfterSend.Location = new System.Drawing.Point(6, 207);
             this.checkBoxConfigClearSendMessageTextAfterSend.Name = "checkBoxConfigClearSendMessageTextAfterSend";
             this.checkBoxConfigClearSendMessageTextAfterSend.Size = new System.Drawing.Size(100, 17);
             this.checkBoxConfigClearSendMessageTextAfterSend.TabIndex = 40;
@@ -572,7 +640,7 @@
             this.checkBoxLogWithDateTime.AutoSize = true;
             this.checkBoxLogWithDateTime.Checked = true;
             this.checkBoxLogWithDateTime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 107);
+            this.checkBoxLogWithDateTime.Location = new System.Drawing.Point(6, 114);
             this.checkBoxLogWithDateTime.Name = "checkBoxLogWithDateTime";
             this.checkBoxLogWithDateTime.Size = new System.Drawing.Size(90, 17);
             this.checkBoxLogWithDateTime.TabIndex = 38;
@@ -585,7 +653,7 @@
             this.checkBoxLogEnable.AutoSize = true;
             this.checkBoxLogEnable.Checked = true;
             this.checkBoxLogEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLogEnable.Location = new System.Drawing.Point(6, 84);
+            this.checkBoxLogEnable.Location = new System.Drawing.Point(6, 91);
             this.checkBoxLogEnable.Name = "checkBoxLogEnable";
             this.checkBoxLogEnable.Size = new System.Drawing.Size(72, 17);
             this.checkBoxLogEnable.TabIndex = 2;
@@ -598,7 +666,7 @@
             this.checkBoxEscapeSequenceEnable.AutoSize = true;
             this.checkBoxEscapeSequenceEnable.Checked = true;
             this.checkBoxEscapeSequenceEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxEscapeSequenceEnable.Location = new System.Drawing.Point(6, 154);
+            this.checkBoxEscapeSequenceEnable.Location = new System.Drawing.Point(6, 161);
             this.checkBoxEscapeSequenceEnable.Name = "checkBoxEscapeSequenceEnable";
             this.checkBoxEscapeSequenceEnable.Size = new System.Drawing.Size(117, 17);
             this.checkBoxEscapeSequenceEnable.TabIndex = 31;
@@ -611,7 +679,7 @@
             this.checkBoxSerialCopySelected.AutoSize = true;
             this.checkBoxSerialCopySelected.Checked = true;
             this.checkBoxSerialCopySelected.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 130);
+            this.checkBoxSerialCopySelected.Location = new System.Drawing.Point(6, 137);
             this.checkBoxSerialCopySelected.Name = "checkBoxSerialCopySelected";
             this.checkBoxSerialCopySelected.Size = new System.Drawing.Size(137, 17);
             this.checkBoxSerialCopySelected.TabIndex = 13;
@@ -764,6 +832,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).EndInit();
             this.tabPageConfiguration.ResumeLayout(false);
             this.tabPageConfiguration.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventTextColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventBackgrondColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForeGroundColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
             this.panelSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
@@ -812,8 +884,6 @@
         private System.Windows.Forms.CheckBox checkBoxPrintSend;
         private System.Windows.Forms.Timer timerCheckSerialPorts;
         private System.Windows.Forms.ComboBox comboBoxNewLineType;
-        private System.Windows.Forms.Button buttonForeGroundColorChange;
-        private System.Windows.Forms.Button buttonBackGroundColorChange;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.RichTextBox richTextBoxTextLog;
         private System.Windows.Forms.Panel panelSettings;
@@ -830,6 +900,14 @@
         private System.Windows.Forms.TextBox textBoxTelnetPort;
         private System.Windows.Forms.ToolTip toolTipHelp;
         private System.Windows.Forms.PictureBox pictureBoxHelp;
+        private System.Windows.Forms.PictureBox pictureBoxBackGroundColor;
+        private System.Windows.Forms.PictureBox pictureBoxEventTextColor;
+        private System.Windows.Forms.PictureBox pictureBoxEventBackgrondColor;
+        private System.Windows.Forms.PictureBox pictureBoxForeGroundColor;
+        private System.Windows.Forms.Label labelConstBackGroundColor;
+        private System.Windows.Forms.Label labelConstEventTextColor;
+        private System.Windows.Forms.Label labelConstEventBackgrondColor;
+        private System.Windows.Forms.Label labelConstForeGroundColor;
     }
 }
 
