@@ -83,6 +83,7 @@
             this.panelSettings = new System.Windows.Forms.Panel();
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
+            this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -121,6 +122,7 @@
             this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
             this.buttonClearSerialTexts.Size = new System.Drawing.Size(22, 22);
             this.buttonClearSerialTexts.TabIndex = 36;
+            this.toolTipHelp.SetToolTip(this.buttonClearSerialTexts, "Clear screen (text log)");
             this.buttonClearSerialTexts.UseVisualStyleBackColor = true;
             this.buttonClearSerialTexts.Click += new System.EventHandler(this.buttonClearSerialTexts_Click);
             // 
@@ -182,6 +184,7 @@
             this.textBoxTelnetPort.Size = new System.Drawing.Size(100, 20);
             this.textBoxTelnetPort.TabIndex = 3;
             this.textBoxTelnetPort.Text = "23";
+            this.toolTipHelp.SetToolTip(this.textBoxTelnetPort, "Telnet port");
             // 
             // textBoxTelnetIP
             // 
@@ -190,6 +193,7 @@
             this.textBoxTelnetIP.Size = new System.Drawing.Size(100, 20);
             this.textBoxTelnetIP.TabIndex = 2;
             this.textBoxTelnetIP.Text = "192.168.1.62";
+            this.toolTipHelp.SetToolTip(this.textBoxTelnetIP, "Telnet IP address");
             // 
             // buttonTelnetOpenClose
             // 
@@ -222,6 +226,7 @@
             this.comboBoxSerialPortCOM.Name = "comboBoxSerialPortCOM";
             this.comboBoxSerialPortCOM.Size = new System.Drawing.Size(102, 21);
             this.comboBoxSerialPortCOM.TabIndex = 3;
+            this.toolTipHelp.SetToolTip(this.comboBoxSerialPortCOM, "Serial port");
             this.comboBoxSerialPortCOM.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortCOM_SelectedIndexChanged);
             // 
             // buttonSerialPortRefresh
@@ -266,6 +271,7 @@
             this.comboBoxSerialPortBaudrate.Name = "comboBoxSerialPortBaudrate";
             this.comboBoxSerialPortBaudrate.Size = new System.Drawing.Size(102, 21);
             this.comboBoxSerialPortBaudrate.TabIndex = 4;
+            this.toolTipHelp.SetToolTip(this.comboBoxSerialPortBaudrate, "Serial baudrate");
             this.comboBoxSerialPortBaudrate.SelectedIndexChanged += new System.EventHandler(this.comboBoxSerialPortBaudrate_SelectedIndexChanged);
             // 
             // tabPageMessage
@@ -645,6 +651,7 @@
             this.pictureBoxSerialReceiving.Size = new System.Drawing.Size(20, 20);
             this.pictureBoxSerialReceiving.TabIndex = 43;
             this.pictureBoxSerialReceiving.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxSerialReceiving, "Is receiving message (at last 1 second)?");
             // 
             // timerReceiveIcon
             // 
@@ -696,6 +703,7 @@
             this.pictureBoxScrollingEnabled.Size = new System.Drawing.Size(20, 20);
             this.pictureBoxScrollingEnabled.TabIndex = 44;
             this.pictureBoxScrollingEnabled.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxScrollingEnabled, "Scrolling enable");
             this.pictureBoxScrollingEnabled.Click += new System.EventHandler(this.pictureBoxScrollingEnabled_Click);
             // 
             // panelLog
@@ -803,6 +811,7 @@
         private System.Windows.Forms.GroupBox groupBoxMessageSearch;
         private System.Windows.Forms.GroupBox groupBoxPeriodicalSending;
         private System.Windows.Forms.TextBox textBoxTelnetPort;
+        private System.Windows.Forms.ToolTip toolTipHelp;
     }
 }
 
