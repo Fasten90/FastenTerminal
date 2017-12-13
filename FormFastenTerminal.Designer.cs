@@ -81,10 +81,10 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.richTextBoxTextLog = new System.Windows.Forms.RichTextBox();
             this.panelSettings = new System.Windows.Forms.Panel();
+            this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -98,9 +98,9 @@
             this.tabPageConfiguration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
             this.panelSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -696,6 +696,19 @@
             this.panelSettings.Size = new System.Drawing.Size(245, 458);
             this.panelSettings.TabIndex = 45;
             // 
+            // pictureBoxHelp
+            // 
+            this.pictureBoxHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxHelp.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxHelp.Image")));
+            this.pictureBoxHelp.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxHelp.InitialImage")));
+            this.pictureBoxHelp.Location = new System.Drawing.Point(221, 4);
+            this.pictureBoxHelp.Name = "pictureBoxHelp";
+            this.pictureBoxHelp.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxHelp.TabIndex = 45;
+            this.pictureBoxHelp.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxHelp, "Scrolling enable");
+            this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
+            // 
             // pictureBoxScrollingEnabled
             // 
             this.pictureBoxScrollingEnabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -722,19 +735,6 @@
             this.panelLog.Name = "panelLog";
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
-            // 
-            // pictureBoxHelp
-            // 
-            this.pictureBoxHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxHelp.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxHelp.Image")));
-            this.pictureBoxHelp.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxHelp.InitialImage")));
-            this.pictureBoxHelp.Location = new System.Drawing.Point(221, 4);
-            this.pictureBoxHelp.Name = "pictureBoxHelp";
-            this.pictureBoxHelp.Size = new System.Drawing.Size(20, 20);
-            this.pictureBoxHelp.TabIndex = 45;
-            this.pictureBoxHelp.TabStop = false;
-            this.toolTipHelp.SetToolTip(this.pictureBoxHelp, "Scrolling enable");
-            this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
             // 
             // FormFastenTerminal
             // 
@@ -766,9 +766,9 @@
             this.tabPageConfiguration.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
             this.panelSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             this.ResumeLayout(false);
 
         }

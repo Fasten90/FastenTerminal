@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TerminalConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <portName />
-  <baudrate>115200</baudrate>
+  <BackgroundColor>#808040</BackgroundColor>
+  <TextColor>Red</TextColor>
+  <EventBackgroundColor>Blue</EventBackgroundColor>
+  <EventTextColor>Yellow</EventTextColor>
   <needLog>true</needLog>
   <dateLog>true</dateLog>
-  <isHex>false</isHex>
   <isBinaryMode>false</isBinaryMode>
+  <newLineString>\r\n</newLineString>
+  <mute>false</mute>
+  <wordWrap>false</wordWrap>
+  <printSendingMsg>true</printSendingMsg>
+  <escapeSequenceIsEnabled>true</escapeSequenceIsEnabled>
+  <TelnetIPaddress>192.168.1.62</TelnetIPaddress>
+  <TelnetPort>2000</TelnetPort>
+  <SerialBaudrate>115200</SerialBaudrate>
 </TerminalConfig>

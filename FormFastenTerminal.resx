@@ -1256,13 +1256,10 @@
         AAAAAAAAAAAAf/+AAAAAAAAAAAAAAAAAAf8=
 </value>
   </data>
-  <metadata name="toolTipHelp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>709, 2</value>
-  </metadata>
   <data name="buttonClearSerialTexts.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw4AAAsOAUC+4UEAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhDAkSOBS709+U
+        YQUAAAAJcEhZcwAACw0AAAsNAe0HwCwAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhDAkSOBS709+U
         AAAC20lEQVQ4T43Ub0gTcRzH8d+2/hgobh651txul+iT+acx2VL3pydBURiWBOGjngXWgwiLiiLTngRa
         QSH1qMyiB4VGYRILKitb9GeW8w+ZDTM1jUWaoqGuz/fcHbd5UD94ebfb/d773XEnk0ZlZaVIGj6fj3m9
         XlFxcTFzu90il8vFnE5n/CzGCgsLE+aJQ4rVnDPqYKXf72dFRUUsFoupys/LZw6HQ45JkmOZUA23YZNa
@@ -1278,6 +1275,9 @@
         Lv1SBOifhPgO01geYuwvy3zZbJQEjDsAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="toolTipHelp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>709, 2</value>
+  </metadata>
   <data name="pictureBoxSerialReceiving.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -1322,7 +1322,7 @@
   <data name="pictureBoxHelp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhDA0MFTegRO0k
+        YQUAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhDA0MFTegRO0k
         AAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAAGASURBVDhPrdTBK0RRFMfx
         N0yTJEqNkqRpsrMwkamx8AfIVv4ExEJJlJUNSylZWCv+AjuWsrQgRFiwIYWFUJ7vz7z73HnvyMapT713
         3rln7tz77gvCMDQRGbSgA22ROqvWZyeDIItBrGITa1jHJIaRs8ZJ7Q0zQBfGcYo3XOMW93jHI2bQ6I+N
@@ -1349,13 +1349,10 @@
         SsB9WMU5QWa/AF9qW/EQQ6kJAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="toolTipHelp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>709, 2</value>
-  </metadata>
   <data name="pictureBoxScrollingEnabled.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxAAAAsQAa0jvXUAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhDAwUJhK1osn+
+        YQUAAAAJcEhZcwAACw8AAAsPAZL5A6UAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfhDAwUJhK1osn+
         AAABd0lEQVQ4T6VTTW+CQBCdxkOPSDwSJGq51RAikSCCf60/pL027Z/rqYfe6Lx1ZrMsG0vjS54zOx+P
         cRnIwYPQoO976rrOsGkaquva8Hg80uFwkCqioihgFubg4JGZMbfwL5cLVVVFwzAEuX/eU1mWKvYkvRaY
         CoEX5juzQSwk5JOxYX4w0WsBQUwGsW8mCrYhAZcMiL0yv8SOgL+MySCmBZuQEIic1NjaPM9pt9uxy+i7

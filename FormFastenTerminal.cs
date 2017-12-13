@@ -36,11 +36,15 @@ namespace FastenTerminal
 
 
         // Configs
+        // Application color
+        private Color ApplicationBackgroundColor = Color.Gainsboro;
+        private Color ApplicationDefaultTextColor = Color.Black;
+
+        // Log colors
         private Color GlobalTextColor = Color.Black;
         private Color GlobalBackgroundColor = Form.DefaultBackColor;
         private bool GlobalEscapeEnabled = true;
 
-        // TODO: Add to config
         private Color EventLogTextColor = Color.Blue;
         private Color EventLogBackgroundColor = Color.Yellow;
 
@@ -89,16 +93,12 @@ namespace FastenTerminal
 			// Load Serial
 			comm = new Serial(ref serialPortDevice, this);
 
-			// Serial config
-			comm.NeedLog = checkBoxLogEnable.Checked;
-			comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
-			
 			comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
 			SerialRefresh();
 
 			// Load config
-			LoadConfigToForm();
+			LoadConfig();
 
 			// Load commands
 			favouriteCommands = new FavouriteCommandHandler(this);
@@ -110,9 +110,6 @@ namespace FastenTerminal
 				notifyIconApplication.Visible = true;  
 			}
 
-			// Form configs
-			GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
-
             checkBoxPrintSend.Checked = comm.printSentEvent;
 
             comboBoxNewLineType.Text = "\\r\\n";
@@ -122,57 +119,96 @@ namespace FastenTerminal
         }
 
 
+        private void LoadConfigToComm()
+        {
+            // Serial config
+            comm.NeedLog = checkBoxLogEnable.Checked;
+            comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 
-		private void LoadConfigToForm()
-		{
-            // Application configs
-            // TODO: Add background - foregroundcolor
+            comm.newLineString = Config.config.newLineString;
 
-            // TODO:        private Color EventLogTextColor = Color.Blue;
-            // private Color EventLogBackgroundColor = Color.Yellow;
-
-            // TODO: Add Telnet configs
-            // IP
-            // Port
-
-            // Serial configs
-            // TODO: Delete com port
-            comboBoxSerialPortCOM.Text = Config.config.portName;
-			comboBoxSerialPortBaudrate.Text = Config.config.baudrate;
-
-            // Logs configs
-			checkBoxLogEnable.Checked = Config.config.needLog;
-			checkBoxLogWithDateTime.Checked = Config.config.dateLog;
-
-            // Message configs
-			checkBoxReceiveBinaryMode.Checked = Config.config.isBinaryMode;
-
-            // TODO: Add newLineString
-
-            // TODO: Add mute
-
-            // TODO: Add word wrap
-
-            // TODO: Add Print sending msg
+            comm.printSentEvent = Config.config.printSendingMsg;
         }
 
+        private void LoadConfigToForm()
+        {
+            SetBackGroundColor(ApplicationBackgroundColor);
+            SetForeGroundColor(ApplicationDefaultTextColor);
 
+            checkBoxLogEnable.Checked = Config.config.needLog;
+            checkBoxLogWithDateTime.Checked = Config.config.dateLog;
+            checkBoxReceiveBinaryMode.Checked = Config.config.isBinaryMode;
+            checkBoxEscapeSequenceEnable.Checked = Config.config.escapeSequenceIsEnabled;
+
+            checkBoxWordWrap.Checked = Config.config.wordWrap;
+            richTextBoxTextLog.WordWrap = checkBoxWordWrap.Checked;
+        }
+
+		private void LoadConfig()
+		{
+            // Application configs
+            // TODO: These colors sets are duplicated
+            SetBackGroundColor(ColorTranslator.FromHtml(Config.config.BackgroundColor));
+            SetForeGroundColor(ColorTranslator.FromHtml(Config.config.TextColor));
+            EventLogBackgroundColor = ColorTranslator.FromHtml(Config.config.EventBackgroundColor);
+            EventLogTextColor = ColorTranslator.FromHtml(Config.config.EventTextColor);
+
+
+            // Message configs
+            //public bool needLog
+            //public bool dateLog
+            //public bool isBinaryMode
+            //public string newLineString
+            soundIsDisabled = Config.config.mute;
+            //public bool wordWrap;
+            //public bool printSendingMsg 
+            GlobalEscapeEnabled = Config.config.escapeSequenceIsEnabled;
+
+            // Telnet configs
+            // IP
+            textBoxTelnetIP.Text = Config.config.TelnetIPaddress;
+            // Port
+            textBoxTelnetPort.Text = Config.config.TelnetPort;
+
+            // Serial configs
+            comboBoxSerialPortBaudrate.Text = Config.config.SerialBaudrate;
+
+            LoadConfigToForm();
+            LoadConfigToComm();
+        }
 
         private void SaveConfig()
 		{
-            // TODO: Sync with LoadConfigToForm
-			Config.config.portName = comboBoxSerialPortCOM.Text;
-			Config.config.baudrate = comboBoxSerialPortBaudrate.Text;
+            // Aplication configs
+            Config.config.BackgroundColor = ColorTranslator.ToHtml(ApplicationBackgroundColor);
+            Config.config.TextColor = ColorTranslator.ToHtml(ApplicationDefaultTextColor);
+            Config.config.EventBackgroundColor = ColorTranslator.ToHtml(EventLogBackgroundColor);
+            Config.config.EventTextColor = ColorTranslator.ToHtml(EventLogTextColor);
 
-			Config.config.needLog = checkBoxLogEnable.Checked;
+            // Not best solutions
+            //Config.config.TextColor = ApplicationDefaultTextColor.Name;
+            //Config.config.EventBackgroundColor = EventLogBackgroundColor.ToString();
+            //Config.config.EventTextColor = EventLogTextColor.ToArgb().ToString();
+
+            // Message configs
+            Config.config.needLog = checkBoxLogEnable.Checked;
 			Config.config.dateLog = checkBoxLogWithDateTime.Checked;
-
 			Config.config.isBinaryMode = checkBoxReceiveBinaryMode.Checked;
+            Config.config.newLineString = comboBoxNewLineType.Text;
+            Config.config.mute = checkBoxMute.Checked;
+            Config.config.wordWrap = checkBoxWordWrap.Checked;
+            Config.config.printSendingMsg = checkBoxPrintSend.Checked;
+            Config.config.escapeSequenceIsEnabled = checkBoxEscapeSequenceEnable.Checked;
 
-			Config.SaveConfigToXml();
+            // Telnet
+            Config.config.TelnetIPaddress = textBoxTelnetIP.Text;
+            Config.config.TelnetPort = textBoxTelnetPort.Text;
+
+            // Serial
+            Config.config.SerialBaudrate = comboBoxSerialPortBaudrate.Text;
+
+            Config.SaveConfigToXml();
 		}
-
-
 
 		private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -282,8 +318,8 @@ namespace FastenTerminal
                 message = ApplicationMessage + message + Environment.NewLine;
             }
 
-			AppendTextLog(message, Color.Blue, Color.Yellow);
-		}
+			AppendTextLog(message, EventLogTextColor, EventLogBackgroundColor);
+    }
 
 		public void AppendTextLogData(string message)
 		{
@@ -985,16 +1021,28 @@ namespace FastenTerminal
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                richTextBoxTextLog.BackColor = colorDialog.Color;
+                SetBackGroundColor(colorDialog.Color);
             }
+        }
+
+        private void SetBackGroundColor(Color color)
+        {
+            ApplicationBackgroundColor = color;
+            richTextBoxTextLog.BackColor = color;
         }
 
         private void buttonForeGroundColor_Click(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                richTextBoxTextLog.ForeColor = colorDialog.Color;
+                SetForeGroundColor(colorDialog.Color);
             }
+        }
+
+        private void SetForeGroundColor(Color color)
+        {
+            ApplicationDefaultTextColor = color;
+            richTextBoxTextLog.ForeColor = color;
         }
 
         private void checkBoxConfigClearSendMessageTextAfterSend_CheckedChanged(object sender, EventArgs e)
@@ -1032,6 +1080,8 @@ namespace FastenTerminal
                     SerialPeriodicalRefreshStart();
                     break;
             }
+
+            LoadConfigToComm();
         }
 
         private void checkBoxNewLineEnabled_CheckedChanged(object sender, EventArgs e)

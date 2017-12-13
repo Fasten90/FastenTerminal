@@ -138,6 +138,7 @@ namespace FastenTerminal
                 }
                 catch (Exception ex)
                 {
+                    Log.SendErrorLog(ex.Message);
                     port = -1;
                     return false;
                 }
