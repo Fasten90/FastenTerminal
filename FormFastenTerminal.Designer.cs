@@ -59,6 +59,8 @@
             this.dataGridViewFavCommands = new System.Windows.Forms.DataGridView();
             this.buttonSerialFavouriteCommandSending = new System.Windows.Forms.Button();
             this.tabPageConfiguration = new System.Windows.Forms.TabPage();
+            this.pictureBoxSave = new System.Windows.Forms.PictureBox();
+            this.pictureBoxConfigIsChanged = new System.Windows.Forms.PictureBox();
             this.labelConstEventTextColor = new System.Windows.Forms.Label();
             this.labelConstEventBackgrondColor = new System.Windows.Forms.Label();
             this.labelConstForeGroundColor = new System.Windows.Forms.Label();
@@ -72,7 +74,6 @@
             this.checkBoxPrintSend = new System.Windows.Forms.CheckBox();
             this.checkBoxWordWrap = new System.Windows.Forms.CheckBox();
             this.checkBoxMute = new System.Windows.Forms.CheckBox();
-            this.buttonSerialSaveConfig = new System.Windows.Forms.Button();
             this.checkBoxReceiveBinaryMode = new System.Windows.Forms.CheckBox();
             this.checkBoxConfigClearSendMessageTextAfterSend = new System.Windows.Forms.CheckBox();
             this.checkBoxLogWithDateTime = new System.Windows.Forms.CheckBox();
@@ -87,12 +88,11 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.richTextBoxTextLog = new System.Windows.Forms.RichTextBox();
             this.panelSettings = new System.Windows.Forms.Panel();
+            this.pictureBoxTop = new System.Windows.Forms.PictureBox();
             this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBoxConfigIsChanged = new System.Windows.Forms.PictureBox();
-            this.pictureBoxTop = new System.Windows.Forms.PictureBox();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -104,17 +104,18 @@
             this.tabPageSerialCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).BeginInit();
             this.tabPageConfiguration.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventTextColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventBackgrondColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForeGroundColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
             this.panelSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).BeginInit();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -445,6 +446,7 @@
             // 
             // tabPageConfiguration
             // 
+            this.tabPageConfiguration.Controls.Add(this.pictureBoxSave);
             this.tabPageConfiguration.Controls.Add(this.pictureBoxConfigIsChanged);
             this.tabPageConfiguration.Controls.Add(this.labelConstEventTextColor);
             this.tabPageConfiguration.Controls.Add(this.labelConstEventBackgrondColor);
@@ -459,7 +461,6 @@
             this.tabPageConfiguration.Controls.Add(this.checkBoxPrintSend);
             this.tabPageConfiguration.Controls.Add(this.checkBoxWordWrap);
             this.tabPageConfiguration.Controls.Add(this.checkBoxMute);
-            this.tabPageConfiguration.Controls.Add(this.buttonSerialSaveConfig);
             this.tabPageConfiguration.Controls.Add(this.checkBoxReceiveBinaryMode);
             this.tabPageConfiguration.Controls.Add(this.checkBoxConfigClearSendMessageTextAfterSend);
             this.tabPageConfiguration.Controls.Add(this.checkBoxLogWithDateTime);
@@ -473,6 +474,26 @@
             this.tabPageConfiguration.TabIndex = 3;
             this.tabPageConfiguration.Text = "Config";
             this.tabPageConfiguration.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxSave
+            // 
+            this.pictureBoxSave.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSave.Image")));
+            this.pictureBoxSave.Location = new System.Drawing.Point(211, 6);
+            this.pictureBoxSave.Name = "pictureBoxSave";
+            this.pictureBoxSave.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxSave.TabIndex = 60;
+            this.pictureBoxSave.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxSave, "Save configuration");
+            this.pictureBoxSave.Click += new System.EventHandler(this.pictureBoxSave_Click);
+            // 
+            // pictureBoxConfigIsChanged
+            // 
+            this.pictureBoxConfigIsChanged.Location = new System.Drawing.Point(185, 6);
+            this.pictureBoxConfigIsChanged.Name = "pictureBoxConfigIsChanged";
+            this.pictureBoxConfigIsChanged.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxConfigIsChanged.TabIndex = 59;
+            this.pictureBoxConfigIsChanged.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxConfigIsChanged, "Config is changed?");
             // 
             // labelConstEventTextColor
             // 
@@ -611,16 +632,6 @@
             this.checkBoxMute.Text = "Mute";
             this.checkBoxMute.UseVisualStyleBackColor = true;
             this.checkBoxMute.CheckedChanged += new System.EventHandler(this.checkBoxMute_CheckedChanged);
-            // 
-            // buttonSerialSaveConfig
-            // 
-            this.buttonSerialSaveConfig.Location = new System.Drawing.Point(3, 348);
-            this.buttonSerialSaveConfig.Name = "buttonSerialSaveConfig";
-            this.buttonSerialSaveConfig.Size = new System.Drawing.Size(75, 23);
-            this.buttonSerialSaveConfig.TabIndex = 42;
-            this.buttonSerialSaveConfig.Text = "Save config";
-            this.buttonSerialSaveConfig.UseVisualStyleBackColor = true;
-            this.buttonSerialSaveConfig.Click += new System.EventHandler(this.buttonSerialSaveConfig_Click);
             // 
             // checkBoxReceiveBinaryMode
             // 
@@ -774,6 +785,17 @@
             this.panelSettings.Size = new System.Drawing.Size(245, 458);
             this.panelSettings.TabIndex = 45;
             // 
+            // pictureBoxTop
+            // 
+            this.pictureBoxTop.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxTop.Image")));
+            this.pictureBoxTop.Location = new System.Drawing.Point(82, 4);
+            this.pictureBoxTop.Name = "pictureBoxTop";
+            this.pictureBoxTop.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxTop.TabIndex = 46;
+            this.pictureBoxTop.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxTop, "Application is always top");
+            this.pictureBoxTop.Click += new System.EventHandler(this.pictureBoxTop_Click);
+            // 
             // pictureBoxHelp
             // 
             this.pictureBoxHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -814,25 +836,6 @@
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
             // 
-            // pictureBoxConfigIsChanged
-            // 
-            this.pictureBoxConfigIsChanged.Location = new System.Drawing.Point(202, 7);
-            this.pictureBoxConfigIsChanged.Name = "pictureBoxConfigIsChanged";
-            this.pictureBoxConfigIsChanged.Size = new System.Drawing.Size(20, 20);
-            this.pictureBoxConfigIsChanged.TabIndex = 59;
-            this.pictureBoxConfigIsChanged.TabStop = false;
-            this.toolTipHelp.SetToolTip(this.pictureBoxConfigIsChanged, "Config is changed?");
-            // 
-            // pictureBoxTop
-            // 
-            this.pictureBoxTop.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxTop.Image")));
-            this.pictureBoxTop.Location = new System.Drawing.Point(82, 4);
-            this.pictureBoxTop.Name = "pictureBoxTop";
-            this.pictureBoxTop.Size = new System.Drawing.Size(20, 20);
-            this.pictureBoxTop.TabIndex = 46;
-            this.pictureBoxTop.TabStop = false;
-            this.pictureBoxTop.Click += new System.EventHandler(this.pictureBoxTop_Click);
-            // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -861,17 +864,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFavCommands)).EndInit();
             this.tabPageConfiguration.ResumeLayout(false);
             this.tabPageConfiguration.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventTextColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEventBackgrondColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForeGroundColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
             this.panelSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfigIsChanged)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -909,7 +913,6 @@
 		private System.Windows.Forms.Timer timerReceiveIcon;
 		private System.Windows.Forms.CheckBox checkBoxReceiveBinaryMode;
 		private System.Windows.Forms.Button buttonSerialOpenLogFile;
-		private System.Windows.Forms.Button buttonSerialSaveConfig;
         private System.Windows.Forms.CheckBox checkBoxMute;
         private System.Windows.Forms.CheckBox checkBoxWordWrap;
         private System.Windows.Forms.CheckBox checkBoxPrintSend;
@@ -941,6 +944,7 @@
         private System.Windows.Forms.Label labelConstForeGroundColor;
         private System.Windows.Forms.PictureBox pictureBoxConfigIsChanged;
         private System.Windows.Forms.PictureBox pictureBoxTop;
+        private System.Windows.Forms.PictureBox pictureBoxSave;
     }
 }
 

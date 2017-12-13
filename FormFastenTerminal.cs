@@ -33,6 +33,8 @@ namespace FastenTerminal
         private const String imgWarning = @"Images\img_warning.png";
         private const String imgTopActive = @"Images\img_top_active.png";
         private const String imgTopInactive = @"Images\img_top_inactive.png";
+        private const String imgSaveActive = @"Images\img_save_active.png";
+        private const String imgSaveInactive = @"Images\img_save_inactive.png";
 
         // Const sounds
         private const String soundBellPath = @"Sounds\sound_bell.wav";
@@ -185,7 +187,9 @@ namespace FastenTerminal
             LoadConfigToForm();
             LoadConfigToComm();
 
+            // There is no change
             pictureBoxConfigIsChanged.ImageLocation = "";
+            pictureBoxSave.ImageLocation = imgSaveInactive;
         }
 
         private void SaveConfig()
@@ -221,6 +225,7 @@ namespace FastenTerminal
             Config.SaveConfigToXml();
 
             pictureBoxConfigIsChanged.ImageLocation = "";
+            pictureBoxSave.ImageLocation = imgSaveInactive;
         }
 
         private void FastenTerminal_FormClosing(object sender, FormClosingEventArgs e)
@@ -974,11 +979,6 @@ namespace FastenTerminal
             Common.OpenTextFile(MessageLog.logFilePath);
         }
 
-        private void buttonSerialSaveConfig_Click(object sender, EventArgs e)
-        {
-            SaveConfig();
-        }
-
         private void checkBoxSerialTextEscapeSequenceEnable_CheckedChanged(object sender, EventArgs e)
         {
             GlobalEscapeEnabled = checkBoxEscapeSequenceEnable.Checked;
@@ -997,7 +997,7 @@ namespace FastenTerminal
             ConfigIsChanged();
         }
 
-        private void comboBoxSerialPortLastCommands_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxSendMessageLastCommands_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Copy clicked text to sending message text
             comboBoxSendMessage.Text = (String)comboBoxSendMessage.SelectedItem;
@@ -1042,6 +1042,12 @@ namespace FastenTerminal
         void ConfigIsChanged()
         {
             pictureBoxConfigIsChanged.ImageLocation = imgWarning;
+            pictureBoxSave.ImageLocation = imgSaveActive;
+        }
+
+        private void pictureBoxSave_Click(object sender, EventArgs e)
+        {
+            SaveConfig();
         }
 
         private void pictureBoxTop_Click(object sender, EventArgs e)
