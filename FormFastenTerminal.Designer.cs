@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFastenTerminal));
             this.serialPortDevice = new System.IO.Ports.SerialPort(this.components);
             this.notifyIconApplication = new System.Windows.Forms.NotifyIcon(this.components);
-            this.buttonClearSerialTexts = new System.Windows.Forms.Button();
             this.textBoxSerialTextFind = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
             this.tabPageCommunication = new System.Windows.Forms.TabPage();
@@ -88,6 +87,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.richTextBoxTextLog = new System.Windows.Forms.RichTextBox();
             this.panelSettings = new System.Windows.Forms.Panel();
+            this.pictureBoxClearScreen = new System.Windows.Forms.PictureBox();
             this.pictureBoxTop = new System.Windows.Forms.PictureBox();
             this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
@@ -112,6 +112,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).BeginInit();
             this.panelSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClearScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
@@ -129,19 +130,6 @@
             this.notifyIconApplication.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconApplication.Icon")));
             this.notifyIconApplication.Text = "FastenTerminal";
             this.notifyIconApplication.Visible = true;
-            // 
-            // buttonClearSerialTexts
-            // 
-            this.buttonClearSerialTexts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClearSerialTexts.Image = ((System.Drawing.Image)(resources.GetObject("buttonClearSerialTexts.Image")));
-            this.buttonClearSerialTexts.Location = new System.Drawing.Point(56, 3);
-            this.buttonClearSerialTexts.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonClearSerialTexts.Name = "buttonClearSerialTexts";
-            this.buttonClearSerialTexts.Size = new System.Drawing.Size(22, 22);
-            this.buttonClearSerialTexts.TabIndex = 36;
-            this.toolTipHelp.SetToolTip(this.buttonClearSerialTexts, "Clear screen (text log)");
-            this.buttonClearSerialTexts.UseVisualStyleBackColor = true;
-            this.buttonClearSerialTexts.Click += new System.EventHandler(this.buttonClearSerialTexts_Click);
             // 
             // textBoxSerialTextFind
             // 
@@ -774,16 +762,27 @@
             // 
             this.panelSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelSettings.Controls.Add(this.pictureBoxClearScreen);
             this.panelSettings.Controls.Add(this.pictureBoxTop);
             this.panelSettings.Controls.Add(this.pictureBoxHelp);
             this.panelSettings.Controls.Add(this.pictureBoxScrollingEnabled);
-            this.panelSettings.Controls.Add(this.buttonClearSerialTexts);
             this.panelSettings.Controls.Add(this.pictureBoxSerialReceiving);
             this.panelSettings.Controls.Add(this.tabControlSerialFunctions);
             this.panelSettings.Location = new System.Drawing.Point(574, 3);
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(245, 458);
             this.panelSettings.TabIndex = 45;
+            // 
+            // pictureBoxClearScreen
+            // 
+            this.pictureBoxClearScreen.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxClearScreen.Image")));
+            this.pictureBoxClearScreen.Location = new System.Drawing.Point(56, 4);
+            this.pictureBoxClearScreen.Name = "pictureBoxClearScreen";
+            this.pictureBoxClearScreen.Size = new System.Drawing.Size(20, 20);
+            this.pictureBoxClearScreen.TabIndex = 47;
+            this.pictureBoxClearScreen.TabStop = false;
+            this.toolTipHelp.SetToolTip(this.pictureBoxClearScreen, "Clear screen (text log)");
+            this.pictureBoxClearScreen.Click += new System.EventHandler(this.pictureBoxClearScreen_Click);
             // 
             // pictureBoxTop
             // 
@@ -872,6 +871,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackGroundColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSerialReceiving)).EndInit();
             this.panelSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClearScreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
@@ -884,7 +884,6 @@
 
 		private System.IO.Ports.SerialPort serialPortDevice;
 		public System.Windows.Forms.NotifyIcon notifyIconApplication;
-		private System.Windows.Forms.Button buttonClearSerialTexts;
 		private System.Windows.Forms.TextBox textBoxSerialTextFind;
 		private System.Windows.Forms.TabControl tabControlSerialFunctions;
 		private System.Windows.Forms.TabPage tabPageSerialCommands;
@@ -945,6 +944,7 @@
         private System.Windows.Forms.PictureBox pictureBoxConfigIsChanged;
         private System.Windows.Forms.PictureBox pictureBoxTop;
         private System.Windows.Forms.PictureBox pictureBoxSave;
+        private System.Windows.Forms.PictureBox pictureBoxClearScreen;
     }
 }
 

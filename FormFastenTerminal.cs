@@ -510,7 +510,7 @@ namespace FastenTerminal
          *          Clear text log
          */
 
-        private void buttonClearSerialTexts_Click(object sender, EventArgs e)
+        private void pictureBoxClearScreen_Click(object sender, EventArgs e)
         {
             ClearScreen();
         }
