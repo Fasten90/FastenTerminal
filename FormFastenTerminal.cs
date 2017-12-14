@@ -131,7 +131,7 @@ namespace FastenTerminal
             comm.NeedLog = checkBoxLogEnable.Checked;
             comm.LogWithDateTime = checkBoxLogWithDateTime.Checked;
 
-            comm.newLineString = Config.config.newLineString;
+            comm.newLineString = Common.ConvertNewLineToReal(Config.config.newLineString);
 
             comm.printSentEvent = Config.config.printSendingMsg;
         }
