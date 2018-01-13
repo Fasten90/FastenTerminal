@@ -117,5 +117,9 @@
       <CommandName>Rablás PNA</CommandName>
       <CommandSendingString>SET_ALARM_DARM_MODE_PNA</CommandSendingString>
     </Command>
+    <Command>
+      <CommandName>UnitTest</CommandName>
+      <CommandSendingString>unittest</CommandSendingString>
+    </Command>
   </CommandList>
 </CommandConfigs>

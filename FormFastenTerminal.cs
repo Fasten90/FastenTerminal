@@ -275,11 +275,15 @@ namespace FastenTerminal
 
         private void pictureBoxHelp_Click(object sender, EventArgs e)
         {
-            string message = "FastenTerminal\n" +
+            string message =
+                "FastenTerminal\n" +
+                "Version: " + Application.ProductVersion + "\n" +
+                "\n" +
                 "Author: Vizi Gábor\n" +
                 "Webpage: http://www.fasten.e5tv.hu/";
+            // "Webpage: <a href=\"http://www.fasten.e5tv.hu/\">www.fasten.e5tv.hu</a>"; - dosn't work
 
-            string caption = "FastenTerminal - help menu";
+            string caption = "FastenTerminal - Help";
 
             MessageBox.Show(message, caption);
         }
