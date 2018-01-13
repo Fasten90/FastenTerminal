@@ -130,52 +130,55 @@ namespace FastenTerminal
 
 			try
 			{
-				lock (receiveLocker)
+
+				if (receiverModeBinary)
 				{
-					if (receiverModeBinary)
-					{
-						// Binary mode
+					// Binary mode
 
-						int dataLength = serial.BytesToRead;
-						byte[] data = new byte[dataLength];
-						int nbrDataRead = serial.Read(data, 0, dataLength);
+					int dataLength = serial.BytesToRead;
+					byte[] data = new byte[dataLength];
+					int nbrDataRead = serial.Read(data, 0, dataLength);
 
-						// Append to buffer
-						actualReceivedMessage = Common.ByteArrayToString(data);
-						receivedMessage += actualReceivedMessage;
+					// Append to buffer
+					actualReceivedMessage = Common.ByteArrayToString(data);
+                }
+				else
+				{
+                    // String mode
 
-						// Append to GUI
-						AppendReceivedTextToGui(actualReceivedMessage);
+					// Append to buffer
+					actualReceivedMessage = serial.ReadExisting();
+                }                   
+                
+                // Append to GUI
+                AppendReceivedTextToGui(actualReceivedMessage);
 
-                        // Save, if has long msg
-                        if (receivedMessage.Length > 50)
-                        {
-                            // Received "process character"
-                            ThreadPool.QueueUserWorkItem(SaveLineLog);
-                        }
+                // TODO: If we have a large message, this operation is slow (~5ms)
+                lock (receivedMessageLocker)
+                {
+                    receivedMessage += actualReceivedMessage;
+                }
+
+                // Save message
+                if (receiverModeBinary)
+                {
+                    // Binary mode
+                    if (receivedMessage.Length > 50)
+                    {
+                        // Received "process character"
+                        ThreadPool.QueueUserWorkItem(SaveLog);
                     }
-					else
-					{
-                        // String mode
-
-						// Append to buffer
-						actualReceivedMessage = serial.ReadExisting();
-                        // TODO: If we have a large message, this operation is slow (~5ms)
-                        receivedMessage += actualReceivedMessage;
-
-
-						// Append to GUI
-						AppendReceivedTextToGui(actualReceivedMessage);
-
-
-                        // Need to save? (have we a line?)
-                        if (receivedMessage.IndexOfAny(LogSaveStartCharacters.ToCharArray()) != -1)
-                        {
-                            // Received "process character"
-                            ThreadPool.QueueUserWorkItem(SaveLineLog);
-                        }
+                }
+                else
+                {
+                    // String mode
+                    // Need to save? (have we a line?)
+                    if (receivedMessage.IndexOfAny(LogSaveCharacters.ToCharArray()) > -1)
+                    {
+                        // Received "process character"
+                        ThreadPool.QueueUserWorkItem(SaveLog);
                     }
-				}
+                }
 			}
 			catch (Exception ex)
 			{
@@ -229,9 +232,11 @@ namespace FastenTerminal
 				}
 			}
 
-			if (NeedLog)
+			if (NeedLog && printSentEvent)
 			{
-				MessageLog.SendLog(logMessage, true);
+                // Log if log and event print enabled
+                flushLogMsg();
+                MessageLog.SendLog(logMessage, true);
 			}
 
 			if (printSentEvent)

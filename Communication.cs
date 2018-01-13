@@ -24,9 +24,9 @@ namespace FastenTerminal
 
         // LOG - aux variables
         protected String logMessage = "";
+        protected Object logMessageLocker = new Object();
 
-        protected string LogSaveStartCharacters = "\r\n\0";
-
+        protected string LogSaveCharacters = "\r\n\0";
 
         public bool printSentEvent = true;
 
@@ -35,11 +35,10 @@ namespace FastenTerminal
         public bool LogWithDateTime = true;
 
 
-        protected Object receiveLocker = new Object();
         protected string receivedMessage = "";
-        protected string actualReceivedMessage = "";
+        protected Object receivedMessageLocker = new Object();
 
-        protected Object messageLocker = new Object();
+        protected string actualReceivedMessage = "";
 
         // Periodical sending
         public bool PeriodSending_Enable = false;
@@ -54,78 +53,64 @@ namespace FastenTerminal
         public bool needPrint = true;
 
 
-        public void SaveLineLog(object state)
+        public void SaveLog(object state)
         {
-            String checkMsg = "";
-
-
             // Event function - received serial message
 
-            // For secure: drop "" (null) string
-            if (receivedMessage == "")
+            // For secure: drop "" (empty) string
+            if (receivedMessage == "" && logMessage == "")
             {
-                // Do not Log this null message
+                // Do not Log this empty message
                 return;
             }
 
 
             // Get string from serial buffer
-            lock (receiveLocker)
+            lock (receivedMessageLocker)
             {
-                checkMsg = receivedMessage;
+                logMessage += receivedMessage;
                 receivedMessage = "";
-            }
 
 
-            // OLD version: PROBLEM: once character is printed one line
-            // Example: received "Fasten", printed in log sometimes, "F", "a", "st", "en" "\r\n"
+                // OLD version: PROBLEM: once character is printed one line
+                // Example: received "Fasten", printed in log sometimes, "F", "a", "st", "en" "\r\n"
 
-            // Save received message
-            lock (messageLocker)
-            {
+                // Save received message
                 if (!receiverModeBinary)
                 {
-                    if (logMessage == "")
+                    // String mode
+                    while (true)
                     {
-                        // Drop first newline characters
-                        logMessage = DropStartNewlineCharacters(checkMsg);
-                    }
-                    else
-                    {
-                        // We have a string, it is endline characters
-                        // Append
-                        logMessage += checkMsg;
-                    }
+                        // Drop newlines from begin of string
+                        logMessage = logMessage.TrimStart(LogSaveCharacters.ToCharArray());
+                        // Check, there 
+                        int newLineCharIndex = logMessage.IndexOfAny(LogSaveCharacters.ToCharArray());
+                        if (newLineCharIndex > -1)   // -1, if there is not newline, but if 0 cannot be, because string was trimmed
+                        {
+                            // Has new line, save it...
 
+                            String saveMsg = logMessage.Substring(0, newLineCharIndex);
+                            logMessage = logMessage.Substring(newLineCharIndex);
 
-                    // Has end character?
-                    int length = IsHasEndCharacter(logMessage);
-                    if ((length > -1) && (logMessage != "") && (length <= logMessage.Length))
-                    {
-                        // Has end character, and not start with it
-                        // First "line"
-                        String cleanedMsg = logMessage.Substring(0, (length + 1));
-                        cleanedMsg = DropEndNewlineCharacters(cleanedMsg);
-
-                        // After line
-                        logMessage = logMessage.Substring((length + 1));
-                        // Drop newline characters from begin
-                        logMessage = DropStartNewlineCharacters(logMessage);
-
-                        // This is a line, which can be processing
-                        // Process message (Log and process)
-                        saveMsg(cleanedMsg);
+                            saveLogMsg(saveMsg);
+                        }
+                        else
+                        {
+                            // There is no more "line", hasn't newline character
+                            break;
+                        }
                     }
                 }
                 else
                 {
                     // receiverModeBinary
-                    saveMsg(checkMsg);
+                    saveLogMsg(logMessage);
+                    logMessage = "";
                 }
             }
         }
 
-        private void saveMsg(string msg)
+        private void saveLogMsg(string msg)
         {
             // Send to protocol Checker
             // TODO: do with "event" or delegate
@@ -143,6 +128,23 @@ namespace FastenTerminal
 
             return;
         }
+
+        protected void flushLogMsg()
+        {
+            // Get string from receive buffer
+            if (NeedLog && (receivedMessage != "" || logMessage != ""))
+            {
+                lock (receivedMessageLocker)
+                {
+                    MessageLog.SendLog(logMessage, LogWithDateTime);
+                    logMessage = "";
+                    MessageLog.SendLog(receivedMessage, LogWithDateTime);
+                    receivedMessage = "";
+                }
+            }
+        }
+
+        // TODO: Need refactors these function below
 
         private int IsHasEndCharacter(string message)
         {

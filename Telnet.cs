@@ -113,6 +113,7 @@ namespace FastenTerminal
                         //this.Invoke(d, new Object[] { Telnet_out });
                     }
 
+                    // TODO: Ugly solution
                     Thread.Sleep(20);
                 }
             }
@@ -166,8 +167,9 @@ namespace FastenTerminal
                 }
             }
 
-            if (NeedLog)
+            if (NeedLog && printSentEvent)
             {
+                flushLogMsg();
                 MessageLog.SendLog(logMessage, true);
             }
 
