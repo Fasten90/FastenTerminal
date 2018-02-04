@@ -146,6 +146,7 @@ namespace FastenTerminal
 
         protected void AppendReceivedTextToGui(string message)
         {
+            // TODO: Delete this?
             if (!receiverModeBinary)
             {
                 // String mode

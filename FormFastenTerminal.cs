@@ -1415,5 +1415,29 @@ namespace FastenTerminal
             Log.SendErrorLog("Serial: Error received:" + e.ToString());
         }
 
+        /*
+         * Command promt
+         */
+
+        private void CommandPromt_Start()
+        {
+            if (comm.isOpened == false)
+            {
+                if (!(comm is CommandPromt))
+                {
+                    comm = new CommandPromt(this);
+                }
+         
+                /*
+                ((CommandPromt)comm).CommandPromt_Start();
+                */
+            }
+        }
+
+        private void buttonCommandPromtOpenClose_Click(object sender, EventArgs e)
+        {
+            CommandPromt_Start();
+        }
+
     }   // End of class
 }	// End of namespace

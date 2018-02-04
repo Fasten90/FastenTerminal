@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandPromt.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="EscapeSequence.cs" />

@@ -93,6 +93,8 @@
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBoxCommCommandPromt = new System.Windows.Forms.GroupBox();
+            this.buttonCommandPromtOpenClose = new System.Windows.Forms.Button();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
@@ -117,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
+            this.groupBoxCommCommandPromt.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -160,6 +163,7 @@
             // 
             // tabPageCommunication
             // 
+            this.tabPageCommunication.Controls.Add(this.groupBoxCommCommandPromt);
             this.tabPageCommunication.Controls.Add(this.groupBoxCommTelnet);
             this.tabPageCommunication.Controls.Add(this.groupBoxCommSerial);
             this.tabPageCommunication.Location = new System.Drawing.Point(4, 22);
@@ -835,6 +839,26 @@
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
             // 
+            // groupBoxCommCommandPromt
+            // 
+            this.groupBoxCommCommandPromt.Controls.Add(this.buttonCommandPromtOpenClose);
+            this.groupBoxCommCommandPromt.Location = new System.Drawing.Point(7, 177);
+            this.groupBoxCommCommandPromt.Name = "groupBoxCommCommandPromt";
+            this.groupBoxCommCommandPromt.Size = new System.Drawing.Size(219, 51);
+            this.groupBoxCommCommandPromt.TabIndex = 11;
+            this.groupBoxCommCommandPromt.TabStop = false;
+            this.groupBoxCommCommandPromt.Text = "Cmd";
+            // 
+            // buttonCommandPromtOpenClose
+            // 
+            this.buttonCommandPromtOpenClose.Location = new System.Drawing.Point(7, 19);
+            this.buttonCommandPromtOpenClose.Name = "buttonCommandPromtOpenClose";
+            this.buttonCommandPromtOpenClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonCommandPromtOpenClose.TabIndex = 0;
+            this.buttonCommandPromtOpenClose.Text = "Open";
+            this.buttonCommandPromtOpenClose.UseVisualStyleBackColor = true;
+            this.buttonCommandPromtOpenClose.Click += new System.EventHandler(this.buttonCommandPromtOpenClose_Click);
+            // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -876,6 +900,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
+            this.groupBoxCommCommandPromt.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -945,6 +970,8 @@
         private System.Windows.Forms.PictureBox pictureBoxTop;
         private System.Windows.Forms.PictureBox pictureBoxSave;
         private System.Windows.Forms.PictureBox pictureBoxClearScreen;
+        private System.Windows.Forms.GroupBox groupBoxCommCommandPromt;
+        private System.Windows.Forms.Button buttonCommandPromtOpenClose;
     }
 }
 
