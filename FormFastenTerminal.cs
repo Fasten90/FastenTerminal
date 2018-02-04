@@ -122,7 +122,7 @@ namespace FastenTerminal
             }
 
             // Serial list refresh
-            SerialPeriodicalRefreshStart();
+            SerialPortRefreshTimerStart();
         }
 
         private void LoadConfigToComm()
@@ -1144,22 +1144,38 @@ namespace FastenTerminal
             switch (newCommState)
             {
                 case CommType.Serial:
+                    // Disable other buttons
                     buttonTelnetOpenClose.Enabled = false;
+                    buttonCommandPromtOpenClose.Enabled = false;
                     break;
 
                 case CommType.Telnet:
+                    // Disable other buttons
                     buttonSerialPortOpenClose.Enabled = false;
                     buttonSerialPortRefresh.Enabled = false;
+                    buttonCommandPromtOpenClose.Enabled = false;
+                    // Disable Serial refresh!
+                    timerCheckSerialPorts.Stop();
+                    break;
+
+                case CommType.CommandPromt:
+                    // Disable other buttons
+                    buttonSerialPortOpenClose.Enabled = false;
+                    buttonSerialPortRefresh.Enabled = false;
+                    buttonTelnetOpenClose.Enabled = false;
                     // Disable Serial refresh!
                     timerCheckSerialPorts.Stop();
                     break;
 
                 case CommType.NotInitialized:
                 default:
+                    // Enable all buttons
                     buttonTelnetOpenClose.Enabled = true;
                     buttonSerialPortOpenClose.Enabled = true;
                     buttonSerialPortRefresh.Enabled = true;
-                    SerialPeriodicalRefreshStart();
+                    buttonCommandPromtOpenClose.Enabled = true;
+                    // Enable serial port refreshing
+                    SerialPortRefreshTimerStart();
                     break;
             }
 
@@ -1216,7 +1232,7 @@ namespace FastenTerminal
             //comm.isOpened = isOpened;
         }
 
-        private void buttonTelnetOpenClose_Click(object sender, EventArgs e)
+        private void telnetOpenClose()
         {
             if (comm.isOpened == false)
             {
@@ -1245,6 +1261,11 @@ namespace FastenTerminal
             }
         }
 
+        private void buttonTelnetOpenClose_Click(object sender, EventArgs e)
+        {
+            telnetOpenClose();
+        }
+
         /*
 		 *			 Serial port
 		 */
@@ -1255,9 +1276,9 @@ namespace FastenTerminal
             SerialRefresh();
         }
 
-        private void SerialPeriodicalRefreshStart()
+        private void SerialPortRefreshTimerStart()
         {
-            // Received
+            // Refresh serial port list timer
             timerCheckSerialPorts.Interval = 500;   // 0.5 sec
             timerCheckSerialPorts.Stop();
             timerCheckSerialPorts.Start();           // Restart
@@ -1423,15 +1444,43 @@ namespace FastenTerminal
         {
             if (comm.isOpened == false)
             {
+                // Open / initialize
                 if (!(comm is CommandPromt))
                 {
                     comm = new CommandPromt(this);
                 }
-         
-                /*
-                ((CommandPromt)comm).CommandPromt_Start();
-                */
+
+                setCmdPromtState(true);
+                
+                // Do not call _Start(), because now we cannot use cmd "forever", only call with command
+                //((CommandPromt)comm).CommandPromt_Start();
             }
+            else
+            {
+                // Close
+                comm.Close();
+
+                setCmdPromtState(false);
+            }
+        }
+
+        private void setCmdPromtState(bool newState)
+        {
+            if (comm.isOpened)
+            {
+                // Print: "Close"
+                buttonCommandPromtOpenClose.Text = "Close";
+                CommStateChanged(CommType.CommandPromt);
+            }
+            else
+            {
+                // Closed, print "Open"
+                buttonCommandPromtOpenClose.Text = "Open";
+                CommStateChanged(CommType.NotInitialized);
+            }
+
+            // Refresh application name
+            RefreshTitle();
         }
 
         private void buttonCommandPromtOpenClose_Click(object sender, EventArgs e)

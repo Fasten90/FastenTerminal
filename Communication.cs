@@ -7,7 +7,8 @@ namespace FastenTerminal
     {
         NotInitialized,
         Serial,
-        Telnet
+        Telnet,
+        CommandPromt
     }
 
     public class Communication

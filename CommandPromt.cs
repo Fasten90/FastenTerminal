@@ -22,11 +22,16 @@ namespace FastenTerminal
             // TODO: Do more beautiful
             // Registrate
             isOpened = true;
+
+            stateInfo = "Command Promt";
+
+            form.AppendTextLogEvent("Command promt opened!");
         }
 
         ~CommandPromt()
         {
             printSentEvent = false;
+            isOpened = false;
             Close();
         }
 
@@ -160,7 +165,7 @@ namespace FastenTerminal
             //string test1 = Encoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(consoleStandardOutput));
 
 
-            /* TODO: ENCODE PROBLEMS */
+            /* TODO: Delete ENCODE PROBLEMS */
             var codepage2 = Console.OutputEncoding.CodePage;        // VG: 1250
             var codepage = CultureInfo.CurrentCulture.TextInfo.OEMCodePage; // VG: 852
             // GetEncoding(codepage)
@@ -170,7 +175,7 @@ namespace FastenTerminal
             //byte[] consoleStandardOutputEncoded = Encoding.Default.GetBytes(consoleStandardOutput);
             //byte[] consoleStandardOutputEncoded = Encoding.UTF8.GetBytes(consoleStandardOutput);
 
-            byte[] test1 = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage2), consoleStandardOutputEncoded);
+            byte[] consoleOutputConverted = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage2), consoleStandardOutputEncoded);
             byte[] consoleErrorConverted = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage2), consoleErrorOutputEncoded);
             //byte[] test1 = Encoding.Convert(Encoding.Default, Encoding.UTF8, consoleStandardOutputEncoded);
             //byte[] test1 = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage2), consoleStandardOutputEncoded);
@@ -183,7 +188,7 @@ namespace FastenTerminal
             // Encoding.UTF8
             // Encoding.GetEncoding(codepage)
 
-            String consoleStandardOutputGood = Encoding.GetEncoding(codepage2).GetString(test1);
+            String consoleStandardOutputGood = Encoding.GetEncoding(codepage2).GetString(consoleOutputConverted);
             String consoleErrorOutputGood    = Encoding.GetEncoding(codepage2).GetString(consoleErrorConverted);
             //String consoleStandardOutputGood = Encoding.ASCII.GetString(test1);
             //String consoleStandardOutputGood = Encoding.Default.GetString(consoleStandardOutputEncoded);
@@ -227,5 +232,19 @@ namespace FastenTerminal
             Console.WriteLine(e.Data);
         }
         */
+
+        public override void Close()
+        {
+            if (t != null)
+            {
+                t.Abort();
+            }
+
+            if (printSentEvent)
+                form.AppendTextLogEvent("Command promt closed");
+
+            isOpened = false;
+            stateInfo = "Closed";
+        }
     }
 }
