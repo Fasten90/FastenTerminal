@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -60,7 +61,7 @@ namespace FastenTerminal
             //cmd.StartInfo.WorkingDirectory = @"C:\";
             */
 
-            var codepage = Console.OutputEncoding.CodePage;
+            //var codepage = Console.OutputEncoding.CodePage;
 
             cmd = new Process();
             cmd.StartInfo = new ProcessStartInfo("cmd.exe")
@@ -73,7 +74,7 @@ namespace FastenTerminal
                 //Arguments = "/c echo test",
                 Arguments = "/c " + cmdMsg,
                 CreateNoWindow = true,
-                StandardOutputEncoding = Encoding.GetEncoding(codepage)
+                //StandardOutputEncoding = Encoding.GetEncoding(codepage)
                 //StandardOutputEncoding = Encoding.Default
                 //StandardOutputEncoding = Encoding.UTF8,
                 //StandardErrorEncoding = Encoding.UTF8,
@@ -155,32 +156,61 @@ namespace FastenTerminal
             String consoleStandardOutput = cmd.StandardOutput.ReadToEnd();
             String consoleErrorOutput = cmd.StandardError.ReadToEnd();
 
+
+            //string test1 = Encoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(consoleStandardOutput));
+
+
             /* TODO: ENCODE PROBLEMS */
-            //var codepage = Console.OutputEncoding.CodePage;
+            var codepage2 = Console.OutputEncoding.CodePage;        // VG: 1250
+            var codepage = CultureInfo.CurrentCulture.TextInfo.OEMCodePage; // VG: 852
             // GetEncoding(codepage)
 
-            byte[] consoleStandardOutputEncoded = Encoding.Default.GetBytes(consoleStandardOutput);
+            byte[] consoleStandardOutputEncoded = Encoding.GetEncoding(codepage2).GetBytes(consoleStandardOutput);
+            byte[] consoleErrorOutputEncoded    = Encoding.GetEncoding(codepage2).GetBytes(consoleErrorOutput);
+            //byte[] consoleStandardOutputEncoded = Encoding.Default.GetBytes(consoleStandardOutput);
+            //byte[] consoleStandardOutputEncoded = Encoding.UTF8.GetBytes(consoleStandardOutput);
+
+            byte[] test1 = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage2), consoleStandardOutputEncoded);
+            byte[] consoleErrorConverted = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage2), consoleErrorOutputEncoded);
+            //byte[] test1 = Encoding.Convert(Encoding.Default, Encoding.UTF8, consoleStandardOutputEncoded);
+            //byte[] test1 = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage2), consoleStandardOutputEncoded);
+            //byte[] test1 = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding(codepage2), consoleStandardOutputEncoded);
+            //byte[] test2 = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.GetEncoding(codepage), consoleStandardOutputEncoded);
+            //byte[] test3 = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.Unicode, consoleStandardOutputEncoded);
+            //byte[] test4 = Encoding.Convert(Encoding.GetEncoding(codepage), Encoding.UTF8, consoleStandardOutputEncoded);
+
             // Encoding.Default
             // Encoding.UTF8
             // Encoding.GetEncoding(codepage)
-            String consoleStandardOutputGood = Encoding.Default.GetString(consoleStandardOutputEncoded);
-            String consoleStandardOutputANSI = Encoding.ASCII.GetString(consoleStandardOutputEncoded);
+
+            String consoleStandardOutputGood = Encoding.GetEncoding(codepage2).GetString(test1);
+            String consoleErrorOutputGood    = Encoding.GetEncoding(codepage2).GetString(consoleErrorConverted);
+            //String consoleStandardOutputGood = Encoding.ASCII.GetString(test1);
+            //String consoleStandardOutputGood = Encoding.Default.GetString(consoleStandardOutputEncoded);
+            //String consoleStandardOutputGood = Encoding.ASCII.GetString(consoleStandardOutputEncoded);
+            //String consoleStandardOutputGood2 = Encoding.GetEncoding(codepage).GetString(test2);
+            //String consoleStandardOutputGood3 = Encoding.Unicode.GetString(test3);
+            //String consoleStandardOutputGood4 = Encoding.UTF8.GetString(test4);
 
             //Console.OutputEncoding = Encoding.UTF8;  // It will throw exception
-            Console.WriteLine("Console output: " + consoleStandardOutput);
-            Console.WriteLine("Console error: " + consoleErrorOutput);
+            Console.WriteLine("Console output: " + consoleStandardOutputGood);
+            //Console.WriteLine("Console output: " + consoleStandardOutputGood2);
+            //Console.WriteLine("Console output: " + consoleStandardOutputGood3);
+            //Console.WriteLine("Console output: " + consoleStandardOutputGood4);
 
-            ///*
-            AppendReceivedTextToGui(consoleStandardOutputANSI);
             if (consoleErrorOutput != "")
-                AppendReceivedTextToGui(consoleErrorOutput);
-            //*/
+                Console.WriteLine("Console error: " + consoleErrorOutputGood);
+
+            AppendReceivedTextToGui(consoleStandardOutputGood);
+            if (consoleErrorOutputGood != "")
+                AppendReceivedTextToGui(consoleErrorOutputGood);
 
             form.CommReceivedCharacterEvent();
 
             cmd.WaitForExit();
         }
 
+        /*
         static void CommandPromt_OutputData(object sender, DataReceivedEventArgs e)
         {
             Process p = sender as Process;
@@ -196,5 +226,6 @@ namespace FastenTerminal
                 return;
             Console.WriteLine(e.Data);
         }
+        */
     }
 }
