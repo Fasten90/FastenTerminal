@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -286,8 +287,10 @@ namespace FastenTerminal
 
             if (cmd != null)
             {
-                cmd.Close();
+                //cmd.Close();
                 //cmd.Kill();
+                int pid = cmd.Id;
+                KillProcessAndChildrens(pid);
             }
 
             if (printSentEvent)
@@ -295,6 +298,35 @@ namespace FastenTerminal
 
             isOpened = false;
             stateInfo = "Closed";
+        }
+
+        /*
+         * This function source: https://stackoverflow.com/questions/30249873/process-kill-doesnt-seem-to-kill-the-process
+         * It is necessary, because the kill was not working all time (e.g. cmd.exe called ping.exe)
+         */
+        private static void KillProcessAndChildrens(int pid)
+        {
+            ManagementObjectSearcher processSearcher = new ManagementObjectSearcher
+              ("Select * From Win32_Process Where ParentProcessID=" + pid);
+            ManagementObjectCollection processCollection = processSearcher.Get();
+
+            try
+            {
+                Process proc = Process.GetProcessById(pid);
+                if (!proc.HasExited) proc.Kill();
+            }
+            catch (ArgumentException)
+            {
+                // Process already exited.
+            }
+
+            if (processCollection != null)
+            {
+                foreach (ManagementObject mo in processCollection)
+                {
+                    KillProcessAndChildrens(Convert.ToInt32(mo["ProcessID"])); //kill child processes(also kills childrens of childrens etc.)
+                }
+            }
         }
     }
 }
