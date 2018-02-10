@@ -12,7 +12,7 @@ namespace FastenTerminal
 {
     public class CommandPromt : Communication
     {
-        private Thread t;
+        //private Thread t;
         Process cmd;
 
         public CommandPromt(FormFastenTerminal form)

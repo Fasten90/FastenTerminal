@@ -42,7 +42,7 @@ namespace FastenTerminal
 
         // Configs
         // Application color
-        private Color ApplicationBackgroundColor = Color.Gainsboro;
+        private Color ApplicationDefaultBackgroundColor = Color.Gainsboro;
         private Color ApplicationDefaultTextColor = Color.Black;
 
         // Log colors
@@ -139,7 +139,7 @@ namespace FastenTerminal
         private void LoadConfigToForm()
         {
             // Call before this function the LoadConfig()
-            SetBackGroundColor(ApplicationBackgroundColor);
+            SetBackGroundColor(ApplicationDefaultBackgroundColor);
             SetForeGroundColor(ApplicationDefaultTextColor);
 
             pictureBoxEventBackgrondColor.BackColor = EventLogBackgroundColor;
@@ -198,7 +198,7 @@ namespace FastenTerminal
         private void SaveConfig()
         {
             // Aplication configs
-            Config.config.BackgroundColor = ColorTranslator.ToHtml(ApplicationBackgroundColor);
+            Config.config.BackgroundColor = ColorTranslator.ToHtml(ApplicationDefaultBackgroundColor);
             Config.config.TextColor = ColorTranslator.ToHtml(ApplicationDefaultTextColor);
             Config.config.EventBackgroundColor = ColorTranslator.ToHtml(EventLogBackgroundColor);
             Config.config.EventTextColor = ColorTranslator.ToHtml(EventLogTextColor);
@@ -389,7 +389,10 @@ namespace FastenTerminal
                 // Check, has Escape sequence?
                 while (message.Length > 0)
                 {
-                    actualEscapeType = EscapeSequence.ProcessEscapeMessage(message, out color, out startIndex);
+                    List<FormatType> formatList = new List<FormatType>() { FormatType.FormatType_Nothing }; ;
+                    List<Color> colorList = new List<Color>() { Color.Black }; ;
+
+                    actualEscapeType = EscapeSequence.ProcessEscapeMessage(message, out startIndex, out formatList, out colorList);
 
                     switch (actualEscapeType)
                     {
@@ -409,19 +412,47 @@ namespace FastenTerminal
                             // TODO: It is not very good...
                             break;
 
-                        case EscapeType.Escape_TextColor:
-                            GlobalTextColor = color;
-                            break;
+                        case EscapeType.Escape_TextFormat:
+                            // Step on the format and color list
 
-                        case EscapeType.Escape_BackgroundColor:
-                            if (color == Color.White)
+                            for (int i = 0; i < formatList.Count; i++)
                             {
-                                GlobalBackgroundColor = Form.DefaultBackColor;
-                            }
-                            else
-                            {
-                                GlobalBackgroundColor = color;
-                            }
+                                FormatType format = formatList[i];
+                                
+                                switch (format)
+                                {
+                                    case FormatType.FormatType_TextColor:
+                                        color = colorList[i];
+                                        GlobalTextColor = color;
+                                        break;
+
+                                    case FormatType.FormatType_BackgroundColor:
+                                        color = colorList[i];
+                                        GlobalBackgroundColor = color;
+                                        break;
+
+                                    case FormatType.FormatType_Bold:
+                                        // TODO: ...
+                                        break;
+
+                                    case FormatType.FormatType_Underscore:
+                                        // TODO: ...
+                                        break;
+
+                                    case FormatType.FormatType_Reset:
+                                        GlobalTextColor = ApplicationDefaultTextColor;
+                                        GlobalBackgroundColor = ApplicationDefaultBackgroundColor;
+                                        break;
+
+                                    case FormatType.FormatType_Nothing:
+                                        // Do nothing
+                                        break;
+
+                                    default:
+                                        // Wrong or do nothing
+                                        break;
+                                }
+                            }                        
                             break;
 
                         case EscapeType.Escape_CursorMoving:
@@ -1088,7 +1119,7 @@ namespace FastenTerminal
 
         private void SetBackGroundColor(Color color)
         {
-            ApplicationBackgroundColor = color;
+            ApplicationDefaultBackgroundColor = color;
             richTextBoxTextLog.BackColor = color;
             pictureBoxBackGroundColor.BackColor = color;
             this.BackColor = color;
