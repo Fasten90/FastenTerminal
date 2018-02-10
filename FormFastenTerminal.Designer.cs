@@ -434,6 +434,8 @@
             // 
             // dataGridViewFavCommands
             // 
+            this.dataGridViewFavCommands.AllowDrop = true;
+            this.dataGridViewFavCommands.AllowUserToResizeRows = false;
             this.dataGridViewFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -442,9 +444,9 @@
             this.dataGridViewFavCommands.MultiSelect = false;
             this.dataGridViewFavCommands.Name = "dataGridViewFavCommands";
             this.dataGridViewFavCommands.RowHeadersVisible = false;
+            this.dataGridViewFavCommands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewFavCommands.Size = new System.Drawing.Size(234, 353);
             this.dataGridViewFavCommands.TabIndex = 22;
-            this.dataGridViewFavCommands.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFavCommands_CellClick);
             this.dataGridViewFavCommands.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFavCommands_CellDoubleClick);
             this.dataGridViewFavCommands.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewFavCommands_MouseClick);
             // 

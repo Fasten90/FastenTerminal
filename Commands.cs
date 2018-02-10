@@ -33,12 +33,19 @@ namespace FastenTerminal
 			};
 
 			CommandList.Add(addCommand);
-
 		}
 
-	}
+        public void AddCommand(String command, String name, int index)
+        {
+            Command addCommand = new Command
+            {
+                CommandSendingString = command,
+                CommandName = name
+            };
 
-
+            CommandList.Insert(index, addCommand);
+        }
+    }
 
 	public class FavouriteCommandHandler
 	{
@@ -46,10 +53,8 @@ namespace FastenTerminal
 
 		private FormFastenTerminal form;
 
-
 		// Configs
 		const String CommandConfigFile = @"CommandConfigs.xml";
-
 
 		// TODO: szebb megoldás a formra átadás helyett?
 		public FavouriteCommandHandler(FormFastenTerminal form)
@@ -69,19 +74,22 @@ namespace FastenTerminal
 			}
 		}
 
-
 		public void AddNewCommand(String command, String name)
 		{
 			CommandConfig.AddCommand(command, name);
 			SaveCommandConfigToXml(CommandConfigFile, CommandConfig);
 		}
 
-		
-		public List<Command> GetCommands()
+        public void AddNewCommand(String command, String name, int index)
+        {
+            CommandConfig.AddCommand(command, name, index);
+            SaveCommandConfigToXml(CommandConfigFile, CommandConfig);
+        }
+
+        public List<Command> GetCommands()
 		{
 			return CommandConfig.CommandList;
 		}
-
 
 		public void SendCommand(String command)
 		{
@@ -90,25 +98,18 @@ namespace FastenTerminal
 			form.AppendTextLogData(message);
 			Log.SendEventLog(message);
 
-
 			String messageResult = "";
 
-			// Send on serial
+			// Send Message
 			messageResult = form.comm.SendMessage(command);
 
-
 			Log.SendEventLog(messageResult);
-			
 		}
-
-
 
 		public void SaveCommandConfig()
 		{
 			SaveCommandConfigToXml(CommandConfigFile, CommandConfig);
 		}
-
-
 
 		public bool LoadCommandConfigFromXml(String ConfigFile, ref CommandConfigs config)
 		{
@@ -128,19 +129,24 @@ namespace FastenTerminal
 
 				return false;
 			}
-
 		}
-
-
 
 		public void SaveCommandConfigToXml(String ConfigFile, CommandConfigs config)
 		{
-
 			XmlSerialization.WriteToXmlFile<CommandConfigs>(ConfigFile, config);
 
 			Log.SendEventLog("CommandConfigs.xml has saved.");
 		}
 
+        internal void DragDrop_FromTo(int fromIndex, int toIndex)
+        {
+            Command item = CommandConfig.CommandList[fromIndex];
 
-	}
+            CommandConfig.CommandList.RemoveAt(fromIndex);
+
+            if (toIndex > fromIndex) toIndex--;
+
+            CommandConfig.CommandList.Insert(toIndex, item);
+        }
+    }
 }

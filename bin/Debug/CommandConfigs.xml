@@ -10,6 +10,14 @@
       <CommandSendingString>version</CommandSendingString>
     </Command>
     <Command>
+      <CommandName>UnitTest</CommandName>
+      <CommandSendingString>unittest</CommandSendingString>
+    </Command>
+    <Command>
+      <CommandName />
+      <CommandSendingString />
+    </Command>
+    <Command>
       <CommandName>Led on</CommandName>
       <CommandSendingString>#raspi setout 1</CommandSendingString>
     </Command>
@@ -116,10 +124,6 @@
     <Command>
       <CommandName>Rablás PNA</CommandName>
       <CommandSendingString>SET_ALARM_DARM_MODE_PNA</CommandSendingString>
-    </Command>
-    <Command>
-      <CommandName>UnitTest</CommandName>
-      <CommandSendingString>unittest</CommandSendingString>
     </Command>
   </CommandList>
 </CommandConfigs>

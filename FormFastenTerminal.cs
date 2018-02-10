@@ -72,6 +72,10 @@ namespace FastenTerminal
         public List<Command> commandList;
         public BindingList<Command> commandBindingList;
 
+        // FavCommand - DragDrop
+        int rowIndexFromMouseDown;
+        DataGridViewRow rw;
+
         private FastenTerminalConfigs Config;
 
         // LOG - text variables
@@ -903,6 +907,11 @@ namespace FastenTerminal
             dataGridViewFavCommands.AutoGenerateColumns = true;
             commandList = favouriteCommands.GetCommands();
 
+            RefreshFavouriteCommands();
+        }
+
+        private void RefreshFavouriteCommands()
+        {
             commandBindingList = new BindingList<Command>(commandList);
             var source = new BindingSource(commandBindingList, null);
             dataGridViewFavCommands.DataSource = source;
@@ -911,8 +920,11 @@ namespace FastenTerminal
 
         private void FavouriteCommands_SendActualSelectedCommand()
         {
-            String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
-            comm.SendMessage(message);
+            if (dataGridViewFavCommands.CurrentRow.Index < dataGridViewFavCommands.RowCount - 1)
+            {
+                String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
+                comm.SendMessage(message);
+            }
         }
 
         private void buttonFavouriteCommandSending_Click(object sender, EventArgs e)
@@ -920,9 +932,48 @@ namespace FastenTerminal
             FavouriteCommands_SendActualSelectedCommand();
         }
 
-        private void dataGridViewFavCommands_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void SendMessageAddLastCommand(String message)
         {
-#warning Delete
+            String command = "";
+
+            // Copy
+            command = message;
+
+            if (comboBoxSendMessage.FindString(command) >= 0)
+            {
+                // We have this command in the list
+                // TODO: put to top?
+            }
+            else
+            {
+                comboBoxSendMessage.Items.Add(command);
+            }
+        }
+
+        private void FavCommands_AddNew(int index)
+        {
+            if (index >= 0)
+                favouriteCommands.AddNewCommand("", "", index);
+            else
+                favouriteCommands.AddNewCommand("", "");
+
+            commandList = favouriteCommands.GetCommands();
+
+            commandBindingList = new BindingList<Command>(commandList);
+            var source = new BindingSource(commandBindingList, null);
+            dataGridViewFavCommands.DataSource = source;
+            dataGridViewFavCommands.Refresh();
+        }
+
+        private void buttonFavouriteCommandsSave_Click(object sender, EventArgs e)
+        {
+            // Save favourite commands
+            favouriteCommands.SaveCommandConfig();
+        }
+
+        private void buttonFavouriteCommandsAdd_Click(object sender, EventArgs e)
+        {
+            FavCommands_AddNew(-1);
         }
 
         private void dataGridViewFavCommands_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -954,7 +1005,12 @@ namespace FastenTerminal
                     dataGridViewFavCommands.CurrentCell = dataGridViewFavCommands.Rows[currentMouseOverRow].Cells[0];
 
                     String cmd = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
-                    m.MenuItems.Add(string.Format("Move to send textbox {0}", cmd), EventHandler_MoveFavCommandToSendTextBox);
+                    m.MenuItems.Add(string.Format("Copy to send textbox \"{0}\"", cmd), EventHandler_MoveFavCommandToSendTextBox);
+                    m.MenuItems.Add(string.Format("Move {0}", cmd), FavCommands_Move);
+                    m.MenuItems.Add(string.Format("Paste {0}", cmd), FavCommands_Paste);
+                    if (rw == null)
+                        m.MenuItems[2].Enabled = false;
+                    m.MenuItems.Add("Insert new command", FavCommands_InsertNew);
                 }
                 else
                 {
@@ -971,40 +1027,41 @@ namespace FastenTerminal
             MoveFavouriteCommandToSendTextBox(cmd);
         }
 
-        private void SendMessageAddLastCommand(String message)
+        private void FavCommands_Move(object sender, System.EventArgs e)
         {
-            String command = "";
-
-            // Copy
-            command = message;
-
-            if (comboBoxSendMessage.FindString(command) >= 0)
+            if (dataGridViewFavCommands.SelectedRows.Count == 1)
             {
-                // We have this command in the list
-                // TODO: put to top?
-            }
-            else
-            {
-                comboBoxSendMessage.Items.Add(command);
+                rw = dataGridViewFavCommands.SelectedRows[0];
+                rowIndexFromMouseDown = dataGridViewFavCommands.SelectedRows[0].Index;
+                //dataGridViewFavCommands.DoDragDrop(rw, DragDropEffects.Move);
             }
         }
 
-        private void buttonFavouriteCommandsSave_Click(object sender, EventArgs e)
+        private void FavCommands_Paste(object sender, System.EventArgs e)
         {
-            // Save favourite commands
-            favouriteCommands.SaveCommandConfig();
+            if (rw != null)
+            {
+                int rowIndexOfItemUnderMouseToDrop;
+                rowIndexOfItemUnderMouseToDrop = dataGridViewFavCommands.CurrentRow.Index;
+
+                /* Row moving */
+                FavouriteCommand_DragDrop_FromTo(rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop);
+
+                rw = null;
+            }
         }
 
-        private void buttonFavouriteCommandsAdd_Click(object sender, EventArgs e)
+        private void FavCommands_InsertNew(object sender, System.EventArgs e)
         {
-            favouriteCommands.AddNewCommand("", "");
+            int index = dataGridViewFavCommands.CurrentRow.Index;
+            FavCommands_AddNew(index);
+        }
 
-            commandList = favouriteCommands.GetCommands();
+        private void FavouriteCommand_DragDrop_FromTo(int rowIndexFromMouseDown, int rowIndexOfItemUnderMouseToDrop)
+        {
+            favouriteCommands.DragDrop_FromTo(rowIndexFromMouseDown, rowIndexOfItemUnderMouseToDrop);
 
-            commandBindingList = new BindingList<Command>(commandList);
-            var source = new BindingSource(commandBindingList, null);
-            dataGridViewFavCommands.DataSource = source;
-            dataGridViewFavCommands.Refresh();
+            RefreshFavouriteCommands();
         }
 
         /*
