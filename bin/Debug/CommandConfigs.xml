@@ -14,8 +14,8 @@
       <CommandSendingString>unittest</CommandSendingString>
     </Command>
     <Command>
-      <CommandName />
-      <CommandSendingString />
+      <CommandName>Event log</CommandName>
+      <CommandSendingString>eventlog</CommandSendingString>
     </Command>
     <Command>
       <CommandName>Led on</CommandName>

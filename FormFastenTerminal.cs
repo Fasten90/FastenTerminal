@@ -1009,7 +1009,7 @@ namespace FastenTerminal
                     m.MenuItems.Add(string.Format("Move {0}", cmd), FavCommands_Move);
                     m.MenuItems.Add(string.Format("Paste {0}", cmd), FavCommands_Paste);
                     if (rw == null)
-                        m.MenuItems[2].Enabled = false;
+                        m.MenuItems[2].Enabled = false; /* TODO: Make more beautiful */
                     m.MenuItems.Add("Insert new command", FavCommands_InsertNew);
                 }
                 else

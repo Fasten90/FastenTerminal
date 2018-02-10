@@ -439,8 +439,10 @@
             this.dataGridViewFavCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewFavCommands.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewFavCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewFavCommands.Location = new System.Drawing.Point(0, 3);
+            this.dataGridViewFavCommands.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewFavCommands.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewFavCommands.MultiSelect = false;
             this.dataGridViewFavCommands.Name = "dataGridViewFavCommands";
             this.dataGridViewFavCommands.RowHeadersVisible = false;
