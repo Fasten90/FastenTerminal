@@ -55,7 +55,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>FastenTerminalIcon2.ico</ApplicationIcon>
+    <ApplicationIcon>FastenTerminalIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>052973D54CE586063CE074AF96C98621528AA4C9</ManifestCertificateThumbprint>
@@ -156,7 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FastenTerminalIcon.ico" />
-    <Content Include="FastenTerminalIcon2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
