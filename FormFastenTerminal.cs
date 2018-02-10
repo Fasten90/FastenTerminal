@@ -1498,46 +1498,36 @@ namespace FastenTerminal
             }
         }
 
+        private void SerialOpen()
+        {
+            ((Serial)comm).ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
+            ((Serial)comm).Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
+
+            if (((Serial)comm).SerialPortComOpen())
+            {
+                // Successful port opening
+                SerialSetStateOpenedOrClosed(true);
+            }
+            else
+            {
+                // Failed open
+                // Not necessary print anything, because "Notify" message is printed from SerialPortComOpen()
+            }
+        }
+
         private void SerialOpenClose()
         {
             // Is opened?
             if (comm.isOpened == false)
             {
                 // If there is not opened port, open
-                try
-                {
-                    if (((Serial)comm).SerialPortComOpen())
-                    {
-                        // Successful port opening
-                        SerialSetStateOpenedOrClosed(true);
-                    }
-                    else
-                    {
-                        // Failed open
-                        // "Notify" message is printed from SerialPortComOpen() 
-                    }
-                }
-                catch (Exception ex)
+                // Open / initialize
+                if (!(comm is Serial))
                 {
                     comm = new Serial(ref serialPortDevice, this);
-
-                    // TODO: To a new function?
-                    ((Serial)comm).ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
-                    ((Serial)comm).Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
-
-                    if (((Serial)comm).SerialPortComOpen())
-                    {
-                        // Successful port opening
-                        SerialSetStateOpenedOrClosed(true);
-                    }
-                    else
-                    {
-                        // Failed open
-                        // "Notify" message is printed from SerialPortComOpen() 
-                    }
-
-                    Log.SendErrorLog("Serial OpenClose error (known bug - reinitialize Serial):\n" + ex.Message);
                 }
+
+                SerialOpen();
             }
             else
             {
