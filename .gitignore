@@ -22,3 +22,4 @@ obj/Debug/*
 bin/Debug/FastenTerminal.application
 *.pdb
 bin/Debug/FastenTerminal.exe.manifest
+/bin/CreateZip
