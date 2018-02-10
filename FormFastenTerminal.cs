@@ -46,8 +46,8 @@ namespace FastenTerminal
         private Color ApplicationDefaultTextColor = Color.Black;
 
         // Log colors
-        private Color GlobalBackgroundColor = Form.DefaultBackColor;
-        private Color GlobalTextColor = Color.Black;
+        private Color GlobalBackgroundColor = Form.DefaultBackColor; /* loaded from Config */
+        private Color GlobalTextColor = Color.Black; /* loaded from Config */
 
         private bool GlobalEscapeEnabled = true;
 
@@ -372,7 +372,6 @@ namespace FastenTerminal
                     tempStringEscapeBuffer = "";
                 }
 
-                Color color = Color.Black;
                 EscapeType actualEscapeType = EscapeType.Escape_Nothing;
                 int startIndex = 0;
 
@@ -418,25 +417,24 @@ namespace FastenTerminal
                             for (int i = 0; i < formatList.Count; i++)
                             {
                                 FormatType format = formatList[i];
-                                
+                                Color color = colorList[i];
+
                                 switch (format)
                                 {
                                     case FormatType.FormatType_TextColor:
-                                        color = colorList[i];
                                         GlobalTextColor = color;
                                         break;
 
                                     case FormatType.FormatType_BackgroundColor:
-                                        color = colorList[i];
                                         GlobalBackgroundColor = color;
                                         break;
 
                                     case FormatType.FormatType_Bold:
-                                        // TODO: ...
+                                        // TODO: Handle bold
                                         break;
 
                                     case FormatType.FormatType_Underscore:
-                                        // TODO: ...
+                                        // TODO: Handle underscore
                                         break;
 
                                     case FormatType.FormatType_Reset:
@@ -559,8 +557,8 @@ namespace FastenTerminal
             tempStringBuffer = "";
             DeleteTextLog();
             SetScrollStateFinal(true);
-            GlobalBackgroundColor = Form.DefaultBackColor;
-            GlobalTextColor = Color.Black;
+            GlobalBackgroundColor = ApplicationDefaultBackgroundColor;
+            GlobalTextColor = ApplicationDefaultTextColor;
             // checkBoxSerialPortScrollBottom Checked event call the 'ScrollBottomAndAppendBuffer();'
         }
 
@@ -1126,6 +1124,8 @@ namespace FastenTerminal
             panelSettings.BackColor = color;
             panelLog.BackColor = color;
 
+            // It is "delete" actual Escape sequence...
+            GlobalBackgroundColor = ApplicationDefaultBackgroundColor;
         }
 
         private void SetForeGroundColor(Color color)
@@ -1133,6 +1133,9 @@ namespace FastenTerminal
             ApplicationDefaultTextColor = color;
             richTextBoxTextLog.ForeColor = color;
             pictureBoxForeGroundColor.BackColor = color;
+
+            // It is "delete" actual Escape sequence...
+            GlobalTextColor = ApplicationDefaultTextColor;
         }
 
         private void pictureBoxForeGroundColor_Click(object sender, EventArgs e)
