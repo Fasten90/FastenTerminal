@@ -228,7 +228,7 @@ namespace FastenTerminal
                     AppendReceivedTextToGui(consoleErrorOutputGood + Environment.NewLine);
 
                 if (consoleStandardOutputGood != "" || consoleErrorOutputGood != "")
-                    form.CommReceivedCharacterEvent();
+                    form.Comm_ReceivedCharacterEvent();
 
                 //cmd.WaitForExit();
             }
@@ -258,7 +258,7 @@ namespace FastenTerminal
                 AppendReceivedTextToGui(consoleStandardOutputGood + Environment.NewLine);
 
             if (consoleStandardOutputGood != "")
-                form.CommReceivedCharacterEvent();
+                form.Comm_ReceivedCharacterEvent();
         }
 
         void CommandPromt_OutputData(object sender, DataReceivedEventArgs e)

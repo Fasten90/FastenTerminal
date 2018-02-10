@@ -110,7 +110,7 @@ namespace FastenTerminal
 
             comboBoxSerialPortBaudrate.SelectedIndex = 0;
 
-            SerialRefresh();
+            CommSerial_RefreshComPorts();
 
             // Load config
             LoadConfig();
@@ -126,7 +126,7 @@ namespace FastenTerminal
             }
 
             // Serial list refresh
-            SerialPortRefreshTimerStart();
+            CommSerial_RefreshComPort_TimerStart();
         }
 
         private void LoadConfigToComm()
@@ -143,8 +143,8 @@ namespace FastenTerminal
         private void LoadConfigToForm()
         {
             // Call before this function the LoadConfig()
-            SetBackGroundColor(ApplicationDefaultBackgroundColor);
-            SetForeGroundColor(ApplicationDefaultTextColor);
+            App_SetBackGroundColor(ApplicationDefaultBackgroundColor);
+            App_SetForeGroundColor(ApplicationDefaultTextColor);
 
             pictureBoxEventBackgrondColor.BackColor = EventLogBackgroundColor;
             pictureBoxEventTextColor.BackColor = EventLogTextColor;
@@ -175,8 +175,8 @@ namespace FastenTerminal
         {
             // Application configs
             // TODO: These colors sets are duplicated
-            SetBackGroundColor(ColorTranslator.FromHtml(Config.config.BackgroundColor));
-            SetForeGroundColor(ColorTranslator.FromHtml(Config.config.TextColor));
+            App_SetBackGroundColor(ColorTranslator.FromHtml(Config.config.BackgroundColor));
+            App_SetForeGroundColor(ColorTranslator.FromHtml(Config.config.TextColor));
             EventLogBackgroundColor = ColorTranslator.FromHtml(Config.config.EventBackgroundColor);
             EventLogTextColor = ColorTranslator.FromHtml(Config.config.EventTextColor);
 
@@ -256,7 +256,7 @@ namespace FastenTerminal
             }
         }
 
-        private void RefreshTitle()
+        private void App_RefreshTitle()
         {
             // For example: "FastenTerminal - COM9 - 9600"
             this.Text = ApplicationName + " - " + comm.stateInfo;
@@ -1173,7 +1173,7 @@ namespace FastenTerminal
         private void timerCheckSerialPorts_Tick(object sender, EventArgs e)
         {
             // Check serial ports
-            SerialRefresh();
+            CommSerial_RefreshComPorts();
 
             // If has COM port, stop
             if (comboBoxSerialPortCOM.Items.Count > 0)
@@ -1201,10 +1201,10 @@ namespace FastenTerminal
 
         private void pictureBoxTop_Click(object sender, EventArgs e)
         {
-            ApplicationTopChange();
+            App_TopStateChange();
         }
 
-        private void ApplicationTopChange()
+        private void App_TopStateChange()
         {
             ApplicationIsTop = !ApplicationIsTop;
             if (ApplicationIsTop)
@@ -1223,12 +1223,12 @@ namespace FastenTerminal
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                SetBackGroundColor(colorDialog.Color);
+                App_SetBackGroundColor(colorDialog.Color);
                 ConfigIsChanged();
             }
         }
 
-        private void SetBackGroundColor(Color color)
+        private void App_SetBackGroundColor(Color color)
         {
             ApplicationDefaultBackgroundColor = color;
             richTextBoxTextLog.BackColor = color;
@@ -1241,7 +1241,7 @@ namespace FastenTerminal
             GlobalBackgroundColor = ApplicationDefaultBackgroundColor;
         }
 
-        private void SetForeGroundColor(Color color)
+        private void App_SetForeGroundColor(Color color)
         {
             ApplicationDefaultTextColor = color;
             richTextBoxTextLog.ForeColor = color;
@@ -1255,7 +1255,7 @@ namespace FastenTerminal
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                SetForeGroundColor(colorDialog.Color);
+                App_SetForeGroundColor(colorDialog.Color);
                 ConfigIsChanged();
             }
         }
@@ -1284,7 +1284,7 @@ namespace FastenTerminal
          *          Communication
          */
 
-        void CommStateChanged(CommType newCommState)
+        void Comm_StateChanged(CommType newCommState)
         {
             commType = newCommState;
 
@@ -1322,7 +1322,7 @@ namespace FastenTerminal
                     buttonSerialPortRefresh.Enabled = true;
                     buttonCommandPromtOpenClose.Enabled = true;
                     // Enable serial port refreshing
-                    SerialPortRefreshTimerStart();
+                    CommSerial_RefreshComPort_TimerStart();
                     break;
             }
 
@@ -1343,11 +1343,11 @@ namespace FastenTerminal
             comm.newLineString = Common.ConvertNewLineToReal(comboBoxNewLineType.Text);
         }
 
-        public void CommReceivedCharacterEvent()
+        public void Comm_ReceivedCharacterEvent()
         {
             if (InvokeRequired)
             {
-                this.BeginInvoke(new Action(CommReceivedCharacterEvent), new object[] { });
+                this.BeginInvoke(new Action(Comm_ReceivedCharacterEvent), new object[] { });
                 return;
             }
 
@@ -1364,22 +1364,22 @@ namespace FastenTerminal
             {
                 // Print: "Close"
                 buttonTelnetOpenClose.Text = "Close";
-                CommStateChanged(CommType.Telnet);
+                Comm_StateChanged(CommType.Telnet);
             }
             else
             {
                 // Closed, print "open"
                 buttonTelnetOpenClose.Text = "Open";
-                CommStateChanged(CommType.NotInitialized);
+                Comm_StateChanged(CommType.NotInitialized);
             }
 
             // Refresh application name
-            RefreshTitle();
+            App_RefreshTitle();
 
             //comm.isOpened = isOpened;
         }
 
-        private void telnetOpenClose()
+        private void CommTelnet_OpenClose()
         {
             if (comm.isOpened == false)
             {
@@ -1410,7 +1410,7 @@ namespace FastenTerminal
 
         private void buttonTelnetOpenClose_Click(object sender, EventArgs e)
         {
-            telnetOpenClose();
+            CommTelnet_OpenClose();
         }
 
         /*
@@ -1420,10 +1420,10 @@ namespace FastenTerminal
         private void buttonSerialPortRefresh_Click(object sender, EventArgs e)
         {
             // Clicked "Serial Refresh" button
-            SerialRefresh();
+            CommSerial_RefreshComPorts();
         }
 
-        private void SerialPortRefreshTimerStart()
+        private void CommSerial_RefreshComPort_TimerStart()
         {
             // Refresh serial port list timer
             timerCheckSerialPorts.Interval = 500;   // 0.5 sec
@@ -1431,21 +1431,17 @@ namespace FastenTerminal
             timerCheckSerialPorts.Start();           // Restart
         }
 
-        private void SerialRefresh()
+        private void CommSerial_RefreshComPorts()
         {
             // Refresh Serial COM ports
-            try
+            if (!(comm is Serial))
             {
-                ((Serial)comm).SerialPortComRefresh();
-            }
-            catch (Exception ex)
-            {
-                // Load Serial
+                // ReCreate Serial
                 comm = new Serial(ref serialPortDevice, this);
-                ((Serial)comm).SerialPortComRefresh();
-                Log.SendErrorLog("Serial refresh error (known bug - reinitialize Serial):\n" + ex.Message);
             }
 
+            ((Serial)comm).SerialPortComRefresh();
+   
             if (((Serial)comm).ComAvailableList != null && ((Serial)comm).ComAvailableList.Length != 0)
             {
                 // Clear
@@ -1473,22 +1469,22 @@ namespace FastenTerminal
 
         private void buttonSerialPortOpenClose_Click(object sender, EventArgs e)
         {
-            SerialOpenClose();
+            CommSerial_OpenClose();
         }
 
-        public void SerialSetStateOpenedOrClosed(bool isOpened)
+        public void CommSerial_SetStateOpenedOrClosed(bool isOpened)
         {
             try
             {
                 if (isOpened)
                 {
                     buttonSerialPortOpenClose.Text = "Port close";
-                    CommStateChanged(CommType.Serial);
+                    Comm_StateChanged(CommType.Serial);
                 }
                 else
                 {
                     buttonSerialPortOpenClose.Text = "Port open";
-                    CommStateChanged(CommType.NotInitialized);
+                    Comm_StateChanged(CommType.NotInitialized);
                 }
             }
             catch (Exception e)
@@ -1498,7 +1494,7 @@ namespace FastenTerminal
             }
         }
 
-        private void SerialOpen()
+        private void CommSerial_Open()
         {
             ((Serial)comm).ComSelected = (string)comboBoxSerialPortCOM.SelectedItem;
             ((Serial)comm).Baudrate = (string)comboBoxSerialPortBaudrate.SelectedItem;
@@ -1506,7 +1502,7 @@ namespace FastenTerminal
             if (((Serial)comm).SerialPortComOpen())
             {
                 // Successful port opening
-                SerialSetStateOpenedOrClosed(true);
+                CommSerial_SetStateOpenedOrClosed(true);
             }
             else
             {
@@ -1515,7 +1511,7 @@ namespace FastenTerminal
             }
         }
 
-        private void SerialOpenClose()
+        private void CommSerial_OpenClose()
         {
             // Is opened?
             if (comm.isOpened == false)
@@ -1524,20 +1520,21 @@ namespace FastenTerminal
                 // Open / initialize
                 if (!(comm is Serial))
                 {
+                    // ReCreate Serial
                     comm = new Serial(ref serialPortDevice, this);
                 }
 
-                SerialOpen();
+                CommSerial_Open();
             }
             else
             {
                 // If opened, close
                 comm.Close();
-                SerialSetStateOpenedOrClosed(false);
+                CommSerial_SetStateOpenedOrClosed(false);
             }
 
             // Refresh application name
-            RefreshTitle();
+            App_RefreshTitle();
         }
 
         private void comboBoxSerialPortCOM_SelectedIndexChanged(object sender, EventArgs e)
@@ -1565,7 +1562,7 @@ namespace FastenTerminal
 
             ((Serial)comm).Receive();
 
-            CommReceivedCharacterEvent();
+            Comm_ReceivedCharacterEvent();
         }
 
         private void serialPortDevice_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
@@ -1607,17 +1604,17 @@ namespace FastenTerminal
             {
                 // Print: "Close"
                 buttonCommandPromtOpenClose.Text = "Close";
-                CommStateChanged(CommType.CommandPromt);
+                Comm_StateChanged(CommType.CommandPromt);
             }
             else
             {
                 // Closed, print "Open"
                 buttonCommandPromtOpenClose.Text = "Open";
-                CommStateChanged(CommType.NotInitialized);
+                Comm_StateChanged(CommType.NotInitialized);
             }
 
             // Refresh application name
-            RefreshTitle();
+            App_RefreshTitle();
         }
 
         private void buttonCommandPromtOpenClose_Click(object sender, EventArgs e)

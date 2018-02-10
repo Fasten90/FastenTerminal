@@ -118,7 +118,7 @@ namespace FastenTerminal
         {
             stateInfo = "Closed";
             isOpened = false;
-            form.SerialSetStateOpenedOrClosed(false);
+            form.CommSerial_SetStateOpenedOrClosed(false);
         }
 
         public void Receive()

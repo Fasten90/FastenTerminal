@@ -105,7 +105,7 @@ namespace FastenTerminal
 
                         AppendReceivedTextToGui(Telnet_out);
 
-                        form.CommReceivedCharacterEvent();
+                        form.Comm_ReceivedCharacterEvent();
 
                         // Sent message display
                         // TODO: 
