@@ -35,6 +35,8 @@
             this.textBoxTextLogSearch = new System.Windows.Forms.TextBox();
             this.tabControlSerialFunctions = new System.Windows.Forms.TabControl();
             this.tabPageCommunication = new System.Windows.Forms.TabPage();
+            this.groupBoxCommCommandPromt = new System.Windows.Forms.GroupBox();
+            this.buttonCommandPromtOpenClose = new System.Windows.Forms.Button();
             this.groupBoxCommTelnet = new System.Windows.Forms.GroupBox();
             this.textBoxTelnetPort = new System.Windows.Forms.TextBox();
             this.textBoxTelnetIP = new System.Windows.Forms.TextBox();
@@ -93,10 +95,9 @@
             this.pictureBoxScrollingEnabled = new System.Windows.Forms.PictureBox();
             this.panelLog = new System.Windows.Forms.Panel();
             this.toolTipHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBoxCommCommandPromt = new System.Windows.Forms.GroupBox();
-            this.buttonCommandPromtOpenClose = new System.Windows.Forms.Button();
             this.tabControlSerialFunctions.SuspendLayout();
             this.tabPageCommunication.SuspendLayout();
+            this.groupBoxCommCommandPromt.SuspendLayout();
             this.groupBoxCommTelnet.SuspendLayout();
             this.groupBoxCommSerial.SuspendLayout();
             this.tabPageMessage.SuspendLayout();
@@ -119,7 +120,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).BeginInit();
             this.panelLog.SuspendLayout();
-            this.groupBoxCommCommandPromt.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPortDevice
@@ -173,6 +173,26 @@
             this.tabPageCommunication.TabIndex = 4;
             this.tabPageCommunication.Text = "Comm";
             this.tabPageCommunication.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxCommCommandPromt
+            // 
+            this.groupBoxCommCommandPromt.Controls.Add(this.buttonCommandPromtOpenClose);
+            this.groupBoxCommCommandPromt.Location = new System.Drawing.Point(7, 177);
+            this.groupBoxCommCommandPromt.Name = "groupBoxCommCommandPromt";
+            this.groupBoxCommCommandPromt.Size = new System.Drawing.Size(219, 51);
+            this.groupBoxCommCommandPromt.TabIndex = 11;
+            this.groupBoxCommCommandPromt.TabStop = false;
+            this.groupBoxCommCommandPromt.Text = "Cmd";
+            // 
+            // buttonCommandPromtOpenClose
+            // 
+            this.buttonCommandPromtOpenClose.Location = new System.Drawing.Point(7, 19);
+            this.buttonCommandPromtOpenClose.Name = "buttonCommandPromtOpenClose";
+            this.buttonCommandPromtOpenClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonCommandPromtOpenClose.TabIndex = 0;
+            this.buttonCommandPromtOpenClose.Text = "Open";
+            this.buttonCommandPromtOpenClose.UseVisualStyleBackColor = true;
+            this.buttonCommandPromtOpenClose.Click += new System.EventHandler(this.buttonCommandPromtOpenClose_Click);
             // 
             // groupBoxCommTelnet
             // 
@@ -424,6 +444,9 @@
             this.dataGridViewFavCommands.RowHeadersVisible = false;
             this.dataGridViewFavCommands.Size = new System.Drawing.Size(234, 353);
             this.dataGridViewFavCommands.TabIndex = 22;
+            this.dataGridViewFavCommands.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFavCommands_CellClick);
+            this.dataGridViewFavCommands.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFavCommands_CellDoubleClick);
+            this.dataGridViewFavCommands.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewFavCommands_MouseClick);
             // 
             // buttonSerialFavouriteCommandSending
             // 
@@ -839,26 +862,6 @@
             this.panelLog.Size = new System.Drawing.Size(568, 458);
             this.panelLog.TabIndex = 46;
             // 
-            // groupBoxCommCommandPromt
-            // 
-            this.groupBoxCommCommandPromt.Controls.Add(this.buttonCommandPromtOpenClose);
-            this.groupBoxCommCommandPromt.Location = new System.Drawing.Point(7, 177);
-            this.groupBoxCommCommandPromt.Name = "groupBoxCommCommandPromt";
-            this.groupBoxCommCommandPromt.Size = new System.Drawing.Size(219, 51);
-            this.groupBoxCommCommandPromt.TabIndex = 11;
-            this.groupBoxCommCommandPromt.TabStop = false;
-            this.groupBoxCommCommandPromt.Text = "Cmd";
-            // 
-            // buttonCommandPromtOpenClose
-            // 
-            this.buttonCommandPromtOpenClose.Location = new System.Drawing.Point(7, 19);
-            this.buttonCommandPromtOpenClose.Name = "buttonCommandPromtOpenClose";
-            this.buttonCommandPromtOpenClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonCommandPromtOpenClose.TabIndex = 0;
-            this.buttonCommandPromtOpenClose.Text = "Open";
-            this.buttonCommandPromtOpenClose.UseVisualStyleBackColor = true;
-            this.buttonCommandPromtOpenClose.Click += new System.EventHandler(this.buttonCommandPromtOpenClose_Click);
-            // 
             // FormFastenTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -874,6 +877,7 @@
             this.Load += new System.EventHandler(this.FormFastenTerminalMain_Load);
             this.tabControlSerialFunctions.ResumeLayout(false);
             this.tabPageCommunication.ResumeLayout(false);
+            this.groupBoxCommCommandPromt.ResumeLayout(false);
             this.groupBoxCommTelnet.ResumeLayout(false);
             this.groupBoxCommTelnet.PerformLayout();
             this.groupBoxCommSerial.ResumeLayout(false);
@@ -900,7 +904,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxScrollingEnabled)).EndInit();
             this.panelLog.ResumeLayout(false);
-            this.groupBoxCommCommandPromt.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

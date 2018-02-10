@@ -909,10 +909,66 @@ namespace FastenTerminal
             dataGridViewFavCommands.Refresh();
         }
 
-        private void buttonFavouriteCommandSending_Click(object sender, EventArgs e)
+        private void FavouriteCommands_SendActualSelectedCommand()
         {
             String message = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
             comm.SendMessage(message);
+        }
+
+        private void buttonFavouriteCommandSending_Click(object sender, EventArgs e)
+        {
+            FavouriteCommands_SendActualSelectedCommand();
+        }
+
+        private void dataGridViewFavCommands_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+#warning Delete
+        }
+
+        private void dataGridViewFavCommands_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FavouriteCommands_SendActualSelectedCommand();
+        }
+
+        private void MoveFavouriteCommandToSendTextBox(String msg)
+        {
+            comboBoxSendMessage.Text = msg;
+        }
+
+        private void dataGridViewFavCommands_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenu m = new ContextMenu();
+                //m.MenuItems.Add(new MenuItem("Move to send textbox"));
+
+                int currentMouseOverRow = dataGridViewFavCommands.HitTest(e.X, e.Y).RowIndex;
+
+                if (currentMouseOverRow >= 0)
+                {
+                    // Set select
+                    dataGridViewFavCommands.CurrentRow.Selected = false;
+
+                    dataGridViewFavCommands.Rows[currentMouseOverRow].Selected = true;
+                    //dataGridViewFavCommands.Rows[currentMouseOverRow].Selected = true;
+                    dataGridViewFavCommands.CurrentCell = dataGridViewFavCommands.Rows[currentMouseOverRow].Cells[0];
+
+                    String cmd = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
+                    m.MenuItems.Add(string.Format("Move to send textbox {0}", cmd), EventHandler_MoveFavCommandToSendTextBox);
+                }
+                else
+                {
+                    // TODO: ...
+                }
+
+                m.Show(dataGridViewFavCommands, new Point(e.X, e.Y));
+            }
+        }
+
+        private void EventHandler_MoveFavCommandToSendTextBox(object sender, System.EventArgs e)
+        {
+            String cmd = ((Command)dataGridViewFavCommands.CurrentRow.DataBoundItem).CommandSendingString;
+            MoveFavouriteCommandToSendTextBox(cmd);
         }
 
         private void SendMessageAddLastCommand(String message)
@@ -1521,6 +1577,5 @@ namespace FastenTerminal
         {
             CommandPromt_Start();
         }
-
     }   // End of class
 }	// End of namespace
